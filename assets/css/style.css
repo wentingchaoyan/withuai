@@ -631,4 +631,100 @@ section h2 {
     color: var(--grey-1);
     margin: 0;
     line-height: 1.6;
+}
+
+.app-preview {
+    margin: 4rem 0;
+    padding: 2rem;
+    background-color: var(--grey-3);
+    border-radius: 12px;
+}
+
+.app-preview h2 {
+    text-align: center;
+    color: var(--dark-brown);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.app-preview p {
+    text-align: center;
+    color: var(--grey-1);
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.app-screenshots {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.screenshot-container {
+    flex: 0 0 300px;
+}
+
+.app-screenshot {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.screenshot-caption {
+    text-align: center;
+    margin-top: 1rem;
+    color: var(--grey-1);
+}
+
+.screenshot-description {
+    flex: 0 0 400px;
+}
+
+.app-features-list {
+    list-style: none;
+    padding: 0;
+}
+
+.app-features-list li {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--dark-brown);
+    font-size: 1.1rem;
+}
+
+.app-features-list li:before {
+    content: "✓";
+    color: var(--olive);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.app-preview-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.app-screenshot-container {
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .app-screenshots {
+        flex-direction: column;
+    }
+
+    .screenshot-container,
+    .screenshot-description {
+        flex: 0 0 100%;
+    }
+
+    .app-preview-grid {
+        grid-template-columns: 1fr;
+    }
 } 
