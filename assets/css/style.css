@@ -85,7 +85,7 @@ body {
 
 .lang-switch a {
     padding: 0.5rem 1rem;
-    background-color: var(--purple);
+    background-color: var(--olive);
     color: white !important;
     border-radius: 4px;
     transition: background-color 0.3s ease;
@@ -152,7 +152,7 @@ body {
 }
 
 .feature-card h3 {
-    color: var(--purple);
+    color: var(--olive);
     margin-bottom: 1rem;
     font-size: 1.25rem;
 }
@@ -284,7 +284,7 @@ body {
 
 .mission-statement {
     font-size: 2rem;
-    color: var(--purple);
+    color: var(--olive);
     margin-bottom: 2rem;
     line-height: 1.4;
 }
@@ -337,7 +337,7 @@ body {
 }
 
 .value-card h3 {
-    color: var(--purple);
+    color: var(--olive);
     margin-bottom: 1rem;
     font-size: 1.5rem;
 }
@@ -387,7 +387,7 @@ section h2 {
 
 .info-item h3 {
     font-size: 1.2rem;
-    color: var(--purple);
+    color: var(--olive);
     margin-bottom: 0.5rem;
 }
 
