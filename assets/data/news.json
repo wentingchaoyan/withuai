@@ -2,7 +2,7 @@
     "articles": [
         {
             "id": "nextinnovator",
-            "date": "2024-03",
+            "date": "2024-10",
             "image": "",
             "ja": {
                 "title": "経済産業省主催「始動 Next Innovator」に採択",
@@ -17,7 +17,7 @@
         },
         {
             "id": "aptwomen",
-            "date": "2024-02",
+            "date": "2024-09",
             "image": "",
             "ja": {
                 "title": "「APT Women」9期生に選出",
@@ -32,7 +32,7 @@
         },
         {
             "id": "nedo",
-            "date": "2024-02",
+            "date": "2024-04",
             "image": "",
             "ja": {
                 "title": "NEDOディープテック支援事業に採択",
@@ -47,7 +47,7 @@
         },
         {
             "id": "jstartup",
-            "date": "2024-01",
+            "date": "2024-11",
             "image": "",
             "ja": {
                 "title": "J-Startup女性起業家コースに採択",
