@@ -3,89 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News - WithU AI</title>
-    <meta name="description" content="WithU AIの最新ニュースやプレスリリース、アクセラレータープログラムに関する情報をご覧いただけます。">
-    <link rel="icon" type="image/svg+xml" href="/assets/images/logo/favicon/favicon.svg">
-    <link rel="apple-touch-icon" href="/assets/images/logo/favicon/apple-touch-icon.png">
-    <link rel="stylesheet" href="/assets/css/reset.css">
+    <title>ニュース - WithU AI</title>
     <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/responsive.css">
 </head>
 <body>
-    <header class="site-header">
-        <div class="header-container">
-            <div class="logo-container">
-                <a href="/">
-                    <img src="/assets/images/logo/logo.svg" alt="WithU AI" class="site-logo">
-                </a>
-            </div>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="/about.html">About</a></li>
-                    <li><a href="/services.html">Services</a></li>
-                    <li><a href="/news/" class="active">News</a></li>
-                    <li><a href="/contact.html">Contact</a></li>
-                    <li class="lang-switch"><a href="/en/news/">English</a></li>
-                </ul>
-            </nav>
-            <button class="mobile-menu-toggle" aria-label="メニュー">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
+    <header>
+        <nav>
+            <a href="/" class="logo">WithU AI</a>
+            <ul>
+                <li><a href="/news/">ニュース</a></li>
+                <li><a href="/en/news/" hreflang="en">English</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
-        <section class="page-hero">
-            <div class="hero-content">
-                <h1>News</h1>
-                <p>最新のニュースとお知らせ</p>
-            </div>
-        </section>
-
-        <section class="news-list">
-            <div class="container">
-                <div class="news-grid">
-                    <article class="news-card">
-                        <a href="/news/detail.html?id=1">
-                            <div class="news-image">
-                                <img src="/assets/images/news/accelerator-program.jpg" alt="アクセラレータープログラム採択" loading="lazy">
-                            </div>
-                            <div class="news-content">
-                                <time datetime="2024-03-20">2024.03.20</time>
-                                <h2>アクセラレータープログラムに採択されました</h2>
-                                <p>WithU AIが○○アクセラレーターのプログラムに採択されました。今後、さらなるサービス向上に努めてまいります。</p>
-                            </div>
-                        </a>
-                    </article>
-                    <!-- 追加のニュース記事はここに追加 -->
-                </div>
+        <section class="news-section">
+            <h1>ニュース</h1>
+            <div class="news-grid">
+                <!-- ニュース記事がここに動的に挿入されます -->
             </div>
         </section>
     </main>
 
-    <footer class="site-footer">
-        <div class="footer-container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="/assets/images/logo/logo-white.svg" alt="WithU AI" class="footer-logo-img">
-                </div>
-                <nav class="footer-nav">
-                    <ul>
-                        <li><a href="/about.html">About</a></li>
-                        <li><a href="/services.html">Services</a></li>
-                        <li><a href="/news/">News</a></li>
-                        <li><a href="/contact.html">Contact</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 WithU AI. All rights reserved.</p>
-            </div>
-        </div>
+    <footer>
+        <p>&copy; 2024 WithU AI. All rights reserved.</p>
     </footer>
 
-    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/news.js"></script>
 </body>
 </html> 

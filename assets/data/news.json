@@ -1,0 +1,64 @@
+{
+    "articles": [
+        {
+            "id": "nextinnovator",
+            "date": "2024-03",
+            "image": "",
+            "ja": {
+                "title": "経済産業省主催「始動 Next Innovator」に採択",
+                "summary": "次世代イノベーター育成プログラム「始動 Next Innovator」にWithU AIが採択されました。",
+                "content": "経済産業省が主催する次世代イノベーター育成プログラム「始動 Next Innovator」において、WithU AIが採択企業として選出されました。本プログラムを通じて、グローバル展開を視野に入れた事業開発を加速させてまいります。"
+            },
+            "en": {
+                "title": "Selected for \"METI J-Startup Next Innovator Program\"",
+                "summary": "WithU AI has been selected for the Next Innovator Program, a next-generation innovator development initiative by METI.",
+                "content": "WithU AI has been selected as a participating company in the Next Innovator Program, a next-generation innovator development initiative organized by the Ministry of Economy, Trade and Industry (METI). Through this program, we will accelerate our business development with a focus on global expansion."
+            }
+        },
+        {
+            "id": "aptwomen",
+            "date": "2024-02",
+            "image": "",
+            "ja": {
+                "title": "「APT Women」9期生に選出",
+                "summary": "東京都女性ベンチャー成長促進事業「APT Women」の9期生としてWithU AIが選出されました。",
+                "content": "東京都が主催する女性ベンチャー成長促進事業「APT Women」の9期生として、WithU AIが選出されました。本プログラムを通じて、事業成長に必要なネットワーク構築とスキル向上を図ってまいります。"
+            },
+            "en": {
+                "title": "Chosen for \"APT Women\" 9th Cohort",
+                "summary": "WithU AI has been selected for the 9th cohort of APT Women, Tokyo Metropolitan Government's Women's Venture Growth Promotion Program.",
+                "content": "WithU AI has been selected for the 9th cohort of APT Women, a women's venture growth promotion program organized by the Tokyo Metropolitan Government. Through this program, we will focus on building essential networks and enhancing skills necessary for business growth."
+            }
+        },
+        {
+            "id": "nedo",
+            "date": "2024-02",
+            "image": "",
+            "ja": {
+                "title": "NEDOディープテック支援事業に採択",
+                "summary": "NEDOの「研究開発型スタートアップ支援事業（NEP）開拓コース」にWithU AIが採択されました。",
+                "content": "国立研究開発法人新エネルギー・産業技術総合開発機構（NEDO）の「研究開発型スタートアップ支援事業（NEP）開拓コース」に採択されました。本支援を通じて、革新的な技術開発をさらに加速させてまいります。"
+            },
+            "en": {
+                "title": "Selected for NEDO Deep Tech Support Program",
+                "summary": "WithU AI has been selected for NEDO's R&D-oriented Startup Support Program (NEP) Pioneer Course.",
+                "content": "WithU AI has been selected for the R&D-oriented Startup Support Program (NEP) Pioneer Course by the New Energy and Industrial Technology Development Organization (NEDO). Through this support, we will further accelerate our innovative technology development."
+            }
+        },
+        {
+            "id": "jstartup",
+            "date": "2024-01",
+            "image": "",
+            "ja": {
+                "title": "J-Startup女性起業家コースに採択",
+                "summary": "経済産業省主催のJ-Startup女性起業家コース「Women's Startup Lab's」にWithU AIが採択されました。",
+                "content": "経済産業省が主催するJ-Startup女性起業家コース「Women's Startup Lab's」において、WithU AIが採択されました。本プログラムを通じて、グローバルな視点でのビジネス展開を加速させてまいります。"
+            },
+            "en": {
+                "title": "Selected for J-Startup Women Entrepreneur Course",
+                "summary": "WithU AI has been selected for the Women's Startup Lab's Program, part of METI's J-Startup initiative for women entrepreneurs.",
+                "content": "WithU AI has been selected for the Women's Startup Lab's Program, which is part of the J-Startup initiative for women entrepreneurs organized by METI. Through this program, we will accelerate our business development from a global perspective."
+            }
+        }
+    ]
+} 
