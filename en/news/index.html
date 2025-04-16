@@ -4,32 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News - WithU AI</title>
+    <meta name="description" content="Stay updated with the latest news and announcements from WithU AI.">
+    <link rel="icon" type="image/svg+xml" href="/assets/images/logo/favicon/favicon.svg">
+    <link rel="apple-touch-icon" href="/assets/images/logo/favicon/apple-touch-icon.png">
+    <link rel="stylesheet" href="/assets/css/reset.css">
     <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="/en/" class="logo">WithU AI</a>
-            <ul>
-                <li><a href="/en/news/">News</a></li>
-                <li><a href="/news/" hreflang="ja">日本語</a></li>
-            </ul>
-        </nav>
+    <header class="site-header">
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="/en/">
+                    <img src="/assets/images/logo/logo.svg" alt="WithU AI" class="site-logo">
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/en/">About</a></li>
+                    <li><a href="/en/services.html">Services</a></li>
+                    <li><a href="/en/news/" class="active">News</a></li>
+                    <li><a href="/en/contact.html">Contact</a></li>
+                    <li class="lang-switch"><a href="/news/" hreflang="ja">日本語</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-toggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
     </header>
 
     <main>
+        <section class="page-hero">
+            <div class="container">
+                <h1>News</h1>
+                <p>Latest updates from WithU AI</p>
+            </div>
+        </section>
+
         <section class="news-section">
-            <h1>News</h1>
-            <div class="news-grid">
-                <!-- News articles will be dynamically inserted here -->
+            <div class="container">
+                <div class="news-grid">
+                    <!-- News articles will be dynamically inserted here -->
+                </div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 WithU AI. All rights reserved.</p>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="/assets/images/logo/logo-white.svg" alt="WithU AI" class="footer-logo-img">
+                </div>
+                <nav class="footer-nav">
+                    <ul>
+                        <li><a href="/en/">About</a></li>
+                        <li><a href="/en/services.html">Services</a></li>
+                        <li><a href="/en/news/">News</a></li>
+                        <li><a href="/en/contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 WithU AI. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 
+    <script src="/assets/js/main.js"></script>
     <script src="/assets/js/news.js"></script>
 </body>
 </html> 
