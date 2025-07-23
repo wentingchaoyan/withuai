@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>認証確認 - WithU AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #F4F1F0;
+            color: #333;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+        }
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #FF511B;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .fallback-link {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #FF511B;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="spinner"></div>
+        <h2>認証確認中...</h2>
+        <p>アプリにリダイレクトしています...</p>
+        <a href="#" id="fallback-link" class="fallback-link" style="display: none;">
+            アプリを開く
+        </a>
+    </div>
+
+    <script>
+        // URLパラメータを取得
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+        const type = urlParams.get('type');
+        const redirectTo = urlParams.get('redirect_to');
+        const email = urlParams.get('email');
+        
+        // アプリのディープリンクURLを構築
+        let appUrl = 'withu://auth/v1/verify';
+        if (token) {
+            appUrl += `?token=${token}`;
+        }
+        if (type) {
+            appUrl += `${token ? '&' : '?'}type=${type}`;
+        }
+        if (redirectTo) {
+            appUrl += `${token || type ? '&' : '?'}redirect_to=${encodeURIComponent(redirectTo)}`;
+        }
+        if (email) {
+            appUrl += `${token || type || redirectTo ? '&' : '?'}email=${encodeURIComponent(email)}`;
+        }
+        
+        // フォールバックリンクを設定
+        const fallbackLink = document.getElementById('fallback-link');
+        fallbackLink.href = appUrl;
+        
+        // インナーブラウザ検出（Gmail、Outlook、Apple Mail等）
+        function isInAppBrowser() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            return userAgent.includes('gmail') || 
+                   userAgent.includes('google') ||
+                   userAgent.includes('outlook') ||
+                   userAgent.includes('apple-mail') ||
+                   userAgent.includes('mail') ||
+                   userAgent.includes('mobile') ||
+                   window.location.href.includes('gmail.com') ||
+                   window.location.href.includes('outlook.com') ||
+                   window.location.href.includes('icloud.com');
+        }
+        
+        // アプリを開く試行
+        function openApp() {
+            if (isInAppBrowser()) {
+                // インナーブラウザの場合は、フォールバックリンクを即座に表示
+                fallbackLink.style.display = 'inline-block';
+                return;
+            }
+            
+            // 通常のブラウザでのアプリ起動
+            window.location.href = appUrl;
+            
+            // Androidでのアプリ起動
+            setTimeout(() => {
+                // アプリがインストールされていない場合のフォールバック
+                if (document.hidden || document.webkitHidden) {
+                    // アプリが開かれた場合
+                    return;
+                }
+                
+                // アプリが開かれていない場合、フォールバックリンクを表示
+                fallbackLink.style.display = 'inline-block';
+            }, 2000);
+        }
+        
+        // ページ読み込み時の処理
+        window.onload = function() {
+            // 新規登録の場合の処理
+            if (isInAppBrowser()) {
+                // インナーブラウザの場合は即座にフォールバックリンクを表示
+                fallbackLink.style.display = 'inline-block';
+                document.querySelector('.container h2').textContent = 'アプリで開いてください';
+                document.querySelector('.container p').textContent = '下のボタンをタップしてアプリを開いてください';
+            } else {
+                // 通常のブラウザの場合は自動でアプリを開く試行
+                setTimeout(openApp, 500);
+            }
+        };
+        
+        // フォールバックリンクのクリック処理
+        fallbackLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            openApp();
+        });
+    </script>
+</body>
+</html> 
