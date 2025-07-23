@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>認証確認 - WithU AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <script>
+        // URLパラメータを取得してアプリにリダイレクト
+        const hash = window.location.hash;
+        if (hash) {
+            // アプリのDeepLinkにリダイレクト
+            window.location.href = `withu://auth/v1/verify${hash}`;
+        } else {
+            // フォールバック
+            window.location.href = 'withu://auth/v1/verify';
+        }
+    </script>
+    <p>認証確認中...</p>
+</body>
+</html> 
