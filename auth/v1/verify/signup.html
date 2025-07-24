@@ -98,48 +98,40 @@
                    window.location.href.includes('icloud.com');
         }
         
-        // アプリを開く試行
-        function openApp() {
-            if (isInAppBrowser()) {
-                // インナーブラウザの場合は、フォールバックリンクを即座に表示
-                fallbackLink.style.display = 'inline-block';
-                return;
-            }
-            
-            // 通常のブラウザでのアプリ起動
-            window.location.href = appUrl;
-            
-            // Androidでのアプリ起動
+        // ユニバーサルリンクの処理
+        function handleUniversalLink() {
+            // ユニバーサルリンクが自動的にアプリを開くのを待つ
             setTimeout(() => {
-                // アプリがインストールされていない場合のフォールバック
-                if (document.hidden || document.webkitHidden) {
-                    // アプリが開かれた場合
-                    return;
+                // アプリが開かれていない場合のフォールバック
+                if (!document.hidden && !document.webkitHidden) {
+                    if (isInAppBrowser()) {
+                        // メールアプリ内の場合は、手動でアプリを開くボタンを表示
+                        fallbackLink.style.display = 'inline-block';
+                        document.querySelector('.container h2').textContent = 'アプリで開いてください';
+                        document.querySelector('.container p').textContent = '下のボタンをタップしてアプリを開いてください';
+                    } else {
+                        // 通常のブラウザの場合は、アプリを開く試行
+                        window.location.href = appUrl;
+                        
+                        setTimeout(() => {
+                            if (!document.hidden && !document.webkitHidden) {
+                                fallbackLink.style.display = 'inline-block';
+                            }
+                        }, 2000);
+                    }
                 }
-                
-                // アプリが開かれていない場合、フォールバックリンクを表示
-                fallbackLink.style.display = 'inline-block';
-            }, 2000);
+            }, 1000);
         }
         
         // ページ読み込み時の処理
         window.onload = function() {
-            // 新規登録の場合の処理
-            if (isInAppBrowser()) {
-                // インナーブラウザの場合は即座にフォールバックリンクを表示
-                fallbackLink.style.display = 'inline-block';
-                document.querySelector('.container h2').textContent = 'アプリで開いてください';
-                document.querySelector('.container p').textContent = '下のボタンをタップしてアプリを開いてください';
-            } else {
-                // 通常のブラウザの場合は自動でアプリを開く試行
-                setTimeout(openApp, 500);
-            }
+            handleUniversalLink();
         };
         
         // フォールバックリンクのクリック処理
         fallbackLink.addEventListener('click', function(e) {
             e.preventDefault();
-            openApp();
+            window.location.href = appUrl;
         });
     </script>
 </body>

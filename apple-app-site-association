@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "TEAM_ID.com.withuai.withu",
+        "paths": [
+          "/auth/v1/verify*",
+          "/auth/v1/confirm*",
+          "/auth/v1/recover*"
+        ]
+      }
+    ]
+  }
+} 
