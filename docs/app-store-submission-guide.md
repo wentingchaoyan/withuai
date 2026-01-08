@@ -1,0 +1,485 @@
+# WithU アプリストア申請ガイド
+
+最終更新日: 2025年1月8日
+
+---
+
+## 目次
+
+1. [App Store Connect（iOS）](#1-app-store-connectios)
+2. [Google Play Console（Android）](#2-google-play-consoleandroid)
+3. [共通メタデータ](#3-共通メタデータ)
+4. [審査対応](#4-審査対応)
+
+---
+
+## 1. App Store Connect（iOS）
+
+### 1.1 App Privacy Details（プライバシーラベル）
+
+#### 収集するデータの種類
+
+| カテゴリ | データタイプ | 収集する | ユーザーに紐付け | トラッキング使用 |
+|---------|-------------|---------|-----------------|-----------------|
+| Contact Info | Email Address | ✅ Yes | ✅ Yes | ❌ No |
+| Health & Fitness | Health | ✅ Yes | ✅ Yes | ❌ No |
+| User Content | Photos or Videos | ✅ Yes | ✅ Yes | ❌ No |
+| User Content | Other User Content | ✅ Yes | ✅ Yes | ❌ No |
+| Identifiers | User ID | ✅ Yes | ✅ Yes | ❌ No |
+| Identifiers | Device ID | ✅ Yes | ✅ Yes | ❌ No |
+| Usage Data | Product Interaction | ✅ Yes | ✅ Yes | ❌ No |
+| Diagnostics | Crash Data | ✅ Yes | ✅ Yes | ❌ No |
+| Diagnostics | Performance Data | ✅ Yes | ✅ Yes | ❌ No |
+
+**注意**: Health データには以下が含まれます（すべて任意入力）：
+- アレルギー情報、既往歴、合併症
+- 身体測定データ（身長、体重）
+- 出生時情報（在胎週数、出生体重等）
+- 発達マイルストーン
+
+#### 各データの利用目的
+
+| データタイプ | 利用目的 |
+|-------------|---------|
+| Email Address | App Functionality |
+| Health | App Functionality |
+| Photos or Videos | App Functionality |
+| Other User Content | App Functionality |
+| User ID | App Functionality |
+| Device ID | Analytics, App Functionality |
+| Product Interaction | Analytics |
+| Crash Data | App Functionality |
+| Performance Data | App Functionality |
+
+#### 入力時の回答例
+
+**Q: Do you or your third-party partners collect data from this app?**
+- A: Yes
+
+**Q: Is this data linked to the user's identity?**
+- A: Yes
+
+**Q: Is this data used for tracking purposes?**
+- A: No
+
+**Q: Do you or your third-party partners use data for tracking?**
+- A: No
+
+---
+
+### 1.2 App Information
+
+| 項目 | 入力内容 |
+|------|---------|
+| Privacy Policy URL | https://withuai.com/en/privacy-en.html |
+| Terms of Service URL (任意) | https://withuai.com/en/terms-en.html |
+| Support URL | https://withuai.com/support |
+| Marketing URL (任意) | https://withuai.com |
+
+---
+
+### 1.3 Age Rating
+
+#### Content Descriptions
+
+| 項目 | 回答 |
+|------|------|
+| Cartoon or Fantasy Violence | None |
+| Realistic Violence | None |
+| Prolonged Graphic or Sadistic Realistic Violence | None |
+| Profanity or Crude Humor | None |
+| Mature/Suggestive Themes | None |
+| Horror/Fear Themes | None |
+| Medical/Treatment Information | Infrequent/Mild |
+| Alcohol, Tobacco, or Drug Use or References | None |
+| Simulated Gambling | None |
+| Sexual Content or Nudity | None |
+| Unrestricted Web Access | None |
+| Gambling with Real Currency | None |
+
+**推奨Age Rating: 4+**
+
+#### 追加質問
+
+**Q: Is this app designed primarily for kids?**
+- A: No（保護者向けアプリのため）
+
+**Q: Does this app contain age-gating?**
+- A: No（必要に応じてYesに変更可）
+
+---
+
+### 1.4 App Review Information
+
+#### Demo Account（必須）
+
+```
+Email: demo@withuai.com
+Password: [審査用パスワード]
+```
+
+※事前にデモアカウントを作成し、サンプルデータ（子供のプロフィール、発達記録、動画分析結果）を登録しておく
+
+#### App Review Notes
+
+```
+【App Overview】
+WithU is a child development tracking app designed for PARENTS and caregivers.
+Children do not directly use this app. Parents use the app to record and track
+their children's developmental milestones.
+
+【Demo Account】
+Email: demo@withuai.com
+Password: [パスワード]
+
+This demo account is pre-populated with:
+- Sample child profile (age 18 months)
+- Development milestone records
+- Sample video analysis results
+- AI-generated developmental suggestions
+
+【AI Features Explanation】
+This app uses AI for the following features:
+
+1. Video Analysis (MediaPipe)
+   - Analyzes child movement patterns from uploaded videos
+   - Processing is done ON-DEVICE (videos are not sent to external servers)
+   - Results show posture and movement assessments
+
+2. Developmental Suggestions (LLM)
+   - Provides general developmental guidance based on recorded milestones
+   - All suggestions are clearly labeled as reference information
+   - Users are advised to consult healthcare professionals
+
+【Important Disclaimers】
+- This app is NOT a medical device
+- AI analysis results do not replace professional medical diagnosis
+- Users are encouraged to consult pediatricians for any concerns
+
+【Data Handling】
+- All user data is encrypted in transit (TLS) and at rest
+- Users can delete their account and all associated data from Settings
+- We do not sell personal information
+- Children's videos are stored securely on Supabase (US servers)
+
+【Third-Party SDKs】
+- Firebase Crashlytics: Crash reporting
+- Firebase Analytics: Usage analytics
+- Supabase: Authentication, database, storage
+- Expo: App framework
+- MediaPipe: On-device video analysis
+
+【Contact】
+For any questions during review: admin@withuai.com
+```
+
+---
+
+## 2. Google Play Console（Android）
+
+### 2.1 Data Safety Section
+
+#### Data Collection
+
+| データタイプ | 収集 | 共有 | 必須 | 目的 |
+|-------------|-----|-----|-----|------|
+| Email address | ✅ | ❌ | ✅ | App functionality |
+| User IDs | ✅ | ❌ | ✅ | App functionality |
+| Health info | ✅ | ❌ | ❌ | App functionality |
+| Photos | ✅ | ❌ | ❌ | App functionality |
+| Videos | ✅ | ❌ | ❌ | App functionality |
+| Other user-generated content | ✅ | ❌ | ❌ | App functionality |
+| Crash logs | ✅ | ❌ | ✅ | Analytics |
+| Diagnostics | ✅ | ❌ | ✅ | Analytics |
+| App interactions | ✅ | ❌ | ✅ | Analytics |
+| Device or other IDs | ✅ | ❌ | ✅ | Analytics |
+
+**注意**: Health info には以下が含まれます（すべて任意入力）：
+- アレルギー情報、既往歴、合併症
+- 身体測定データ（身長、体重）
+- 出生時情報（在胎週数、出生体重等）
+
+#### Security Practices
+
+| 項目 | 回答 |
+|------|------|
+| Data is encrypted in transit | ✅ Yes |
+| You provide a way for users to request that their data be deleted | ✅ Yes |
+| Data is transferred to a third party | ✅ Yes (Firebase, Supabase) |
+
+#### 入力時の回答
+
+**Q: Does your app collect or share any of the required user data types?**
+- A: Yes
+
+**Q: Is all of the user data collected by your app encrypted in transit?**
+- A: Yes
+
+**Q: Do you provide a way for users to request that their data be deleted?**
+- A: Yes
+
+---
+
+### 2.2 App Content
+
+#### Target Audience
+
+| 項目 | 選択 |
+|------|------|
+| Target age group | 18 and over |
+| Appeal to children | No |
+
+**重要**: 「Designed for Families」プログラムには申請しない
+
+#### App Category
+
+| 項目 | 選択 |
+|------|------|
+| Application type | App |
+| Category | Parenting |
+| Tags | Baby, Child Development, Family |
+
+---
+
+### 2.3 Store Listing
+
+#### Contact Details
+
+| 項目 | 入力内容 |
+|------|---------|
+| Email | admin@withuai.com |
+| Phone (任意) | - |
+| Website | https://withuai.com |
+
+#### Privacy Policy
+
+| 項目 | 入力内容 |
+|------|---------|
+| Privacy Policy URL | https://withuai.com/en/privacy-en.html |
+
+---
+
+### 2.4 App Access（審査用）
+
+```
+Instructions for reviewer:
+
+Demo Account:
+Email: demo@withuai.com
+Password: [審査用パスワード]
+
+This account contains sample data including:
+- Child profile with developmental records
+- Video analysis results
+- AI-generated suggestions
+
+Note: This app is designed for parents/caregivers to track
+their children's development. Children do not use this app directly.
+```
+
+---
+
+## 3. 共通メタデータ
+
+### 3.1 アプリ説明文
+
+#### 短い説明（80文字以内）
+
+**日本語:**
+```
+お子様の発達をAIで記録・分析。保護者のための発達支援アプリ
+```
+
+**English:**
+```
+Track your child's development with AI analysis. A developmental support app for parents.
+```
+
+#### 詳細説明
+
+**日本語:**
+```
+WithUは、保護者がお子様の発達を記録・追跡するためのアプリです。
+
+【主な機能】
+• 発達マイルストーンの記録と追跡
+• 動画によるAI姿勢・動作分析
+• AIによる発達アドバイスの提供
+• 成長記録のカレンダー表示
+• 月次発達レポートの作成
+
+【AI分析機能】
+お子様の動画をアップロードすると、AIが姿勢や動作パターンを分析。
+発達の参考情報を提供します。
+※AI分析結果は参考情報であり、医療診断を代替するものではありません。
+
+【安心のプライバシー保護】
+• データは暗号化して安全に保存
+• 第三者への個人情報販売は行いません
+• アカウント削除でデータを完全消去可能
+
+【対象ユーザー】
+本アプリは保護者・養育者向けです。お子様が直接操作することは想定していません。
+
+【ご注意】
+本アプリは医療機器ではありません。お子様の発達に関する懸念がある場合は、
+医療専門家にご相談ください。
+```
+
+**English:**
+```
+WithU is an app for parents to record and track their children's development.
+
+【Key Features】
+• Record and track developmental milestones
+• AI-powered posture and movement analysis from videos
+• AI-generated developmental suggestions
+• Calendar view of growth records
+• Monthly development reports
+
+【AI Analysis】
+Upload videos of your child, and AI will analyze posture and movement patterns
+to provide developmental reference information.
+*AI analysis results are for reference only and do not replace medical diagnosis.
+
+【Privacy Protection】
+• Data is encrypted and stored securely
+• We do not sell personal information to third parties
+• Delete your account to completely erase all data
+
+【Target Users】
+This app is designed for parents and caregivers. It is not intended for
+children to use directly.
+
+【Important Notice】
+This app is not a medical device. If you have concerns about your child's
+development, please consult a healthcare professional.
+```
+
+---
+
+### 3.2 キーワード（App Store用）
+
+**日本語:**
+```
+発達,子供,赤ちゃん,成長記録,マイルストーン,AI分析,育児,子育て,発達支援,療育
+```
+
+**English:**
+```
+development,child,baby,growth,milestone,AI analysis,parenting,childcare,developmental support
+```
+
+---
+
+### 3.3 スクリーンショット推奨内容
+
+| 画面 | 説明文（日本語） | 説明文（English） |
+|------|-----------------|-------------------|
+| 1 | 発達マイルストーンを簡単記録 | Easily record developmental milestones |
+| 2 | AIが動画から動作を分析 | AI analyzes movements from videos |
+| 3 | 成長をカレンダーで振り返り | Review growth on calendar |
+| 4 | AIによる発達アドバイス | AI-powered developmental suggestions |
+| 5 | 月次レポートで成長を可視化 | Visualize growth with monthly reports |
+
+---
+
+## 4. 審査対応
+
+### 4.1 よくある質問への回答
+
+#### Q: このアプリは子供向けですか？
+
+```
+No, this app is designed for parents and caregivers to track their
+children's development. Children do not directly interact with or
+use this app. The app requires adult authentication (email/password)
+and contains features intended for adult users only.
+```
+
+#### Q: AI分析はどのように機能しますか？
+
+```
+The app uses two AI technologies:
+
+1. MediaPipe (On-device): Video analysis is performed entirely on the
+   user's device. No video data is sent to external servers for analysis.
+
+2. LLM-based suggestions: General developmental guidance is generated
+   based on milestone data. All AI-generated content is clearly labeled
+   as reference information, and users are advised to consult healthcare
+   professionals for important decisions.
+```
+
+#### Q: 医療アプリとして分類されますか？
+
+```
+No, this app is NOT a medical device and does not provide medical
+diagnosis or treatment. It is a parenting/lifestyle app that helps
+parents track their children's developmental milestones. All AI
+analysis results include clear disclaimers stating they are for
+reference only and do not replace professional medical advice.
+```
+
+---
+
+### 4.2 審査リジェクト時の対応
+
+#### パターン1: プライバシー関連
+
+```
+問題: Privacy policy does not match data collection
+対応: プライバシーポリシーの該当箇所を確認し、App Privacy Details
+     と一致するよう更新
+```
+
+#### パターン2: デモアカウント
+
+```
+問題: Unable to test app features
+対応: 新しいデモアカウントを作成し、サンプルデータを追加。
+     App Review Notesにログイン情報を再記載
+```
+
+#### パターン3: 子供のデータ
+
+```
+問題: App collects children's data
+対応: アプリは保護者向けであり、子供が直接使用しないことを説明。
+     保護者が自身の子供について情報を入力する形式であることを明記
+```
+
+---
+
+### 4.3 チェックリスト
+
+#### 申請前
+
+- [ ] プライバシーポリシーURLが有効でアクセス可能
+- [ ] 利用規約URLが有効でアクセス可能
+- [ ] デモアカウントが作成済み
+- [ ] デモアカウントにサンプルデータが登録済み
+- [ ] App Privacy Details / Data Safety Sectionが入力済み
+- [ ] Age Ratingが設定済み
+- [ ] App Review Notes / Instructions for reviewerが記載済み
+- [ ] スクリーンショットが準備済み
+- [ ] アプリ説明文が記載済み
+- [ ] アプリ内にアカウント削除機能がある
+- [ ] アプリ内にプライバシーポリシーへのリンクがある
+- [ ] AI分析結果に免責事項が表示される
+
+#### サーバー側
+
+- [ ] サーバーが安定稼働している
+- [ ] デモアカウントでログイン可能
+- [ ] 全機能が正常動作する
+
+---
+
+## 連絡先
+
+審査に関する問い合わせ: admin@withuai.com
+
+---
+
+*本ドキュメントはWithUアプリのApp Store/Google Play申請用に作成されました。*
