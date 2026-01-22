@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>サービス - WithU AI</title>
-    <meta name="description" content="WithU AIの提供するAIソリューションサービス。子どもの発達支援をサポートします。">
+    <title>サービス - With U</title>
+    <meta name="description" content="With Uの提供するAIソリューションサービス。子どもの発達支援をサポートします。">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" href="assets/images/favicon.ico">
 </head>
@@ -12,20 +12,20 @@
     <header class="site-header">
         <div class="header-container">
             <div class="logo-container">
-                <a href="/">
-                    <img src="assets/images/logo/logo.svg" alt="WithU AI" class="site-logo">
+                <a href="story.html">
+                    <img src="assets/images/logo/logo.svg" alt="With U" class="site-logo">
                 </a>
             </div>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="/">会社概要</a></li>
-                    <li><a href="services.html" class="active">サービス</a></li>
-                    <li><a href="news/index.html">ニュース</a></li>
-                    <li><a href="contact.html">お問い合わせ</a></li>
-                    <li class="lang-switch"><a href="en/services.html">EN</a></li>
+                    <li><a href="story.html">ストーリー</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
+                    <li><a href="news/index.html">News</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="lang-switch"><a href="en/services.html">English</a></li>
                 </ul>
             </nav>
-            <button class="mobile-menu-toggle">
+            <button class="mobile-menu-toggle" aria-label="メニュー">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -37,7 +37,6 @@
         <section class="page-hero">
             <div class="container">
                 <h1>サービス</h1>
-                <p>子どもの発達をサポートするAIソリューション</p>
             </div>
         </section>
 
@@ -45,11 +44,11 @@
             <div class="container">
                 <div class="beta-notice">
                     <h2>実証実験実施中</h2>
-                    <p>現在、WithU AIは実証実験の段階にあり、サービスを無料でご利用いただけます。この機会にぜひご体験ください。</p>
+                    <p>現在、With Uは実証実験の段階にあり、サービスを無料でご利用いただけます。この機会にぜひご体験ください。</p>
                 </div>
 
                 <div class="app-preview">
-                    <h2>WithU AIアプリ</h2>
+                    <h2>With Uアプリ</h2>
                     <p>お子さまの発達をAIと専門家がサポート</p>
                     <div class="app-screenshots">
                         <div class="screenshot-container">
@@ -186,7 +185,7 @@
         <section class="app-release-section">
             <div class="container">
                 <h2>アプリリリース予定</h2>
-                <p>WithU AIのアプリリリースにご興味のある方は、ぜひお問い合わせください。実証実験への参加や、リリース情報のご案内をさせていただきます。</p>
+                <p>With Uのアプリリリースにご興味のある方は、ぜひお問い合わせください。実証実験への参加や、リリース情報のご案内をさせていただきます。</p>
                 <div class="app-preview-grid">
                     <div class="app-screenshot-container">
                         <img src="assets/images/app/home-screen.png" alt="WithUアプリのホーム画面" class="app-screenshot">
@@ -212,7 +211,7 @@
         <section class="cta-section">
             <div class="container">
                 <h2>実証実験に参加しませんか？</h2>
-                <p>WithU AIのサービスを無料で体験いただけます。アプリのリリース情報もお届けします。</p>
+                <p>With Uのサービスを無料で体験いただけます。アプリのリリース情報もお届けします。</p>
                 <a href="contact.html" class="cta-button">お問い合わせ</a>
             </div>
         </section>
@@ -222,20 +221,21 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <img src="assets/images/logo/logo-white.svg" alt="WithU AI" class="footer-logo-img">
+                    <img src="assets/images/logo/logo-white.svg" alt="With U" class="footer-logo-img">
                 </div>
                 <nav class="footer-nav">
                     <ul>
-                        <li><a href="/">会社概要</a></li>
-                        <li><a href="services.html">サービス</a></li>
-                        <li><a href="news/index.html">ニュース</a></li>
-                        <li><a href="contact.html">お問い合わせ</a></li>
+                        <li><a href="story.html">ストーリー</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="news/index.html">News</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 WithU AI. All rights reserved.</p>
+                <p>&copy; <span id="year"></span> With U. All rights reserved.</p>
             </div>
+            <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
         </div>
     </footer>
 

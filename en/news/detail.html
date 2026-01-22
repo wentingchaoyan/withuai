@@ -3,18 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News - WithU AI</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <title>News - With U</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="icon" href="../../assets/images/favicon.ico">
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="/en/" class="logo">WithU AI</a>
-            <ul>
-                <li><a href="/en/news/">News</a></li>
-                <li><a href="/news/detail.html" hreflang="ja" class="lang-switch">日本語</a></li>
-            </ul>
-        </nav>
+    <header class="site-header">
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="../index.html">
+                    <img src="../../assets/images/logo/logo.svg" alt="With U" class="site-logo">
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../index.html">About</a></li>
+                    <li><a href="../story.html">Our Story</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../news/index.html" class="active">News</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                    <li class="lang-switch"><a href="../../news/detail.html">日本語</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-toggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
     </header>
 
     <main>
@@ -23,15 +39,35 @@
                 <!-- Article content will be dynamically inserted here -->
             </div>
             <div class="news-navigation">
-                <a href="/en/news/" class="back-to-list">Back to News</a>
+                <a href="../news/index.html" class="back-to-list">Back to News</a>
             </div>
         </article>
     </main>
 
-    <footer>
-        <p>&copy; 2024 WithU AI. All rights reserved.</p>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="../../assets/images/logo/logo-white.svg" alt="With U" class="footer-logo-img">
+                </div>
+                <nav class="footer-nav">
+                    <ul>
+                        <li><a href="../index.html">About</a></li>
+                        <li><a href="../story.html">Our Story</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../news/index.html">News</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="year"></span> With U. All rights reserved.</p>
+            </div>
+            <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+        </div>
     </footer>
 
-    <script src="/assets/js/news.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/news.js"></script>
 </body>
-</html> 
+</html>

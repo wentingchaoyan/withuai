@@ -3,29 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News - WithU AI</title>
-    <meta name="description" content="Stay updated with the latest news and announcements from WithU AI.">
-    <link rel="icon" type="image/svg+xml" href="/assets/images/logo/favicon/favicon.svg">
-    <link rel="apple-touch-icon" href="/assets/images/logo/favicon/apple-touch-icon.png">
-    <link rel="stylesheet" href="/assets/css/reset.css">
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <title>News - With U</title>
+    <meta name="description" content="Stay updated with the latest news and announcements from With U.">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="icon" href="../../assets/images/favicon.ico">
 </head>
 <body>
     <header class="site-header">
         <div class="header-container">
             <div class="logo-container">
-                <a href="/en/">
-                    <img src="/assets/images/logo/logo.svg" alt="WithU AI" class="site-logo">
+                <a href="../story.html">
+                    <img src="../../assets/images/logo/logo.svg" alt="With U" class="site-logo">
                 </a>
             </div>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="/en/">About</a></li>
-                    <li><a href="/en/services.html">Services</a></li>
-                    <li><a href="/en/news/" class="active">News</a></li>
-                    <li><a href="/en/contact.html">Contact</a></li>
-                    <li class="lang-switch"><a href="/news/" hreflang="ja">日本語</a></li>
+                    <li><a href="../story.html">Our Story</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../news/index.html" class="active">News</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                    <li class="lang-switch"><a href="../../news/index.html">日本語</a></li>
                 </ul>
             </nav>
             <button class="mobile-menu-toggle" aria-label="Menu">
@@ -40,14 +37,43 @@
         <section class="page-hero">
             <div class="container">
                 <h1>News</h1>
-                <p>Latest updates from WithU AI</p>
             </div>
         </section>
 
         <section class="news-section">
             <div class="container">
                 <div class="news-grid">
-                    <!-- News articles will be dynamically inserted here -->
+                    <article class="news-card">
+                        <div class="news-content">
+                            <time datetime="2024-11">November 2024</time>
+                            <h2>Selected for J-Startup Women Entrepreneur Course</h2>
+                            <p>With U has been selected for the Women's Startup Lab's Program, part of METI's J-Startup initiative for women entrepreneurs.</p>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-content">
+                            <time datetime="2024-10">October 2024</time>
+                            <h2>Selected for "METI J-Startup Next Innovator Program"</h2>
+                            <p>With U has been selected for the Next Innovator Program, a next-generation innovator development initiative by METI.</p>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-content">
+                            <time datetime="2024-09">September 2024</time>
+                            <h2>Chosen for "APT Women" 9th Cohort</h2>
+                            <p>With U has been selected for the 9th cohort of APT Women, Tokyo Metropolitan Government's Women's Venture Growth Promotion Program.</p>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-content">
+                            <time datetime="2024-04">April 2024</time>
+                            <h2>Selected for NEDO Deep Tech Support Program</h2>
+                            <p>With U has been selected for NEDO's R&D-oriented Startup Support Program (NEP) Pioneer Course.</p>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
@@ -57,24 +83,24 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <img src="/assets/images/logo/logo-white.svg" alt="WithU AI" class="footer-logo-img">
+                    <img src="../../assets/images/logo/logo-white.svg" alt="With U" class="footer-logo-img">
                 </div>
                 <nav class="footer-nav">
                     <ul>
-                        <li><a href="/en/">About</a></li>
-                        <li><a href="/en/services.html">Services</a></li>
-                        <li><a href="/en/news/">News</a></li>
-                        <li><a href="/en/contact.html">Contact</a></li>
+                        <li><a href="../story.html">Our Story</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../news/index.html">News</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
                     </ul>
                 </nav>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 WithU AI. All rights reserved.</p>
+                <p>&copy; <span id="year"></span> With U. All rights reserved.</p>
             </div>
+            <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
         </div>
     </footer>
 
-    <script src="/assets/js/main.js"></script>
-    <script src="/assets/js/news.js"></script>
+    <script src="../../assets/js/main.js"></script>
 </body>
-</html> 
+</html>

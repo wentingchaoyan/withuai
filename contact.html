@@ -3,29 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - WithU AI</title>
-    <meta name="description" content="WithU AIへのお問い合わせはこちらのフォームからお願いいたします。">
-    <link rel="icon" type="image/svg+xml" href="/assets/images/logo/favicon/favicon.svg">
-    <link rel="apple-touch-icon" href="/assets/images/logo/favicon/apple-touch-icon.png">
-    <link rel="stylesheet" href="/assets/css/reset.css">
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <title>Contact - With U</title>
+    <meta name="description" content="With Uへのお問い合わせはこちらのフォームからお願いいたします。">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="assets/images/favicon.ico">
 </head>
 <body>
     <header class="site-header">
         <div class="header-container">
             <div class="logo-container">
-                <a href="/">
-                    <img src="/assets/images/logo/logo.svg" alt="WithU AI" class="site-logo">
+                <a href="story.html">
+                    <img src="assets/images/logo/logo.svg" alt="With U" class="site-logo">
                 </a>
             </div>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="/">About</a></li>
-                    <li><a href="/services.html">Services</a></li>
-                    <li><a href="/news/">News</a></li>
-                    <li><a href="/contact.html" class="active">Contact</a></li>
-                    <li class="lang-switch"><a href="/en/contact.html">English</a></li>
+                    <li><a href="story.html">ストーリー</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="news/index.html">News</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                    <li class="lang-switch"><a href="en/contact.html">English</a></li>
                 </ul>
             </nav>
             <button class="mobile-menu-toggle" aria-label="メニュー">
@@ -40,7 +37,6 @@
         <section class="page-hero">
             <div class="hero-content">
                 <h1>Contact</h1>
-                <p>お問い合わせ</p>
             </div>
         </section>
 
@@ -49,7 +45,7 @@
                 <div class="contact-grid">
                     <div class="contact-info">
                         <h2>お問い合わせ先</h2>
-                        <p>WithU AIへのお問い合わせはこちらのフォームからお願いいたします。</p>
+                        <p>With Uへのお問い合わせはこちらのフォームからお願いいたします。</p>
                         <div class="info-item">
                             <h3>Email</h3>
                             <p><a href="mailto:admin@withuai.com">admin@withuai.com</a></p>
@@ -83,23 +79,24 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <img src="/assets/images/logo/logo-white.svg" alt="WithU AI" class="footer-logo-img">
+                    <img src="assets/images/logo/logo-white.svg" alt="With U" class="footer-logo-img">
                 </div>
                 <nav class="footer-nav">
                     <ul>
-                        <li><a href="/">About</a></li>
-                        <li><a href="/services.html">Services</a></li>
-                        <li><a href="/news/">News</a></li>
-                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="story.html">ストーリー</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="news/index.html">News</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 WithU AI. All rights reserved.</p>
+                <p>&copy; <span id="year"></span> With U. All rights reserved.</p>
             </div>
+            <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
         </div>
     </footer>
 
-    <script src="/assets/js/main.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html> 

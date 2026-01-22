@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services - WithU AI</title>
-    <meta name="description" content="AI solutions and services provided by WithU AI. Supporting child development through technology.">
+    <title>Services - With U</title>
+    <meta name="description" content="AI solutions and services provided by With U. Supporting child development through technology.">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="icon" href="../assets/images/favicon.ico">
 </head>
@@ -12,20 +12,20 @@
     <header class="site-header">
         <div class="header-container">
             <div class="logo-container">
-                <a href="/en">
-                    <img src="../assets/images/logo/logo.svg" alt="WithU AI" class="site-logo">
+                <a href="story.html">
+                    <img src="../assets/images/logo/logo.svg" alt="With U" class="site-logo">
                 </a>
             </div>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="/en">About</a></li>
+                    <li><a href="story.html">Our Story</a></li>
                     <li><a href="services.html" class="active">Services</a></li>
                     <li><a href="news/index.html">News</a></li>
                     <li><a href="contact.html">Contact</a></li>
-                    <li class="lang-switch"><a href="../services.html">JA</a></li>
+                    <li class="lang-switch"><a href="../services.html">日本語</a></li>
                 </ul>
             </nav>
-            <button class="mobile-menu-toggle">
+            <button class="mobile-menu-toggle" aria-label="Menu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -37,7 +37,6 @@
         <section class="page-hero">
             <div class="container">
                 <h1>Services</h1>
-                <p>AI Solutions for Child Development Support</p>
             </div>
         </section>
 
@@ -45,11 +44,11 @@
             <div class="container">
                 <div class="beta-notice">
                     <h2>Beta Testing Now Available</h2>
-                    <p>WithU AI is currently in the beta testing phase, and our services are available free of charge. Take this opportunity to experience our platform.</p>
+                    <p>With U is currently in the beta testing phase, and our services are available free of charge. Take this opportunity to experience our platform.</p>
                 </div>
 
                 <div class="app-preview">
-                    <h2>WithU AI App</h2>
+                    <h2>With U App</h2>
                     <p>AI and Expert Support for Your Child's Development</p>
                     <div class="app-screenshots">
                         <div class="screenshot-container">
@@ -186,7 +185,7 @@
         <section class="app-release-section">
             <div class="container">
                 <h2>App Release Coming Soon</h2>
-                <p>If you're interested in the WithU AI app release, please contact us. We'll provide information about participating in our beta testing and updates about the official release.</p>
+                <p>If you're interested in the With U app release, please contact us. We'll provide information about participating in our beta testing and updates about the official release.</p>
                 <div class="app-preview-grid">
                     <div class="app-screenshot-container">
                         <img src="../assets/images/app/home-screen.png" alt="WithU App Home Screen" class="app-screenshot">
@@ -212,7 +211,7 @@
         <section class="cta-section">
             <div class="container">
                 <h2>Join Our Beta Testing</h2>
-                <p>Experience WithU AI's services for free and receive updates about our app release.</p>
+                <p>Experience With U's services for free and receive updates about our app release.</p>
                 <a href="contact.html" class="cta-button">Contact Us</a>
             </div>
         </section>
@@ -222,12 +221,11 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <img src="../assets/images/logo/logo-white.svg" alt="WithU AI" class="footer-logo-img">
+                    <img src="../assets/images/logo/logo-white.svg" alt="With U" class="footer-logo-img">
                 </div>
                 <nav class="footer-nav">
                     <ul>
-                        <li><a href="/en">Home</a></li>
-                        <li><a href="index.html">About</a></li>
+                        <li><a href="story.html">Our Story</a></li>
                         <li><a href="services.html">Services</a></li>
                         <li><a href="news/index.html">News</a></li>
                         <li><a href="contact.html">Contact</a></li>
@@ -235,8 +233,9 @@
                 </nav>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 WithU AI. All rights reserved.</p>
+                <p>&copy; <span id="year"></span> With U. All rights reserved.</p>
             </div>
+            <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
         </div>
     </footer>
 
