@@ -1,0 +1,32 @@
+<svg width="243" height="221" viewBox="0 0 243 221" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Orange circle border -->
+  <circle cx="128" cy="121" r="95" stroke="#FF511B" stroke-width="10" fill="none"/>
+
+  <!-- Magazine/Book base -->
+  <rect x="80" y="70" width="96" height="110" rx="3" fill="#FFFFFF" stroke="#FF511B" stroke-width="2"/>
+
+  <!-- Magazine spine -->
+  <rect x="80" y="70" width="8" height="110" fill="#FFD4C4" stroke="#FF511B" stroke-width="2"/>
+
+  <!-- Photo frame 1 (main) -->
+  <rect x="95" y="82" width="50" height="40" rx="2" fill="#FFE4DC" stroke="#FF511B" stroke-width="2"/>
+
+  <!-- Simple landscape in photo -->
+  <circle cx="108" cy="95" r="6" fill="#FFAA8A"/>
+  <path d="M95 115 L108 100 L120 110 L135 95 L145 115 Z" fill="#FFD4C4"/>
+
+  <!-- Photo frame 2 (small) -->
+  <rect x="150" y="82" width="20" height="20" rx="2" fill="#FFE4DC" stroke="#FF511B" stroke-width="2"/>
+  <circle cx="160" cy="92" r="5" fill="#FFAA8A"/>
+
+  <!-- Text lines -->
+  <line x1="95" y1="135" x2="168" y2="135" stroke="#FFAA8A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="95" y1="147" x2="168" y2="147" stroke="#FFAA8A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="95" y1="159" x2="140" y2="159" stroke="#FFAA8A" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Star decoration -->
+  <path d="M160 155 L162 161 L168 161 L163 165 L165 171 L160 167 L155 171 L157 165 L152 161 L158 161 Z" fill="#FF511B"/>
+
+  <!-- Heart decoration -->
+  <path d="M152 108 C152 105 155 103 158 106 C161 103 164 105 164 108 C164 112 158 116 158 116 C158 116 152 112 152 108 Z" fill="#FF511B"/>
+</svg>

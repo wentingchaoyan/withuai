@@ -1,0 +1,48 @@
+<svg width="243" height="221" viewBox="0 0 243 221" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Orange circle border -->
+  <circle cx="128" cy="121" r="95" stroke="#FF511B" stroke-width="10" fill="none"/>
+
+  <!-- Timeline path (curved) -->
+  <path d="M70 170 Q90 150 100 130 Q110 110 130 100 Q150 90 170 80 Q185 72 190 60"
+        stroke="#FFD4C4" stroke-width="6" fill="none" stroke-linecap="round"/>
+
+  <!-- Milestone 1 (Birth/Start) -->
+  <circle cx="70" cy="170" r="12" fill="#FF511B"/>
+  <circle cx="70" cy="170" r="6" fill="#FFFFFF"/>
+
+  <!-- Baby icon at milestone 1 -->
+  <circle cx="55" cy="158" r="10" fill="#FFE4DC" stroke="#FF511B" stroke-width="2"/>
+  <circle cx="55" cy="155" r="4" fill="#FFAA8A"/>
+
+  <!-- Milestone 2 -->
+  <circle cx="100" cy="130" r="10" fill="#FF511B"/>
+  <circle cx="100" cy="130" r="5" fill="#FFFFFF"/>
+
+  <!-- Star at milestone 2 -->
+  <path d="M85 118 L87 123 L92 123 L88 126 L89 131 L85 128 L81 131 L82 126 L78 123 L83 123 Z" fill="#FF511B"/>
+
+  <!-- Milestone 3 -->
+  <circle cx="130" cy="100" r="10" fill="#FF511B"/>
+  <circle cx="130" cy="100" r="5" fill="#FFFFFF"/>
+
+  <!-- Heart at milestone 3 -->
+  <path d="M142 88 C142 85 145 83 148 86 C151 83 154 85 154 88 C154 92 148 96 148 96 C148 96 142 92 142 88 Z" fill="#FF511B"/>
+
+  <!-- Milestone 4 -->
+  <circle cx="170" cy="80" r="10" fill="#FF511B"/>
+  <circle cx="170" cy="80" r="5" fill="#FFFFFF"/>
+
+  <!-- Flag at milestone 4 -->
+  <line x1="180" y1="60" x2="180" y2="78" stroke="#FF511B" stroke-width="2"/>
+  <path d="M180 60 L195 66 L180 72 Z" fill="#FF511B"/>
+
+  <!-- Milestone 5 (Current/Future) -->
+  <circle cx="190" cy="60" r="12" fill="#FFE4DC" stroke="#FF511B" stroke-width="3" stroke-dasharray="4 2"/>
+
+  <!-- Growth arrow -->
+  <path d="M175 145 L185 135 L180 135 L180 125 L170 125 L170 135 L165 135 Z" fill="#FF511B" opacity="0.7"/>
+
+  <!-- Small photo frames along timeline -->
+  <rect x="108" y="140" width="20" height="16" rx="2" fill="#FFFFFF" stroke="#FFAA8A" stroke-width="1.5"/>
+  <rect x="145" y="105" width="20" height="16" rx="2" fill="#FFFFFF" stroke="#FFAA8A" stroke-width="1.5"/>
+</svg>

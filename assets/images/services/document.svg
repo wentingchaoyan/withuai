@@ -1,0 +1,28 @@
+<svg width="243" height="221" viewBox="0 0 243 221" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Orange circle border -->
+  <circle cx="128" cy="121" r="95" stroke="#FF511B" stroke-width="10" fill="none"/>
+
+  <!-- Background document (back) -->
+  <rect x="88" y="65" width="70" height="90" rx="4" fill="#FFE4DC" stroke="#FF511B" stroke-width="2"/>
+
+  <!-- Main document (front) -->
+  <rect x="100" y="75" width="70" height="90" rx="4" fill="#FFFFFF" stroke="#FF511B" stroke-width="2"/>
+
+  <!-- Document lines (text representation) -->
+  <line x1="112" y1="95" x2="158" y2="95" stroke="#FFAA8A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="112" y1="107" x2="158" y2="107" stroke="#FFAA8A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="112" y1="119" x2="145" y2="119" stroke="#FFAA8A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="112" y1="131" x2="158" y2="131" stroke="#FFAA8A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="112" y1="143" x2="138" y2="143" stroke="#FFAA8A" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Magnifying glass (search/OCR) -->
+  <circle cx="155" cy="148" r="18" stroke="#FF511B" stroke-width="3" fill="#FFFFFF" fill-opacity="0.9"/>
+  <line x1="168" y1="161" x2="180" y2="173" stroke="#FF511B" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Text inside magnifying glass (OCR symbol) -->
+  <text x="149" y="152" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#FF511B">A</text>
+  <text x="157" y="152" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#FF511B">a</text>
+
+  <!-- Small folder icon -->
+  <path d="M75 140 L75 170 L105 170 L105 148 L95 148 L92 140 Z" fill="#FFD4C4" stroke="#FF511B" stroke-width="2" stroke-linejoin="round"/>
+</svg>
