@@ -8,126 +8,308 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="icon" href="../assets/images/favicon.ico">
     <style>
+        /* Story Page Specific Styles */
         .story-hero {
-            background: linear-gradient(135deg, var(--grey-3) 0%, #fff 100%);
-            padding: 6rem 2rem 2rem;
+            position: relative;
+            padding: 8rem 2rem 2rem;
             text-align: center;
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse at 30% 20%, rgba(255, 81, 27, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(215, 200, 98, 0.12) 0%, transparent 50%),
+                var(--warm-cream);
         }
+
+        .story-hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -15%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(242, 204, 143, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 18s ease-in-out infinite;
+        }
+
         .story-hero h1 {
-            font-size: 2.5rem;
-            color: var(--dark-brown);
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 600;
+            color: var(--deep-twilight);
             margin-bottom: 0;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease-out-expo) forwards;
+            position: relative;
+            z-index: 1;
         }
+
         .story-content {
-            max-width: 800px;
+            max-width: 720px;
             margin: 0 auto;
             padding: 4rem 2rem;
         }
+
         .story-content p {
             font-size: 1.15rem;
-            line-height: 2.2;
-            color: var(--dark-brown);
+            line-height: 2.1;
+            color: var(--deep-twilight);
             margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 0.6s var(--ease-out-expo) forwards;
         }
+
+        .story-content p:nth-child(1) { animation-delay: 0.1s; }
+        .story-content p:nth-child(2) { animation-delay: 0.15s; }
+        .story-content p:nth-child(3) { animation-delay: 0.2s; }
+        .story-content p:nth-child(4) { animation-delay: 0.25s; }
+        .story-content p:nth-child(5) { animation-delay: 0.3s; }
+        .story-content p:nth-child(6) { animation-delay: 0.35s; }
+
         .story-content p em {
-            color: var(--orange);
+            color: var(--brand-orange);
             font-style: normal;
             font-weight: 600;
+            background: linear-gradient(180deg, transparent 60%, rgba(255, 81, 27, 0.15) 60%);
+            padding: 0 0.1em;
         }
+
         .photo-section {
             margin: 3rem 0;
             text-align: center;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease-out-expo) 0.3s forwards;
         }
+
         .photo-frame {
             display: inline-block;
-            max-width: 500px;
+            max-width: 480px;
             width: 100%;
-            border-radius: 16px;
+            border-radius: var(--radius-xl);
             overflow: hidden;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            transition: all var(--transition-medium);
         }
+
+        .photo-frame::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius-xl);
+            padding: 3px;
+            background: linear-gradient(135deg, var(--brand-orange), var(--brand-yellow), var(--brand-orange));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .photo-frame:hover {
+            transform: translateY(-8px) rotate(-1deg);
+            box-shadow: 0 25px 60px rgba(45, 49, 66, 0.2);
+        }
+
         .photo-frame img {
             width: 100%;
             height: auto;
             display: block;
         }
-        .photo-placeholder {
-            width: 100%;
-            height: 350px;
-            background: linear-gradient(135deg, var(--grey-2) 0%, var(--grey-3) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--grey-1);
-            font-size: 1rem;
-        }
+
         .photo-caption {
-            margin-top: 1rem;
+            margin-top: 1.25rem;
             font-size: 0.95rem;
-            color: var(--grey-1);
+            color: var(--stone);
             font-style: italic;
+            font-family: var(--font-display);
         }
+
         .vision-quote {
-            background: linear-gradient(135deg, var(--orange) 0%, var(--purple) 100%);
+            position: relative;
+            background: linear-gradient(135deg, var(--brand-orange) 0%, #FF7043 50%, var(--brand-yellow) 100%);
             color: white;
-            padding: 4rem 2rem;
+            padding: 5rem 2rem;
             text-align: center;
-            margin: 2rem 0;
+            margin: 3rem 0;
+            overflow: hidden;
         }
+
+        .vision-quote::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -25%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            animation: float 12s ease-in-out infinite;
+        }
+
+        .vision-quote::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            right: -15%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 50%;
+            animation: float 15s ease-in-out infinite reverse;
+        }
+
         .vision-quote blockquote {
             max-width: 700px;
             margin: 0 auto;
-            font-size: 1.8rem;
-            line-height: 1.8;
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            line-height: 1.7;
             font-weight: 500;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease-out-expo) 0.2s forwards;
         }
+
+        .vision-quote blockquote::before {
+            content: '"';
+            position: absolute;
+            top: -0.5em;
+            left: -0.3em;
+            font-size: 4em;
+            opacity: 0.15;
+            font-family: Georgia, serif;
+        }
+
         .story-section-alt {
-            background-color: var(--grey-3);
+            background: linear-gradient(180deg, var(--warm-cream) 0%, var(--soft-white) 100%);
             padding: 4rem 0;
+            position: relative;
         }
+
+        .story-section-alt::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--stone-lighter), transparent);
+        }
+
         .story-section-alt .story-content {
             padding-top: 0;
             padding-bottom: 0;
         }
-        .closing-message {
-            text-align: center;
-            padding: 3rem 2rem;
-        }
-        .closing-message p {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-        }
-        .signature {
-            color: var(--dark-brown);
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-top: 2rem;
-        }
+
         .two-photos {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
             margin: 3rem 0;
         }
+
         .two-photos .photo-frame {
             max-width: 100%;
         }
-        .two-photos .photo-placeholder {
-            height: 280px;
+
+        .two-photos .photo-frame:nth-child(1) {
+            animation-delay: 0.1s;
         }
+
+        .two-photos .photo-frame:nth-child(2) {
+            animation-delay: 0.2s;
+            transform: translateY(1.5rem);
+        }
+
+        .two-photos .photo-frame:hover {
+            transform: translateY(-8px) rotate(1deg);
+        }
+
+        .two-photos .photo-frame:nth-child(2):hover {
+            transform: translateY(calc(1.5rem - 8px)) rotate(-1deg);
+        }
+
+        .closing-message {
+            text-align: center;
+            padding: 4rem 2rem;
+            background:
+                radial-gradient(ellipse at 50% 100%, rgba(215, 200, 98, 0.1) 0%, transparent 50%),
+                var(--soft-white);
+        }
+
+        .closing-message p {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            color: var(--deep-twilight);
+            margin-bottom: 1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .signature {
+            color: var(--brand-orange);
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 1.15rem;
+            margin-top: 2rem;
+            display: inline-block;
+            position: relative;
+        }
+
+        .signature::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--brand-orange), var(--brand-yellow));
+            border-radius: 2px;
+        }
+
         @media (max-width: 768px) {
+            .story-hero {
+                padding: 7rem 1.5rem 1.5rem;
+            }
+
             .story-hero h1 {
                 font-size: 2rem;
             }
+
+            .story-content {
+                padding: 2.5rem 1.5rem;
+            }
+
             .story-content p {
                 font-size: 1.05rem;
                 line-height: 2;
             }
-            .vision-quote blockquote {
-                font-size: 1.4rem;
+
+            .vision-quote {
+                padding: 3.5rem 1.5rem;
             }
+
+            .vision-quote blockquote {
+                font-size: 1.35rem;
+            }
+
             .two-photos {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .two-photos .photo-frame:nth-child(2) {
+                transform: none;
+            }
+
+            .closing-message {
+                padding: 3rem 1.5rem;
+            }
+
+            .closing-message p {
+                font-size: 1.15rem;
             }
         }
     </style>
@@ -167,7 +349,7 @@
                 My child was born with <em>Down syndrome</em>.
             </p>
             <p>
-                The first time I held her, her tiny hand gripped my finger. In that moment, I made a promise to do everything I could for this child. Every time I saw her smile, I felt an overwhelming desire to help her reach her full potential.
+                The first time I held him, his tiny hand gripped my finger. In that moment, I made a promise to do everything I could for this child. Every time I saw his smile, I felt an overwhelming desire to help him reach his full potential.
             </p>
 
             <div class="photo-section">
@@ -180,13 +362,13 @@
                 But the reality was harder than I ever imagined.
             </p>
             <p>
-                My child's growth is slow. There were nights when I couldn't help comparing her to other children, crushed by anxiety and impatience. "Where is she right now in her development?" "Where is she heading?" "What can I do for her today?"—I carried these unanswered questions with me constantly.
+                My child's growth is slow. There were nights when I couldn't help comparing him to other children, crushed by anxiety and impatience. "Where is he right now in his development?" "Where is he heading?" "What can I do for him today?"—I carried these unanswered questions with me constantly.
             </p>
             <p>
-                I wanted to consult with her therapists, but I couldn't convey her daily progress well. At the hospital, I repeated the same explanations every time. Family and caregivers were disconnected—<em>no one saw the whole picture</em>. I wanted to celebrate her small victories with someone, but that "someone" wasn't there. I felt so alone.
+                I wanted to consult with his therapists, but I couldn't convey his daily progress well. At the hospital, I repeated the same explanations every time. Family and caregivers were disconnected—<em>no one saw the whole picture</em>. I wanted to celebrate his small victories with someone, but that "someone" wasn't there. I felt so alone.
             </p>
             <p>
-                Specialists came in with preconceptions based on limited samples, already convinced that "this child can't do this." At home, I watched her small changes every day. She had grown so much in six months—yet standardized assessment tools said "no progress." <em>The child I saw at home and the child in those evaluations felt like two different people</em>. I desperately wanted to share what I observed at home.
+                Specialists came in with preconceptions based on limited samples, already convinced that "this child can't do this." At home, I watched his small changes every day. He had grown so much in six months—yet standardized assessment tools said "no progress." <em>The child I saw at home and the child in those evaluations felt like two different people</em>. I desperately wanted to share what I observed at home.
             </p>
             <p>
                 One day, I visited a special needs school. What I saw there cut deep into my heart. After graduation, the options were predetermined jobs and minimal wages. That was presented as "reality." Nothing had even started yet—was my child's future already decided? I couldn't stop the tears.
@@ -211,7 +393,7 @@
                     It's okay if growth is slow. What matters is that everyone involved <em>observes the child, notices the small changes, shares them, and celebrates together</em>. That joy leads to the next step of growth. I wanted to create that cycle.
                 </p>
                 <p>
-                    "Where is she in her development right now?" "Where is she heading?" "What can we do today?"—the app gives you hints. And then families, therapists, and schools can all look in the same direction, supporting the child as <em>One Team</em>.
+                    "Where is he in his development right now?" "Where is he heading?" "What can we do today?"—the app gives you hints. And then families, therapists, and schools can all look in the same direction, supporting the child as <em>One Team</em>.
                 </p>
 
                 <div class="two-photos">
@@ -224,7 +406,7 @@
                 </div>
 
                 <p>
-                    What she couldn't do yesterday, she did today. We record that moment and celebrate together—"That's amazing!" That joy gives both the child and those supporting her the strength to keep moving forward.
+                    What he couldn't do yesterday, he did today. We record that moment and celebrate together—"That's amazing!" That joy gives both the child and those supporting him the strength to keep moving forward.
                 </p>
                 <p>
                     We don't want the next family to experience the loneliness we went through. We want to build a world where no one has to carry this burden alone.
@@ -235,7 +417,7 @@
             </div>
         </section>
 
-        <section class="story-content closing-message">
+        <section class="closing-message">
             <p>
                 Will you join us in expanding your child's possibilities with With U?
             </p>

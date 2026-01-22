@@ -7,6 +7,184 @@
     <meta name="description" content="With Uの提供するAIソリューションサービス。子どもの発達支援をサポートします。">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" href="assets/images/favicon.ico">
+    <style>
+        /* Services Page Specific Enhancements */
+        .services-hero {
+            position: relative;
+            padding: 10rem 2rem 5rem;
+            text-align: center;
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse at 20% 40%, rgba(215, 200, 98, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 60%, rgba(242, 204, 143, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 90%, rgba(255, 81, 27, 0.08) 0%, transparent 40%),
+                var(--warm-cream);
+        }
+
+        .services-hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -15%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(215, 200, 98, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .services-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(242, 204, 143, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 15s ease-in-out infinite reverse;
+        }
+
+        .services-hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 600;
+            color: var(--deep-twilight);
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease-out-expo) forwards;
+            position: relative;
+            z-index: 1;
+        }
+
+        .services-hero p {
+            font-size: 1.25rem;
+            color: var(--stone);
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease-out-expo) 0.15s forwards;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Wave Divider */
+        .wave-divider {
+            position: relative;
+            margin-top: -1px;
+            overflow: hidden;
+            line-height: 0;
+            background: var(--soft-white);
+        }
+
+        .wave-divider svg {
+            display: block;
+            width: 100%;
+            height: 80px;
+        }
+
+        .wave-divider.wave-cream {
+            background: var(--warm-cream);
+        }
+
+        /* Enhanced Service Cards */
+        .service-section .service-grid {
+            margin-top: var(--space-xl);
+        }
+
+        /* Alternate card accent colors */
+        .service-card:nth-child(3n+1)::before {
+            background: linear-gradient(180deg, var(--brand-orange) 0%, var(--brand-yellow) 100%);
+        }
+
+        .service-card:nth-child(3n+2)::before {
+            background: linear-gradient(180deg, var(--brand-yellow) 0%, var(--brand-yellow-light) 100%);
+        }
+
+        .service-card:nth-child(3n+3)::before {
+            background: linear-gradient(180deg, var(--brand-yellow) 0%, var(--brand-orange) 100%);
+        }
+
+        /* Service icons - keep original images visible */
+        .service-card:nth-child(3n+1):hover .service-icon {
+            box-shadow: 0 8px 25px rgba(255, 81, 27, 0.2);
+        }
+
+        .service-card:nth-child(3n+2):hover .service-icon {
+            box-shadow: 0 8px 25px rgba(215, 200, 98, 0.25);
+        }
+
+        .service-card:nth-child(3n+3):hover .service-icon {
+            box-shadow: 0 8px 25px rgba(255, 81, 27, 0.2);
+        }
+
+        /* Enhanced App Preview */
+        .app-preview {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-preview::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(129, 178, 154, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .app-preview h2 {
+            font-family: var(--font-display);
+            position: relative;
+        }
+
+        /* App Release Section Enhancement */
+        .app-release-section {
+            background:
+                radial-gradient(ellipse at 30% 50%, rgba(242, 204, 143, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 50%, rgba(129, 178, 154, 0.08) 0%, transparent 50%),
+                var(--soft-white);
+        }
+
+        .app-release-section h2 {
+            font-family: var(--font-display);
+        }
+
+        /* Feature items with staggered animation */
+        .feature-item {
+            opacity: 0;
+            animation: fadeUp 0.6s var(--ease-out-expo) forwards;
+        }
+
+        .feature-item:nth-child(1) { animation-delay: 0.1s; }
+        .feature-item:nth-child(2) { animation-delay: 0.2s; }
+        .feature-item:nth-child(3) { animation-delay: 0.3s; }
+
+        /* CTA Section Enhancement */
+        .cta-section {
+            position: relative;
+        }
+
+        .cta-section h2 {
+            font-family: var(--font-display);
+        }
+
+        @media (max-width: 768px) {
+            .services-hero {
+                padding: 8rem 1.5rem 3rem;
+            }
+
+            .services-hero h1 {
+                font-size: 2rem;
+            }
+
+            .wave-divider svg {
+                height: 50px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="site-header">
@@ -34,11 +212,16 @@
     </header>
 
     <main>
-        <section class="page-hero">
-            <div class="container">
-                <h1>サービス</h1>
-            </div>
+        <section class="services-hero">
+            <h1>サービス</h1>
         </section>
+
+        <!-- Wave divider -->
+        <div class="wave-divider">
+            <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+                <path d="M0,40 C200,80 400,0 600,40 C800,80 1000,0 1200,40 L1200,80 L0,80 Z" fill="var(--soft-white)"/>
+            </svg>
+        </div>
 
         <section class="service-section">
             <div class="container">
@@ -70,12 +253,6 @@
                     <div class="service-card">
                         <h3>発達支援プラットフォーム</h3>
                         <p>お子さまの成長を記録・管理する中心的なプラットフォームです。日々の様子を簡単に記録し、発達の全体像を把握できます。</p>
-                        <ul class="service-features">
-                            <li>発達段階に応じた記録管理</li>
-                            <li>写真・動画・テキストでの記録</li>
-                            <li>成長の全体像の把握</li>
-                            <li>支援目標の設定と追跡</li>
-                        </ul>
                         <div class="service-icon">
                             <img src="assets/images/services/child-development.svg" alt="発達支援">
                         </div>
@@ -83,13 +260,7 @@
 
                     <div class="service-card">
                         <h3>AIによる発達分析</h3>
-                        <p>動画からお子さまの動作をAIが自動解析。歩行や座位などの運動発達を数値化し、変化を可視化します。</p>
-                        <ul class="service-features">
-                            <li>動画からの姿勢・動作分析</li>
-                            <li>運動発達の数値化</li>
-                            <li>経時的な変化の可視化</li>
-                            <li>専門家による結果確認</li>
-                        </ul>
+                        <p>動画からお子さまの動作をAIが自動解析。運動発達を数値化し、変化を可視化します。</p>
                         <div class="service-icon">
                             <img src="assets/images/services/ai-analysis.svg" alt="AI分析">
                         </div>
@@ -97,13 +268,7 @@
 
                     <div class="service-card">
                         <h3>成長記録の共有</h3>
-                        <p>家族、療育機関、学校、医療機関と記録を安全に共有。関係者全員が同じ情報を見ながら連携できます。</p>
-                        <ul class="service-features">
-                            <li>関係者への安全な共有</li>
-                            <li>閲覧権限の細かい設定</li>
-                            <li>チーム間の情報連携</li>
-                            <li>共有履歴の管理</li>
-                        </ul>
+                        <p>家族、療育機関、学校、医療機関と記録を安全に共有。関係者全員で連携できます。</p>
                         <div class="service-icon">
                             <img src="assets/images/services/sharing.svg" alt="共有機能">
                         </div>
@@ -112,12 +277,6 @@
                     <div class="service-card">
                         <h3>個別支援レポート</h3>
                         <p>蓄積された記録から、専門家がお子さま専用のレポートを作成。具体的な支援方法を提案します。</p>
-                        <ul class="service-features">
-                            <li>専門家によるレポート作成</li>
-                            <li>具体的な支援方法の提案</li>
-                            <li>定期的な進捗確認</li>
-                            <li>療育機関との情報共有</li>
-                        </ul>
                         <div class="service-icon">
                             <img src="assets/images/services/report.svg" alt="レポート">
                         </div>
@@ -126,12 +285,6 @@
                     <div class="service-card">
                         <h3>成長マガジン</h3>
                         <p>記録した写真や動画を美しいマガジン形式で自動作成。お子さまの成長を振り返る特別な一冊になります。</p>
-                        <ul class="service-features">
-                            <li>写真・動画の自動レイアウト</li>
-                            <li>月別・年別のマガジン作成</li>
-                            <li>PDF出力・印刷対応</li>
-                            <li>家族への共有</li>
-                        </ul>
                         <div class="service-icon">
                             <img src="assets/images/services/magazine.svg" alt="マガジン">
                         </div>
@@ -140,12 +293,6 @@
                     <div class="service-card">
                         <h3>ドキュメント管理</h3>
                         <p>診断書や療育資料などの書類をスキャンして保存。OCRで文字を認識し、必要な時にすぐ検索できます。</p>
-                        <ul class="service-features">
-                            <li>書類のスキャン・保存</li>
-                            <li>OCRによる文字認識</li>
-                            <li>カテゴリ別の整理</li>
-                            <li>キーワード検索</li>
-                        </ul>
                         <div class="service-icon">
                             <img src="assets/images/services/document.svg" alt="ドキュメント">
                         </div>
@@ -154,12 +301,6 @@
                     <div class="service-card">
                         <h3>スケジュール管理</h3>
                         <p>療育、通院、学校行事などの予定を一括管理。Googleカレンダーと連携して家族で共有できます。</p>
-                        <ul class="service-features">
-                            <li>療育・通院予定の管理</li>
-                            <li>Googleカレンダー連携</li>
-                            <li>家族での予定共有</li>
-                            <li>予定のメモ・記録</li>
-                        </ul>
                         <div class="service-icon">
                             <img src="assets/images/services/calendar.svg" alt="カレンダー">
                         </div>
@@ -168,12 +309,6 @@
                     <div class="service-card">
                         <h3>ライフマップ</h3>
                         <p>誕生から現在までの大切な出来事を時系列で記録。お子さまの成長の軌跡を一目で振り返れます。</p>
-                        <ul class="service-features">
-                            <li>ライフイベントの記録</li>
-                            <li>時系列での表示</li>
-                            <li>マイルストーン管理</li>
-                            <li>写真・動画の紐付け</li>
-                        </ul>
                         <div class="service-icon">
                             <img src="assets/images/services/lifemap.svg" alt="ライフマップ">
                         </div>
@@ -181,6 +316,13 @@
                 </div>
             </div>
         </section>
+
+        <!-- Wave divider -->
+        <div class="wave-divider wave-cream">
+            <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+                <path d="M0,40 C300,0 600,80 900,40 C1050,20 1150,60 1200,40 L1200,80 L0,80 Z" fill="var(--soft-white)"/>
+            </svg>
+        </div>
 
         <section class="app-release-section">
             <div class="container">
@@ -241,4 +383,4 @@
 
     <script src="assets/js/main.js"></script>
 </body>
-</html> 
+</html>
