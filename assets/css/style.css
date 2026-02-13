@@ -863,6 +863,145 @@ p {
 }
 
 /* ============================================
+   Launch Notice (replaces Beta Notice)
+   ============================================ */
+.launch-notice {
+    background: linear-gradient(135deg, var(--brand-orange) 0%, var(--brand-orange-dark) 100%);
+    color: white;
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-terracotta);
+}
+
+.launch-notice::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+}
+
+.launch-notice h2 {
+    color: white;
+    margin-bottom: 0.75rem;
+    font-size: 1.75rem;
+    position: relative;
+}
+
+.launch-notice p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    margin: 0 0 var(--space-md);
+    position: relative;
+}
+
+/* ============================================
+   Download Badges
+   ============================================ */
+.download-badges {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-md);
+    margin: var(--space-lg) 0;
+    flex-wrap: wrap;
+}
+
+.download-badge {
+    display: inline-block;
+    transition: all var(--transition-fast);
+}
+
+.download-badge:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.1);
+}
+
+.download-badge img {
+    height: 50px;
+    width: auto;
+}
+
+/* ============================================
+   App Download Section (replaces App Release)
+   ============================================ */
+.app-download-section {
+    padding: var(--space-3xl) 0;
+    text-align: center;
+    background:
+        radial-gradient(ellipse at 30% 50%, rgba(242, 204, 143, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 50%, rgba(129, 178, 154, 0.08) 0%, transparent 50%),
+        var(--soft-white);
+}
+
+.app-download-section h2 {
+    font-family: var(--font-display);
+    color: var(--deep-twilight);
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+}
+
+.app-download-section .app-subtitle {
+    text-align: center;
+    color: var(--stone);
+    margin-bottom: var(--space-xl);
+    font-size: 1.15rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.app-download-section .app-preview-grid {
+    text-align: left;
+}
+
+.app-download-section .download-badges {
+    margin-top: var(--space-xl);
+}
+
+/* Contact link in CTA */
+.cta-contact-link {
+    margin-top: var(--space-md);
+}
+
+.cta-contact-link a {
+    color: var(--brand-orange);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.cta-contact-link a:hover {
+    color: var(--brand-orange-dark);
+}
+
+@media (max-width: 480px) {
+    .download-badge img {
+        height: 42px;
+    }
+
+    .download-badges {
+        gap: var(--space-sm);
+    }
+
+    .launch-notice {
+        padding: var(--space-lg);
+    }
+
+    .launch-notice h2 {
+        font-size: 1.4rem;
+    }
+}
+
+/* ============================================
    Features Section (Generic)
    ============================================ */
 .features {
