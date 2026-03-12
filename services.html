@@ -11,7 +11,7 @@
         /* Services Page Specific Enhancements */
         .services-hero {
             position: relative;
-            padding: 10rem 2rem 5rem;
+            padding: 8rem 2rem 2.5rem;
             text-align: center;
             overflow: hidden;
             background:
@@ -140,20 +140,187 @@
             position: relative;
         }
 
-        /* App Download Section Enhancement */
-        .app-download-section h2 {
-            font-family: var(--font-display);
+        /* ===== Testimonials Section ===== */
+        .testimonials-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(170deg, var(--warm-cream) 0%, #f5f0e8 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .testimonials-section::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 81, 27, 0.04);
+        }
+        .testimonials-section::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -60px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(215, 200, 98, 0.06);
         }
 
-        /* Feature items with staggered animation */
-        .feature-item {
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .testimonials-label {
+            display: inline-block;
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--brand-orange);
+            margin-bottom: 12px;
+            background: rgba(255, 81, 27, 0.08);
+            padding: 6px 18px;
+            border-radius: var(--radius-pill);
+        }
+        .testimonials-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+            font-weight: 600;
+            color: var(--deep-twilight);
+            margin-bottom: 12px;
+        }
+        .testimonials-subtitle {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--stone);
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .testimonials-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+        }
+
+        .testimonial-card {
+            background: var(--soft-white);
+            border-radius: var(--radius-lg);
+            padding: 36px 32px 32px;
+            position: relative;
+            box-shadow: var(--shadow-sm);
+            transition: transform var(--transition-medium), box-shadow var(--transition-medium);
             opacity: 0;
             animation: fadeUp 0.6s var(--ease-out-expo) forwards;
         }
+        .testimonial-card:nth-child(1) { animation-delay: 0.1s; }
+        .testimonial-card:nth-child(2) { animation-delay: 0.2s; }
+        .testimonial-card:nth-child(3) { animation-delay: 0.3s; }
+        .testimonial-card:nth-child(4) { animation-delay: 0.4s; }
+        .testimonial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
 
-        .feature-item:nth-child(1) { animation-delay: 0.1s; }
-        .feature-item:nth-child(2) { animation-delay: 0.2s; }
-        .feature-item:nth-child(3) { animation-delay: 0.3s; }
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 28px;
+            right: 28px;
+            height: 3px;
+            border-radius: 0 0 3px 3px;
+        }
+        .testimonial-card:nth-child(odd)::before {
+            background: linear-gradient(90deg, var(--brand-orange), var(--brand-yellow));
+        }
+        .testimonial-card:nth-child(even)::before {
+            background: linear-gradient(90deg, var(--brand-yellow), var(--honey));
+        }
+
+        .testimonial-quote-mark {
+            position: absolute;
+            top: 20px;
+            left: 28px;
+            font-size: 56px;
+            line-height: 1;
+            color: var(--brand-orange);
+            opacity: 0.1;
+            font-family: Georgia, serif;
+            font-weight: bold;
+            user-select: none;
+        }
+
+        .testimonial-text {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            line-height: 1.9;
+            color: var(--deep-twilight);
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-footer {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-top: 1px solid var(--stone-lighter);
+            padding-top: 18px;
+        }
+
+        .testimonial-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            flex-shrink: 0;
+            font-family: var(--font-body);
+        }
+        .avatar-orange { background: linear-gradient(135deg, var(--brand-orange), var(--brand-orange-dark)); }
+        .avatar-yellow { background: linear-gradient(135deg, var(--brand-yellow), #c4b555); }
+        .avatar-honey { background: linear-gradient(135deg, var(--honey), #d4a96a); }
+        .avatar-twilight { background: linear-gradient(135deg, var(--deep-twilight), #3d4260); }
+
+        .testimonial-user-info { flex: 1; }
+        .testimonial-user-name {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--deep-twilight);
+        }
+        .testimonial-user-role {
+            font-family: var(--font-body);
+            font-size: 12px;
+            color: var(--stone);
+            margin-top: 2px;
+        }
+
+        .testimonial-stars {
+            display: flex;
+            gap: 2px;
+        }
+        .testimonial-stars span {
+            color: var(--brand-yellow);
+            font-size: 14px;
+        }
 
         /* CTA Section Enhancement */
         .cta-section {
@@ -166,7 +333,7 @@
 
         @media (max-width: 768px) {
             .services-hero {
-                padding: 8rem 1.5rem 3rem;
+                padding: 7rem 1.5rem 2rem;
             }
 
             .services-hero h1 {
@@ -175,6 +342,25 @@
 
             .wave-divider svg {
                 height: 50px;
+            }
+
+            .testimonials-section {
+                padding: 4rem 1.25rem;
+            }
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .testimonial-card {
+                padding: 28px 22px 24px;
+            }
+            .testimonial-quote-mark {
+                font-size: 44px;
+                left: 18px;
+            }
+            .testimonial-card::before {
+                left: 18px;
+                right: 18px;
             }
         }
     </style>
@@ -209,35 +395,14 @@
             <h1>サービス</h1>
         </section>
 
-        <!-- Wave divider -->
-        <div class="wave-divider">
-            <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
-                <path d="M0,40 C200,80 400,0 600,40 C800,80 1000,0 1200,40 L1200,80 L0,80 Z" fill="var(--soft-white)"/>
-            </svg>
-        </div>
-
         <section class="service-section">
             <div class="container">
-                <div class="launch-notice">
-                    <h2>HugMap リリース</h2>
-                    <p>With Uの発達支援アプリ「HugMap」がダウンロードいただけます。</p>
-                    <div class="download-badges">
-                        <a href="https://apps.apple.com/jp/app/hugmap/id6743437199" class="download-badge" target="_blank" rel="noopener noreferrer">
-                            <img src="assets/images/app/badge-app-store.svg" alt="App Storeからダウンロード">
-                        </a>
-                        <a href="https://play.google.com/apps/internaltest/4700383829748403272" class="download-badge" target="_blank" rel="noopener noreferrer">
-                            <img src="assets/images/app/badge-google-play.svg" alt="Google Playで手に入れよう">
-                        </a>
-                    </div>
-                </div>
-
                 <div class="app-preview">
                     <h2>HugMap</h2>
                     <p>お子さまの発達をAIでサポートする成長記録アプリ</p>
                     <div class="app-screenshots">
                         <div class="screenshot-container">
                             <img src="assets/images/app/home-screen.png" alt="HugMapアプリのホーム画面" class="app-screenshot">
-                            <p class="screenshot-caption">発達状況の詳細な記録と分析</p>
                         </div>
                         <div class="screenshot-description">
                             <ul class="app-features-list">
@@ -247,6 +412,14 @@
                                 <li>診断書・療育計画書のスキャン保存</li>
                                 <li>家族を招待して成長を共有</li>
                             </ul>
+                            <div class="download-badges">
+                                <a href="https://apps.apple.com/jp/app/hugmap/id6743437199" class="download-badge" target="_blank" rel="noopener noreferrer">
+                                    <img src="assets/images/app/badge-app-store.svg" alt="App Storeからダウンロード">
+                                </a>
+                                <a href="https://play.google.com/apps/internaltest/4700383829748403272" class="download-badge" target="_blank" rel="noopener noreferrer">
+                                    <img src="assets/images/app/badge-google-play.svg" alt="Google Playで手に入れよう">
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -300,55 +473,86 @@
                         </div>
                     </div>
 
-                    <div class="service-card">
-                        <h3>スケジュール管理</h3>
-                        <p>療育、通院、学校行事などの予定を一括管理。Googleカレンダーと連携して家族で共有できます。</p>
-                        <div class="service-icon">
-                            <img src="assets/images/services/calendar.svg" alt="カレンダー">
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials-section">
+            <div class="testimonials-header">
+                <div class="testimonials-label">User's Voice</div>
+                <h2 class="testimonials-title">ユーザーの声</h2>
+                <p class="testimonials-subtitle">HugMapをご利用いただいた保護者・支援者の皆さまからの声をご紹介します。</p>
+            </div>
+            <div class="testimonials-container">
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote-mark">"</div>
+                        <p class="testimonial-text">入力した情報がサポートブックにまとめられるのが感動しました！これは画期的で便利です！ところどころ書かれているメッセージが温かくて、作成者の愛を感じました。</p>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-avatar avatar-orange">A</div>
+                            <div class="testimonial-user-info">
+                                <div class="testimonial-user-name">A.K さん</div>
+                                <div class="testimonial-user-role">保護者</div>
+                            </div>
+                            <div class="testimonial-stars">
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="service-card">
-                        <h3>ライフマップ</h3>
-                        <p>誕生から現在までの大切な出来事を時系列で記録。お子さまの成長の軌跡を一目で振り返れます。</p>
-                        <div class="service-icon">
-                            <img src="assets/images/services/lifemap.svg" alt="ライフマップ">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote-mark">"</div>
+                        <p class="testimonial-text">座れるか座れないかのゼロイチではなく、その中間にも発達はあると知れて嬉しい。発達段階の解説や「やってみよう」の取り組みアドバイスが具体的で、実践しやすいです。</p>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-avatar avatar-yellow">S</div>
+                            <div class="testimonial-user-info">
+                                <div class="testimonial-user-name">S.Y さん</div>
+                                <div class="testimonial-user-role">保護者</div>
+                            </div>
+                            <div class="testimonial-stars">
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote-mark">"</div>
+                        <p class="testimonial-text">初めてできるようになったことを記入しておけるのは、見返した時に思い出に残っていいなと思います。記入項目が細かく指定されていて、親としても子の様子を把握しやすいです。</p>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-avatar avatar-twilight">M</div>
+                            <div class="testimonial-user-info">
+                                <div class="testimonial-user-name">M.I さん</div>
+                                <div class="testimonial-user-role">保護者</div>
+                            </div>
+                            <div class="testimonial-stars">
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote-mark">"</div>
+                        <p class="testimonial-text">保護者様のご負担を減らし、支援員にとっても必要な情報にアクセスできる、双方向に価値のあるアプリだと感じています。民間ならではのフットワークで繋がれるツールとしても期待感が大きいです。</p>
+                        <div class="testimonial-footer">
+                            <div class="testimonial-avatar avatar-honey">T</div>
+                            <div class="testimonial-user-info">
+                                <div class="testimonial-user-name">T.M さん</div>
+                                <div class="testimonial-user-role">児童発達支援事業者</div>
+                            </div>
+                            <div class="testimonial-stars">
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Wave divider -->
-        <div class="wave-divider wave-cream">
-            <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
-                <path d="M0,40 C300,0 600,80 900,40 C1050,20 1150,60 1200,40 L1200,80 L0,80 Z" fill="var(--soft-white)"/>
-            </svg>
-        </div>
-
-        <section class="app-download-section">
+        <section class="cta-section">
             <div class="container">
-                <h2>HugMapをダウンロード</h2>
-                <p class="app-subtitle">お子さまの成長を記録し、AIで発達を分析。家族みんなで共有できる発達支援アプリです。</p>
-                <div class="app-preview-grid">
-                    <div class="app-screenshot-container">
-                        <img src="assets/images/app/home-screen.png" alt="HugMapアプリのホーム画面" class="app-screenshot">
-                    </div>
-                    <div class="app-features">
-                        <div class="feature-item">
-                            <h3>成長記録</h3>
-                            <p>写真や動画にタグを付けて成長を記録。お子さまの大切な瞬間を見逃しません。</p>
-                        </div>
-                        <div class="feature-item">
-                            <h3>AI発達分析</h3>
-                            <p>動画をアップロードするだけでAIがお子さまの動きを解析し、発達の状況を可視化します。</p>
-                        </div>
-                        <div class="feature-item">
-                            <h3>成長マガジン</h3>
-                            <p>入園・入学時に使える総合的な成長記録。お子さまの発達の軌跡を一冊にまとめます。</p>
-                        </div>
-                    </div>
-                </div>
+                <h2>HugMapをはじめよう</h2>
+                <p>お子さまの成長を記録し、家族や支援者と共有できる発達支援アプリです。</p>
                 <div class="download-badges">
                     <a href="https://apps.apple.com/jp/app/hugmap/id6743437199" class="download-badge" target="_blank" rel="noopener noreferrer">
                         <img src="assets/images/app/badge-app-store.svg" alt="App Storeからダウンロード">
@@ -357,14 +561,7 @@
                         <img src="assets/images/app/badge-google-play.svg" alt="Google Playで手に入れよう">
                     </a>
                 </div>
-            </div>
-        </section>
-
-        <section class="cta-section">
-            <div class="container">
-                <h2>実証実験パートナー募集中</h2>
-                <p>療育施設・教育機関・医療機関の皆さまへ。HugMapを活用した発達支援の実証実験を実施しています。導入にご興味のある方は、お気軽にお問い合わせください。</p>
-                <a href="contact.html" class="cta-button">お問い合わせ</a>
+                <p class="cta-partner">療育施設・教育機関・医療機関の皆さまへ：導入にご興味のある方は<a href="contact.html">お問い合わせ</a>ください。</p>
             </div>
         </section>
     </main>

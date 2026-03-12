@@ -141,4 +141,23 @@
         width: 100%;
         text-align: center;
     }
-} 
+
+    .testimonials-section {
+        padding: 4rem 1.25rem;
+    }
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .testimonial-card {
+        padding: 28px 22px 24px;
+    }
+    .testimonial-quote-mark {
+        font-size: 44px;
+        left: 18px;
+    }
+    .testimonial-card::before {
+        left: 18px;
+        right: 18px;
+    }
+}
