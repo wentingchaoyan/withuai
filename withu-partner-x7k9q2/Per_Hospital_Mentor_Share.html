@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>WithU — Stakeholder Detail (Mentor Share)</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; margin: 0; padding: 24px; background: #FAFAFA; color: #1A1A1A; }
+  h1 { margin: 0 0 6px; font-size: 22px; }
+  h2 { margin: 28px 0 12px; font-size: 18px; color: #FF511B; }
+  h3 { margin: 18px 0 8px; font-size: 15px; color: #1A1A1A; border-bottom: 2px solid #FF511B; padding-bottom: 4px; }
+  .subtitle { color: #666; font-size: 13px; margin-bottom: 20px; }
+
+  details.framework { background: #fff; border: 1px solid #E5E5E5; border-radius: 8px; padding: 12px 14px; margin-bottom: 16px; font-size: 12px; }
+  details.framework summary { font-weight: 700; cursor: pointer; color: #FF511B; font-size: 13px; }
+  details.framework p { margin: 8px 0; line-height: 1.5; color: #555; }
+  details.framework .roles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+  details.framework .role-def { background: #F8F8F8; padding: 8px; border-radius: 4px; font-size: 11px; }
+  details.framework .role-def strong { color: #FF511B; }
+
+  .tabs { display: flex; gap: 4px; margin-bottom: 0; border-bottom: 2px solid #1A1A1A; flex-wrap: wrap; }
+  .tab { padding: 10px 16px; background: #E5E5E5; cursor: pointer; border-radius: 8px 8px 0 0; font-size: 13px; font-weight: 600; color: #666; border: 1px solid transparent; border-bottom: none; }
+  .tab.active { background: #1A1A1A; color: #fff; }
+  .tab:hover:not(.active) { background: #CCC; color: #1A1A1A; }
+
+  .hospital { display: none; background: #fff; border: 1px solid #E5E5E5; border-top: none; border-radius: 0 0 8px 8px; padding: 20px; margin-bottom: 20px; }
+  .hospital.active { display: block; }
+
+  .hospital-header { background: #FFF5F0; padding: 12px 16px; border-radius: 4px; margin-bottom: 16px; }
+  .hospital-header strong { font-size: 16px; }
+  .hospital-meta { color: #666; font-size: 12px; margin-top: 4px; }
+
+  table.matrix { width: 100%; border-collapse: collapse; font-size: 11px; margin-bottom: 16px; }
+  table.matrix th { background: #1A1A1A; color: #fff; padding: 8px 6px; text-align: center; font-weight: 600; border: 1px solid #333; vertical-align: middle; }
+  table.matrix th.functional { background: #333; text-align: left; min-width: 180px; }
+  table.matrix th.sales-role { writing-mode: horizontal-tb; min-width: 70px; max-width: 90px; font-size: 10px; }
+  table.matrix td { padding: 6px; border: 1px solid #E5E5E5; vertical-align: middle; min-width: 70px; text-align: center; font-size: 11px; }
+  table.matrix td.functional { text-align: left; font-weight: 600; background: #F8F8F8; }
+  table.matrix td.functional .role-name { display: block; }
+  table.matrix td.functional .person { display: block; color: #666; font-weight: 400; font-size: 10px; font-style: italic; margin-top: 2px; }
+  table.matrix td.fill { background: #FFE5DC; color: #FF511B; font-weight: 700; }
+  table.matrix td.star { background: #FF511B; color: #fff; font-weight: 700; }
+  table.matrix td.empty { color: #CCC; }
+  table.matrix td.tbd { color: #FF511B; font-style: italic; font-size: 10px; }
+  table.matrix tr.priority td { background: #FFFFFF; }
+  table.matrix tr.priority td.functional { background: #FFF5F0; }
+  table.matrix tr.defer { opacity: 0.55; }
+  table.matrix tr.defer td { background: #FAFAFA; }
+
+  .pi-grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .pi-grid { background: #fff; border: 1px solid #E5E5E5; border-radius: 6px; padding: 0; overflow: hidden; }
+  .pi-grid-title { background: #F8F8F8; padding: 8px 12px; font-size: 12px; font-weight: 700; border-bottom: 1px solid #E5E5E5; }
+
+  .sequence { background: #FAFAFA; border: 1px solid #E5E5E5; border-radius: 6px; padding: 14px; margin-bottom: 16px; }
+  .sequence-title { font-size: 12px; font-weight: 700; color: #FF511B; margin-bottom: 10px; }
+  .step { display: flex; align-items: center; margin-bottom: 8px; }
+  .step-num { background: #FF511B; color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 11px; margin-right: 10px; flex-shrink: 0; }
+  .step-text { font-size: 12px; }
+  .step-text strong { color: #1A1A1A; }
+  .step-arrow { margin: 4px 0 4px 11px; color: #999; }
+
+  .notes { background: #FAFAFA; border: 1px solid #E5E5E5; padding: 12px 16px; border-radius: 4px; font-size: 12px; }
+  .notes strong { color: #FF511B; }
+  .notes ul { margin: 6px 0; padding-left: 20px; }
+
+  .legend-row { display: flex; gap: 16px; margin-top: 16px; font-size: 11px; color: #666; flex-wrap: wrap; }
+  .legend-row .item { display: flex; align-items: center; gap: 4px; }
+  .legend-row .swatch { display: inline-block; width: 14px; height: 14px; border-radius: 2px; }
+
+  .companion-banner { background: #fff; border: 1px solid #E5E5E5; border-radius: 8px; padding: 14px 18px; margin-bottom: 16px; font-size: 12px; color: #555; }
+  .companion-banner strong { color: #FF511B; }
+
+  @media (max-width: 1100px) {
+    .pi-grid-container { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<h1>WithU — Stakeholder Detail (Mentor Share)</h1>
+<div class="subtitle">Operational companion to the WithU Mentor Deck · 3 Strategic Insights + 8 tabs (Master List + 7 hospitals) · For James Gardner, Colin Plover, Natalia</div>
+
+<div class="companion-banner">
+  <strong>How this document relates to the deck:</strong> The 7-slide Mentor Deck carries the strategic narrative (framework, hypotheses, positioning). This HTML carries the <strong>operational detail</strong> — who is who, how to reach them, and what we know about each hospital. Use them together: deck for "why and what," HTML for "who and how."
+</div>
+
+<h2>★ 3 Strategic Insights</h2>
+<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+  <div style="background: #1A1A1A; color: #fff; padding: 14px; border-radius: 8px;">
+    <div style="font-size: 11px; color: #FF511B; font-weight: 700; margin-bottom: 6px;">★ INSIGHT 1</div>
+    <div style="font-size: 13px; font-weight: 700; margin-bottom: 6px;">Baumer → Sie Center bridge</div>
+    <div style="font-size: 11px; color: #CCC; line-height: 1.5;">Nicole Baumer (former BCH DS Director) moved to Sie Center Denver July 2024. Dual-relationship asset — knows both BCH and Sie Center ecosystems. <strong style="color: #FF511B;">Y2 expansion strategy unlocks via Baumer.</strong></div>
+  </div>
+  <div style="background: #1A1A1A; color: #fff; padding: 14px; border-radius: 8px;">
+    <div style="font-size: 11px; color: #FF511B; font-weight: 700; margin-bottom: 6px;">★ INSIGHT 2</div>
+    <div style="font-size: 13px; font-weight: 700; margin-bottom: 6px;">LaScala family-story alignment</div>
+    <div style="font-size: 11px; color: #CCC; line-height: 1.5;">NAPA founded 2008 by Lynette LaScala after son Cody's near-drowning at age 1. 20-year worldwide therapy search. Mother-founder origin — <strong style="color: #FF511B;">structural alignment with Ting (DS son). Founder-to-founder opening at NAPA.</strong></div>
+  </div>
+  <div style="background: #1A1A1A; color: #fff; padding: 14px; border-radius: 8px;">
+    <div style="font-size: 11px; color: #FF511B; font-weight: 700; margin-bottom: 6px;">★ INSIGHT 3</div>
+    <div style="font-size: 13px; font-weight: 700; margin-bottom: 6px;">ICI Director transition window</div>
+    <div style="font-size: 11px; color: #CCC; line-height: 1.5;">Cindy Thomas retired November 2025. UMass Boston actively hiring new Director. New leadership sets priorities — <strong style="color: #FF511B;">Y2 timing aligns with WithU's mature pitch readiness. Engage within 6 months of appointment.</strong></div>
+  </div>
+</div>
+
+<h2>Detail by entity (Master List + 7 hospitals)</h2>
+<p style="font-size: 12px; color: #555; margin-bottom: 12px;">Master Person List = 30+ persons across all entities (priority for who-to-engage scan). Per-hospital tabs = 1) Functional × Sales-process matrix · 2) Power/Interest grid · 3) Sales sequence · Notes (verified names + open questions).</p>
+
+<div class="tabs">
+  <div class="tab active" onclick="showHospital(0)">📋 Master Person List</div>
+  <div class="tab" onclick="showHospital(1)">MGH (★ Skotko)</div>
+  <div class="tab" onclick="showHospital(2)">Boston Children's ★J</div>
+  <div class="tab" onclick="showHospital(3)">Spaulding ★J</div>
+  <div class="tab" onclick="showHospital(4)">Franciscan ★J</div>
+  <div class="tab" onclick="showHospital(5)">NAPA Boston</div>
+  <div class="tab" onclick="showHospital(6)">SPED Child Mass ★J</div>
+  <div class="tab" onclick="showHospital(7)">ICI ★J</div>
+</div>
+
+<!-- ============================ Master Person List ============================ -->
+<div class="hospital active" id="h-master">
+  <div class="hospital-header">
+    <strong>📋 Master Person List — 30+ persons across all 8 entities</strong>
+    <div class="hospital-meta">Sorted by Wave + engagement priority · row coding distinguishes priority roles (highlighted) from defer roles (greyed-out) · LinkedIn / email / contact data sourced via public web research, May 2026</div>
+  </div>
+<p style="font-size: 11px; margin-bottom: 6px;">LinkedIn / email contact data added (sourced via public web research, May 2026). Several individuals have transitioned roles since earlier reference materials were compiled:</p>
+<ul style="font-size: 11px; margin-top: 0; margin-bottom: 10px; padding-left: 20px;">
+  <li><strong>Adam Landman, MD</strong> — now SVP/CDIO at Brown Health (previously MGB CIO + SVP Digital).</li>
+  <li><strong>Lee Schwamm, MD</strong> — now Associate Dean at Yale SOM + SVP/CDHO at Yale New Haven Health (previously MGB VP Virtual Care). Potential Y2+ Yale ecosystem asset.</li>
+  <li><strong>Matthew Murphy</strong> — now EVP at Cohere Health (previously BCH IDHA Innovation Lead). Confirm current Accelerator Grant Program lead before submission.</li>
+  <li><strong>Franciscan CEO transition</strong> — Dr. Chiang reported as Interim President per recent sources; verify current leadership before outreach (BCH acquired Franciscan in 2023).</li>
+  <li><strong>Bryan LaScala</strong> — title corrected to CEO of NAPA Center (Lynette is now Chief Visionary Officer + Executive Chair).</li>
+</ul>
+<p style="font-size: 11px; margin-bottom: 10px;"><strong>New contact (Wave 0 actionable now):</strong> Maureen Gallagher, Executive Director, MDSC — mgallagher@mdsc.org · 781-221-0024. Skotko chairs MDSC Medical &amp; Scientific Advisory Board, so community partnership opens an organic pathway.</p>
+<p style="font-size: 11px; margin-bottom: 8px; color: #666;"><strong>Row coding:</strong> highlighted = priority roles (User / Champion / External Influencer). Greyed-out = defer (Buyer / Econ-DM / Gatekeeper / Internal Influencer) — engage in Wave 1+.</p>
+<table class="matrix" style="font-size: 10px;">
+  <thead>
+    <tr>
+      <th>Wave</th>
+      <th style="min-width: 160px;">Name + Title</th>
+      <th style="min-width: 120px;">Entity</th>
+      <th style="min-width: 110px;">Sales role</th>
+      <th style="min-width: 130px;">Engagement trigger</th>
+      <th style="min-width: 200px;">Approach action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="priority"><td><strong>⏳ 1 ★</strong></td><td><strong>Brian G. Skotko, MD, MPP</strong> — Director<br><a href="https://www.linkedin.com/in/brian-skotko-b6909026/" target="_blank" style="font-size: 10px; color: #555;">LinkedIn</a> · <a href="https://brianskotko.com/" target="_blank" style="font-size: 10px; color: #555;">brianskotko.com</a></td><td>MGH DS Program</td><td>🟢 Champion + Influencer</td><td>⏳ When WithU has product proof + customer evidence ready</td><td>Multi-path: MDSC community · cold direct · organic intros. Vision + DSC2U complement.</td></tr>
+    <tr class="priority"><td><strong>⏳ 1 ★</strong></td><td><strong>BCH DS Director (post-Baumer)</strong> ⚠️ TBD<br><span style="font-size: 10px; color: #666;">verify via <a href="https://www.childrenshospital.org/services/down-syndrome-program/meet-our-team" target="_blank" style="color: #555;">BCH DSP team page</a></span></td><td>Boston Children's</td><td>🟢 Champion</td><td>⏳ via James — when WithU has clear product story + ask</td><td>Warm intro via James — activate when WithU has product + evidence + specific ask.</td></tr>
+    <tr class="priority"><td><strong>🟢 0</strong></td><td><strong>BCH IDHA Accelerator Grant Program</strong> — open application<br><a href="https://accelerator.childrenshospital.org/" target="_blank" style="font-size: 10px; color: #555;">accelerator.childrenshospital.org</a></td><td>BCH IDHA</td><td>🟢 Formal pathway</td><td>NOW — open application</td><td>Submit grant proposal — no warm intro required</td></tr>
+    <tr class="priority"><td><strong>⏳ 1</strong></td><td><strong>John Brownstein, PhD</strong> — Chief Innovation Officer<br><a href="https://www.linkedin.com/in/john-brownstein/" target="_blank" style="font-size: 10px; color: #555;">LinkedIn</a> · <a href="https://x.com/johnbrownstein" target="_blank" style="font-size: 10px; color: #555;">@johnbrownstein</a></td><td>BCH IDHA</td><td>🟢 Buyer + Champion</td><td>⏳ via James (when WithU is grant-application-ready)</td><td>Innovation pathway entry. Parallel direct path: BCH IDHA Accelerator Grant Program (open application).</td></tr>
+    <tr class="priority"><td><strong>🟢 0</strong></td><td><strong>Nikki Rice, DPT</strong> — Director of Rehab<br><a href="https://www.linkedin.com/in/nikki-rice-aa4950125/" target="_blank" style="font-size: 10px; color: #555;">LinkedIn</a> · <span style="font-size: 10px; color: #666;">@napacenter.org</span></td><td>NAPA Boston</td><td>🟢 Champion + User</td><td>NOW — direct (no intro needed)</td><td>Cold direct approach (LinkedIn / email) + intro request to Lynette</td></tr>
+    <tr class="priority"><td><strong>🟢 0</strong></td><td><strong>Meghan Thomas, MS, OTR/L</strong> — Outpt Therapies Mgr<br><span style="font-size: 10px; color: #666;">📧 mthomas@franciscanchildrens.org · ☎ 617-254-3800</span></td><td>Franciscan</td><td>🟢 Champion (User+Influ)</td><td>NOW — Direct (email/LinkedIn)</td><td>Cold approach + workflow discovery</td></tr>
+    <tr class="priority"><td><strong>🟢 0</strong></td><td><strong>Maureen Gallagher</strong> — Executive Director<br><span style="font-size: 10px; color: #666;">📧 mgallagher@mdsc.org · ☎ 781-221-0024</span></td><td>MDSC (Mass DS Congress)</td><td>🟢 External Community Champion</td><td>NOW — direct contact OK</td><td>Community presence, family voice gathering, MDSC Conference partnership</td></tr>
+    <tr class="priority"><td><strong>🟢 0</strong></td><td><strong>Existing 100-family network</strong> — customer development</td><td>WithU User base</td><td>🟢 External Pull (proof)</td><td>NOW — already accessible</td><td>Extract numbers, validate workflow, build evidence</td></tr>
+    <tr class="priority"><td>🔁 2 ★★</td><td><strong>Lynette LaScala</strong> — Founder & CVO<br><a href="https://www.linkedin.com/in/lynette-lascala-80854123/" target="_blank" style="font-size: 10px; color: #555;">LinkedIn</a> · <span style="font-size: 10px; color: #666;">@napacenter.org</span></td><td>NAPA Corporate</td><td>🟢 Champion (founder)</td><td>After Nikki Rice engagement</td><td>Founder-to-founder access via Nikki escalation</td></tr>
+    <tr class="priority"><td>🔁 2</td><td><strong>NAPA Intake Coordinator</strong> ⚠️ TBD</td><td>NAPA Boston</td><td>🟢 User (★ pain owner)</td><td>After Nikki Rice engagement</td><td>$300/15min pain interview</td></tr>
+    <tr class="defer"><td>🔁 2</td><td><strong>Greg Jackson, MRC</strong> — President & COO<br><span style="font-size: 10px; color: #666;">via <a href="https://spauldingrehab.org/about/leadership-trustees/jackson-greg" target="_blank" style="color: #555;">Spaulding leadership page</a></span></td><td>Spaulding</td><td>⏸ Buyer + Econ-DM</td><td>After MGH Skotko (MGB system intro) — Wave 1 trigger</td><td>Indirect via Skotko intro</td></tr>
+    <tr class="priority"><td>🔁 2</td><td>Casey Vandale, PT, DPT<br><span style="font-size: 10px; color: #666;">LinkedIn TBD · <a href="https://www.massgeneral.org/children/down-syndrome/casey-vandale" target="_blank" style="color: #555;">MGH bio</a></span></td><td>MGH DS team</td><td>🟢 User + Influencer</td><td>After Skotko (Wave 1 trigger)</td><td>Workflow interview</td></tr>
+    <tr class="priority"><td>🔁 2</td><td>Sharon Serinsky, MS, OTR/L<br><a href="https://www.linkedin.com/in/sharon-serinsky-49325316" target="_blank" style="font-size: 10px; color: #555;">LinkedIn</a> · <span style="font-size: 10px; color: #666;">@partners.org</span></td><td>MGH DS team</td><td>🟢 User + Influencer</td><td>After Skotko (Wave 1 trigger)</td><td>Workflow interview</td></tr>
+    <tr class="defer"><td>🔁 2</td><td>Michelle Palumbo, MD<br><span style="font-size: 10px; color: #666;">LinkedIn not surfaced · <a href="https://www.massgeneral.org/doctors/19428/michelle-palumbo" target="_blank" style="color: #555;">MGH bio</a> (Lurie Center)</span></td><td>MGH DS team</td><td>⏸ Influencer</td><td>After Skotko (Wave 1 trigger)</td><td>Clinical perspective</td></tr>
+    <tr class="defer"><td>🔁 2</td><td>Karen Seligsohn, PhD<br><span style="font-size: 10px; color: #666;">LinkedIn not surfaced · <a href="https://www.massgeneral.org/children/doctors/doctor.aspx?id=18155" target="_blank" style="color: #555;">MGH bio</a></span></td><td>MGH DS team</td><td>⏸ Influencer</td><td>After Skotko (Wave 1 trigger)</td><td>Psychological assessment perspective</td></tr>
+    <tr class="defer"><td>🔁 2</td><td>Bryan LaScala — <strong>CEO</strong> (corrected)<br><a href="https://www.linkedin.com/in/bryan-lascala-76586717" target="_blank" style="font-size: 10px; color: #555;">LinkedIn</a> · <span style="font-size: 10px; color: #666;">@napacenter.org</span></td><td>NAPA Corporate</td><td>⏸ Buyer + Econ-DM</td><td>After Lynette engagement</td><td>Corporate decision pathway.</td></tr>
+    <tr class="priority"><td>🔁 2</td><td>Kathryn LeMonda, OTD, OTR/L — Pediatric OT Mgr<br><a href="https://www.linkedin.com/in/kathryn-a-lemonda-otd-otr-l-7308a567/" target="_blank" style="font-size: 10px; color: #555;">LinkedIn</a></td><td>NAPA Boston</td><td>🟢 User + Champion</td><td>After Nikki Rice engagement</td><td>OT workflow + sensory profile</td></tr>
+    <tr class="priority"><td>🔁 2</td><td>Kerri (last name TBD) — PT Manager</td><td>NAPA Boston</td><td>🟢 User</td><td>After Nikki Rice engagement</td><td>PT workflow</td></tr>
+    <tr class="priority"><td>🔁 2</td><td>Emma (last name TBD) — ST Manager</td><td>NAPA Boston</td><td>🟢 User</td><td>After Nikki Rice engagement</td><td>ST + apraxia workflow</td></tr>
+    <tr class="defer"><td>🔁 2</td><td>Jen Doorly Magaziner, MBA, MPH — VP Digital Health<br><a href="https://www.linkedin.com/in/jennifer-doorly-magaziner/" target="_blank" style="font-size: 10px; color: #555;">LinkedIn</a></td><td>BCH IDHA</td><td>⏸ Buyer</td><td>via Brownstein or James (Wave 1 trigger)</td><td>Innovation pathway. Co-leads IDHA with Brownstein.</td></tr>
+    <tr class="defer"><td>🔁 2</td><td>Franciscan CEO ⚠️ TBD<br><span style="font-size: 10px; color: #FF511B;">⚠️ John Nash may have retired; <strong>Dr. Chiang reported as Interim President</strong> (verify via <a href="https://franciscanchildrens.org/about-us/leadership" target="_blank" style="color: #555;">leadership page</a>)</span></td><td>Franciscan</td><td>⏸ Buyer + Econ-DM</td><td>After Meghan Thomas engagement</td><td>Standalone CEO budget authority (BCH acquired 2023, role may be reorganized).</td></tr>
+    <tr class="defer"><td>⊘ 3</td><td>Chris Coburn — Chief Innovation Officer<br><a href="https://www.linkedin.com/in/ccoburn/" target="_blank" style="font-size: 10px; color: #555;">LinkedIn</a> · <span style="font-size: 10px; color: #666;">@partners.org</span></td><td>MGB-wide</td><td>⏸ Buyer + Econ-DM</td><td>After MGH Skotko + Spaulding</td><td>System-level Innovation budget</td></tr>
+    <tr class="defer"><td>⊘ 3</td><td>Jeffrey Schneider, MD — Interim Chair PM&R<br><a href="https://www.linkedin.com/in/jeff-schneider-47126713b/" target="_blank" style="font-size: 10px; color: #555;">LinkedIn</a> · <span style="font-size: 10px; color: #666;">effective 2025-08-01</span></td><td>MGB-wide / Spaulding</td><td>⏸ Influencer</td><td>After Spaulding engagement</td><td>System-level PM&R pathway</td></tr>
+    <tr class="defer"><td>⊘ 3</td><td>Adam Landman, MD — now at Brown Health (CDIO)<br><span style="font-size: 10px; color: #666;">⚠️ Transitioned from MGB. Confirm current MGB CIO before pursuing IT signoff conversation.</span></td><td><span style="color: #666;">MGB-wide</span> → Brown Health</td><td>⏸ Gatekeeper (former MGB)</td><td>Reassess for MGB path</td><td>Verify current MGB CIO. Brown Health opens separately.</td></tr>
+    <tr class="priority"><td>⊘ 3</td><td>Lee Schwamm, MD — now at Yale SOM + Yale New Haven Health<br><span style="font-size: 10px; color: #666;">⚠️ Transitioned from MGB. Y2+ Yale ecosystem asset.</span></td><td><span style="color: #666;">MGB-wide</span> → Yale</td><td>🟢 External Influencer (Y2)</td><td>Y2 alignment via Yale path</td><td>Future Yale ecosystem entry. Confirm current MGB Virtual Care lead.</td></tr>
+    <tr class="defer"><td>⊘ 3</td><td>John Danko, DO — Associate CMO<br><span style="font-size: 10px; color: #666;">LinkedIn not surfaced · <a href="https://spauldingrehab.org/about/leadership-trustees/jackson-greg" target="_blank" style="color: #555;">Spaulding leadership</a></span></td><td>Spaulding</td><td>⏸ Influencer</td><td>After Greg Jackson</td><td>PM&R clinical integration</td></tr>
+    <tr class="defer"><td>⊘ 3</td><td>Dr. Judi Cullinane, PhD — CNO<br><a href="https://www.linkedin.com/in/dr-judi-cullinane-phd-msn-cags-rn-nea-bc-lsbbh-776973a4/" target="_blank" style="font-size: 10px; color: #555;">LinkedIn</a> · <span style="font-size: 10px; color: #666;">@partners.org</span></td><td>Spaulding</td><td>⏸ Gatekeeper + Influencer</td><td>When nursing workflow integration discussed</td><td>Nursing workflow</td></tr>
+    <tr class="defer"><td>⊘ 3</td><td>Sarah Lindenauer — Sr Director, Innovation Strategy<br><a href="https://www.linkedin.com/in/sarah-lindenauer-b4631334/" target="_blank" style="font-size: 10px; color: #555;">LinkedIn</a> · <span style="font-size: 10px; color: #666;">@childrens.harvard.edu</span></td><td>BCH IDHA</td><td>⏸ Influencer</td><td>via Brownstein</td><td>Pipeline evaluation.</td></tr>
+    <tr class="priority"><td>⚠️ TBD</td><td>Matthew Murphy — now at Cohere Health (EVP)<br><span style="font-size: 10px; color: #666;">⚠️ Transitioned from BCH IDHA. <a href="https://www.linkedin.com/in/murphmat/" target="_blank" style="color: #555;">LinkedIn</a>. Verify current Accelerator Grant Program lead via <a href="https://accelerator.childrenshospital.org/about/team/" target="_blank" style="color: #555;">team page</a>.</span></td><td><span style="color: #666;">BCH IDHA</span> → Cohere Health</td><td>🟢 (former Champion)</td><td>Identify current grant lead first</td><td>Confirm current Accelerator Grant Program lead before submission outreach.</td></tr>
+    <tr class="priority"><td>⊘ Y2+</td><td><strong>Nicole Baumer, MD, MEd</strong> — Director, Sie Center<br><span style="font-size: 10px; color: #666;">LinkedIn not surfaced · <a href="https://www.childrenscolorado.org/doctors-and-departments/physicians/b/nicole-baumer/" target="_blank" style="color: #555;">Children's CO bio</a> · DSMIG-USA President · NDSC VP</span></td><td>Sie Center Denver (was BCH)</td><td>🟢 External Influencer (Y2 bridge)</td><td>Y2 expansion timing</td><td>Y2 outreach via GDSF — BCH bridge potential. Personal connection: sister with DS.</td></tr>
+    <tr class="priority"><td>🟢 0</td><td>SPED Child Mass site owner ⚠️ TBD<br><span style="font-size: 10px; color: #666;">contact via <a href="https://spedchildmass.com/" target="_blank" style="color: #555;">spedchildmass.com</a> contact form</span></td><td>SPED Child Mass</td><td>🟢 External (distribution)</td><td>NOW — anytime (low effort)</td><td>Newsletter / event partnership</td></tr>
+    <tr class="priority"><td>⊘ Y2+</td><td>ICI new Director ⚠️ TBD<br><span style="font-size: 10px; color: #666;">Cindy Thomas retired 2025-11-01. Successor not yet announced — monitor <a href="https://www.communityinclusion.org/" target="_blank" style="color: #555;">communityinclusion.org</a></span></td><td>ICI / UMass Boston</td><td>🟢 External Champion + Endorser</td><td>Within 6 months of appointment</td><td>Research collaboration + UCEDD network</td></tr>
+  </tbody>
+</table>
+<div style="font-size: 10px; color: #666; margin-top: 6px;"><strong>Wave legend:</strong> 🟢 Wave 0 = ACTIONABLE NOW (independent of warm intros) · ⏳ Wave 1 = TRIGGERED when WithU has product proof points + customer evidence ready · 🔁 Wave 2 = triggered by Wave 1 success (intros + ramp) · ⊘ Wave 3 / Y2+ = parallel expansion / Y2 hold</div>
+</div>
+
+<!-- ============================ MGH ============================ -->
+<div class="hospital" id="h0">
+  <div class="hospital-header">
+    <strong>Mass General Hospital — Down Syndrome Program</strong>
+    <div class="hospital-meta">Boston, MA · Premier US academic DS clinic · Brian Skotko Director · Multi-path outreach (MDSC community channel, cold direct, organic mentor intros) when WithU has product proof + customer evidence ready</div>
+  </div>
+
+  <h3>1. Functional × Sales-Process Matrix</h3>
+  <table class="matrix">
+    <thead>
+      <tr>
+        <th class="functional">Functional role</th>
+        <th class="sales-role">User</th>
+        <th class="sales-role">Buyer</th>
+        <th class="sales-role">Econ-DM</th>
+        <th class="sales-role">Champion</th>
+        <th class="sales-role">Gatekpr</th>
+        <th class="sales-role">Influ-int</th>
+        <th class="sales-role">Influ-ext</th>
+        <th class="sales-role">Saboteur</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="functional"><span class="role-name">DS Program Director</span><span class="person">Brian G. Skotko, MD, MPP ★ (Genomic Medicine, Harvard Med)</span></td><td class="empty">light</td><td class="empty">—</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="tbd">DSC2U?</td></tr>
+      <tr><td class="functional"><span class="role-name">Pediatrician (DS team)</span><span class="person">Michelle L. Palumbo, MD</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Psychologist (DS team)</span><span class="person">Karen J. (Kay) Seligsohn, PhD</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Innovation / Digital Health (MGB-wide)</span><span class="person">Chris Coburn (CIO) · Adam Landman MD (CIO+SVP Digital)</span></td><td class="empty">—</td><td class="fill">●</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Physical Therapist (DS team)</span><span class="person">Casey E. Vandale, PT, DPT</span></td><td class="star">★</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Occupational Therapist (DS team)</span><span class="person">Sharon P. Serinsky, MS, OTR/L</span></td><td class="star">★</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Child Life Specialist</span><span class="person">⚠️ MGH CLS team — via Colin's network</span></td><td class="star">★</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Care Coordinator / Social Worker</span><span class="person">⚠️ TBD (program coordinator + resource specialist exist)</span></td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Virtual Care / Innovation lead (MGB)</span><span class="person">Lee Schwamm, MD (VP Virtual Care)</span></td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">IT / Compliance / Procurement</span><span class="person">MGB IT (Adam Landman team) — gatekeeper</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td><td class="empty">—</td><td class="tbd">latent</td></tr>
+      <tr><td class="functional"><span class="role-name">External: Parents + MDSC</span><span class="person">MGH DS family caseload + MDSC member overlap</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2. Power / Interest Grid</h3>
+  <div class="pi-grid-container">
+    <div class="pi-grid">
+      <div class="pi-grid-title">Stakeholder positioning (current best-guess; verify when engagement opportunity arises)</div>
+      <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; background: #FAFAFA;">
+        <line x1="50" y1="50" x2="50" y2="370" stroke="#1A1A1A" stroke-width="2"/>
+        <line x1="50" y1="370" x2="570" y2="370" stroke="#1A1A1A" stroke-width="2"/>
+        <line x1="310" y1="50" x2="310" y2="370" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="50" y1="210" x2="570" y2="210" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="180" y="80" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Keep satisfied</text>
+        <text x="440" y="80" text-anchor="middle" font-size="10" fill="#FF511B" font-weight="700">★ Manage closely</text>
+        <text x="180" y="350" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Monitor</text>
+        <text x="440" y="350" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Keep informed</text>
+        <text x="310" y="395" text-anchor="middle" font-size="11" fill="#1A1A1A" font-weight="700">Interest in WithU →</text>
+        <text x="20" y="210" text-anchor="middle" font-size="11" fill="#1A1A1A" font-weight="700" transform="rotate(-90 20 210)">Power (decision authority) →</text>
+
+        <circle cx="470" cy="100" r="10" fill="#FF511B"/>
+        <text x="485" y="105" font-size="11" fill="#1A1A1A" font-weight="600">Skotko (Director)</text>
+
+        <circle cx="200" cy="120" r="8" fill="#666"/>
+        <text x="215" y="125" font-size="11" fill="#1A1A1A">CMO ⚠️</text>
+
+        <circle cx="380" cy="160" r="8" fill="#FF511B" fill-opacity="0.6"/>
+        <text x="395" y="165" font-size="11" fill="#1A1A1A">Coburn (CIO) / Landman</text>
+
+        <circle cx="500" cy="280" r="8" fill="#FF511B" fill-opacity="0.6"/>
+        <text x="395" y="285" font-size="11" fill="#1A1A1A">Vandale PT / Serinsky OT</text>
+
+        <circle cx="520" cy="310" r="8" fill="#FF511B" fill-opacity="0.6"/>
+        <text x="395" y="320" font-size="11" fill="#1A1A1A">CLS (Colin nw) ⚠️</text>
+
+        <circle cx="150" cy="290" r="7" fill="#999"/>
+        <text x="165" y="295" font-size="11" fill="#1A1A1A">IT / Compliance ⚠️</text>
+
+        <circle cx="450" cy="340" r="7" fill="#FF511B" fill-opacity="0.4"/>
+        <text x="395" y="355" font-size="11" fill="#1A1A1A">Parents (External Pull)</text>
+      </svg>
+    </div>
+    <div class="sequence">
+      <div class="sequence-title">3. Sales Sequence</div>
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Champion engagement</strong> (when WithU has product proof + customer evidence): Brian Skotko meeting via MDSC community channel, cold direct, or organic mentor intro. WithU vs DSC2U positioning. Within-stage continuity gap articulation.</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Influencer broadening</strong>: Skotko intro to Lead OT/PT/ST + CLS. Workflow interviews. Identify Influencer (researchers).</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Innovation Officer pathway</strong>: Skotko or Care Coord intro to MGB Innovation. Light SaaS pilot proposal.</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">4</div><div class="step-text"><strong>IT/Compliance early engagement</strong>: BAA negotiation. Federated data architecture brief.</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">5</div><div class="step-text"><strong>Economic DM commitment</strong>: CMO sign-off. Q3-Q4 deal close target.</div></div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <strong>✅ Verified names:</strong> Brian Skotko (Director), Casey Vandale (PT), Sharon Serinsky (OT), Michelle Palumbo (MD), Karen Seligsohn (Psychologist), Chris Coburn (MGB CIO), Adam Landman (MGB CIO+Digital), Lee Schwamm (MGB VP Virtual Care)
+    <br><br>
+    <strong>⚠️ Open questions / TBD:</strong>
+    <ul>
+      <li>MGH DS Program coordinator + resource specialist — names verify</li>
+      <li>CLS team at MGH — Colin to facilitate intro</li>
+      <li>Skotko's positioning re: DSC2U — open question how he views WithU's complementary fit (within-stage workflow continuity vs. DSC2U's annual care plan). Aim to articulate non-overlapping value clearly.</li>
+      <li>MGB Innovation budget control for €25K SaaS — under Coburn (Innovation) or Landman (Digital)?</li>
+      <li>Existing EHR vendor (Epic) — would they actively oppose (Saboteur) or stay neutral?</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================ BCH ============================ -->
+<div class="hospital" id="h1">
+  <div class="hospital-header">
+    <strong>Boston Children's Hospital — Down Syndrome Program</strong>
+    <div class="hospital-meta">Boston, MA · Largest US pediatric medical center · Director TBD (post-Baumer transition) · Outreach path via James Gardner (warm intro) when WithU's product story + ask are ready. Parallel direct path: BCH IDHA Accelerator Grant Program.</div>
+  </div>
+
+  <h3>1. Functional × Sales-Process Matrix</h3>
+  <table class="matrix">
+    <thead>
+      <tr>
+        <th class="functional">Functional role</th>
+        <th class="sales-role">User</th>
+        <th class="sales-role">Buyer</th>
+        <th class="sales-role">Econ-DM</th>
+        <th class="sales-role">Champion</th>
+        <th class="sales-role">Gatekpr</th>
+        <th class="sales-role">Influ-int</th>
+        <th class="sales-role">Influ-ext</th>
+        <th class="sales-role">Saboteur</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="functional"><span class="role-name">DS Program Director (current)</span><span class="person">⚠️ Post-Baumer transition — verify current. Previous: Nicole Baumer MD MEd (now at Sie Center, Denver since Jul 2024)</span></td><td class="empty">light</td><td class="empty">—</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">★ Sie Center bridge (Denver)</span><span class="person">Nicole Baumer (ex-BCH Director, now at Sie Center) — DUAL-relationship asset</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">IDHA Chief Innovation Officer</span><span class="person">John Brownstein (CIO, BCH IDHA)</span></td><td class="empty">—</td><td class="fill">●</td><td class="fill">●</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">IDHA VP Digital Health</span><span class="person">Jen Magaziner, MBA, MPH</span></td><td class="empty">—</td><td class="fill">●</td><td class="fill">●</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">IDHA Director (Digital Health pipeline)</span><span class="person">Sarah Lindenauer · Matthew Murphy (Accelerator Grant Program lead)</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Lead Specialty Therapists (OT/PT/ST)</span><span class="person">⚠️ TBD — discover via DS Program meeting</span></td><td class="star">★</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Child Life Specialist</span><span class="person">⚠️ via Colin's network at BCH</span></td><td class="star">★</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Care Coordinator / Social Worker</span><span class="person">⚠️ TBD</span></td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">CMO / COO (BCH)</span><span class="person">⚠️ BCH leadership — verify</span></td><td class="empty">—</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">IT / Compliance / Procurement</span><span class="person">⚠️ BCH IT</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td><td class="empty">—</td><td class="tbd">latent</td></tr>
+      <tr><td class="functional"><span class="role-name">External: Parents + MDSC + DSDN</span><span class="person">BCH DS caseload + MDSC families + DSDN diagnoses</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2. Power / Interest Grid</h3>
+  <div class="pi-grid-container">
+    <div class="pi-grid">
+      <div class="pi-grid-title">Stakeholder positioning (mostly TBD until BCH access)</div>
+      <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; background: #FAFAFA;">
+        <line x1="50" y1="50" x2="50" y2="370" stroke="#1A1A1A" stroke-width="2"/>
+        <line x1="50" y1="370" x2="570" y2="370" stroke="#1A1A1A" stroke-width="2"/>
+        <line x1="310" y1="50" x2="310" y2="370" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="50" y1="210" x2="570" y2="210" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="180" y="80" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Keep satisfied</text>
+        <text x="440" y="80" text-anchor="middle" font-size="10" fill="#FF511B" font-weight="700">★ Manage closely</text>
+        <text x="180" y="350" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Monitor</text>
+        <text x="440" y="350" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Keep informed</text>
+        <text x="310" y="395" text-anchor="middle" font-size="11" fill="#1A1A1A" font-weight="700">Interest in WithU →</text>
+        <text x="20" y="210" text-anchor="middle" font-size="11" fill="#1A1A1A" font-weight="700" transform="rotate(-90 20 210)">Power (decision authority) →</text>
+
+        <circle cx="450" cy="120" r="10" fill="#FF511B" fill-opacity="0.6" stroke="#FF511B" stroke-width="2" stroke-dasharray="3,2"/>
+        <text x="465" y="125" font-size="11" fill="#1A1A1A" font-weight="600">DS Director ⚠️ (post-Baumer)</text>
+
+        <circle cx="430" cy="160" r="10" fill="#FF511B" fill-opacity="0.6"/>
+        <text x="350" y="180" font-size="11" fill="#1A1A1A">Brownstein (IDHA CIO)</text>
+
+        <circle cx="200" cy="100" r="8" fill="#666" stroke="#666" stroke-dasharray="3,2"/>
+        <text x="215" y="105" font-size="11" fill="#1A1A1A">CMO ⚠️</text>
+
+        <circle cx="500" cy="290" r="8" fill="#FF511B" fill-opacity="0.4" stroke="#FF511B" stroke-dasharray="3,2"/>
+        <text x="395" y="295" font-size="11" fill="#1A1A1A">Lead Therapists ⚠️</text>
+
+        <circle cx="520" cy="320" r="8" fill="#FF511B" fill-opacity="0.4" stroke="#FF511B" stroke-dasharray="3,2"/>
+        <text x="395" y="330" font-size="11" fill="#1A1A1A">CLS (Colin) ⚠️</text>
+
+        <circle cx="150" cy="290" r="7" fill="#999" stroke="#999" stroke-dasharray="3,2"/>
+        <text x="165" y="295" font-size="11" fill="#1A1A1A">IT / Compliance ⚠️</text>
+
+        <circle cx="450" cy="345" r="7" fill="#FF511B" fill-opacity="0.4"/>
+        <text x="395" y="360" font-size="11" fill="#1A1A1A">Parents (External Pull)</text>
+      </svg>
+    </div>
+    <div class="sequence">
+      <div class="sequence-title">3. Sales Sequence</div>
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Send warm intro request to James</strong> for BCH DS Director (foundational ask — engagement starts when James responds)</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Champion identification (when intro succeeds)</strong>: meet DS Director, articulate Family Primacy + workflow value. Trigger: WithU has product proof points + clear ask ready for James to pass forward.</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Innovation Accelerator path</strong>: BCH has formal accelerator; Director may route to it. This is faster than CMO-direct.</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Frontline workflow validation</strong>: CLS via Colin's network, Lead Therapists via DS Director intro</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">5</div><div class="step-text"><strong>Y2 IT/Compliance + Pilot</strong>: BAA negotiation, light SaaS pilot</div></div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <strong>✅ Verified names:</strong> John Brownstein (IDHA CIO), Jen Magaziner (IDHA VP Digital Health), Sarah Lindenauer (IDHA Director, digital health pipeline), Matthew Murphy (Innovation Lead/Accelerator Grant Program). Nicole Baumer (former BCH DS Director, moved to Sie Center Denver July 2024).
+    <br><br>
+    <strong>★ Strategic asset:</strong> Nicole Baumer (now at Sie Center) is a <strong>dual-relationship opportunity</strong> — she knows both BCH and Sie Center. Approach via Sie Center as bridge + Y2 expansion target.
+    <br><br>
+    <strong>⚠️ Open questions / TBD:</strong>
+    <ul>
+      <li>★ BCH DS Program current Director (post-Baumer transition) — confirm via BCH website + James intro pathway</li>
+      <li>BCH IDHA <strong>recent digital health pilots</strong> — Brownstein team's portfolio of SaaS (research before any future meeting)</li>
+      <li>BCH Lead Therapist names — discover via DS Program meeting</li>
+      <li>BCH CLS contact — Colin's network</li>
+      <li>BCH-Spaulding system overlap — note: Boston Children's listing mentions Spaulding affiliation; would joint pilot make sense?</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================ Spaulding ============================ -->
+<div class="hospital" id="h2">
+  <div class="hospital-header">
+    <strong>Spaulding Rehabilitation Hospital — Pediatric DS</strong>
+    <div class="hospital-meta">Boston (Charlestown) · MGB system (shared with MGH) · Pediatric inpatient + outpatient rehab · Outreach via MGH Skotko after MGH conversation succeeds</div>
+  </div>
+
+  <h3>1. Functional × Sales-Process Matrix</h3>
+  <table class="matrix">
+    <thead>
+      <tr>
+        <th class="functional">Functional role</th>
+        <th class="sales-role">User</th>
+        <th class="sales-role">Buyer</th>
+        <th class="sales-role">Econ-DM</th>
+        <th class="sales-role">Champion</th>
+        <th class="sales-role">Gatekpr</th>
+        <th class="sales-role">Influ-int</th>
+        <th class="sales-role">Influ-ext</th>
+        <th class="sales-role">Saboteur</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="functional"><span class="role-name">President & COO (Spaulding)</span><span class="person">Greg Jackson, MRC (named April 2025) — 30+ yrs healthcare, rehab specialty</span></td><td class="empty">—</td><td class="fill">●</td><td class="star">★</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Interim Chair PM&R (MGB-wide)</span><span class="person">Jeffrey Schneider, MD (effective Aug 2025) — system-wide medical authority</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Associate CMO (Boston + Cape Cod)</span><span class="person">John Danko, DO (Harvard Med PM&R clinical instructor)</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Chief Nursing Officer</span><span class="person">Judi Cullinane (oversees nursing + patient care)</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Pediatric Rehab Director (specific)</span><span class="person">⚠️ TBD — Spaulding's specific pediatric lead, verify via MGH Skotko intro</span></td><td class="empty">light</td><td class="empty">—</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">MGB Innovation (system-shared)</span><span class="person">Chris Coburn (CIO) · Adam Landman (Digital) — shared with MGH</span></td><td class="empty">—</td><td class="fill">●</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Lead Specialty Therapists (OT/PT/ST)</span><span class="person">⚠️ Spaulding pediatric team — TBD</span></td><td class="star">★</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Care Coordinator / Discharge Planner</span><span class="person">⚠️ TBD</span></td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">IT / Compliance (MGB-shared)</span><span class="person">Adam Landman team — shared MGB IT</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td><td class="empty">—</td><td class="tbd">latent</td></tr>
+      <tr><td class="functional"><span class="role-name">External: Parents + MDSC + Discharge connection</span><span class="person">Inpatient → outpatient transition critical</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2. Power / Interest Grid</h3>
+  <div class="pi-grid-container">
+    <div class="pi-grid">
+      <div class="pi-grid-title">Stakeholder positioning (TBD; depends on MGH Skotko intro)</div>
+      <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; background: #FAFAFA;">
+        <line x1="50" y1="50" x2="50" y2="370" stroke="#1A1A1A" stroke-width="2"/>
+        <line x1="50" y1="370" x2="570" y2="370" stroke="#1A1A1A" stroke-width="2"/>
+        <line x1="310" y1="50" x2="310" y2="370" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="50" y1="210" x2="570" y2="210" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="180" y="80" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Keep satisfied</text>
+        <text x="440" y="80" text-anchor="middle" font-size="10" fill="#FF511B" font-weight="700">★ Manage closely</text>
+        <text x="180" y="350" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Monitor</text>
+        <text x="440" y="350" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Keep informed</text>
+        <text x="310" y="395" text-anchor="middle" font-size="11" fill="#1A1A1A" font-weight="700">Interest in WithU →</text>
+        <text x="20" y="210" text-anchor="middle" font-size="11" fill="#1A1A1A" font-weight="700" transform="rotate(-90 20 210)">Power (decision authority) →</text>
+
+        <circle cx="450" cy="130" r="10" fill="#FF511B" fill-opacity="0.6" stroke="#FF511B" stroke-width="2" stroke-dasharray="3,2"/>
+        <text x="465" y="135" font-size="11" fill="#1A1A1A">Pediatric Director ⚠️</text>
+
+        <circle cx="220" cy="100" r="8" fill="#666"/>
+        <text x="235" y="105" font-size="11" fill="#1A1A1A">Coburn (MGB Innov)</text>
+
+        <circle cx="180" cy="140" r="9" fill="#FF511B" fill-opacity="0.5"/>
+        <text x="195" y="145" font-size="11" fill="#1A1A1A">Greg Jackson (Pres)</text>
+
+        <circle cx="350" cy="170" r="8" fill="#FF511B" fill-opacity="0.5"/>
+        <text x="365" y="175" font-size="11" fill="#1A1A1A">Schneider (PM&amp;R Chair)</text>
+
+        <circle cx="500" cy="280" r="8" fill="#FF511B" fill-opacity="0.4" stroke="#FF511B" stroke-dasharray="3,2"/>
+        <text x="380" y="285" font-size="11" fill="#1A1A1A">Lead Therapists ⚠️</text>
+
+        <circle cx="450" cy="320" r="8" fill="#FF511B" fill-opacity="0.4" stroke="#FF511B" stroke-dasharray="3,2"/>
+        <text x="350" y="325" font-size="11" fill="#1A1A1A">Care Coord / Discharge ⚠️</text>
+
+        <circle cx="150" cy="290" r="7" fill="#999" stroke="#999" stroke-dasharray="3,2"/>
+        <text x="165" y="295" font-size="11" fill="#1A1A1A">MGB IT (shared)</text>
+
+        <circle cx="450" cy="345" r="7" fill="#FF511B" fill-opacity="0.4"/>
+        <text x="335" y="360" font-size="11" fill="#1A1A1A">Parents (Discharge transition)</text>
+      </svg>
+    </div>
+    <div class="sequence">
+      <div class="sequence-title">3. Sales Sequence</div>
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Indirect via MGH (after Skotko conversation succeeds)</strong>: ask Skotko for Spaulding intro (MGB system colleague). Spaulding is Wave 2 — triggered by MGH success.</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Pediatric Rehab Director meeting</strong>: discharge transition continuity is key value (inpatient → outpatient → home)</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Joint MGH + Spaulding pilot proposal</strong>: leverage MGB system Innovation arm</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">4</div><div class="step-text"><strong>MGB IT/Compliance (system-level)</strong>: BAA covers both hospitals</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">5</div><div class="step-text"><strong>Y2 dual-hospital pilot</strong>: Spaulding + MGH joint pilot demonstrates system-wide value</div></div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <strong>✅ Verified names:</strong> Greg Jackson (President & COO, named April 2025), Jeffrey Schneider MD (Interim Chair PM&R MGB-wide, August 2025), John Danko DO (Associate CMO Boston + Cape Cod), Judi Cullinane (CNO). Plus shared MGB Innovation: Coburn (CIO), Landman (Digital), Schwamm (Virtual Care).
+    <br><br>
+    <strong>⚠️ Open questions / TBD:</strong>
+    <ul>
+      <li>Spaulding Pediatric Rehab specific lead — verify via MGH Skotko or website</li>
+      <li>MGB Innovation budget allocation — shared across MGH/Spaulding/BWH or per-hospital?</li>
+      <li>Discharge transition workflow — is there an existing tool? (critical for WithU value prop)</li>
+      <li>Greg Jackson new role priorities — what is he prioritizing in first year (2025-26)?</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================ Franciscan ============================ -->
+<div class="hospital" id="h3">
+  <div class="hospital-header">
+    <strong>Franciscan Children's</strong>
+    <div class="hospital-meta">Brighton, MA · 100+ year legacy · Pediatric long-term acute + rehab + outpatient · Standalone (not MGB)</div>
+  </div>
+
+  <h3>1. Functional × Sales-Process Matrix</h3>
+  <table class="matrix">
+    <thead>
+      <tr>
+        <th class="functional">Functional role</th>
+        <th class="sales-role">User</th>
+        <th class="sales-role">Buyer</th>
+        <th class="sales-role">Econ-DM</th>
+        <th class="sales-role">Champion</th>
+        <th class="sales-role">Gatekpr</th>
+        <th class="sales-role">Influ-int</th>
+        <th class="sales-role">Influ-ext</th>
+        <th class="sales-role">Saboteur</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="functional"><span class="role-name">CEO</span><span class="person">John Nash (CEO Franciscan Children's)</span></td><td class="empty">—</td><td class="fill">●</td><td class="star">★</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Outpatient Therapies Manager</span><span class="person">Meghan Thomas, MS, OTR/L (Manager of Outpatient Therapies) ★</span></td><td class="empty">light</td><td class="empty">—</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Lead OT / PT / ST / Feeding</span><span class="person">⚠️ Multi-disciplinary leads — verify via Meghan Thomas intro</span></td><td class="star">★</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Inpatient Medical Director</span><span class="person">⚠️ TBD</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Care Coordinator</span><span class="person">⚠️ TBD</span></td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">CFO / VP Operations</span><span class="person">⚠️ TBD (standalone hospital leadership)</span></td><td class="empty">—</td><td class="fill">●</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">IT / Compliance / Procurement</span><span class="person">⚠️ Smaller IT team (standalone advantage — fewer gates)</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td><td class="empty">—</td><td class="tbd">latent</td></tr>
+      <tr><td class="functional"><span class="role-name">BCH affiliation</span><span class="person">Franciscan listed on BCH locations page — possible collaboration path</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">External: Long-term family caseload</span><span class="person">Family relationship 5-15 yrs typical</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2. Power / Interest Grid</h3>
+  <div class="pi-grid-container">
+    <div class="pi-grid">
+      <div class="pi-grid-title">Stakeholder positioning (smaller standalone — closer decision-making)</div>
+      <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; background: #FAFAFA;">
+        <line x1="50" y1="50" x2="50" y2="370" stroke="#1A1A1A" stroke-width="2"/>
+        <line x1="50" y1="370" x2="570" y2="370" stroke="#1A1A1A" stroke-width="2"/>
+        <line x1="310" y1="50" x2="310" y2="370" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="50" y1="210" x2="570" y2="210" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="180" y="80" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Keep satisfied</text>
+        <text x="440" y="80" text-anchor="middle" font-size="10" fill="#FF511B" font-weight="700">★ Manage closely</text>
+        <text x="180" y="350" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Monitor</text>
+        <text x="440" y="350" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Keep informed</text>
+        <text x="310" y="395" text-anchor="middle" font-size="11" fill="#1A1A1A" font-weight="700">Interest in WithU →</text>
+        <text x="20" y="210" text-anchor="middle" font-size="11" fill="#1A1A1A" font-weight="700" transform="rotate(-90 20 210)">Power (decision authority) →</text>
+
+        <circle cx="430" cy="120" r="10" fill="#FF511B" fill-opacity="0.6"/>
+        <text x="445" y="125" font-size="11" fill="#1A1A1A">Meghan Thomas (Outpatient)</text>
+
+        <circle cx="350" cy="100" r="8" fill="#FF511B" fill-opacity="0.6"/>
+        <text x="365" y="105" font-size="11" fill="#1A1A1A">John Nash (CEO)</text>
+
+        <circle cx="500" cy="290" r="8" fill="#FF511B" fill-opacity="0.4" stroke="#FF511B" stroke-dasharray="3,2"/>
+        <text x="380" y="295" font-size="11" fill="#1A1A1A">Lead Therapists ⚠️</text>
+
+        <circle cx="450" cy="320" r="8" fill="#FF511B" fill-opacity="0.4" stroke="#FF511B" stroke-dasharray="3,2"/>
+        <text x="335" y="325" font-size="11" fill="#1A1A1A">Care Coord ⚠️</text>
+
+        <circle cx="200" cy="290" r="7" fill="#999" stroke="#999" stroke-dasharray="3,2"/>
+        <text x="215" y="295" font-size="11" fill="#1A1A1A">IT / Compliance (small)</text>
+
+        <circle cx="500" cy="345" r="7" fill="#FF511B" fill-opacity="0.4"/>
+        <text x="380" y="360" font-size="11" fill="#1A1A1A">Long-term families (5-15yr)</text>
+      </svg>
+    </div>
+    <div class="sequence">
+      <div class="sequence-title">3. Sales Sequence</div>
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Direct outreach (no warm intro path established)</strong>: cold contact Outpatient Therapy Director via LinkedIn or office</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Multi-disciplinary value pitch</strong>: OT/PT/ST/feeding silo problem. Smaller standalone = faster decision.</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Long-term family relationship articulation</strong>: 5-15 year families benefit most from longitudinal data</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Standalone IT advantage</strong>: smaller IT team = faster BAA negotiation than MGB system</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">5</div><div class="step-text"><strong>President / CFO sign</strong>: standalone budget closer to operations than mega-system</div></div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <strong>✅ Verified names:</strong> John Nash (CEO), Meghan Thomas, MS, OTR/L (Manager of Outpatient Therapies). 30 Warren Street, Brighton, MA. Franciscan listed as affiliated with Boston Children's Hospital.
+    <br><br>
+    <strong>⚠️ Open questions / TBD:</strong>
+    <ul>
+      <li>CFO / VP Operations name — for €25K SaaS budget authority</li>
+      <li>Lead OT/PT/ST/Feeding clinician names — verify via Meghan Thomas</li>
+      <li>Franciscan budget for digital tools — what scale of SaaS does standalone afford?</li>
+      <li>Franciscan IT current vendor stack — what existing tools (EHR, scheduling, billing)?</li>
+      <li>BCH affiliation level — does Franciscan join BCH IT/procurement systems or standalone?</li>
+      <li>Long-term family retention data — Franciscan unique advantage if families stay 5-15 yrs</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================ NAPA Boston ============================ -->
+<div class="hospital" id="h4">
+  <div class="hospital-header">
+    <strong>NAPA Center — Boston site</strong>
+    <div class="hospital-meta">Multi-site intensive therapy chain · 10 locations globally · Marketing-driven · Public B-Corp · Direct site visit (when feasible) — no warm intro required, can engage anytime</div>
+  </div>
+
+  <h3>1. Functional × Sales-Process Matrix</h3>
+  <table class="matrix">
+    <thead>
+      <tr>
+        <th class="functional">Functional role</th>
+        <th class="sales-role">User</th>
+        <th class="sales-role">Buyer</th>
+        <th class="sales-role">Econ-DM</th>
+        <th class="sales-role">Champion</th>
+        <th class="sales-role">Gatekpr</th>
+        <th class="sales-role">Influ-int</th>
+        <th class="sales-role">Influ-ext</th>
+        <th class="sales-role">Saboteur</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="functional"><span class="role-name">Boston Director of Rehab</span><span class="person">Nikki Rice (Director of Rehab + Pediatric PT)</span></td><td class="empty">light</td><td class="empty">—</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">OT Manager (Boston)</span><span class="person">Kathryn LeMonda (Pediatric OT Manager)</span></td><td class="star">★</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">PT Manager (Boston)</span><span class="person">Kerri (PT Manager) — verify last name</span></td><td class="star">★</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">ST Manager (Boston)</span><span class="person">Emma (Speech Therapy Manager) — verify last name</span></td><td class="star">★</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Intake / Pre-admission Coordinator</span><span class="person">⚠️ TBD — pre-admission $300/15min pain owner ★</span></td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">NAPA Founder & Chief Visionary Officer</span><span class="person">Lynette LaScala (founded 2008, mother of Cody) ★ ★ family-story alignment</span></td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="star">★</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">NAPA COO</span><span class="person">Bryan LaScala (Lynette's son, Cody's brother)</span></td><td class="empty">—</td><td class="fill">●</td><td class="star">★</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">NAPA Marketing / Growth team</span><span class="person">⚠️ HQ-based; family acquisition focus</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">NAPA Corporate IT / Compliance</span><span class="person">⚠️ HQ-based</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td><td class="empty">—</td><td class="tbd">latent</td></tr>
+      <tr><td class="functional"><span class="role-name">External: Families flying to NAPA</span><span class="person">Pre-admission family pain (Natalia type)</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2. Power / Interest Grid</h3>
+  <div class="pi-grid-container">
+    <div class="pi-grid">
+      <div class="pi-grid-title">Stakeholder positioning (corporate vs site dynamics)</div>
+      <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; background: #FAFAFA;">
+        <line x1="50" y1="50" x2="50" y2="370" stroke="#1A1A1A" stroke-width="2"/>
+        <line x1="50" y1="370" x2="570" y2="370" stroke="#1A1A1A" stroke-width="2"/>
+        <line x1="310" y1="50" x2="310" y2="370" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="50" y1="210" x2="570" y2="210" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="180" y="80" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Keep satisfied</text>
+        <text x="440" y="80" text-anchor="middle" font-size="10" fill="#FF511B" font-weight="700">★ Manage closely</text>
+        <text x="180" y="350" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Monitor</text>
+        <text x="440" y="350" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Keep informed</text>
+        <text x="310" y="395" text-anchor="middle" font-size="11" fill="#1A1A1A" font-weight="700">Interest in WithU →</text>
+        <text x="20" y="210" text-anchor="middle" font-size="11" fill="#1A1A1A" font-weight="700" transform="rotate(-90 20 210)">Power (decision authority) →</text>
+
+        <circle cx="350" cy="100" r="10" fill="#FF511B" fill-opacity="0.6"/>
+        <text x="365" y="105" font-size="11" fill="#1A1A1A">Lynette LaScala (CVO/Founder)</text>
+
+        <circle cx="320" cy="135" r="9" fill="#FF511B" fill-opacity="0.6"/>
+        <text x="335" y="140" font-size="11" fill="#1A1A1A">Bryan LaScala (COO)</text>
+
+        <circle cx="450" cy="150" r="10" fill="#FF511B" fill-opacity="0.6"/>
+        <text x="465" y="155" font-size="11" fill="#1A1A1A">Nikki Rice (Boston Dir Rehab)</text>
+
+        <circle cx="430" cy="240" r="9" fill="#FF511B" fill-opacity="0.5" stroke="#FF511B" stroke-dasharray="3,2"/>
+        <text x="335" y="245" font-size="11" fill="#1A1A1A">Marketing / Growth ⚠️</text>
+
+        <circle cx="500" cy="290" r="8" fill="#FF511B" fill-opacity="0.4"/>
+        <text x="395" y="295" font-size="11" fill="#1A1A1A">LeMonda OT / Kerri PT / Emma ST</text>
+
+        <circle cx="510" cy="320" r="8" fill="#FF511B" fill-opacity="0.4" stroke="#FF511B" stroke-dasharray="3,2"/>
+        <text x="370" y="325" font-size="11" fill="#1A1A1A">Intake Coord ★ pain owner ⚠️</text>
+
+        <circle cx="200" cy="280" r="7" fill="#999" stroke="#999" stroke-dasharray="3,2"/>
+        <text x="215" y="285" font-size="11" fill="#1A1A1A">Corporate IT</text>
+
+        <circle cx="220" cy="120" r="7" fill="#999" stroke="#999" stroke-dasharray="3,2"/>
+        <text x="235" y="125" font-size="11" fill="#1A1A1A">B-Corp Investors</text>
+
+        <circle cx="500" cy="345" r="7" fill="#FF511B" fill-opacity="0.4"/>
+        <text x="365" y="360" font-size="11" fill="#1A1A1A">Families flying in (Natalia)</text>
+      </svg>
+    </div>
+    <div class="sequence">
+      <div class="sequence-title">3. Sales Sequence</div>
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Site visit (when feasible)</strong>: meet Nikki Rice (Director of Rehab) + Lead Therapists. Pre-admission $300/15min pain articulation.</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Intake Coordinator interview</strong>: this is the actual pain owner — replace $300/15min with structured family data</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Site Director endorses to Corporate</strong>: ask Site Director to introduce to NAPA HQ for multi-site discussion</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">4</div><div class="step-text"><strong>NAPA Marketing / Growth team</strong>: family acquisition channel value (qualified families pre-prepared)</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">5</div><div class="step-text"><strong>NAPA CEO + Corporate IT</strong>: master partnership decision (10-site rollout potential)</div></div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <strong>✅ Verified names (Boston site):</strong> Nikki Rice (Director of Rehab + Pediatric PT), Kathryn LeMonda (Pediatric OT Manager), Kerri (PT Manager), Emma (Speech Therapy Manager). Located at 220 Bear Hill Road, Suite 101, Waltham, MA 02451.
+    <br><br>
+    <strong>✅ Verified names (Corporate):</strong> Lynette LaScala (Founder & Chief Visionary Officer, founded 2008), Bryan LaScala (COO, son of Lynette).
+    <br><br>
+    <strong>★ Strategic insight — Founder family-story alignment:</strong> Lynette LaScala founded NAPA in 2008 after son Cody's near-drowning at age 1 (20-year therapy search). <strong>Mother-founder origin resonates with Ting's WithU story (DS son).</strong> Open founder-to-founder — high-trust opening.
+    <br><br>
+    <strong>⚠️ Open questions / TBD:</strong>
+    <ul>
+      <li>Intake / Pre-admission Coordinator name — pre-admission $300/15min pain owner ★ (most actionable interview target)</li>
+      <li>NAPA's corporate tech stack — what tools do they currently use?</li>
+      <li>NAPA's family acquisition cost (CAC) — Marketing/Growth team owns this number</li>
+      <li>Bryan LaScala's appetite for new vendor relationships — is he open to pilots?</li>
+      <li>NAPA B-Corp board / investors — does mission alignment factor into vendor selection?</li>
+      <li>Kerri (PT) and Emma (ST) last names — verify in pre-meeting research</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================ SPED Child Mass ============================ -->
+<div class="hospital" id="h5">
+  <div class="hospital-header">
+    <strong>SPED Child & Teen Massachusetts</strong>
+    <div class="hospital-meta">spedchildmass.com · Special-needs events aggregator for MA · Distribution / community channel · ★ James purposeful pick</div>
+  </div>
+
+  <h3>1. Stakeholder Matrix (adapted for community resource)</h3>
+  <table class="matrix">
+    <thead>
+      <tr>
+        <th class="functional">Role</th>
+        <th class="sales-role">User</th>
+        <th class="sales-role">Buyer</th>
+        <th class="sales-role">Econ-DM</th>
+        <th class="sales-role">Champion</th>
+        <th class="sales-role">Gatekpr</th>
+        <th class="sales-role">Influ-int</th>
+        <th class="sales-role">Influ-ext</th>
+        <th class="sales-role">Saboteur</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="functional"><span class="role-name">Site Owner / Editor</span><span class="person">⚠️ TBD — small operator (likely founder-led)</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td><td class="fill">●</td><td class="star">★</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Newsletter / Calendar Manager</span><span class="person">⚠️ TBD (possibly same person as owner)</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Featured organizations on site</span><span class="person">Multiple MA disability orgs (Autism Alliance, etc.)</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="fill">●</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">External: MA special needs families</span><span class="person">Subscribers of newsletter / event calendar</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2. Strategic Role for WithU</h3>
+  <div class="pi-grid-container">
+    <div class="pi-grid">
+      <div class="pi-grid-title">SPED Child Mass = Distribution / Awareness channel for MA families</div>
+      <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; background: #FAFAFA;">
+        <line x1="50" y1="50" x2="50" y2="370" stroke="#1A1A1A" stroke-width="2"/>
+        <line x1="50" y1="370" x2="570" y2="370" stroke="#1A1A1A" stroke-width="2"/>
+        <line x1="310" y1="50" x2="310" y2="370" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="50" y1="210" x2="570" y2="210" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="180" y="80" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Keep satisfied</text>
+        <text x="440" y="80" text-anchor="middle" font-size="10" fill="#FF511B" font-weight="700">★ Manage closely</text>
+        <text x="180" y="350" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Monitor</text>
+        <text x="440" y="350" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Keep informed</text>
+        <text x="310" y="395" text-anchor="middle" font-size="11" fill="#1A1A1A" font-weight="700">Interest in WithU →</text>
+        <text x="20" y="210" text-anchor="middle" font-size="11" fill="#1A1A1A" font-weight="700" transform="rotate(-90 20 210)">Distribution power →</text>
+
+        <circle cx="450" cy="170" r="10" fill="#FF511B" fill-opacity="0.6" stroke="#FF511B" stroke-width="2" stroke-dasharray="3,2"/>
+        <text x="465" y="175" font-size="11" fill="#1A1A1A" font-weight="600">Site Owner ⚠️</text>
+
+        <circle cx="500" cy="280" r="9" fill="#FF511B" fill-opacity="0.5"/>
+        <text x="395" y="285" font-size="11" fill="#1A1A1A">MA family newsletter readers</text>
+
+        <circle cx="200" cy="160" r="7" fill="#999"/>
+        <text x="215" y="165" font-size="11" fill="#1A1A1A">Featured MA disability orgs</text>
+      </svg>
+    </div>
+    <div class="sequence">
+      <div class="sequence-title">3. Engagement Sequence</div>
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Direct outreach (cold)</strong>: identify site owner via "About" page or LinkedIn. Email or contact form.</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Listing request</strong>: WithU events / launch announcements added to MA event calendar</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Newsletter feature</strong>: ask for inclusion in monthly newsletter to MA special needs families</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Cross-promotion</strong>: WithU promotes SPED Child Mass to families; mutual referral</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">5</div><div class="step-text"><strong>Y2 partnership consideration</strong>: featured org or sponsor of curated events</div></div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <strong>★ Why James picked this:</strong> Distribution for MA family acquisition. Direct line to MA special needs parents who actively check the calendar. Low effort to engage, high reach.
+    <br><br>
+    <strong>⚠️ Open questions / TBD:</strong>
+    <ul>
+      <li>Site owner / founder name — verify via About page or contact form</li>
+      <li>Subscriber count of newsletter — what's the actual reach?</li>
+      <li>Pricing model — is it free for orgs to be listed, or paid?</li>
+      <li>Existing relationships with similar tools — has anyone like WithU been featured before?</li>
+      <li>Geographic specificity — is this MA-only or broader?</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================ ICI Community Inclusion ============================ -->
+<div class="hospital" id="h6">
+  <div class="hospital-header">
+    <strong>Institute for Community Inclusion (ICI) at UMass Boston</strong>
+    <div class="hospital-meta">communityinclusion.org · Federally-funded UCEDD · Research + technical assistance on disability inclusion · ★ James purposeful pick · School for Global Inclusion and Social Development</div>
+  </div>
+
+  <h3>1. Stakeholder Matrix (adapted for research/UCEDD)</h3>
+  <table class="matrix">
+    <thead>
+      <tr>
+        <th class="functional">Role</th>
+        <th class="sales-role">User</th>
+        <th class="sales-role">Buyer</th>
+        <th class="sales-role">Econ-DM</th>
+        <th class="sales-role">Champion</th>
+        <th class="sales-role">Gatekpr</th>
+        <th class="sales-role">Influ-int</th>
+        <th class="sales-role">Influ-ext</th>
+        <th class="sales-role">Saboteur</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="functional"><span class="role-name">Director (in transition)</span><span class="person">⚠️ Position vacant — Cindy Thomas retired Nov 2025; UMass hiring (Associate/Full Prof + Director posting active)</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Faculty researchers (multi-disciplinary)</span><span class="person">⚠️ TBD names — research areas: employment, transition, community living, school inclusion</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Project coordinators (Future Quest, etc.)</span><span class="person">⚠️ Specific projects: Future Quest ($481,675 grant 2024)</span></td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">Federal funders (HHS / AIDD)</span><span class="person">UCEDD federal grant authority</span></td><td class="empty">—</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">UMass Boston School of Global Inclusion</span><span class="person">⚠️ SGISD Dean / leadership</span></td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="empty">—</td><td class="fill">●</td><td class="fill">●</td><td class="empty">—</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">UCEDD network (national)</span><span class="person">63 UCEDDs nationally — ICI is one of network</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="fill">●</td><td class="fill">●</td><td class="empty">—</td></tr>
+      <tr><td class="functional"><span class="role-name">External: People with disabilities (focus group / participants)</span><span class="person">Research participant base</span></td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="empty">—</td><td class="star">★</td><td class="empty">—</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2. Strategic Role for WithU</h3>
+  <div class="pi-grid-container">
+    <div class="pi-grid">
+      <div class="pi-grid-title">ICI = Research credibility + UCEDD network access + federal funding pathway</div>
+      <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; background: #FAFAFA;">
+        <line x1="50" y1="50" x2="50" y2="370" stroke="#1A1A1A" stroke-width="2"/>
+        <line x1="50" y1="370" x2="570" y2="370" stroke="#1A1A1A" stroke-width="2"/>
+        <line x1="310" y1="50" x2="310" y2="370" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="50" y1="210" x2="570" y2="210" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="180" y="80" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Keep satisfied</text>
+        <text x="440" y="80" text-anchor="middle" font-size="10" fill="#FF511B" font-weight="700">★ Manage closely</text>
+        <text x="180" y="350" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Monitor</text>
+        <text x="440" y="350" text-anchor="middle" font-size="10" fill="#999" font-style="italic">Keep informed</text>
+        <text x="310" y="395" text-anchor="middle" font-size="11" fill="#1A1A1A" font-weight="700">Interest in WithU →</text>
+        <text x="20" y="210" text-anchor="middle" font-size="11" fill="#1A1A1A" font-weight="700" transform="rotate(-90 20 210)">Research / endorser power →</text>
+
+        <circle cx="450" cy="120" r="11" fill="#FF511B" fill-opacity="0.6" stroke="#FF511B" stroke-width="2" stroke-dasharray="3,2"/>
+        <text x="465" y="125" font-size="11" fill="#1A1A1A" font-weight="600">★ ICI Director ⚠️ (TBD — vacant)</text>
+
+        <circle cx="220" cy="100" r="8" fill="#666" stroke="#666" stroke-dasharray="3,2"/>
+        <text x="235" y="105" font-size="11" fill="#1A1A1A">SGISD Dean ⚠️</text>
+
+        <circle cx="180" cy="160" r="7" fill="#666"/>
+        <text x="195" y="165" font-size="11" fill="#1A1A1A">Federal funders (HHS/AIDD)</text>
+
+        <circle cx="500" cy="240" r="8" fill="#FF511B" fill-opacity="0.5" stroke="#FF511B" stroke-dasharray="3,2"/>
+        <text x="385" y="245" font-size="11" fill="#1A1A1A">Faculty researchers ⚠️</text>
+
+        <circle cx="450" cy="290" r="7" fill="#FF511B" fill-opacity="0.4"/>
+        <text x="335" y="295" font-size="11" fill="#1A1A1A">Project coords (Future Quest)</text>
+
+        <circle cx="500" cy="340" r="7" fill="#FF511B" fill-opacity="0.4"/>
+        <text x="350" y="355" font-size="11" fill="#1A1A1A">UCEDD network (63 nationally)</text>
+      </svg>
+    </div>
+    <div class="sequence">
+      <div class="sequence-title">3. Engagement Sequence</div>
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Background research</strong>: review recent ICI publications on inclusion, longitudinal outcomes, family support tools — build informed framing for any future contact</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Identify a faculty researcher</strong> with longitudinal disability data interest. Approach via UMass Boston email.</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Director transition opportunity</strong>: new director will set priorities. Engage early in Y2 once appointed.</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Research collaboration proposal</strong>: WithU as data infrastructure for ICI longitudinal studies</div></div>
+      <div class="step-arrow">↓</div>
+      <div class="step"><div class="step-num">5</div><div class="step-text"><strong>UCEDD network amplification</strong>: ICI endorsement opens doors to 63 UCEDDs nationally (Y3)</div></div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <strong>★ Why James picked this:</strong> ICI = federal-level credibility + research validation + UCEDD network access. Disability inclusion authority. Y2-Y3 unlock for federal funding pathway.
+    <br><br>
+    <strong>⚠️ Director transition window:</strong> Cindy Thomas retired Nov 2025. UMass Boston hiring (Director posted). New leadership sets priorities — Y2 timing aligns with WithU readiness. <strong>Reach out within 6 months of appointment.</strong>
+    <br><br>
+    <strong>⚠️ Open questions / TBD:</strong>
+    <ul>
+      <li>Current acting director (interim) — verify who is leading during transition</li>
+      <li>Current faculty researchers with DS / longitudinal data interest — name verify</li>
+      <li>Future Quest project status (2024 $481K grant) — what's the current scope and outcomes?</li>
+      <li>SGISD Dean — UMass Boston faculty hierarchy</li>
+      <li>UCEDD network governance — how does ICI relate to AUCD (Association of University Centers on Disabilities)?</li>
+      <li>ICI's existing tech / data partnerships — what tools do they currently use for research?</li>
+    </ul>
+  </div>
+</div>
+
+<div class="legend-row">
+  <strong>Cell legend:</strong>
+  <div class="item"><span class="swatch" style="background:#FF511B;"></span> ★ Critical role for this person</div>
+  <div class="item"><span class="swatch" style="background:#FFE5DC;"></span> ● Plays this role</div>
+  <div class="item"><span class="swatch" style="background:#fff; border: 1px solid #CCC;"></span> Empty / not applicable</div>
+  <div class="item"><span style="color:#FF511B; font-style: italic;">tbd / latent</span> Verify or potentially active</div>
+</div>
+
+<div style="margin-top: 24px; padding: 14px 18px; background: #fff; border: 1px solid #E5E5E5; border-radius: 8px; font-size: 12px; color: #555;">
+  <strong style="color: #FF511B;">How to use this document:</strong>
+  <ol style="margin: 8px 0 0; padding-left: 20px; line-height: 1.6;">
+    <li><strong>Strategic Insights</strong> (top, always visible) — Baumer / LaScala / ICI Director — "why these entities matter" at a glance.</li>
+    <li><strong>Master Person List tab</strong> (default) — 30+ persons across all 8 entities, sorted by Wave + role. Primary scan view.</li>
+    <li><strong>Per-hospital tabs</strong> — when an intro is being considered or confirmed, open the relevant entity tab for matrix + grid + sales sequence + open questions.</li>
+    <li><strong>For mentors:</strong> we'd love your input on names that need verification (⚠️ TBD), and any Champion / User candidates in your network we should add.</li>
+  </ol>
+</div>
+
+<script>
+function showHospital(idx) {
+  document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+  document.querySelectorAll('.hospital').forEach((h, i) => h.classList.toggle('active', i === idx));
+}
+</script>
+</body>
+</html>
