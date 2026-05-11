@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 720" font-family="Helvetica, Arial, sans-serif">
+  <!-- Background -->
+  <rect x="0" y="0" width="1000" height="720" fill="#FFFFFF"/>
+
+  <!-- Title -->
+  <text x="500" y="38" text-anchor="middle" font-size="22" font-weight="700" fill="#000000">
+    Business Model — 7 Revenue Streams × 3 Stages
+  </text>
+  <text x="500" y="62" text-anchor="middle" font-size="13" fill="#666666" font-style="italic">
+    Family data accumulates → premium emerges in Y2 → flywheel compounds in Y3+
+  </text>
+
+  <!-- ===================== MAIN MATRIX ===================== -->
+
+  <!-- Matrix container -->
+  <rect x="40" y="90" width="920" height="440" fill="#FFFFFF" stroke="#000000" stroke-width="1.5"/>
+
+  <!-- Column headers background -->
+  <rect x="40" y="90" width="920" height="40" fill="#000000"/>
+
+  <!-- Column header dividers -->
+  <line x1="320" y1="90" x2="320" y2="530" stroke="#999999" stroke-width="1"/>
+  <line x1="533" y1="90" x2="533" y2="530" stroke="#999999" stroke-width="1"/>
+  <line x1="747" y1="90" x2="747" y2="530" stroke="#999999" stroke-width="1"/>
+
+  <!-- Column headers -->
+  <text x="180" y="116" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF">REVENUE STREAM</text>
+  <text x="426" y="116" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF">YEAR 1</text>
+  <text x="640" y="116" text-anchor="middle" font-size="13" font-weight="700" fill="#FF511B">YEAR 2</text>
+  <text x="853" y="116" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF">YEAR 3+</text>
+
+  <!-- ROW 1: Family Free Tier -->
+  <line x1="40" y1="155" x2="960" y2="155" stroke="#E5E5E5" stroke-width="0.5"/>
+  <text x="60" y="148" font-size="12" font-weight="700" fill="#000000">① Family Free Tier</text>
+  <text x="60" y="163" font-size="10" fill="#666666" font-style="italic">universal access · accumulation · crisis</text>
+  <text x="426" y="148" text-anchor="middle" font-size="11" fill="#000000">1,000–1,500 active</text>
+  <text x="426" y="163" text-anchor="middle" font-size="10" fill="#666666">data engine starts</text>
+  <text x="640" y="148" text-anchor="middle" font-size="11" fill="#000000">5,000–20,000 active</text>
+  <text x="640" y="163" text-anchor="middle" font-size="10" fill="#666666">multi-region scale</text>
+  <text x="853" y="148" text-anchor="middle" font-size="11" fill="#000000">50,000+ active</text>
+  <text x="853" y="163" text-anchor="middle" font-size="10" fill="#666666">universal default</text>
+
+  <!-- ROW 2: Family Premium -->
+  <line x1="40" y1="195" x2="960" y2="195" stroke="#E5E5E5" stroke-width="0.5"/>
+  <text x="60" y="188" font-size="12" font-weight="700" fill="#000000">② Family Premium  €10/mo</text>
+  <text x="60" y="203" font-size="10" fill="#666666" font-style="italic">advanced features · optional</text>
+  <text x="426" y="188" text-anchor="middle" font-size="11" fill="#000000">50–200 paying</text>
+  <text x="426" y="203" text-anchor="middle" font-size="10" fill="#666666">€10–25K ARR</text>
+  <text x="640" y="188" text-anchor="middle" font-size="11" fill="#000000">1K–5K paying</text>
+  <text x="640" y="203" text-anchor="middle" font-size="10" fill="#666666">€100–600K ARR</text>
+  <text x="853" y="188" text-anchor="middle" font-size="11" fill="#000000">10K+ paying</text>
+  <text x="853" y="203" text-anchor="middle" font-size="10" fill="#666666">€1M+ ARR</text>
+
+  <!-- ROW 3: Center Referral Fee -->
+  <line x1="40" y1="235" x2="960" y2="235" stroke="#E5E5E5" stroke-width="0.5"/>
+  <text x="60" y="228" font-size="12" font-weight="700" fill="#000000">③ Center Referral Fee  €100–300/family</text>
+  <text x="60" y="243" font-size="10" fill="#666666" font-style="italic">qualified family lead delivery</text>
+  <text x="426" y="228" text-anchor="middle" font-size="11" fill="#FF511B" font-weight="700">★ Y1 main entry</text>
+  <text x="426" y="243" text-anchor="middle" font-size="10" fill="#666666">5–10 partner centers</text>
+  <text x="640" y="228" text-anchor="middle" font-size="11" fill="#000000">scale to 30+</text>
+  <text x="640" y="243" text-anchor="middle" font-size="10" fill="#666666">centers</text>
+  <text x="853" y="228" text-anchor="middle" font-size="11" fill="#999999">declining</text>
+  <text x="853" y="243" text-anchor="middle" font-size="10" fill="#999999">(replaced by SaaS)</text>
+
+  <!-- ROW 4: Light Center SaaS -->
+  <line x1="40" y1="275" x2="960" y2="275" stroke="#E5E5E5" stroke-width="0.5"/>
+  <text x="60" y="268" font-size="12" font-weight="700" fill="#000000">④ Light Center SaaS  €5–10K/yr</text>
+  <text x="60" y="283" font-size="10" fill="#666666" font-style="italic">documentation + family communication</text>
+  <text x="426" y="268" text-anchor="middle" font-size="11" fill="#FF511B" font-weight="700">★ Y1 main entry</text>
+  <text x="426" y="283" text-anchor="middle" font-size="10" fill="#666666">3–5 pilot centers</text>
+  <text x="640" y="268" text-anchor="middle" font-size="11" fill="#000000">30+ centers</text>
+  <text x="640" y="283" text-anchor="middle" font-size="10" fill="#666666">expanded standard</text>
+  <text x="853" y="268" text-anchor="middle" font-size="11" fill="#000000">100+ centers</text>
+  <text x="853" y="283" text-anchor="middle" font-size="10" fill="#666666">platform integrated</text>
+
+  <!-- ROW 5: Premium AI SaaS -->
+  <line x1="40" y1="315" x2="960" y2="315" stroke="#E5E5E5" stroke-width="0.5"/>
+  <rect x="533" y="315" width="427" height="40" fill="#FF511B" fill-opacity="0.08"/>
+  <text x="60" y="308" font-size="12" font-weight="700" fill="#000000">⑤ Premium AI SaaS  €25–40K/yr</text>
+  <text x="60" y="323" font-size="10" fill="#666666" font-style="italic">AI personalization · methodology · retention</text>
+  <text x="426" y="308" text-anchor="middle" font-size="11" fill="#999999">—</text>
+  <text x="426" y="323" text-anchor="middle" font-size="10" fill="#999999">data scale required</text>
+  <text x="640" y="308" text-anchor="middle" font-size="11" fill="#FF511B" font-weight="700">★ Y2 emerges</text>
+  <text x="640" y="323" text-anchor="middle" font-size="10" fill="#666666">5–10 centers premium</text>
+  <text x="853" y="308" text-anchor="middle" font-size="11" fill="#000000">30+ centers</text>
+  <text x="853" y="323" text-anchor="middle" font-size="10" fill="#666666">main revenue driver</text>
+
+  <!-- ROW 6: Outcome-based pricing -->
+  <line x1="40" y1="355" x2="960" y2="355" stroke="#E5E5E5" stroke-width="0.5"/>
+  <text x="60" y="348" font-size="12" font-weight="700" fill="#000000">⑥ Outcome-based Pricing</text>
+  <text x="60" y="363" font-size="10" fill="#666666" font-style="italic">€40K+ base + per-outcome variable</text>
+  <text x="426" y="348" text-anchor="middle" font-size="11" fill="#999999">—</text>
+  <text x="426" y="363" text-anchor="middle" font-size="10" fill="#999999">measurement infra building</text>
+  <text x="640" y="348" text-anchor="middle" font-size="11" fill="#000000">experimental</text>
+  <text x="640" y="363" text-anchor="middle" font-size="10" fill="#666666">2–3 top centers pilot</text>
+  <text x="853" y="348" text-anchor="middle" font-size="11" fill="#FF511B" font-weight="700">★ established</text>
+  <text x="853" y="363" text-anchor="middle" font-size="10" fill="#666666">top tier centers</text>
+
+  <!-- ROW 7: Public funding -->
+  <line x1="40" y1="395" x2="960" y2="395" stroke="#E5E5E5" stroke-width="0.5"/>
+  <text x="60" y="388" font-size="12" font-weight="700" fill="#000000">⑦ Public Funding · Insurer · Gov't</text>
+  <text x="60" y="403" font-size="10" fill="#666666" font-style="italic">grants → per-capita reimbursement</text>
+  <text x="426" y="388" text-anchor="middle" font-size="11" fill="#000000">€100–300K grants</text>
+  <text x="426" y="403" text-anchor="middle" font-size="10" fill="#666666">R&amp;D + early validation</text>
+  <text x="640" y="388" text-anchor="middle" font-size="11" fill="#000000">€500K–1M grants</text>
+  <text x="640" y="403" text-anchor="middle" font-size="10" fill="#666666">+ insurer pilots</text>
+  <text x="853" y="388" text-anchor="middle" font-size="11" fill="#FF511B" font-weight="700">★ per-capita</text>
+  <text x="853" y="403" text-anchor="middle" font-size="10" fill="#666666">MassHealth / NDIS-style</text>
+
+  <!-- TOTAL ROW -->
+  <line x1="40" y1="435" x2="960" y2="435" stroke="#000000" stroke-width="2"/>
+  <rect x="40" y="435" width="920" height="50" fill="#000000"/>
+  <text x="60" y="467" font-size="14" font-weight="700" fill="#FFFFFF">TOTAL ARR TARGET</text>
+  <text x="426" y="467" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">€50–200K</text>
+  <text x="640" y="467" text-anchor="middle" font-size="16" font-weight="700" fill="#FF511B">€300K–1M</text>
+  <text x="853" y="467" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">€1–3M+</text>
+
+  <!-- Stage descriptions row -->
+  <line x1="40" y1="485" x2="960" y2="485" stroke="#E5E5E5" stroke-width="0.5"/>
+  <text x="60" y="510" font-size="11" fill="#666666" font-style="italic">stage character</text>
+  <text x="426" y="510" text-anchor="middle" font-size="11" fill="#666666" font-style="italic">prove the loop works</text>
+  <text x="640" y="510" text-anchor="middle" font-size="11" fill="#FF511B" font-style="italic">premium emerges from data</text>
+  <text x="853" y="510" text-anchor="middle" font-size="11" fill="#666666" font-style="italic">flywheel compounds</text>
+
+  <!-- ===================== BOTTOM: Coexistence + Flywheel mini ===================== -->
+
+  <!-- Left mini: Coexistence stack -->
+  <text x="240" y="565" text-anchor="middle" font-size="12" font-weight="700" fill="#000000">We coexist with existing SaaS — sit on top, not replace</text>
+  <rect x="100" y="580" width="280" height="22" rx="3" fill="#FF511B" stroke="#000000" stroke-width="1"/>
+  <text x="240" y="596" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF">FAMILY DATA — unique to WithU</text>
+  <rect x="100" y="605" width="280" height="22" rx="3" fill="#000000"/>
+  <text x="240" y="621" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF">WithU LAYER — AI + bridge</text>
+  <rect x="100" y="630" width="280" height="22" rx="3" fill="#E5E5E5" stroke="#999999" stroke-width="1"/>
+  <text x="240" y="646" text-anchor="middle" font-size="10" font-weight="700" fill="#000000">EXISTING EHR — WebPT, TheraNest, Epic</text>
+
+  <!-- Right mini: 4 Design Principles -->
+  <text x="760" y="565" text-anchor="middle" font-size="12" font-weight="700" fill="#000000">4 Design Principles — conflict avoidance + portability</text>
+
+  <!-- Principle 1: Family ownership -->
+  <rect x="430" y="580" width="125" height="48" rx="5" fill="#FFFFFF" stroke="#FF511B" stroke-width="1.5"/>
+  <text x="492" y="597" text-anchor="middle" font-size="9" font-weight="700" fill="#000000">① Family ownership</text>
+  <text x="492" y="611" text-anchor="middle" font-size="8" fill="#666666">data belongs to family;</text>
+  <text x="492" y="622" text-anchor="middle" font-size="8" fill="#666666">access is consent-based</text>
+
+  <!-- Principle 2: No routing AI -->
+  <rect x="565" y="580" width="125" height="48" rx="5" fill="#FFFFFF" stroke="#FF511B" stroke-width="1.5"/>
+  <text x="627" y="597" text-anchor="middle" font-size="9" font-weight="700" fill="#000000">② No routing AI</text>
+  <text x="627" y="611" text-anchor="middle" font-size="8" fill="#666666">we inform,</text>
+  <text x="627" y="622" text-anchor="middle" font-size="8" fill="#666666">families decide</text>
+
+  <!-- Principle 3: Service relationship -->
+  <rect x="700" y="580" width="125" height="48" rx="5" fill="#FFFFFF" stroke="#FF511B" stroke-width="1.5"/>
+  <text x="762" y="597" text-anchor="middle" font-size="9" font-weight="700" fill="#000000">③ Service, not lock-in</text>
+  <text x="762" y="611" text-anchor="middle" font-size="8" fill="#666666">centers serve families;</text>
+  <text x="762" y="622" text-anchor="middle" font-size="8" fill="#666666">no customer capture</text>
+
+  <!-- Principle 4: Practitioner portability -->
+  <rect x="835" y="580" width="125" height="48" rx="5" fill="#FFFFFF" stroke="#FF511B" stroke-width="1.5"/>
+  <text x="897" y="597" text-anchor="middle" font-size="9" font-weight="700" fill="#000000">④ Profile portability</text>
+  <text x="897" y="611" text-anchor="middle" font-size="8" fill="#666666">practitioners own profile;</text>
+  <text x="897" y="622" text-anchor="middle" font-size="8" fill="#666666">follows across employers</text>
+
+  <!-- Loop back arrow -->
+  <path d="M 860 638 Q 860 660 760 660 Q 620 660 620 638" stroke="#FF511B" stroke-width="2" fill="none" stroke-dasharray="3,2"/>
+  <polygon points="617,640 620,634 623,640" fill="#FF511B"/>
+  <text x="740" y="675" text-anchor="middle" font-size="9" fill="#FF511B" font-style="italic">funds free family expansion</text>
+
+  <!-- ===================== FOOTER: Pricing rationale ===================== -->
+  <line x1="60" y1="690" x2="940" y2="690" stroke="#E5E5E5" stroke-width="1"/>
+  <text x="500" y="710" text-anchor="middle" font-size="11" fill="#000000" font-weight="700">
+    Pricing rationale: <tspan fill="#666666" font-weight="400" font-style="italic">Local €5–10K vs. Intl €25–40K reflects AI feature set, not data access. All centers see the same family-permissioned data.</tspan>
+  </text>
+</svg>
