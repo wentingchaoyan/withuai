@@ -1,4 +1,4 @@
-# 05a — Per-Player Story / Need-Gap / Feature Set / Trigger Moment
+# 👥 05a — Per-Player Story / Need-Gap / Feature Set / Trigger Moment
 
 **Version:** 1.0 · 2026-05-08
 **Audience:** Sales, partnerships, product, engineering

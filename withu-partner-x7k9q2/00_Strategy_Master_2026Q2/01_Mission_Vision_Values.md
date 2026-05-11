@@ -1,4 +1,4 @@
-# 01 — Mission, Vision, Values
+# 🧭 01 — Mission, Vision, Values
 
 **Version:** 1.0 · 2026-05-08
 **Audience:** Investors, board, mentors, team, future hires

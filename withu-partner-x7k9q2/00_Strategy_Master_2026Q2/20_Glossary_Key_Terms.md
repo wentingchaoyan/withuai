@@ -1,4 +1,4 @@
-# 20 — Glossary and Key Terms
+# 📖 20 — Glossary and Key Terms
 
 **Version:** 1.0 · 2026-05-08
 **Purpose:** Shared vocabulary across WithU's strategy documents, ensuring consistent terminology across team, board, mentors, and external communications.

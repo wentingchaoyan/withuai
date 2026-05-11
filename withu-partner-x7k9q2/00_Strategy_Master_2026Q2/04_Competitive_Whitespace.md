@@ -1,4 +1,4 @@
-# 04 — Competitive Landscape and White Space
+# ⚔️ 04 — Competitive Landscape and White Space
 
 **Version:** 1.0 · 2026-05-08
 **Audience:** Investors, mentors, strategic partners

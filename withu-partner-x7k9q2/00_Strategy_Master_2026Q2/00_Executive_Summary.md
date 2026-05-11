@@ -1,4 +1,4 @@
-# 00 — WithU Executive Summary
+# 📋 00 — WithU Executive Summary
 
 **Version:** 1.0 · 2026-05-08
 **Length:** 3 pages

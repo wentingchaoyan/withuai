@@ -1,4 +1,4 @@
-# 08 — Business Model and Monetization
+# 💰 08 — Business Model and Monetization
 
 **Version:** 1.0 · 2026-05-08
 **Audience:** Investors, board, strategic partners

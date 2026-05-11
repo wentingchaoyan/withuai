@@ -1,4 +1,4 @@
-# 05b — Strategy MECE Lever Analysis (3 Profiles)
+# 🎚️ 05b — Strategy MECE Lever Analysis (3 Profiles)
 
 **Version:** 1.0 · 2026-05-08
 **Audience:** Founder, strategy team, investors who want the reasoning behind the value proposition

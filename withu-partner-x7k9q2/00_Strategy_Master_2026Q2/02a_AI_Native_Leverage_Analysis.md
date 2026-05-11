@@ -1,4 +1,4 @@
-# 02a — Native AI Leverage Analysis: The Keystone Problem
+# 🧠 02a — Native AI Leverage Analysis: The Keystone Problem
 
 **Version:** 1.0 · 2026-05-11
 **Audience:** Founder, investors, technical leads, mentors evaluating "why AI native, why now"

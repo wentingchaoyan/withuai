@@ -1,4 +1,4 @@
-# 02 — Industry Analysis: Pediatric Disability Care as Tragedy of the Commons
+# 🏭 02 — Industry Analysis: Pediatric Disability Care as Tragedy of the Commons
 
 **Version:** 1.0 · 2026-05-08
 **Audience:** Investors, mentors, strategic partners

@@ -1,4 +1,4 @@
-# 05 — Value Proposition
+# 🎁 05 — Value Proposition
 
 **Version:** 1.0 · 2026-05-08
 **Audience:** Investors, partners, prospective customers
@@ -16,11 +16,13 @@
 
 WithU delivers value to three distinct stakeholder groups, each with their own goal language:
 
-| Stakeholder | Goal | Tagline |
-|---|---|---|
-| **Provider** | LTV (Lifetime Value) maximization | "WithU extends the relationship that begins in your clinic — turning each intensive into the start of a lifelong customer arc." |
-| **Family** | Continuous growth support | "WithU walks beside your child's growth — quietly capturing the journey so you have the right answer at every turning point." |
-| **Researcher** | Real-World Data (RWD) supply | "WithU supplies the data category researchers can't get from clinics, claims, or surveys — what families capture in daily life." |
+| Stakeholder    | Goal                              | Tagline                                                                                                                          |
+| -------------- | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| **Provider**   | LTV (Lifetime Value) maximization | "WithU extends the relationship that begins in your clinic — turning each intensive into the start of a lifelong customer arc."  |
+| **Family**     | Continuous growth support         | "WithU walks beside your child's growth — quietly capturing the journey so you have the right answer at every turning point."    |
+| **Researcher** | Real-World Data (RWD) supply      | "WithU supplies the data category researchers can't get from clinics, claims, or surveys — what families capture in daily life." |
+Provider: measure results
+NPO therapist
 
 ---
 

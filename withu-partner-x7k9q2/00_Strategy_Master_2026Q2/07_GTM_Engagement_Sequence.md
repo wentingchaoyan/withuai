@@ -1,4 +1,4 @@
-# 07 — Go-to-Market Engagement Sequence (8 Waves)
+# 🛣️ 07 — Go-to-Market Engagement Sequence (8 Waves)
 
 **Version:** 1.0 · 2026-05-08
 **Audience:** Investors, board, team

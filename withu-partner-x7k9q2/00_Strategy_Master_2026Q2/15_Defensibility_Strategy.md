@@ -1,4 +1,4 @@
-# 15 — Defensibility Strategy (Moat)
+# 🛡️ 15 — Defensibility Strategy (Moat)
 
 **Version:** 1.0 · 2026-05-08
 **Audience:** Investors, board, strategic partners

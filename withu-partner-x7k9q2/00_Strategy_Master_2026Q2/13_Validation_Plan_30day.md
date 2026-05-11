@@ -1,4 +1,4 @@
-# 13 — Validation Plan: 30-Day Research Sprint
+# ✅ 13 — Validation Plan: 30-Day Research Sprint
 
 **Version:** 1.0 · 2026-05-08
 **Audience:** Investors, board, mentors, team

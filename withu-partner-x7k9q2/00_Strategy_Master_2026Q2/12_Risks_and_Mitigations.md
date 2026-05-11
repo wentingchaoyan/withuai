@@ -1,4 +1,4 @@
-# 12 — Risks and Mitigations
+# ⚠️ 12 — Risks and Mitigations
 
 **Version:** 1.0 · 2026-05-08
 **Audience:** Investors, board, mentors
