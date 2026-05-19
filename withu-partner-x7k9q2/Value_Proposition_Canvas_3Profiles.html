@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WithU — Value Proposition Canvases (3 Profiles)</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; margin: 0; padding: 24px; background: #FAFAFA; color: #1A1A1A; }
+  h1 { margin: 0 0 6px; font-size: 22px; }
+  h2 { margin: 0 0 10px; font-size: 18px; color: #FF511B; }
+  h3 { margin: 18px 0 8px; font-size: 14px; color: #1A1A1A; text-transform: uppercase; letter-spacing: 1px; }
+  .subtitle { color: #666; font-size: 13px; margin-bottom: 20px; }
+
+  /* Hero / framing */
+  .framing { background: #FFFAF0; padding: 14px 20px; border-radius: 6px; margin: 20px 0; font-size: 12px; line-height: 1.6; color: #555; }
+  .framing strong { color: #B8860B; }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 4px; margin: 24px 0 0; border-bottom: 2px solid #1A1A1A; }
+  .tab { padding: 12px 22px; background: #E5E5E5; cursor: pointer; border-radius: 8px 8px 0 0; font-size: 13px; font-weight: 600; color: #666; }
+  .tab.active { background: #1A1A1A; color: #fff; }
+  .tab:hover:not(.active) { background: #CCC; color: #1A1A1A; }
+  .tab .label { display: block; font-size: 11px; opacity: 0.7; font-weight: 400; margin-top: 2px; }
+
+  .canvas-wrapper { display: none; background: #fff; border: 1px solid #E5E5E5; border-top: none; border-radius: 0 0 8px 8px; padding: 28px; }
+  .canvas-wrapper.active { display: block; }
+
+  /* Profile header */
+  .profile-header { margin-bottom: 24px; }
+  .profile-title { font-size: 24px; font-weight: 700; margin-bottom: 14px; }
+  .goals-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  .goal-box { padding: 14px 16px; border-radius: 4px; }
+  .goal-outcome { background: #FFF5F0; }
+  .goal-worldview { background: #FFFAF0; }
+  .goal-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+  .goal-outcome .goal-label { color: #FF511B; }
+  .goal-worldview .goal-label { color: #B8860B; }
+  .goal-body { font-size: 14px; line-height: 1.5; }
+  .tagline { background: #1A1A1A; color: #fff; padding: 14px 20px; border-radius: 4px; font-size: 14px; font-style: italic; line-height: 1.5; }
+
+  /* Canvas main layout: 2-column with arrow */
+  .canvas { display: grid; grid-template-columns: 1fr 60px 1fr; gap: 0; margin: 28px 0; align-items: stretch; }
+
+  /* Left square — Value Proposition */
+  .value-prop {
+    background: #fff;
+    border: 2px solid #1A1A1A;
+    border-radius: 6px;
+    padding: 18px;
+    position: relative;
+  }
+  .canvas-corner-label {
+    position: absolute;
+    top: -10px;
+    left: 14px;
+    background: #fff;
+    padding: 0 8px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #666;
+  }
+  .vp-section { margin-bottom: 16px; }
+  .vp-section:last-child { margin-bottom: 0; }
+  .vp-section-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #FF511B;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .vp-section-icon {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background: #FFF5F0;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 22px;
+    font-size: 13px;
+  }
+  .vp-list { list-style: none; padding: 0; margin: 0; }
+  .vp-list li {
+    font-size: 12px;
+    line-height: 1.55;
+    padding: 6px 0 6px 16px;
+    position: relative;
+    color: #333;
+    border-bottom: 1px dashed #F0F0F0;
+  }
+  .vp-list li:last-child { border-bottom: none; }
+  .vp-list li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: #FF511B;
+    font-size: 11px;
+  }
+
+  /* Arrow */
+  .arrow-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1A1A1A;
+    font-size: 28px;
+  }
+  .arrow-text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #999;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  /* Right circle — Customer Segment */
+  .customer-seg {
+    background: #fff;
+    border: 2px solid #1A1A1A;
+    border-radius: 50% / 12%;
+    padding: 18px 30px;
+    position: relative;
+  }
+  .cs-section { margin-bottom: 16px; }
+  .cs-section:last-child { margin-bottom: 0; }
+  .cs-section-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1A1A1A;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cs-section-icon {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background: #F0F0F0;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 22px;
+    font-size: 13px;
+  }
+  .cs-list { list-style: none; padding: 0; margin: 0; }
+  .cs-list li {
+    font-size: 12px;
+    line-height: 1.55;
+    padding: 6px 0 6px 16px;
+    position: relative;
+    color: #333;
+    border-bottom: 1px dashed #F0F0F0;
+  }
+  .cs-list li:last-child { border-bottom: none; }
+  .cs-list li::before {
+    content: "○";
+    position: absolute;
+    left: 0;
+    color: #666;
+    font-size: 9px;
+    top: 8px;
+  }
+
+  /* Fit indicator */
+  .fit-row {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    gap: 0;
+    margin-top: 6px;
+    align-items: center;
+  }
+  .fit-text {
+    background: #1A1A1A;
+    color: #D7C862;
+    padding: 8px 14px;
+    border-radius: 4px;
+    font-size: 11px;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  .fit-text strong { color: #fff; font-size: 12px; }
+
+  /* Worldview promise */
+  .worldview-promise {
+    background: #1A1A1A;
+    color: #E5E5E5;
+    padding: 18px 22px;
+    border-radius: 6px;
+    margin-top: 24px;
+  }
+  .worldview-promise .label {
+    color: #D7C862;
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .worldview-promise .body-text {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .worldview-promise .body-text em { color: #FF511B; font-style: normal; font-weight: 600; }
+
+  /* Discussion prompt */
+  .discussion-prompt {
+    background: #F0F8FF;
+    padding: 14px 18px;
+    border-radius: 4px;
+    margin-top: 18px;
+    font-size: 12px;
+    color: #555;
+  }
+  .discussion-prompt strong { color: #4682B4; }
+
+  /* Short-term / Long-term temporal classification chips */
+  .chip {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 9px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    margin-right: 7px;
+    vertical-align: middle;
+    text-transform: uppercase;
+  }
+  .chip-st {
+    background: #E8F5E9;
+    color: #2E7D32;
+  }
+  .chip-lt {
+    background: #E3F2FD;
+    color: #1565C0;
+  }
+
+  /* Legend / key */
+  .temporal-legend {
+    background: #fff;
+    border: 1px solid #E5E5E5;
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-size: 11px;
+    color: #555;
+    flex-wrap: wrap;
+  }
+  .temporal-legend .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .temporal-legend strong { color: #1A1A1A; font-size: 12px; }
+
+  /* Visual Canvas (Osterwalder schematic with SVG) */
+  .visual-canvas-section {
+    margin: 28px 0;
+    padding: 22px;
+    background: #FAFAFA;
+    border-radius: 8px;
+    border: 1px solid #E5E5E5;
+  }
+  .visual-canvas-section .vc-title-bar {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #666;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .svg-canvas-container {
+    max-width: 920px;
+    margin: 0 auto;
+  }
+  .svg-canvas-container svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .vc-content {
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    font-size: 10.5px;
+    line-height: 1.45;
+    color: #333;
+  }
+  .vc-content .vc-section-title {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #FF511B;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .vc-content .vc-section-title.cs-title {
+    color: #1A1A1A;
+  }
+  .vc-content .vc-item {
+    padding: 2px 0;
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+  }
+  .vc-content .vc-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .vc-content .vc-dot-st { background: #4CAF50; }
+  .vc-content .vc-dot-lt { background: #1565C0; }
+  .vc-caption {
+    text-align: center;
+    font-size: 11px;
+    color: #666;
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  @media (max-width: 1100px) {
+    .canvas { grid-template-columns: 1fr; gap: 14px; }
+    .arrow-area { transform: rotate(90deg); }
+    .arrow-text { writing-mode: horizontal-tb; transform: none; }
+    .goals-grid { grid-template-columns: 1fr; }
+    .fit-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<h1>WithU — Value Proposition Canvas (3 Profiles)</h1>
+<div class="subtitle">Provider · Family · Researcher · Osterwalder format · Mentor discussion artifact · 2026-05-19 · Backed by <code>00_Strategy_Master_2026Q2/05_Value_Proposition.md v1.1</code></div>
+
+<div class="framing">
+  <strong>📍 How to use this canvas:</strong> Each profile shows WithU's value proposition (left square) mapped to the stakeholder's customer-segment reality (right circle). Read the right side first ("what they actually need / feel"), then test whether the left side ("what we offer") actually addresses it. The arrow signifies fit — if a Pain Reliever doesn't connect to a real Pain, it's a feature without value. Goals shown twice: Outcome (measurable) and Worldview (meaningful). Same data, two dimensions — see <code>05 v1.1 Beliefs</code> section.
+</div>
+
+<div class="temporal-legend">
+  <strong>⏱ Temporal classification:</strong>
+  <span class="legend-item"><span class="chip chip-st">ST</span> <strong>Short-term felt value</strong> — relief or benefit experienced within hours to ~1 month (acute-moment deliverables, immediate emotional relief)</span>
+  <span class="legend-item"><span class="chip chip-lt">LT</span> <strong>Long-term felt value</strong> — compounding over months to multi-year (cohort data, lifecycle continuity, career arcs, industry positioning)</span>
+</div>
+
+<div class="framing" style="margin-top: 10px;">
+  <strong>💡 Why this matters for the mentor session:</strong> Stakeholders evaluate value with different time horizons. Families need <span class="chip chip-st" style="margin-right: 0;">ST</span> proof in the first few uses or they leave. Investors / providers / researchers think in <span class="chip chip-lt" style="margin-right: 0;">LT</span> arcs and discount short-term polish. If a canvas is heavily one-color, that's a signal: <em>are we under-serving the other time horizon for this stakeholder?</em>
+</div>
+
+<!-- Tabs -->
+<div class="tabs">
+  <div class="tab active" onclick="showCanvas('provider', this)">Provider<span class="label">LTV / Lifelong clinic</span></div>
+  <div class="tab" onclick="showCanvas('family', this)">Family<span class="label">Continuous Growth / Expert</span></div>
+  <div class="tab" onclick="showCanvas('researcher', this)">Researcher<span class="label">RWD / Honor family knowledge</span></div>
+</div>
+
+<!-- =================================================================== PROVIDER CANVAS =================================================================== -->
+<div class="canvas-wrapper active" id="provider">
+
+  <div class="profile-header">
+    <div class="profile-title">Profile 1: Providers (NAPA, Hospital DSP, Specialty Clinics)</div>
+    <div class="goals-grid">
+      <div class="goal-box goal-outcome">
+        <div class="goal-label">⭐ Outcome Goal (measurable)</div>
+        <div class="goal-body">LTV (Lifetime Value) maximization — Revenue × Visits × Years × Margin + Referrals</div>
+      </div>
+      <div class="goal-box goal-worldview">
+        <div class="goal-label">✦ Worldview Goal (meaningful)</div>
+        <div class="goal-body">Be the clinic families remember across decades — the practice worth defending against commoditization</div>
+      </div>
+    </div>
+    <div class="tagline">"WithU extends the relationship that begins in your clinic — turning each intensive into the start of a lifelong customer arc."</div>
+  </div>
+
+  <!-- ============== VISUAL CANVAS (Osterwalder schematic) ============== -->
+  <div class="visual-canvas-section">
+    <div class="vc-title-bar">⬛ Visual Overview — Osterwalder Canvas Layout</div>
+    <div class="svg-canvas-container">
+      <svg viewBox="0 0 1100 590" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrowhead-provider" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#1A1A1A"/>
+          </marker>
+        </defs>
+
+        <!-- Square label -->
+        <text x="260" y="25" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="2" fill="#666">VALUE PROPOSITION</text>
+
+        <!-- SQUARE with diagonals -->
+        <rect x="40" y="45" width="440" height="500" fill="white" stroke="#1A1A1A" stroke-width="2"/>
+        <line x1="40" y1="45" x2="480" y2="295" stroke="#1A1A1A" stroke-width="2"/>
+        <line x1="40" y1="545" x2="480" y2="295" stroke="#1A1A1A" stroke-width="2"/>
+
+        <!-- Products & Services (left triangle — wide at vertical middle) -->
+        <foreignObject x="55" y="225" width="285" height="140">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="vc-content">
+            <div class="vc-section-title">🎁 Products &amp; Services</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>Pre-arrival Summary</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>Continuity Bridge</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>Cohort Outcome Data</div>
+          </div>
+        </foreignObject>
+
+        <!-- Gain Creators (top-right triangle — wide at top) -->
+        <foreignObject x="265" y="60" width="210" height="110">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="vc-content">
+            <div class="vc-section-title">📈 Gain Creators</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>Higher LTV</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>Defensible Pricing</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>Industry Leadership</div>
+          </div>
+        </foreignObject>
+
+        <!-- Pain Relievers (bottom-right triangle — wide at bottom) -->
+        <foreignObject x="265" y="425" width="210" height="110">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="vc-content">
+            <div class="vc-section-title">💊 Pain Relievers</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>Real Context @ Intake</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>49-week Bridge</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>Outcome Evidence</div>
+          </div>
+        </foreignObject>
+
+        <!-- ARROW -->
+        <line x1="500" y1="295" x2="560" y2="295" stroke="#1A1A1A" stroke-width="3" marker-end="url(#arrowhead-provider)"/>
+        <text x="530" y="283" text-anchor="middle" font-size="9" fill="#666" letter-spacing="1">FIT</text>
+
+        <!-- Circle label -->
+        <text x="830" y="25" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="2" fill="#666">CUSTOMER SEGMENT</text>
+
+        <!-- Outer circle -->
+        <circle cx="830" cy="295" r="245" fill="white" stroke="#1A1A1A" stroke-width="2"/>
+
+        <!-- Head -->
+        <circle cx="830" cy="295" r="30" fill="white" stroke="#1A1A1A" stroke-width="2"/>
+        <circle cx="820" cy="290" r="2" fill="#1A1A1A"/>
+        <circle cx="840" cy="290" r="2" fill="#1A1A1A"/>
+        <path d="M 819 303 Q 830 311 841 303" stroke="#1A1A1A" stroke-width="1.5" fill="none"/>
+
+        <!-- Dividing lines from head edge to outer circle edge -->
+        <line x1="843" y1="268" x2="935" y2="70" stroke="#1A1A1A" stroke-width="2"/>
+        <line x1="843" y1="322" x2="935" y2="520" stroke="#1A1A1A" stroke-width="2"/>
+
+        <!-- Gains (top-left wedge of circle) -->
+        <foreignObject x="635" y="155" width="170" height="105">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="vc-content">
+            <div class="vc-section-title cs-title">😊 Gains</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>Higher Retention</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>Outcome Evidence</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>"We know your child"</div>
+          </div>
+        </foreignObject>
+
+        <!-- Customer Jobs (right wedge of circle) -->
+        <foreignObject x="870" y="260" width="180" height="80">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="vc-content">
+            <div class="vc-section-title cs-title">✓ Customer Jobs</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>Maximize LTV</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>Maintain Craft</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>Build Brand</div>
+          </div>
+        </foreignObject>
+
+        <!-- Pains (bottom-left wedge of circle) -->
+        <foreignObject x="635" y="335" width="170" height="105">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="vc-content">
+            <div class="vc-section-title cs-title">😣 Pains</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>15-min Intake Waste</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>Zero Visibility (49wk)</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>Lost LTV $5–15K</div>
+          </div>
+        </foreignObject>
+      </svg>
+    </div>
+    <div class="vc-caption">Top 3 items per section · 🟢 = short-term felt · 🔵 = long-term felt · Full lists below</div>
+  </div>
+
+  <div class="canvas">
+
+    <!-- LEFT: VALUE PROPOSITION SQUARE -->
+    <div class="value-prop">
+      <div class="canvas-corner-label">VALUE PROPOSITION</div>
+
+      <div class="vp-section">
+        <div class="vp-section-title"><span class="vp-section-icon">🎁</span> Products &amp; Services</div>
+        <ul class="vp-list">
+          <li><span class="chip chip-st">ST</span> Pre-arrival baseline + lifelong record summary (delivered before family arrives)</li>
+          <li><span class="chip chip-st">ST</span> Pre/Post intensive structured capture (P1 + P5 primitives)</li>
+          <li><span class="chip chip-st">ST</span> Continuity bridge with home-practice prompts during 49-week gap</li>
+          <li><span class="chip chip-st">ST</span> Family-side capture flowing back to your clinical team</li>
+          <li><span class="chip chip-lt">LT</span> Cohort outcome data infrastructure with validated instruments (GMFM, PEDI)</li>
+          <li><span class="chip chip-lt">LT</span> Brand-aligned Lighthouse partnership (Phase 1 free — not SaaS)</li>
+        </ul>
+      </div>
+
+      <div class="vp-section">
+        <div class="vp-section-title"><span class="vp-section-icon">📈</span> Gain Creators</div>
+        <ul class="vp-list">
+          <li><span class="chip chip-lt">LT</span> Higher LTV → lifelong customer arc + churn detection + return-visit re-engagement</li>
+          <li><span class="chip chip-lt">LT</span> Defensible pricing → outcome evidence + cohort comparisons + research-grade data</li>
+          <li><span class="chip chip-st">ST</span> "We know your child" differentiation → real context at intake + cross-stage continuity</li>
+          <li><span class="chip chip-lt">LT</span> Research / academic positioning → IRB-ready exports + Foundation partnership infrastructure</li>
+          <li><span class="chip chip-lt">LT</span> Industry leadership → First Domino positioning across 400+ clinic ecosystem</li>
+          <li><span class="chip chip-st">ST</span> Professional craft honored → family labor absorbed, clinical relationship deepens</li>
+        </ul>
+      </div>
+
+      <div class="vp-section">
+        <div class="vp-section-title"><span class="vp-section-icon">💊</span> Pain Relievers</div>
+        <ul class="vp-list">
+          <li><span class="chip chip-st">ST</span> 15-min intake / minimal context → pre-arrival lifelong record summary</li>
+          <li><span class="chip chip-st">ST</span> Zero visibility between sessions → family-side capture flowing to clinical team</li>
+          <li><span class="chip chip-st">ST</span> Week-2 idea exhaustion at home → continuity bridge prompts</li>
+          <li><span class="chip chip-lt">LT</span> Families never return → lifecycle architecture (preschool → adult, multiple touchpoints)</li>
+          <li><span class="chip chip-lt">LT</span> Outcomes stay anecdotal → cohort outcome data with validated instruments</li>
+          <li><span class="chip chip-st">ST</span> SaaS fatigue (already too many tools) → WithU sits on top, not replace</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="arrow-area">
+      <div class="arrow-text">FIT</div>
+      <span>→</span>
+    </div>
+
+    <!-- RIGHT: CUSTOMER SEGMENT CIRCLE -->
+    <div class="customer-seg">
+      <div class="canvas-corner-label">CUSTOMER SEGMENT</div>
+
+      <div class="cs-section">
+        <div class="cs-section-title"><span class="cs-section-icon">✓</span> Customer Jobs</div>
+        <ul class="cs-list">
+          <li><span class="chip chip-lt">LT</span> Maximize LTV per patient family</li>
+          <li><span class="chip chip-st">ST</span> Maintain craft and professional standards under industry commoditization pressure</li>
+          <li><span class="chip chip-lt">LT</span> Defend premium / self-pay pricing through outcome evidence</li>
+          <li><span class="chip chip-lt">LT</span> Build industry-leader / academic-collaborator brand position</li>
+          <li><span class="chip chip-lt">LT</span> Sustain family relationships beyond intensive episodes</li>
+          <li><span class="chip chip-lt">LT</span> Honor founder generation legacy (e.g., Cody's mission at NAPA)</li>
+        </ul>
+      </div>
+
+      <div class="cs-section">
+        <div class="cs-section-title"><span class="cs-section-icon">😊</span> Gains</div>
+        <ul class="cs-list">
+          <li><span class="chip chip-lt">LT</span> Higher retention / re-intensive rate (LTV growth)</li>
+          <li><span class="chip chip-lt">LT</span> Outcome evidence usable for pricing / payer / research</li>
+          <li><span class="chip chip-st">ST</span> "We know your child" — relationship continuity competitive advantage</li>
+          <li><span class="chip chip-lt">LT</span> Academic / research collaboration unlocked</li>
+          <li><span class="chip chip-lt">LT</span> Industry peer reputation + press / media visibility</li>
+          <li><span class="chip chip-st">ST</span> Mission accomplishment + family business pride</li>
+        </ul>
+      </div>
+
+      <div class="cs-section">
+        <div class="cs-section-title"><span class="cs-section-icon">😣</span> Pains</div>
+        <ul class="cs-list">
+          <li><span class="chip chip-st">ST</span> 15-min family intake / minimal context = clinician time waste + bad-fit risk</li>
+          <li><span class="chip chip-st">ST</span> Zero visibility into home life between sessions</li>
+          <li><span class="chip chip-st">ST</span> Families "run out of ideas by week 2" after returning home</li>
+          <li><span class="chip chip-lt">LT</span> Lost relationships = $5–15K LTV each, gone</li>
+          <li><span class="chip chip-lt">LT</span> Outcomes stay anecdotal → hard to defend pricing, win research, convince payers</li>
+          <li><span class="chip chip-st">ST</span> Existing SaaS overload — providers reject new tools that demand workflow change</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="fit-row">
+    <div></div>
+    <div class="fit-text"><strong>FIT</strong></div>
+    <div></div>
+  </div>
+
+  <div class="worldview-promise">
+    <div class="label">✦ OUR WORLDVIEW PROMISE TO PROVIDERS</div>
+    <div class="body-text">
+      We see you as professionals whose craft is undervalued by an industry that doesn't track outcomes well. The 49 weeks after your 3-week intensive are not your failure — they are an integration problem the entire pediatric disability care system has tolerated for decades. WithU absorbs the family labor that currently holds those 49 weeks together. <em>Your LTV grows because the worldview of "lifelong relationship" is honored — not because we optimized your funnel.</em>
+      <br><br>
+      We do not see you as customers to be sold SaaS to (you have enough SaaS). We see you as <em>infrastructure partners</em> whose participation in WithU is the data ecosystem's foundation. Your families bring WithU to you — not the other way around.
+    </div>
+  </div>
+
+  <div class="discussion-prompt">
+    <strong>💬 Mentor discussion prompts:</strong> Is any Pain Reliever <em>not</em> connecting to a real Pain? Is any major Pain <em>not</em> being addressed? Does the Worldview Promise change how NAPA would receive WithU's pitch? Where's the weakest link in this canvas?
+  </div>
+
+</div>
+
+
+<!-- =================================================================== FAMILY CANVAS =================================================================== -->
+<div class="canvas-wrapper" id="family">
+
+  <div class="profile-header">
+    <div class="profile-title">Profile 2: Families (Parents of Children with Developmental Disabilities)</div>
+    <div class="goals-grid">
+      <div class="goal-box goal-outcome">
+        <div class="goal-label">⭐ Outcome Goal (measurable)</div>
+        <div class="goal-body">Continuous growth support — right intervention at right moment × trajectory × parent confidence × child's eventual ownership</div>
+      </div>
+      <div class="goal-box goal-worldview">
+        <div class="goal-label">✦ Worldview Goal (meaningful)</div>
+        <div class="goal-body">Be the expert on my own child, recognized as such — by every provider, every teacher, every system</div>
+      </div>
+    </div>
+    <div class="tagline">"WithU walks beside your child's growth — quietly capturing the journey so you have the right answer at every turning point."</div>
+  </div>
+
+  <!-- ============== VISUAL CANVAS (Osterwalder schematic) ============== -->
+  <div class="visual-canvas-section">
+    <div class="vc-title-bar">⬛ Visual Overview — Osterwalder Canvas Layout</div>
+    <div class="svg-canvas-container">
+      <svg viewBox="0 0 1100 590" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrowhead-family" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#1A1A1A"/>
+          </marker>
+        </defs>
+
+        <text x="260" y="25" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="2" fill="#666">VALUE PROPOSITION</text>
+
+        <rect x="40" y="45" width="440" height="500" fill="white" stroke="#1A1A1A" stroke-width="2"/>
+        <line x1="40" y1="45" x2="480" y2="295" stroke="#1A1A1A" stroke-width="2"/>
+        <line x1="40" y1="545" x2="480" y2="295" stroke="#1A1A1A" stroke-width="2"/>
+
+        <!-- Products & Services -->
+        <foreignObject x="55" y="225" width="285" height="140">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="vc-content">
+            <div class="vc-section-title">🎁 Products &amp; Services</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>AI Auto-Import</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>Master Record</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>One-pager Generator</div>
+          </div>
+        </foreignObject>
+
+        <!-- Gain Creators -->
+        <foreignObject x="265" y="60" width="210" height="110">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="vc-content">
+            <div class="vc-section-title">📈 Gain Creators</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>Right Answer @ Moments</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>Cognitive Load ↓</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>Lifelong Continuity</div>
+          </div>
+        </foreignObject>
+
+        <!-- Pain Relievers -->
+        <foreignObject x="265" y="425" width="210" height="110">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="vc-content">
+            <div class="vc-section-title">💊 Pain Relievers</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>1-page in 3min</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>Auto-built IEP Packet</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>Sensitive Framing</div>
+          </div>
+        </foreignObject>
+
+        <!-- ARROW -->
+        <line x1="500" y1="295" x2="560" y2="295" stroke="#1A1A1A" stroke-width="3" marker-end="url(#arrowhead-family)"/>
+        <text x="530" y="283" text-anchor="middle" font-size="9" fill="#666" letter-spacing="1">FIT</text>
+
+        <text x="830" y="25" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="2" fill="#666">CUSTOMER SEGMENT</text>
+
+        <!-- Circle -->
+        <circle cx="830" cy="295" r="245" fill="white" stroke="#1A1A1A" stroke-width="2"/>
+        <circle cx="830" cy="295" r="30" fill="white" stroke="#1A1A1A" stroke-width="2"/>
+        <circle cx="820" cy="290" r="2" fill="#1A1A1A"/>
+        <circle cx="840" cy="290" r="2" fill="#1A1A1A"/>
+        <path d="M 819 303 Q 830 311 841 303" stroke="#1A1A1A" stroke-width="1.5" fill="none"/>
+
+        <line x1="843" y1="268" x2="935" y2="70" stroke="#1A1A1A" stroke-width="2"/>
+        <line x1="843" y1="322" x2="935" y2="520" stroke="#1A1A1A" stroke-width="2"/>
+
+        <!-- Gains -->
+        <foreignObject x="635" y="155" width="170" height="105">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="vc-content">
+            <div class="vc-section-title cs-title">😊 Gains</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>Right Answer @ Moments</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>Quality Time w/ Child</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>Dignity-Affirming</div>
+          </div>
+        </foreignObject>
+
+        <!-- Customer Jobs -->
+        <foreignObject x="870" y="260" width="180" height="80">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="vc-content">
+            <div class="vc-section-title cs-title">✓ Customer Jobs</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>Coordinate Providers</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>Be Expert on Child</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>Acute Moment Prep</div>
+          </div>
+        </foreignObject>
+
+        <!-- Pains -->
+        <foreignObject x="635" y="335" width="170" height="105">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="vc-content">
+            <div class="vc-section-title cs-title">😣 Pains</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>Double-Explanation</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>15–25hr/wk Labor</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>Milestone Apps Stress</div>
+          </div>
+        </foreignObject>
+      </svg>
+    </div>
+    <div class="vc-caption">Top 3 items per section · 🟢 = short-term felt · 🔵 = long-term felt · <strong>Family canvas: dominantly ST</strong> — every reliever is felt immediately</div>
+  </div>
+
+  <div class="canvas">
+
+    <!-- LEFT: VALUE PROPOSITION SQUARE -->
+    <div class="value-prop">
+      <div class="canvas-corner-label">VALUE PROPOSITION</div>
+
+      <div class="vp-section">
+        <div class="vp-section-title"><span class="vp-section-icon">🎁</span> Products &amp; Services</div>
+        <ul class="vp-list">
+          <li><span class="chip chip-st">ST</span> AI auto-import (email OAuth, photo OCR, voice memo, portal aggregation) — zero double-work</li>
+          <li><span class="chip chip-st">ST</span> Master record → filtered per-recipient PDFs (validated by Amy + Beppu-san)</li>
+          <li><span class="chip chip-st">ST</span> 3-minute one-pager generator for new providers (P1 primitive)</li>
+          <li><span class="chip chip-st">ST</span> IEP advocacy packet from 12 months of accumulated record</li>
+          <li><span class="chip chip-st">ST</span> Transition portfolios at age-appropriate moments</li>
+          <li><span class="chip chip-st">ST</span> DS-normed sensitive milestone framing (P7 primitive)</li>
+          <li><span class="chip chip-st">ST</span> Family-controlled granular sharing + revocable consent</li>
+          <li><span class="chip chip-st">ST</span> Caregiver brief generator (1-pager for any audience)</li>
+        </ul>
+      </div>
+
+      <div class="vp-section">
+        <div class="vp-section-title"><span class="vp-section-icon">📈</span> Gain Creators</div>
+        <ul class="vp-list">
+          <li><span class="chip chip-st">ST</span> "Right answer at every turning point" → episodic deliverables at acute moments</li>
+          <li><span class="chip chip-st">ST</span> Cognitive load reduction → capture-passive, no daily opening required</li>
+          <li><span class="chip chip-lt">LT</span> "I'm the expert on my child" → curator role + advocate-grade evidence portfolio</li>
+          <li><span class="chip chip-lt">LT</span> Lifelong continuity → preschool → school → teen → adult architecture</li>
+          <li><span class="chip chip-lt">LT</span> Child eventually owns their record → identity-aware UI evolving as child matures</li>
+          <li><span class="chip chip-st">ST</span> Cohort comparison without anxiety of averages → anti-normative framing</li>
+          <li><span class="chip chip-st">ST</span> Auto-generated growth narratives for milestones → pride in child's progress</li>
+          <li><span class="chip chip-lt">LT</span> Connection to similar families → implicit community</li>
+        </ul>
+      </div>
+
+      <div class="vp-section">
+        <div class="vp-section-title"><span class="vp-section-icon">💊</span> Pain Relievers</div>
+        <ul class="vp-list">
+          <li><span class="chip chip-st">ST</span> Repeating the same story (double-explanation problem) → 1-page summary in 3 minutes</li>
+          <li><span class="chip chip-st">ST</span> IEP with no evidence → auto-built advocacy packet</li>
+          <li><span class="chip chip-st">ST</span> Stage transitions overwhelm → transition portfolios</li>
+          <li><span class="chip chip-st">ST</span> "Is this normal for DS?" judgment vacuum → cohort comparison + DS-normed reference</li>
+          <li><span class="chip chip-st">ST</span> Data scattered across 5+ provider systems → family-controlled granular sharing</li>
+          <li><span class="chip chip-st">ST</span> Insurance denial → evidence portfolio for appeals</li>
+          <li><span class="chip chip-st">ST</span> Exhausted from being integration point → capture-passive design</li>
+          <li><span class="chip chip-st">ST</span> Milestone apps say "should be walking" → P7 sensitive framing replaces threshold-violation</li>
+          <li><span class="chip chip-st">ST</span> Quarterly notes go unread (overload) → filter / synthesize / surface at acute moments only</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="arrow-area">
+      <div class="arrow-text">FIT</div>
+      <span>→</span>
+    </div>
+
+    <!-- RIGHT: CUSTOMER SEGMENT CIRCLE -->
+    <div class="customer-seg">
+      <div class="canvas-corner-label">CUSTOMER SEGMENT</div>
+
+      <div class="cs-section">
+        <div class="cs-section-title"><span class="cs-section-icon">✓</span> Customer Jobs</div>
+        <ul class="cs-list">
+          <li><span class="chip chip-lt">LT</span> Support child's developmental growth across 18+ years</li>
+          <li><span class="chip chip-lt">LT</span> Coordinate 25–50 providers, schools, specialists across that time</li>
+          <li><span class="chip chip-st">ST</span> Prepare for acute moments: new provider, IEP, decisions, advocacy</li>
+          <li><span class="chip chip-lt">LT</span> Honor child's individual journey (not deficit framing)</li>
+          <li><span class="chip chip-lt">LT</span> Eventually transition record ownership to the child themselves</li>
+          <li><span class="chip chip-lt">LT</span> Be recognized as the authoritative voice on their own child</li>
+        </ul>
+      </div>
+
+      <div class="cs-section">
+        <div class="cs-section-title"><span class="cs-section-icon">😊</span> Gains</div>
+        <ul class="cs-list">
+          <li><span class="chip chip-st">ST</span> Right answer in hand at every turning point (no scrambling)</li>
+          <li><span class="chip chip-lt">LT</span> "I am the expert on my child" recognition by all stakeholders</li>
+          <li><span class="chip chip-st">ST</span> Quality time with child preserved (less time on coordination)</li>
+          <li><span class="chip chip-st">ST</span> Service hours secured at IEPs</li>
+          <li><span class="chip chip-st">ST</span> Inter-family sync (grandparents, caregivers) without re-explaining</li>
+          <li><span class="chip chip-st">ST</span> Pride in child's progress (auto-narratives)</li>
+          <li><span class="chip chip-st">ST</span> Dignity-affirming framing throughout — no shame for different timeline</li>
+        </ul>
+      </div>
+
+      <div class="cs-section">
+        <div class="cs-section-title"><span class="cs-section-icon">😣</span> Pains</div>
+        <ul class="cs-list">
+          <li><span class="chip chip-st">ST</span> Double-explanation problem — re-explaining child's story to every new provider</li>
+          <li><span class="chip chip-lt">LT</span> 15–25 hours/week unpaid integration labor — burnout, divorce, bankruptcy</li>
+          <li><span class="chip chip-st">ST</span> Stage transitions cause 50%+ context loss → trauma + reassessment</li>
+          <li><span class="chip chip-st">ST</span> Milestone apps cause emotional harm ("should be walking" stress — P7 origin)</li>
+          <li><span class="chip chip-st">ST</span> Quarterly progress notes go unread — too much information, too late</li>
+          <li><span class="chip chip-st">ST</span> Data scattered across 5+ provider systems — family is the only integration node</li>
+          <li><span class="chip chip-st">ST</span> Information density mismatch per recipient (school confusion vs rehab detail need)</li>
+          <li><span class="chip chip-st">ST</span> "Just one more app" — friction tolerance is zero</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="fit-row">
+    <div></div>
+    <div class="fit-text"><strong>FIT</strong></div>
+    <div></div>
+  </div>
+
+  <div class="worldview-promise">
+    <div class="label">✦ OUR WORLDVIEW PROMISE TO FAMILIES</div>
+    <div class="body-text">
+      We see you as the world's foremost expert on your own child — not a patient, not a data entry worker, not a customer. The 15–25 hours per week you currently spend coordinating, translating, advocating, documenting — that labor is real, valuable, and unsustainable. <em>WithU is built to absorb that labor, not to add to it.</em> You curate; WithU integrates. You decide what to share; WithU never decides for you. You own this record; one day your child will own it from you.
+      <br><br>
+      We will never make you feel that your child is behind. We will never compare your child to typical norms in a way that judges. <em>The reference frames are DS-normed. The framing is "different timeline, not delayed."</em> Outcome data exists in the background; what reaches you at acute moments is dignity, deliverable, decision support.
+    </div>
+  </div>
+
+  <div class="discussion-prompt">
+    <strong>💬 Mentor discussion prompts:</strong> Does the Pain side resonate as <em>real</em> (per your network)? Are the Pain Relievers <em>actually buildable</em> at WithU's stage? What's missing on the Gains side? Where does the Family worldview promise feel weakest or strongest?
+  </div>
+
+</div>
+
+
+<!-- =================================================================== RESEARCHER CANVAS =================================================================== -->
+<div class="canvas-wrapper" id="researcher">
+
+  <div class="profile-header">
+    <div class="profile-title">Profile 3: Researchers (Academic, Foundation, Pharma RWD)</div>
+    <div class="goals-grid">
+      <div class="goal-box goal-outcome">
+        <div class="goal-label">⭐ Outcome Goal (measurable)</div>
+        <div class="goal-body">Real-World Data (RWD) supply — depth × breadth × longitudinality × uniqueness × regulatory alignment</div>
+      </div>
+      <div class="goal-box goal-worldview">
+        <div class="goal-label">✦ Worldview Goal (meaningful)</div>
+        <div class="goal-body">Honor what families know, alongside what clinics measure — family voice as research-grade evidence</div>
+      </div>
+    </div>
+    <div class="tagline">"WithU supplies the data category researchers can't get from clinics, claims, or surveys — what families capture in daily life."</div>
+  </div>
+
+  <!-- ============== VISUAL CANVAS (Osterwalder schematic) ============== -->
+  <div class="visual-canvas-section">
+    <div class="vc-title-bar">⬛ Visual Overview — Osterwalder Canvas Layout</div>
+    <div class="svg-canvas-container">
+      <svg viewBox="0 0 1100 590" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrowhead-researcher" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#1A1A1A"/>
+          </marker>
+        </defs>
+
+        <text x="260" y="25" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="2" fill="#666">VALUE PROPOSITION</text>
+
+        <rect x="40" y="45" width="440" height="500" fill="white" stroke="#1A1A1A" stroke-width="2"/>
+        <line x1="40" y1="45" x2="480" y2="295" stroke="#1A1A1A" stroke-width="2"/>
+        <line x1="40" y1="545" x2="480" y2="295" stroke="#1A1A1A" stroke-width="2"/>
+
+        <!-- Products & Services -->
+        <foreignObject x="55" y="225" width="285" height="140">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="vc-content">
+            <div class="vc-section-title">🎁 Products &amp; Services</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>Family-Node Cohort</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>3 Unique Data Categories</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>IRB-friendly Consent</div>
+          </div>
+        </foreignObject>
+
+        <!-- Gain Creators -->
+        <foreignObject x="265" y="60" width="210" height="110">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="vc-content">
+            <div class="vc-section-title">📈 Gain Creators</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>FDA-aligned RWD</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>Multi-site Federated</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>Career Impact</div>
+          </div>
+        </foreignObject>
+
+        <!-- Pain Relievers -->
+        <foreignObject x="265" y="425" width="210" height="110">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="vc-content">
+            <div class="vc-section-title">💊 Pain Relievers</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>90% Recruit Cost ↓</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>Retention &gt; 80%</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>IRB-friendly Consent</div>
+          </div>
+        </foreignObject>
+
+        <!-- ARROW -->
+        <line x1="500" y1="295" x2="560" y2="295" stroke="#1A1A1A" stroke-width="3" marker-end="url(#arrowhead-researcher)"/>
+        <text x="530" y="283" text-anchor="middle" font-size="9" fill="#666" letter-spacing="1">FIT</text>
+
+        <text x="830" y="25" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="2" fill="#666">CUSTOMER SEGMENT</text>
+
+        <!-- Circle -->
+        <circle cx="830" cy="295" r="245" fill="white" stroke="#1A1A1A" stroke-width="2"/>
+        <circle cx="830" cy="295" r="30" fill="white" stroke="#1A1A1A" stroke-width="2"/>
+        <circle cx="820" cy="290" r="2" fill="#1A1A1A"/>
+        <circle cx="840" cy="290" r="2" fill="#1A1A1A"/>
+        <path d="M 819 303 Q 830 311 841 303" stroke="#1A1A1A" stroke-width="1.5" fill="none"/>
+
+        <line x1="843" y1="268" x2="935" y2="70" stroke="#1A1A1A" stroke-width="2"/>
+        <line x1="843" y1="322" x2="935" y2="520" stroke="#1A1A1A" stroke-width="2"/>
+
+        <!-- Gains -->
+        <foreignObject x="635" y="155" width="170" height="105">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="vc-content">
+            <div class="vc-section-title cs-title">😊 Gains</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>New Study Designs</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>Career Impact</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>Mission Accomplishment</div>
+          </div>
+        </foreignObject>
+
+        <!-- Customer Jobs -->
+        <foreignObject x="870" y="260" width="180" height="80">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="vc-content">
+            <div class="vc-section-title cs-title">✓ Customer Jobs</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>Win NIH Grants</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>Publish Papers</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>Honor Family Voice</div>
+          </div>
+        </foreignObject>
+
+        <!-- Pains -->
+        <foreignObject x="635" y="335" width="170" height="105">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="vc-content">
+            <div class="vc-section-title cs-title">😣 Pains</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-st"></span>$200–2K Recruitment</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>50% Attrition</div>
+            <div class="vc-item"><span class="vc-dot vc-dot-lt"></span>No Real-world Data</div>
+          </div>
+        </foreignObject>
+      </svg>
+    </div>
+    <div class="vc-caption">Top 3 items per section · 🟢 = short-term felt · 🔵 = long-term felt · <strong>Researcher canvas: dominantly LT</strong> — academic time horizons + cohort accumulation</div>
+  </div>
+
+  <div class="canvas">
+
+    <!-- LEFT: VALUE PROPOSITION SQUARE -->
+    <div class="value-prop">
+      <div class="canvas-corner-label">VALUE PROPOSITION</div>
+
+      <div class="vp-section">
+        <div class="vp-section-title"><span class="vp-section-icon">🎁</span> Products &amp; Services</div>
+        <ul class="vp-list">
+          <li><span class="chip chip-lt">LT</span> Family-as-integration-node cohort — multi-site without multi-site recruitment cost</li>
+          <li><span class="chip chip-lt">LT</span> Three unique data categories not available elsewhere: daily functioning, longitudinal QoL, caregiver experience</li>
+          <li><span class="chip chip-st">ST</span> Standardized data structure aligned with GMFM-88, PEDI, PODCI instruments</li>
+          <li><span class="chip chip-st">ST</span> Family-controlled granular consent — IRB-friendly from day 1</li>
+          <li><span class="chip chip-lt">LT</span> Co-grant infrastructure for NIH / Foundation collaboration</li>
+          <li><span class="chip chip-lt">LT</span> White-label registry platform for Foundations without tech infrastructure</li>
+          <li><span class="chip chip-lt">LT</span> Federated multi-site analysis tooling (Phase 2)</li>
+        </ul>
+      </div>
+
+      <div class="vp-section">
+        <div class="vp-section-title"><span class="vp-section-icon">📈</span> Gain Creators</div>
+        <ul class="vp-list">
+          <li><span class="chip chip-lt">LT</span> FDA-aligned RWD → family-side capture of daily functioning</li>
+          <li><span class="chip chip-lt">LT</span> Multi-site federated analyses → standardized data structure</li>
+          <li><span class="chip chip-lt">LT</span> Longitudinal QoL trajectory → continuous family reporting (not snapshots)</li>
+          <li><span class="chip chip-lt">LT</span> Cross-condition research enabled → common infrastructure for DS, CP, autism, rare genetic</li>
+          <li><span class="chip chip-lt">LT</span> Foundation collaboration hub → white-label registry SaaS</li>
+          <li><span class="chip chip-lt">LT</span> Pharma RWD partnership pathway → regulatory-ready data structure</li>
+          <li><span class="chip chip-lt">LT</span> AI / ML training datasets → consented, structured, longitudinal pediatric data</li>
+          <li><span class="chip chip-lt">LT</span> Career impact → publications + grant wins + tenure track</li>
+        </ul>
+      </div>
+
+      <div class="vp-section">
+        <div class="vp-section-title"><span class="vp-section-icon">💊</span> Pain Relievers</div>
+        <ul class="vp-list">
+          <li><span class="chip chip-st">ST</span> Recruitment slow / expensive ($200–2,000/family) → pre-engaged family pool, ~90% cost reduction</li>
+          <li><span class="chip chip-lt">LT</span> Longitudinal attrition 30–50% at 6 months → capture-passive design, retention &gt;80%</li>
+          <li><span class="chip chip-st">ST</span> Phenotype data fragmented across clinics → family-curated integrates across sites</li>
+          <li><span class="chip chip-lt">LT</span> Foundation registries: low engagement → engaging registry infrastructure white-label</li>
+          <li><span class="chip chip-st">ST</span> HIPAA / IRB friction → family-controlled granular consent</li>
+          <li><span class="chip chip-lt">LT</span> Survey burden burns out participants → passive capture + low-friction PROMs</li>
+          <li><span class="chip chip-lt">LT</span> Data extraction worldview → collaboration worldview replaces it</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="arrow-area">
+      <div class="arrow-text">FIT</div>
+      <span>→</span>
+    </div>
+
+    <!-- RIGHT: CUSTOMER SEGMENT CIRCLE -->
+    <div class="customer-seg">
+      <div class="canvas-corner-label">CUSTOMER SEGMENT</div>
+
+      <div class="cs-section">
+        <div class="cs-section-title"><span class="cs-section-icon">✓</span> Customer Jobs</div>
+        <ul class="cs-list">
+          <li><span class="chip chip-lt">LT</span> Win NIH / Foundation R01 / equivalent grants</li>
+          <li><span class="chip chip-lt">LT</span> Publish high-impact pediatric disability papers</li>
+          <li><span class="chip chip-lt">LT</span> Build longitudinal cohorts that retain over years</li>
+          <li><span class="chip chip-st">ST</span> Access cross-site / multi-condition data without bureaucratic friction</li>
+          <li><span class="chip chip-lt">LT</span> Honor family voice in research design (vs. data extraction model)</li>
+          <li><span class="chip chip-lt">LT</span> Advance pediatric rare disease drug development (pharma side)</li>
+        </ul>
+      </div>
+
+      <div class="cs-section">
+        <div class="cs-section-title"><span class="cs-section-icon">😊</span> Gains</div>
+        <ul class="cs-list">
+          <li><span class="chip chip-lt">LT</span> Co-grant infrastructure unlocks new study designs</li>
+          <li><span class="chip chip-lt">LT</span> Career impact: high-impact publications + grant wins</li>
+          <li><span class="chip chip-lt">LT</span> Foundation / advocacy collaboration credibility</li>
+          <li><span class="chip chip-lt">LT</span> Pharma partnership pathway opens (RWD licensing)</li>
+          <li><span class="chip chip-lt">LT</span> FDA RWD acceptance signal (post-2018 guidance)</li>
+          <li><span class="chip chip-lt">LT</span> Mission accomplishment — advancing pediatric DS / disability research</li>
+          <li><span class="chip chip-lt">LT</span> Cross-condition comparative research at scale</li>
+        </ul>
+      </div>
+
+      <div class="cs-section">
+        <div class="cs-section-title"><span class="cs-section-icon">😣</span> Pains</div>
+        <ul class="cs-list">
+          <li><span class="chip chip-st">ST</span> Recruitment cost $200–2,000 per family — burning grant funds before data collection</li>
+          <li><span class="chip chip-lt">LT</span> 50% longitudinal attrition at 6 months — long-term studies fail</li>
+          <li><span class="chip chip-st">ST</span> Phenotype data fragmented across clinics — site-by-site recruitment overhead</li>
+          <li><span class="chip chip-lt">LT</span> Foundation registries: one-time enrollment + low ongoing engagement</li>
+          <li><span class="chip chip-st">ST</span> HIPAA / IRB friction blocks cross-institutional collaboration</li>
+          <li><span class="chip chip-lt">LT</span> Survey-burden burnout of research participants</li>
+          <li><span class="chip chip-lt">LT</span> No real-world daily functioning data (only clinic-environment GMFM)</li>
+          <li><span class="chip chip-lt">LT</span> No systematic caregiver experience data — research worldview hasn't valued it</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="fit-row">
+    <div></div>
+    <div class="fit-text"><strong>FIT</strong></div>
+    <div></div>
+  </div>
+
+  <div class="worldview-promise">
+    <div class="label">✦ OUR WORLDVIEW PROMISE TO RESEARCHERS</div>
+    <div class="body-text">
+      We see research as a collaboration between scientists and the disability community — not as data extraction from passive subjects. <em>Family voice is research-grade evidence, not survey noise.</em> The three structurally invisible data dimensions (daily functioning, longitudinal QoL, caregiver experience) are invisible not because they don't exist, but because the research worldview hasn't valued them. WithU asks researchers to value what families know.
+      <br><br>
+      We do not see researchers as RWD customers to be sold cohort access (though pricing exists). We see researchers as <em>mission partners</em> whose work, properly grounded in family-reported real-world experience, will reshape what evidence-based pediatric disability care means. Co-authored publications. Foundation alignment. Family consent embedded from Day 1. <em>This is research that respects everyone in the loop.</em>
+    </div>
+  </div>
+
+  <div class="discussion-prompt">
+    <strong>💬 Mentor discussion prompts:</strong> Would Skotko / MIT bioeng PI / a Foundation grants officer recognize these Pains in their own words? Are the Pain Relievers <em>credible</em> given current cohort size (small)? What proof points would convert a researcher from polite interest to co-grant commitment?
+  </div>
+
+</div>
+
+
+<!-- =================================================================== Cross-cutting framing footer =================================================================== -->
+<div style="background: #FFFAF0; padding: 18px 22px; border-radius: 6px; margin-top: 28px; font-size: 12px; line-height: 1.65; color: #555;">
+  <strong style="color: #B8860B;">🧭 The single insight underlying all three canvases:</strong>
+  <br><br>
+  Families are the only entity that physically touches every provider, school, and home moment in a child's life. WithU is anchored to that fact. Provider VP relies on this (= we extend their reach beyond their walls). Family VP relies on this (= family is the curator, not the data source). Researcher VP relies on this (= we supply data they can't get elsewhere). <em>If this single fact is not internalized, none of the three VPs hold.</em>
+  <br><br>
+  <strong style="color: #B8860B;">📚 Backing documents:</strong> <code>05_Value_Proposition.md v1.1</code> · <code>02a_AI_Native_Leverage_Analysis.md</code> · <code>05a_Per_Player_Story_Need_Feature_Sets.md</code> · <code>15_Defensibility_Strategy.md v1.1 Layer 7</code>
+  <br><br>
+  <strong style="color: #B8860B;">💬 Mentor session usage:</strong> Use each canvas as 5–8 minute discussion artifact. Lead with the right side (Pains / Gains / Jobs — what they experience), then test whether the left side (Products / Pain Relievers / Gain Creators — what we offer) genuinely connects. Pay attention to which side mentor pushes back on first — that's signal about which assumption is weakest.
+</div>
+
+<script>
+  function showCanvas(canvasId, tabElement) {
+    document.querySelectorAll('.canvas-wrapper').forEach(w => w.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(canvasId).classList.add('active');
+    tabElement.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
