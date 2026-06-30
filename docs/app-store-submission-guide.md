@@ -372,15 +372,145 @@ development,child,baby,growth,milestone,AI analysis,parenting,childcare,developm
 
 ---
 
-### 3.3 スクリーンショット推奨内容
+### 3.3 スクリーンショット
 
-| 画面 | 説明文（日本語） | 説明文（English） |
-|------|-----------------|-------------------|
-| 1 | 発達マイルストーンを簡単記録 | Easily record developmental milestones |
-| 2 | AIが動画から動作を分析 | AI analyzes movements from videos |
-| 3 | 成長をカレンダーで振り返り | Review growth on calendar |
-| 4 | AIによる発達アドバイス | AI-powered developmental suggestions |
-| 5 | 月次レポートで成長を可視化 | Visualize growth with monthly reports |
+#### 必要枚数
+
+| プラットフォーム | 必須枚数 | 最大枚数 | 推奨枚数 |
+|-----------------|---------|---------|---------|
+| App Store | 1枚〜 | 10枚 | 5〜8枚 |
+| Google Play | 2枚〜 | 8枚 | 5〜8枚 |
+
+---
+
+#### 必要サイズ（iOS）
+
+| デバイス | 画面サイズ | 解像度 | 必須 |
+|----------|-----------|--------|------|
+| iPhone 16 Pro Max | 6.9インチ | 1320 x 2868 px | ✅ |
+| iPhone 15 Pro Max | 6.7インチ | 1290 x 2796 px | ✅ |
+| iPhone 14 Plus / 13 Pro Max | 6.7インチ | 1284 x 2778 px | - |
+| iPhone 11 Pro Max / XS Max | 6.5インチ | 1242 x 2688 px | ✅ |
+| iPhone 8 Plus / 7 Plus | 5.5インチ | 1242 x 2208 px | ✅ |
+| iPad Pro 12.9インチ | 12.9インチ | 2048 x 2732 px | タブレット対応時 |
+| iPad Pro 11インチ | 11インチ | 1668 x 2388 px | タブレット対応時 |
+
+**ヒント**: 最大サイズ(6.9インチ)を用意すれば、App Store Connectで自動リサイズ可能
+
+---
+
+#### 必要サイズ（Android）
+
+| アスペクト比 | 解像度 | 備考 |
+|-------------|--------|------|
+| 16:9（縦） | 1080 x 1920 px | 最小サイズ |
+| 16:9（縦） | 1440 x 2560 px | 推奨 |
+| 9:16（横） | 1920 x 1080 px | 横向き対応時 |
+
+**要件**:
+- 最小: 320px
+- 最大: 3840px
+- ファイル形式: JPEG または 24bit PNG（透過なし）
+- ファイルサイズ: 最大8MB
+
+---
+
+#### 撮影する画面（推奨順）
+
+| # | 画面名 | ファイルパス | 優先度 |
+|---|--------|-------------|--------|
+| 1 | ホーム | `src/pages/home/HomeScreen.tsx` | 必須 |
+| 2 | 記録一覧 | `src/pages/record/RecordListScreen.tsx` | 必須 |
+| 3 | 発達段階 + 発達詳細 | `src/pages/evaluation/DevelopmentalOverviewScreen.tsx` + `src/pages/evaluation/StageDetailScreen.tsx` | 必須 |
+| 4 | AI分析結果 | `src/pages/AIAnalysis/ProcessVideoScreen.tsx` | 必須 |
+| 5 | プロフィール | `src/pages/account/ProfileSummaryScreen.tsx` | 必須 |
+| 6 | 成長マガジン | `src/pages/journal/DevelopmentalMagazineScreen.tsx` | 推奨 |
+| 7 | スケジュール管理 | `src/pages/calendar/CalendarScreen.tsx` | 推奨 |
+| 8 | 記録追加 | `src/pages/record/AddRecordScreen.tsx` | 推奨 |
+| 9 | スキャン結果 | `src/pages/scan/OCRResultScreen.tsx` | 任意 |
+
+**推奨構成（8枚）**: 1〜6 + 7または8から選択
+
+---
+
+#### スクリーンショットキャプション
+
+| # | 画面 | 日本語 | English |
+|---|------|--------|---------|
+| 1 | ホーム | 今日の小さな成長を、見逃さない | Never miss today's small victories |
+| 2 | 記録一覧 | 大切な瞬間を、ずっと残せる | Keep precious moments forever |
+| 3 | 発達段階 + 発達詳細 | 「今どこにいて、何ができるか」がわかる | Know where your child is and what you can do |
+| 4 | AI分析 | 家庭での観察をAIがサポート | AI supports your observations at home |
+| 5 | プロフィール | 家族も専門家もOne Teamに | Family and experts as One Team |
+| 6 | 成長マガジン | 成長の軌跡を特別な一冊に | Turn growth milestones into a keepsake |
+| 7 | スケジュール管理 | 療育・通院・学校行事をまとめて管理 | Manage therapy, appointments & school events together |
+| 8 | 記録追加 | 気づいた瞬間をすぐ記録 | Capture the moment you notice it |
+| 9 | スキャン結果 | 大切な書類をいつでも検索 | Search important documents anytime |
+
+---
+
+#### スクリーンショット撮影のコツ
+
+**1. データ準備**
+- デモ用に見栄えの良い写真・動画データを用意
+- 同じ子どものデータで統一感を出す
+- 個人を特定できない配慮（サンプル画像推奨）
+
+**2. 撮影環境**
+```bash
+# iOSシミュレーターでの撮影
+xcrun simctl io booted screenshot screenshot.png
+
+# Androidエミュレーターでの撮影
+adb exec-out screencap -p > screenshot.png
+```
+
+**3. 推奨ツール**
+- [Fastlane Snapshot](https://docs.fastlane.tools/actions/snapshot/) - 自動スクリーンショット
+- [Screenshots](https://github.com/nicklockwood/Screenshots) - iOS用自動化
+- Figma / Sketch - キャプション追加・デザイン加工
+
+**4. デザインガイドライン**
+- ステータスバーの時刻を統一（9:41 AMが一般的）
+- バッテリー残量を100%に
+- キャリア名を削除または統一
+- 通知バッジを非表示に
+
+**5. キャプション追加時の注意**
+- フォントサイズは読みやすく（最小24pt推奨）
+- 背景色はアプリのブランドカラーに合わせる
+- 重要な情報が画面端で切れないよう配置
+
+---
+
+#### スクリーンショット作成ワークフロー
+
+```
+1. シミュレーター/実機でアプリを起動
+   ↓
+2. デモデータでログイン
+   ↓
+3. 各画面を撮影（PNG形式）
+   ↓
+4. デザインツールでキャプション追加
+   ↓
+5. 各サイズにリサイズ・書き出し
+   ↓
+6. App Store Connect / Play Consoleにアップロード
+```
+
+---
+
+#### スクリーンショットチェックリスト
+
+- [ ] 全必須サイズを用意（iOS: 6.9, 6.5, 5.5インチ / Android: 16:9）
+- [ ] 最低5枚、理想は8枚用意
+- [ ] 日本語版と英語版を用意
+- [ ] キャプションがはみ出していないか確認
+- [ ] 個人情報が映り込んでいないか確認
+- [ ] ステータスバーが統一されているか確認
+- [ ] 画像がぼやけていないか確認（高解像度）
+- [ ] ファイルサイズが制限内か確認
 
 ---
 

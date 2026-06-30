@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Down Syndrome Center Podcast — テーマ別エピソード一覧</title>
+<base target="_blank">
+<style>
+  :root{
+    --bg:#f7f5f2; --card:#ffffff; --ink:#1f2933; --sub:#647084;
+    --accent:#2a6f8e; --accent2:#c2613f; --line:#e6e1da; --chip:#eef2f4;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI",sans-serif;
+       line-height:1.55;}
+  header{padding:28px 20px 14px;max-width:1000px;margin:0 auto;}
+  h1{font-size:1.5rem;margin:0 0 4px;}
+  .meta{color:var(--sub);font-size:.86rem;margin:0;}
+  .controls{position:sticky;top:0;background:var(--bg);padding:12px 20px;
+            max-width:1000px;margin:0 auto;z-index:5;border-bottom:1px solid var(--line);}
+  #search{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;
+          font-size:.95rem;background:#fff;}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+  .chip{border:1px solid var(--line);background:var(--chip);color:var(--ink);
+        padding:5px 10px;border-radius:999px;font-size:.78rem;cursor:pointer;white-space:nowrap;}
+  .chip.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+  main{max-width:1000px;margin:0 auto;padding:8px 20px 60px;}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;
+          padding:16px 18px;margin:16px 0;}
+  .sec-head{display:flex;align-items:baseline;gap:10px;margin:0 0 10px;}
+  .sec-head h2{font-size:1.08rem;margin:0;}
+  .sec-head .cnt{color:var(--sub);font-size:.8rem;}
+  ul{list-style:none;margin:0;padding:0;}
+  li{display:flex;gap:10px;align-items:baseline;padding:6px 0;border-top:1px dashed var(--line);}
+  li:first-child{border-top:none;}
+  .num{flex:0 0 auto;min-width:42px;font-variant-numeric:tabular-nums;
+       color:#fff;background:var(--accent2);border-radius:6px;font-size:.72rem;
+       text-align:center;padding:2px 6px;}
+  .num.none{background:#9aa6b2;}
+  .ep a{color:var(--accent);text-decoration:none;font-size:.94rem;}
+  .ep a:hover{text-decoration:underline;}
+  .date{color:var(--sub);font-size:.78rem;margin-left:6px;white-space:nowrap;}
+  .empty{color:var(--sub);font-style:italic;padding:8px 0;}
+  footer{max-width:1000px;margin:0 auto;padding:0 20px 40px;color:var(--sub);font-size:.78rem;}
+  /* preschool */
+  .badge{flex:0 0 auto;font-size:.66rem;background:#e8b84b;color:#5a3d00;
+         border-radius:5px;padding:1px 6px;font-weight:700;white-space:nowrap;}
+  .chip.pre{background:#fbeec9;border-color:#e8b84b;color:#7a5400;}
+  .chip.pre.active{background:#e8b84b;border-color:#e8b84b;color:#3d2900;}
+  li.preli{flex-wrap:wrap;}
+  details.ol{flex:1 1 100%;margin:4px 0 2px 52px;}
+  details.ol summary{cursor:pointer;font-size:.78rem;color:var(--accent);list-style:none;}
+  details.ol summary::-webkit-details-marker{display:none;}
+  details.ol summary::before{content:"▸ ";}
+  details.ol[open] summary::before{content:"▾ ";}
+  .olbox{background:#fbf8f1;border:1px solid #efe6d3;border-radius:8px;
+         padding:8px 12px;margin-top:6px;}
+  .olbox h4{margin:.2rem 0 .3rem;font-size:.76rem;color:var(--sub);text-transform:none;}
+  .olbox ul{margin:0 0 6px;padding-left:18px;list-style:disc;}
+  .olbox ul li{display:list-item;border:none;padding:2px 0;font-size:.84rem;}
+  .olbox .lk li{font-size:.8rem;}
+  .olbox .lk a{color:var(--accent);word-break:break-all;}
+  @media(max-width:560px){.date{display:block;margin-left:0;}details.ol{margin-left:0;}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Down Syndrome Center Podcast — テーマ別エピソード一覧</h1>
+  <p class="meta">Hosted by Dr. Kishore Vellody（西ペンシルベニア・ダウン症センター）／ 全<span id="total">0</span>件・15テーマに分類 ｜ タイトルをクリックすると各エピソードのページが開きます<br><span style="color:#9a7400;font-weight:600;">★ 未就学児（0〜6歳）に関係の高い回</span>には ★未就学児 バッジを付け、「アウトライン・リンク」を開くと内容と参考リンクが見られます（<span id="pretotal">0</span>件）。</p>
+</header>
+
+<div class="controls">
+  <input id="search" type="text" placeholder="キーワードで検索（例: 睡眠, COVID, 心臓, 教育, sleep, heart …）">
+  <div class="chips" id="chips"></div>
+</div>
+
+<main id="list"></main>
+
+<footer>
+  出典: <a href="https://downsyndromecenter.libsyn.com/" target="_blank" rel="noopener">Down Syndrome Center Podcast (libsyn)</a>　｜
+  注: #12・#13は公開アーカイブに見当たらず未収録。番号のない初期回は「—」表示。テーマ分類は内容に基づく分類です（複数テーマにまたがる回は代表的な1つに配置）。
+</footer>
+
+<script>
+const CATS = [
+  ["card","心臓・循環器"],
+  ["sleep","睡眠・呼吸器"],
+  ["sense","耳鼻科・眼科（感覚器）"],
+  ["gi","消化器・栄養・食事・体重"],
+  ["med","内分泌・免疫・血液・予防接種・薬"],
+  ["ortho","整形外科・運動器・理学療法・運動"],
+  ["derm","歯科・皮膚"],
+  ["neuro","神経・認知・退行・発達障害"],
+  ["mh","メンタルヘルス・行動・感覚処理"],
+  ["edu","ことば・教育・療育"],
+  ["family","家族・ライフステージ・性・成人期"],
+  ["adv","アドボカシー・制度・法律・財務"],
+  ["org","団体・コミュニティ・研究紹介"],
+  ["covid","COVID-19"],
+  ["special","特別回・講演・インタビュー・書籍"]
+];
+
+const EP = [
+["228","2026-06-18","Central Neural Drive and Breathing in Down Syndrome","https://downsyndromecenter.libsyn.com/000-central-neural-drive-and-breathing-in-down-syndrome","sleep"],
+["227","2026-06-04","Exploring Caregiver Grief","https://downsyndromecenter.libsyn.com/227-exploring-caregiver-grief","family"],
+["226","2026-05-21","Musculoskeletal Issues and Physical Therapy","https://downsyndromecenter.libsyn.com/musculoskeletal-issues-and-physical-therapy","ortho"],
+["225","2026-05-07","New Food Guidelines — What Do They Mean for People with Down Syndrome?","https://downsyndromecenter.libsyn.com/225-new-food-guidelines-are-here-what-do-they-mean-for-people-with-down-syndrome","gi"],
+["224","2026-04-23","Leucovorin — What is it and is there a role in Down syndrome?","https://downsyndromecenter.libsyn.com/224-leucovorin-what-is-it-and-is-there-a-role-in-down-syndrome","med"],
+["223","2026-04-09","Updated Vaccination Guidelines — What Do They Mean for People with Ds?","https://downsyndromecenter.libsyn.com/223-updated-vaccination-guidelines-what-do-they-mean-for-people-with-ds","med"],
+["222","2026-03-19","Exercise in Down syndrome (Dr. Thessa Hilgenkamp)","https://downsyndromecenter.libsyn.com/223-exercise-in-down-syndrome-with-dr-thessa-hilgenkamp","ortho"],
+["221","2026-03-05","Central Auditory Processing Disorder (CAPD) and Cortical Visual Impairment (CVI)","https://downsyndromecenter.libsyn.com/219-central-auditory-processing-disorder-capd-and-cortical-visual-impairment-cvi-in-ds","sense"],
+["220","2026-02-19","CARE Down Syndrome (CARE DS)","https://downsyndromecenter.libsyn.com/221-care-down-syndrome-care-ds","org"],
+["219","2026-02-05","Drooling, Tongue Protrusion, and other Oral Motor Topics","https://downsyndromecenter.libsyn.com/219-drooling-tongue-protrusion-and-other-oral-motor-topics","edu"],
+["218","2026-01-22","Vision Concerns (Dr. Michael Puente)","https://downsyndromecenter.libsyn.com/vision-concerns-with-dr-michael-puente","sense"],
+["217","2026-01-08","Neuropsychological and IQ testing (Dr. Rosemarie Manfredi)","https://downsyndromecenter.libsyn.com/neuropsychological-and-iq-testing-with-dr-rosemarie-manfredi","neuro"],
+["216","2025-12-18","Speech Clarity","https://downsyndromecenter.libsyn.com/speech-clarity","edu"],
+["215","2025-12-04","Hip Issues in Down syndrome (Dr. Ricki Koehler)","https://downsyndromecenter.libsyn.com/hip-issues-in-down-syndrome-with-dr-ricki-koehler","ortho"],
+["214","2025-11-20","REACH — Serving Children with Hirschsprung Disease","https://downsyndromecenter.libsyn.com/reach-serving-children-with-hirschsprung-disease","org"],
+["213","2025-11-06","Cholesterol in Down syndrome — Should we worry about it?","https://downsyndromecenter.libsyn.com/212-cholesterol-in-down-syndrome-should-we-worry-about-it","card"],
+["212","2025-10-23","What To Know If Your Child Is Admitted To A Hospital","https://downsyndromecenter.libsyn.com/what-to-know-if-your-child-is-admitted-to-a-hospital","adv"],
+["211","2025-10-09","Hey \"Device,\" Do You Understand Me? (Speech Accessibility)","https://downsyndromecenter.libsyn.com/hey-device-do-you-understand-me","edu"],
+["210","2025-09-25","Parent Education & Advocacy Leadership (PEAL) Center","https://downsyndromecenter.libsyn.com/parent-education-advocacy-leadership-peal-center","adv"],
+["209","2025-09-11","Advocacy Alert! (Part 2) — Medicaid Changes","https://downsyndromecenter.libsyn.com/208-advocacy-alert-part-2-medicaid-changes","adv"],
+["208","2025-09-04","Advocacy Alert! (Part 1) — IDEA, Federal Changes, Dept of Education","https://downsyndromecenter.libsyn.com/207-advocacy-alert-part-1-idea-federal-changes-dept-of-education","adv"],
+["207","2025-08-21","Red Down Mexico (English)","https://downsyndromecenter.libsyn.com/000-red-down-mexico-english","org"],
+["207","2025-08-21","Red Down México (Spanish)","https://downsyndromecenter.libsyn.com/red-down-mxico-spanish","org"],
+["206","2025-07-24","Mental Health in Mosaic Down Syndrome","https://downsyndromecenter.libsyn.com/mental-health-in-mosaic-down-syndrome","mh"],
+["205","2025-07-10","Update on Sleep Apnea","https://downsyndromecenter.libsyn.com/update-on-sleep-apnea","sleep"],
+["204","2025-06-19","Down Syndrome Medical Interest Group (DSMIG) and Project Echo","https://downsyndromecenter.libsyn.com/down-syndrome-medical-interest-group-dsmig-and-project-echo","org"],
+["203","2025-06-05","Child Life Specialists","https://downsyndromecenter.libsyn.com/child-life-specialists","family"],
+["202","2025-05-22","Reflections From An Adult Sibling","https://downsyndromecenter.libsyn.com/196-reflections-from-an-adult-sibling","family"],
+["201","2025-05-08","Shoes and Orthotics (Dr. Sarah Mann)","https://downsyndromecenter.libsyn.com/shoes-and-orthotics-with-dr-sarah-mann","ortho"],
+["200","2025-04-29","The Next Generation! (200th episode)","https://downsyndromecenter.libsyn.com/200-the-next-generation","special"],
+["199","2025-04-10","Update on Down Syndrome Regression Disorder (DSRD)","https://downsyndromecenter.libsyn.com/update-on-down-syndrome-regression-disorder-dsrd","neuro"],
+["198","2025-03-21","Happy World Down Syndrome Day!","https://downsyndromecenter.libsyn.com/198-happy-world-down-syndrome-day","special"],
+["197","2025-03-13","National Down Syndrome Congress (NDSC)","https://downsyndromecenter.libsyn.com/197-national-down-syndrome-congress-ndsc","org"],
+["196","2025-02-27","Advocacy 101","https://downsyndromecenter.libsyn.com/196-advocacy-101","adv"],
+["195","2025-02-13","2025 Update — Down Syndrome Association of Pittsburgh!","https://downsyndromecenter.libsyn.com/195-2025-update-down-syndrome-association-of-pittsburgh","org"],
+["194","2025-01-23","Mental Health Therapy in Down Syndrome","https://downsyndromecenter.libsyn.com/194-mental-health-therapy-in-down-syndrome","mh"],
+["193","2025-01-09","Personalized Medicine in Down syndrome?","https://downsyndromecenter.libsyn.com/193-personalized-medicine-in-down-syndrome","med"],
+["192","2024-12-26","Year End Guest!","https://downsyndromecenter.libsyn.com/192-year-end-guest","special"],
+["191","2024-11-21","Cardiac Surgery","https://downsyndromecenter.libsyn.com/191-cardiac-surgery","card"],
+["190","2024-11-07","Immunizations in Down Syndrome","https://downsyndromecenter.libsyn.com/189-immunizations-in-down-syndrome","med"],
+["189","2024-10-24","Buddy Up For Life","https://downsyndromecenter.libsyn.com/188-buddy-up-for-life","org"],
+["188","2024-10-10","How Does Provider Bias Affect Delivery of the Diagnosis of Ds?","https://downsyndromecenter.libsyn.com/187-how-does-provider-bias-affect-delivery-of-the-diagnosis-of-ds","family"],
+["187","2024-09-26","Why Have a Down Syndrome Center?","https://downsyndromecenter.libsyn.com/187-why-have-a-down-syndrome-center","org"],
+["186","2024-09-12","Supplements in Down Syndrome — What Do We Know?","https://downsyndromecenter.libsyn.com/186-supplements-in-down-syndrome-what-do-we-know","med"],
+["185","2024-08-29","The Immune System in Down Syndrome","https://downsyndromecenter.libsyn.com/185-the-immune-system-in-down-syndrome","med"],
+["184","2024-08-15","Baby Led Weaning (Jill Rabin)","https://downsyndromecenter.libsyn.com/184-baby-led-weaning-with-jill-rabin","gi"],
+["183","2024-07-11","Behavioral Support Services (Dr. Santamaria)","https://downsyndromecenter.libsyn.com/183-behavioral-support-services-with-dr-santamaria","mh"],
+["182","2024-06-20","Anesthesia in Down Syndrome, Part 2","https://downsyndromecenter.libsyn.com/182-anesthesia-in-down-syndrome-part-2","med"],
+["181","2024-06-06","Anesthesia in Down syndrome, Part 1","https://downsyndromecenter.libsyn.com/181-anesthesia-in-down-syndrome-part-1","med"],
+["180","2024-05-23","Sleep Questions!","https://downsyndromecenter.libsyn.com/180-sleep-questions","sleep"],
+["179","2024-05-09","Exceptional Families of the Military","https://downsyndromecenter.libsyn.com/179-exceptional-families-of-the-military","family"],
+["178","2024-04-18","John's Crazy Socks!","https://downsyndromecenter.libsyn.com/177-johns-crazy-socks","org"],
+["177","2024-04-04","Weight Loss Medications and Surgeries","https://downsyndromecenter.libsyn.com/177-weight-loss-medications-and-surgeries","gi"],
+["176","2024-03-21","Happy World Down Syndrome Day 2024!","https://downsyndromecenter.libsyn.com/176-happy-world-down-syndrome-day-2024","special"],
+["175","2024-03-07","Inflammation in Down Syndrome (Dr. Joaquin Espinosa)","https://downsyndromecenter.libsyn.com/175-inflammation-in-down-syndrome-with-dr-joaquin-espinosa","med"],
+["174","2024-02-22","Dating in Down Syndrome (Terri Couwenhoven)","https://downsyndromecenter.libsyn.com/174-dating-in-down-syndrome-with-terri-couwenhoven","family"],
+["173","2024-02-08","Sexuality and Down Syndrome (Terri Couwenhoven)","https://downsyndromecenter.libsyn.com/173-sexuality-and-down-syndrome-with-terri-couwenhoven","family"],
+["172","2024-01-25","Hearing Health in Down Syndrome, Part 2 (Dr. Heather Porter)","https://downsyndromecenter.libsyn.com/172-hearing-health-in-down-syndrome-with-dr-heather-porter","sense"],
+["171","2024-01-11","Hearing Health in Down Syndrome, Part 1 (Dr. Heather Porter)","https://downsyndromecenter.libsyn.com/171-hearing-health-in-down-syndrome-with-dr-heather-porter","sense"],
+["170","2023-12-28","Dementia in Down Syndrome, Part 2 (Dr. Seth Keller)","https://downsyndromecenter.libsyn.com/170-dementia-in-down-syndrome-part-2-with-dr-seth-keller","neuro"],
+["169","2023-12-14","Dementia in Down Syndrome, Part 1 (Dr. Seth Keller)","https://downsyndromecenter.libsyn.com/169-dementia-in-down-syndrome-part-1-with-dr-seth-keller","neuro"],
+["168","2023-11-28","Year End Update!","https://downsyndromecenter.libsyn.com/168-year-end-update","special"],
+["167","2023-11-16","Talk Tools (Heather Vukelich)","https://downsyndromecenter.libsyn.com/167-talk-tools-with-heather-vukelich","edu"],
+["166","2023-11-02","Gigi's Playhouse (Nanci Gianni)","https://downsyndromecenter.libsyn.com/166-gigis-playhouse-with-nanci-gianni","org"],
+["165","2023-10-19","Friendship Circle (Rabbi Mordy Rudolph)","https://downsyndromecenter.libsyn.com/165-friendship-circle-with-rabbi-mordy-rudolph","org"],
+["164","2023-10-05","Black Down Syndrome Association","https://downsyndromecenter.libsyn.com/161-black-down-syndrome-association","org"],
+["163","2023-09-21","Aging in Down Syndrome (Life Expectancy, Early Aging, Menopause)","https://downsyndromecenter.libsyn.com/162-aging-in-down-syndrome-life-expectancy-early-aging-menopause","family"],
+["162","2023-09-07","Is Homeschooling An Option for Children with Ds? (LaTaasha Byrd)","https://downsyndromecenter.libsyn.com/162-is-homeschooling-an-option-for-children-with-ds-with-lataasha-byrd","edu"],
+["161","2023-08-17","Special Olympics","https://downsyndromecenter.libsyn.com/160-special-olympics","org"],
+["160","2023-08-03","Down Syndrome Regression Disorder (Dr. Jon Santoro)","https://downsyndromecenter.libsyn.com/159-down-syndrome-regression-disorder-with-dr-jon-santoro","neuro"],
+["159","2023-07-20","Sensory Processing — Part 2 (Sound sensitivity, toothbrushing, haircuts, nail trims)","https://downsyndromecenter.libsyn.com/158-sensory-processing-part-2-sound-sensitivity-toothbrushing-haircuts-nail-trims","mh"],
+["158","2023-07-06","Update on COVID (Dr. Andy Nowalk)","https://downsyndromecenter.libsyn.com/159-update-on-covid-wit-dr-andy-nowalk","covid"],
+["157","2023-06-22","Understanding Grief and Grieving in People with Down Syndrome","https://downsyndromecenter.libsyn.com/157-understanding-grief-and-grieving-in-people-with-down-syndrome","family"],
+["156","2023-06-08","Behavioral Analysis (Dr. Stacy Taylor)","https://downsyndromecenter.libsyn.com/154-behavioral-analysis-with-dr-stacy-taylor","mh"],
+["155","2023-05-25","Down Syndrome Affiliates in Action","https://downsyndromecenter.libsyn.com/155-down-syndrome-affiliates-in-action","org"],
+["154","2023-05-11","Bitty and Beau's Coffee Shop","https://downsyndromecenter.libsyn.com/153-bitty-and-beaus-coffee-shop","org"],
+["153","2023-04-27","Improving Tolerance to Device Wearing (hearing aids, glasses, CPAP masks)","https://downsyndromecenter.libsyn.com/153-improving-tolerance-to-device-wearing-hearing-aids-glasses-cpap-masks","mh"],
+["152","2023-04-13","Addressing Unhealthy Eating Habits (Shannon Frizzell)","https://downsyndromecenter.libsyn.com/152-addressing-unhealthy-eating-habits-with-shannon-frizzell","gi"],
+["151","2023-03-21","A Conversation with Friends — Happy World Down Syndrome Day!","https://downsyndromecenter.libsyn.com/151-a-conversation-with-friends-happy-world-down-syndrome-day","special"],
+["150","2023-03-01","How to Address Throwing Behaviors (Dr. Tarin Santamaria)","https://downsyndromecenter.libsyn.com/150-how-to-address-throwing-behaviors-with-dr-tarin-santamaria","mh"],
+["149","2023-02-02","Juvenile Idiopathic Arthritis (Dr. Jordan Jones)","https://downsyndromecenter.libsyn.com/149-juvenile-idiopathic-arthritis-with-dr-jordan-jones","ortho"],
+["148","2023-01-05","Jack's Basket (Carissa Carroll)","https://downsyndromecenter.libsyn.com/148-jacks-basket-with-carissa-carroll","org"],
+["147","2022-12-15","Forget Me Not — A Documentary on Inclusive Education","https://downsyndromecenter.libsyn.com/147-forget-me-not-a-powerful-documentary-on-inclusive-education","special"],
+["146","2022-12-01","Hirschsprung Disease","https://downsyndromecenter.libsyn.com/145-hirschsprung-disease","gi"],
+["145","2022-11-17","The Importance of Exercise in Down Syndrome","https://downsyndromecenter.libsyn.com/144-the-importance-of-exercise-in-down-syndrome","ortho"],
+["144","2022-11-03","Global Down Syndrome Foundation","https://downsyndromecenter.libsyn.com/142-global-down-syndrome-foundation","org"],
+["143","2022-10-20","Depression, Anxiety, and OCD in Down syndrome","https://downsyndromecenter.libsyn.com/142-depression-anxiety-and-ocd-in-down-syndrome","mh"],
+["142","2022-10-07","Exciting Upcoming Events with DSA Pittsburgh!","https://downsyndromecenter.libsyn.com/142-exciting-upcoming-events-with-dsa-pittsburgh","org"],
+["141","2022-09-29","National Down Syndrome Society (NDSS)","https://downsyndromecenter.libsyn.com/139-national-down-syndrome-society-ndss","org"],
+["140","2022-09-16","COVID Update — Omicron Boosters!","https://downsyndromecenter.libsyn.com/140-covid-update-omicron-boosters","covid"],
+["139","2022-09-02","National Down Syndrome Congress (NDSC)","https://downsyndromecenter.libsyn.com/139-national-down-syndrome-congress-ndsc","org"],
+["138","2022-08-11","Not Down, Up Mommy (author Antoinette Scaffidi)","https://downsyndromecenter.libsyn.com/138-not-down-up-mommy-with-author-antoinette-scaffidi","special"],
+["137","2022-07-28","Swallowing Dysfunction and G-tubes","https://downsyndromecenter.libsyn.com/137-swallowing-dysfunction-and-g-tubes","gi"],
+["136","2022-07-14","Healthy Lifestyle Choices Around Food and Exercise","https://downsyndromecenter.libsyn.com/135-healthy-lifestyle-choices-around-food-and-exercise","gi"],
+["135","2022-07-01","COVID Update (Vaccination for Younger Children, Boosters for Older Children)","https://downsyndromecenter.libsyn.com/135-covid-update-vaccination-for-younger-children-boosters-for-older-children","covid"],
+["134","2022-06-16","The Lucky Few (Heather Avis)","https://downsyndromecenter.libsyn.com/134-the-lucky-few-with-heather-avis","special"],
+["133","2022-06-02","Catching Up with The Improvaneers (Rob Snow)","https://downsyndromecenter.libsyn.com/132-catching-up-with-the-improvaneers-with-rob-snow","org"],
+["132","2022-05-19","Down Syndrome Diagnosis Network (Jen Jacob)","https://downsyndromecenter.libsyn.com/131-down-syndrome-diagnosis-network-with-jen-jacob","org"],
+["131","2022-05-05","Domestic Adoption in Ds","https://downsyndromecenter.libsyn.com/129-domestic-adoption-in-ds","family"],
+["130","2022-04-19","The NEW 2022 Health Supervision Guidelines for Children and Adolescents (Dr. Marilyn Bull)","https://downsyndromecenter.libsyn.com/130-the-new-2022-health-supervision-guidelines-for-children-and-adolescents-with-down-syndrome-with-dr-marilyn-bull","med"],
+["129","2022-04-14","Supplemental Security Income (SSI) and Waivers","https://downsyndromecenter.libsyn.com/125-supplemental-security-income-ssi-and-waivers","adv"],
+["128","2022-03-31","Power of Attorney and Guardianship","https://downsyndromecenter.libsyn.com/124-power-of-attorney-and-guardianship","adv"],
+["127","2022-03-21","Happy World Down Syndrome Day!","https://downsyndromecenter.libsyn.com/127-happy-world-down-syndrome-day","special"],
+["126","2022-03-17","Omicron Fading? Where Do We Go From Here?","https://downsyndromecenter.libsyn.com/126-omicron-fading-where-do-we-go-from-here","covid"],
+["125","2022-03-14","National Down Syndrome Convention","https://downsyndromecenter.libsyn.com/125-national-down-syndrome-convention","org"],
+["124","2022-03-04","Aorta Borealis","https://downsyndromecenter.libsyn.com/124-aorta-borealis","special"],
+["123","2022-02-17","Education in Down Syndrome","https://downsyndromecenter.libsyn.com/123-education-in-down-syndrome","edu"],
+["122","2022-01-25","COVID, Omicron, Vaccines — Myths and Truths","https://downsyndromecenter.libsyn.com/122-covid-omicron-vaccines-myths-and-truths","covid"],
+["121","2021-12-23","COVID in Ds, Omicron Edition","https://downsyndromecenter.libsyn.com/121-covid-in-ds-omicron-edition","covid"],
+["120","2021-12-16","Alzheimer Disease in Down Syndrome","https://downsyndromecenter.libsyn.com/120-alzheimer-disease-in-down-syndrome","neuro"],
+["119","2021-12-02","What About College for People with Down Syndrome?","https://downsyndromecenter.libsyn.com/119-what-about-college-for-people-with-down-syndrome","edu"],
+["118","2021-11-18","Early Intervention Services","https://downsyndromecenter.libsyn.com/118-early-intervention-services","edu"],
+["117","2021-11-05","COVID Vaccine for Younger Children and Boosters for Adults","https://downsyndromecenter.libsyn.com/117-covid-vaccine-for-younger-children-and-boosters-for-adults","covid"],
+["116","2021-10-28","Unexplained Regression in Down Syndrome","https://downsyndromecenter.libsyn.com/116-unexplained-regressions-in-down-syndrome","neuro"],
+["115","2021-10-14","Approach to Selective (\"Picky\") Eaters","https://downsyndromecenter.libsyn.com/115-approach-to-selective-picky-eaters","gi"],
+["114","2021-09-30","Self Talk, The Groove, and Other Common Behaviors (Dennis McGuire)","https://downsyndromecenter.libsyn.com/113-self-talk-the-groove-and-other-common-behaviors-in-ds-with-dennis-mcguire","mh"],
+["113","2021-09-16","Behavioral Evaluation and Approach in Older Children (Dr. Tarin Santamaria)","https://downsyndromecenter.libsyn.com/114-behavioral-evaluation-and-approach-in-older-children-with-dr-tarin-santamaria","mh"],
+["112","2021-09-02","COVID, Delta, and Ds (Dr. Andrew Nowalk)","https://downsyndromecenter.libsyn.com/112-covid-delta-and-ds-with-dr-andrew-nowalk","covid"],
+["111","2021-08-19","School Based Physical Therapy in Children with Down syndrome (Hellen Milligan)","https://downsyndromecenter.libsyn.com/111-school-based-physical-therapy-in-children-with-down-syndrome-with-hellen-milligan-pt-mpt","ortho"],
+["110","2021-08-03","COVID and Return to School 2021 (Dr. Andrew Nowalk)","https://downsyndromecenter.libsyn.com/110-covid-and-return-to-school-2021-with-dr-andrew-nowalk","covid"],
+["109","2021-07-29","Sensory Processing in Ds (Dr. Katie Frank)","https://downsyndromecenter.libsyn.com/109-sensory-processing-in-ds-with-dr-katie-frank","mh"],
+["108","2021-07-15","Pain Perception and Expression in Down Syndrome (Dr. Meredith Wright Whittaker)","https://downsyndromecenter.libsyn.com/108-pain-perception-and-expression-in-down-syndrome","mh"],
+["107","2021-07-01","Atlanto-axial instability in Ds (Dr. Marilyn Bull)","https://downsyndromecenter.libsyn.com/107-atlanto-axial-instability-in-ds-with-dr-marilyn-bull","ortho"],
+["106","2021-06-17","COVID and Mental Health in Ds (Dr. Ruth Brown)","https://downsyndromecenter.libsyn.com/106-covid-and-mental-health-in-ds-with-dr-ruth-browh","covid"],
+["105","2021-06-03","Hearts of Joy International","https://downsyndromecenter.libsyn.com/105-hearts-of-joy-international","org"],
+["104","2021-05-25","Become an Ally for Advocacy (Jawanda and Rachel Mast)","https://downsyndromecenter.libsyn.com/104-ally-for-advocacy","adv"],
+["103","2021-05-18","COVID Vaccination in Children with Ds (Dr. Andrew Nowalk)","https://downsyndromecenter.libsyn.com/103-covid-vaccination-in-children-with-ds-with-dr-andrew-nowalk","covid"],
+["102","2021-05-14","Orthodontic Care (Dr. Lindsay Schuster)","https://downsyndromecenter.libsyn.com/102-orthodontic-care-with-dr-lindsay-schuster","derm"],
+["101","2021-05-07","2021 NDSC Convention (Sarah Hill)","https://downsyndromecenter.libsyn.com/101-2021-ndsc-convention-with-sarah-hill","org"],
+["100","2021-04-28","The 100th Podcast!","https://downsyndromecenter.libsyn.com/100-the-100th-podcast","special"],
+["99","2021-04-08","Education in Ds — Past, Present, and Future (Ricki Sabia, JD)","https://downsyndromecenter.libsyn.com/99-education-in-ds-past-present-and-future-with-ricki-sabia-jd","edu"],
+["98","2021-03-21","World Down Syndrome Day Special Interview!","https://downsyndromecenter.libsyn.com/98-world-down-syndrome-day-special-interview","special"],
+["97","2021-03-15","COVID and DS — Variants, Vaccines, and a New Study (Dr. Andrew Nowalk)","https://downsyndromecenter.libsyn.com/97-covid-and-ds-variants-vaccines-and-a-new-study-in-ds-with-dr-andrew-nowalk","covid"],
+["96","2021-03-11","Skin Conditions in Down Syndrome, Part 2 (Dr. Jillian Rork)","https://downsyndromecenter.libsyn.com/95-skin-conditions-in-down-syndrome-part-2-with-dr-jillian-rork","derm"],
+["95","2021-02-25","Feeding in Infants with Down Syndrome","https://downsyndromecenter.libsyn.com/95-feeding-in-infants-with-down-syndrome","gi"],
+["94","2021-02-11","Skin Conditions in Down Syndrome, Part 1 (Dr. Jillian Rork)","https://downsyndromecenter.libsyn.com/94-skin-conditions-in-down-syndrome-with-dr-jillian-rork","derm"],
+["93","2021-01-21","Infantile Spasms (Dr. Nicole Baumer)","https://downsyndromecenter.libsyn.com/92-infantile-spasms-with-dr-nicole-baumer","neuro"],
+["92","2021-01-14","COVID-19 Vaccine in People with Down Syndrome","https://downsyndromecenter.libsyn.com/92-covid-19-vaccine-in-people-with-down-syndrome","covid"],
+["91","2021-01-04","Medical History of Down Syndrome (Dr. Kristen Ehrenberger)","https://downsyndromecenter.libsyn.com/91-medical-history-of-down-syndrome-with-dr-kristen-ehrenberger-md-phd","special"],
+["90","2020-12-21","Financial Planning Advice and Resources (Rob Wrubel)","https://downsyndromecenter.libsyn.com/90-financial-planning-advice-and-resources-with-rob-wrubel","adv"],
+["89","2020-12-10","COVID Town Hall (DSA Pittsburgh)","https://downsyndromecenter.libsyn.com/89-covid-town-hall-hosted-by-dsa-pittsburgh","covid"],
+["88","2020-11-20","Hot off the Presses! Adult Healthcare Guidelines (Dr. Peter Bulova)","https://downsyndromecenter.libsyn.com/88-hot-off-the-presses-adult-healthcare-guidelines-with-dr-peter-bulova","family"],
+["87","2020-11-13","Down Syndrome Clinic to You — DSC2U (Dr. Brian Skotko)","https://downsyndromecenter.libsyn.com/87-down-syndrome-clinic-to-you-dsc2u-with-dr-brian-skotko","org"],
+["86","2020-11-06","Learning to Read — Tips & Resources for Success (Dana Halle)","https://downsyndromecenter.libsyn.com/86-learning-to-read-tips-resources-for-success-with-dana-halle","edu"],
+["85","2020-10-27","Does having Ds lead to higher risk in COVID? (COVID and DS #7)","https://downsyndromecenter.libsyn.com/85-does-having-ds-lead-to-higher-risk-in-covid-covid-and-ds6-with-dr-andrew-nowalk","covid"],
+["84","2020-10-08","Toilet Training in Down Syndrome (Dr. Lina Patel)","https://downsyndromecenter.libsyn.com/84-toilet-training-in-down-syndrome-with-dr-lina-patel-psyd","edu"],
+["83","2020-09-04","A Friend Like Anian (Meeka Caldwell)","https://downsyndromecenter.libsyn.com/83-a-friend-like-anian-with-meeka-caldwell","special"],
+["82","2020-08-24","COVID and DS #6 — Return to School, Part 2 (Dr. Andrew Nowalk)","https://downsyndromecenter.libsyn.com/82-ds-and-covid-return-to-school-part-2-with-dr-andrew-nowalk","covid"],
+["81","2020-08-21","Updates from the DS Center, Down Syndrome Association","https://downsyndromecenter.libsyn.com/81-updates-from-the-ds-center-down-syndrome-association-with-erin-kelly-and-meredith-peterson","org"],
+["80","2020-08-06","Autism and Down Syndrome (Dr. Nicole Baumer)","https://downsyndromecenter.libsyn.com/80-autism-and-down-syndrome-with-dr-nicole-baumer","neuro"],
+["79","2020-07-30","ADHD and Down Syndrome (Dr. Nicole Baumer)","https://downsyndromecenter.libsyn.com/79-adhd-and-down-syndrome-with-dr-nicole-baumer-0","neuro"],
+["78","2020-07-23","Race and Healthcare in People with Down Syndrome #2","https://downsyndromecenter.libsyn.com/78-race-and-healthcare-in-people-with-down-syndrome-2-with-kimberly-ewing-and-roxanne-hoke-chandler","adv"],
+["77","2020-07-16","COVID and DS #5 — Thoughts on School Reopening (Dr. Andrew Nowalk)","https://downsyndromecenter.libsyn.com/77-covid-and-ds-5-thoughts-on-school-reopening-with-dr-andrew-nowalk","covid"],
+["76","2020-07-06","International Adoption and Down Syndrome","https://downsyndromecenter.libsyn.com/76-international-adoption-and-down-syndrome","family"],
+["75","2020-06-17","Is COVID-19 more common in Down syndrome? A review of recent data","https://downsyndromecenter.libsyn.com/75-is-covid-19-more-common-in-down-syndrome-a-review-of-recent-data-with-dr-andrew-nowalk-and-dr-megan-freeman","covid"],
+["74","2020-06-13","Race and Healthcare for People with Down Syndrome","https://downsyndromecenter.libsyn.com/74-race-and-healthcare-for-people-with-down-syndrome-with-shauntel-neal-howe-and-valerie-williams","adv"],
+["73","2020-06-03","Stuttering (Betsy Gilbert, CCC-SLP)","https://downsyndromecenter.libsyn.com/73-stuttering-with-betsy-gilbert-ccc-slp","edu"],
+["72","2020-05-15","Coronavirus in Ds #3 — Navigating Towards an Eventual Safe Return","https://downsyndromecenter.libsyn.com/72-coronavirus-in-ds-3-navigating-towards-an-eventual-safe-return-with-dr-andrew-nowalk","covid"],
+["71","2020-04-21","Right to Equal Medical Treatment for People with DS (Heather Sachs, JD)","https://downsyndromecenter.libsyn.com/71-right-to-equal-medical-treatment-for-people-with-ds-with-heather-sachs-jd","adv"],
+["70","2020-03-31","Coronavirus in Ds #2 — Myths and Truths (Dr. Andrew Nowalk)","https://downsyndromecenter.libsyn.com/70-coronavirus-in-ds-2-myths-and-truths-with-dr-andrew-nowalk","covid"],
+["69","2020-03-20","Best Practices and Resources for Online Education in Ds (Dr. Sean Smith)","https://downsyndromecenter.libsyn.com/69-best-practices-and-resources-for-online-education-in-ds-with-dr-sean-smith","edu"],
+["68","2020-03-10","Coronavirus (Dr. Andrew Nowalk)","https://downsyndromecenter.libsyn.com/68-coronavirus-with-dr-andrew-nowalk","covid"],
+["67","2020-03-05","Preventing Respiratory Illness (Dr. Andrew Nowalk)","https://downsyndromecenter.libsyn.com/67-preventing-respiratory-illness-with-dr-andrew-nowalk","sleep"],
+["66","2020-02-20","Dental Topics (Dr. Brian Martin)","https://downsyndromecenter.libsyn.com/66-dental-topics-with-dr-brian-martin","derm"],
+["65","2020-02-04","Speech Apraxia (Betsy Gilbert, CCC-SLP)","https://downsyndromecenter.libsyn.com/65-speech-apraxia-with-betsy-gilbert-ccc-slp","edu"],
+["64","2019-11-21","Sibling Topics (Sue Levine and Brian Skotko, MD)","https://downsyndromecenter.libsyn.com/64-sibling-topics-with-sue-levine-and-brian-skotko-md","family"],
+["63","2019-10-31","Research at the NIH (Melissa Parisi, MD and Lisa Kaeser, JD)","https://downsyndromecenter.libsyn.com/63-research-at-the-nih-with-melissa-parisi-md-and-lisa-kaeser-jd","org"],
+["62","2019-10-08","Hematologic (Blood) Issues (Dr. Kishnani and Dr. Hart)","https://downsyndromecenter.libsyn.com/62-hematologic-blood-issues-with-dr-kishnani-and-dr-hart","med"],
+["61","2019-09-18","Stand Up For Downs / Improvaneers (Rob Snow)","https://downsyndromecenter.libsyn.com/61-stand-up-for-downs-improvaneers-with-rob-snow","org"],
+["60","2019-08-21","Interview with Bryan Gratton (Financial Advising, Night to Remember)","https://downsyndromecenter.libsyn.com/60-interview-with-bryan-gratton-financial-advising-tips-night-to-remember-pittsburgh","adv"],
+["59","2019-05-31","DSAP — Past, Present, and Future (Gina Cusano)","https://downsyndromecenter.libsyn.com/59-dsap-past-present-and-future-with-gina-cusano","org"],
+["58","2019-05-24","Interview on That's Pediatrics Podcast","https://downsyndromecenter.libsyn.com/58-interview-on-thats-pediatrics-podcast","special"],
+["57","2019-02-26","National Down Syndrome Convention (David Tolleson and Coleen Popp)","https://downsyndromecenter.libsyn.com/57-national-down-syndrome-convention-with-david-tolleson-and-coleen-popp","org"],
+["56","2018-10-09","Wearing a CPAP Mask (Daniel Chaplin)","https://downsyndromecenter.libsyn.com/56-wearing-a-cpap-mask-with-daniel-chaplin","sleep"],
+["55","2018-09-17","Gross Motor Development, Part 2 (Pat Winders)","https://downsyndromecenter.libsyn.com/55-gross-motor-development-part-2-with-pat-winders","ortho"],
+["54","2018-08-07","Gross Motor Development, Part 1 (Pat Winders)","https://downsyndromecenter.libsyn.com/54-gross-motor-development-part-1-with-pat-winders","ortho"],
+["53","2018-05-10","Orthotics (DeLaTorre Orthotics)","https://downsyndromecenter.libsyn.com/53-orthotics-with-delatorre-orthotics","ortho"],
+["52","2018-05-03","Nutrition Advice, Part 2 (Joan Medlen)","https://downsyndromecenter.libsyn.com/52-nutrition-advice-part-2-with-joan-medlen","gi"],
+["51","2018-04-27","Nutrition Advice, Part 1 (Joan Medlen)","https://downsyndromecenter.libsyn.com/51-nutrition-advice-with-joan-medlen","gi"],
+["50","2018-03-29","Later Childhood Speech, Language, and Communication (Dr. Libby Kumin)","https://downsyndromecenter.libsyn.com/50-later-speech-language-and-communication-with-dr-libby-kumin","edu"],
+["49","2018-03-22","Early Speech, Language, and Communication (Dr. Libby Kumin)","https://downsyndromecenter.libsyn.com/49-early-speech-language-and-communication-with-dr-libby-kumin","edu"],
+["48","2018-03-21","Happy World Down Syndrome Day!","https://downsyndromecenter.libsyn.com/happy-world-down-syndrome-day-0","special"],
+["47","2018-03-08","INSPIRE Study for Sleep Apnea","https://downsyndromecenter.libsyn.com/47-inspire-study-for-sleep-apnea","sleep"],
+["46","2018-03-01","Sleep Apnea (Dr. Simons and Dr. Tobey)","https://downsyndromecenter.libsyn.com/46-sleep-apnea-with-dr-simons-and-dr-tobey","sleep"],
+["45","2018-02-22","Pediatric Ophthalmology, Keratoconus (Dr. Ken Nischal)","https://downsyndromecenter.libsyn.com/45-pediatric-ophthalmology-keratoconus-with-dr-ken-nischal","sense"],
+["44","2018-02-15","Pediatric Ophthalmology (Dr. Ken Nischal)","https://downsyndromecenter.libsyn.com/44-pediatric-ophthalmology-with-dr-ken-nischal","sense"],
+["43","2017-12-29","Behavioral Issues in Down Syndrome, Part 2 (Dr. David Stein)","https://downsyndromecenter.libsyn.com/43-behavioral-issues-in-down-syndrome-part-2-with-dr-david-stein","mh"],
+["42","2017-12-22","Behavioral Issues in Down Syndrome, Part 1 (Dr. David Stein)","https://downsyndromecenter.libsyn.com/42-behavioral-issues-in-down-syndrome-part-1-with-dr-david-stein","mh"],
+["41","2017-12-15","Up At Down Country Interview, Part 2 (Delivering diagnosis, medical masqueraders)","https://downsyndromecenter.libsyn.com/41-up-at-down-country-interview-part-2","family"],
+["40","2017-12-08","Up At Down Country Interview, Part 1 (Prenatal testing, Delivering the Diagnosis)","https://downsyndromecenter.libsyn.com/40-up-at-down-country-interview","family"],
+["39","2017-11-30","Transition from Pediatric to Adult Care (Dr. Andrew McCormick)","https://downsyndromecenter.libsyn.com/39-transition-for-pediatric-to-adult-care-with-dr-andrew-mccormick","family"],
+["38","2017-03-24","Have a Question — Ask the Doctors! (Teen & Adult)","https://downsyndromecenter.libsyn.com/38-have-a-question-ask-the-doctors-teenadult","special"],
+["37","2017-03-15","Have a Question — Ask the Doctor!","https://downsyndromecenter.libsyn.com/have-a-question-ask-the-doctor","special"],
+["—","2016-12-15","2016 NDSC Convention — Medical Issues in Down Syndrome (Part 2)","https://downsyndromecenter.libsyn.com/2016-ndsc-convention-medical-issues-in-down-syndrome-part-2","special"],
+["—","2016-11-03","2016 NDSC Convention — Medical Issues in Down Syndrome (Part 1)","https://downsyndromecenter.libsyn.com/2016-ndsc-convention-medical-issues-in-down-syndrome-part-1","special"],
+["—","2016-09-23","Sign Language Instructional Video","https://downsyndromecenter.libsyn.com/sign-language-instructional-video","edu"],
+["—","2016-03-21","Down Syndrome Journeys","https://downsyndromecenter.libsyn.com/down-syndrome-journeys","special"],
+["32","2015-12-29","Puberty and Sexuality Issues (Terri Couwenhoven) — Part 2","https://downsyndromecenter.libsyn.com/-fileprogress-32-puberty-and-sexuality-issues-with-terri-couwenhoven-part-2","family"],
+["31","2015-11-24","Puberty and Sexuality Issues in Down Syndrome (Terri Couwenhoven) — Part 1","https://downsyndromecenter.libsyn.com/31-puberty-and-sexuality-issues-in-down-syndrome-part-1","family"],
+["30","2014-10-09","NDSC Convention — Medical Issues in Down Syndrome","https://downsyndromecenter.libsyn.com/30-ndsc-convention-medical-issues-in-down-syndrome","special"],
+["29","2014-07-24","Behavioral Issues (Using Time-Out)","https://downsyndromecenter.libsyn.com/29-behavioral-issues-using-time-out","mh"],
+["28","2014-06-20","Adult Related Issues in Down Syndrome","https://downsyndromecenter.libsyn.com/podcast-28-adult-related-issues-in-down-syndrome","family"],
+["27","2014-05-05","Toilet Training, Part 2","https://downsyndromecenter.libsyn.com/27-toilet-training-part-2","edu"],
+["26","2014-04-03","Toilet Training, Part 1","https://downsyndromecenter.libsyn.com/26-toilet-training","edu"],
+["25","2014-03-21","Happy World Down Syndrome Day!","https://downsyndromecenter.libsyn.com/25-happy-world-down-syndrome-day-0","special"],
+["24","2014-03-13","Sleep Apnea and Sleep Studies (Dr. Chakravorty)","https://downsyndromecenter.libsyn.com/24-sleep-apnea-and-sleep-studies-with-dr-chakravorty","sleep"],
+["23","2014-02-03","Cardiac Surgery (Dr. Peter Wearden)","https://downsyndromecenter.libsyn.com/-23-cardiac-surgery-with-dr-peter-wearden","card"],
+["22","2014-01-03","Cardiac Issues in Down Syndrome (Dr. Linda Russo)","https://downsyndromecenter.libsyn.com/-22-cardiac-issues-in-down-syndrome-with-dr-linda-russo","card"],
+["21","2013-11-12","Down Syndrome Radio Interview","https://downsyndromecenter.libsyn.com/-21-down-syndrome-radio-interview","special"],
+["20","2013-10-28","Endocrine Issues — Diabetes, Obesity, Growth (Dr. Amanda Flint)","https://downsyndromecenter.libsyn.com/-20-endocrine-issues-diabetes-obesity-growth-with-dr-amanda-flint","med"],
+["19","2013-10-04","Endocrine Issues — Thyroid (Dr. Amanda Flint)","https://downsyndromecenter.libsyn.com/-19-endocrine-issues-thyroid-with-dr-amanda-flint","med"],
+["18","2013-07-27","Medical Issues in Ds, Part 6 (Q&A)","https://downsyndromecenter.libsyn.com/medical-issues-in-ds-part-6-q-a","special"],
+["17","2013-07-27","Medical Issues in Ds, Part 5 (Dietary, Behavioral, DS Center)","https://downsyndromecenter.libsyn.com/medical-issues-in-ds-part-5-dietary-behavioral-ds-center","special"],
+["16","2013-07-27","Medical Issues in Ds, Part 4 (Atlantoaxial, Neurologic, Dental, General Pediatric)","https://downsyndromecenter.libsyn.com/medical-issues-in-ds-part-4-atlantoaxial-instability-neurologic-dental-general-pediatric","special"],
+["15","2013-07-27","Medical Issues in Ds, Part 3 (ENT, Ophtho, Endocrine, Hematologic, Musculoskeletal)","https://downsyndromecenter.libsyn.com/medical-issues-in-ds-part-3-ent-ophtho-endocrine-hematologic-musculoskeletal","special"],
+["14","2013-07-27","Medical Issues in Ds, Part 2 (Cardiac, Gastro)","https://downsyndromecenter.libsyn.com/medical-issues-in-ds-part-2-cardiac-gastro","special"],
+["11","2013-06-20","Sinusitis (Dr. Todd Otteson)","https://downsyndromecenter.libsyn.com/-11-sinusitis-with-dr-todd-otteson","sense"],
+["10","2013-06-06","Ear Infections (Dr. Todd Otteson)","https://downsyndromecenter.libsyn.com/-10-ear-infections-with-dr-todd-otteson","sense"],
+["9","2013-05-22","Special Needs Trusts (Nicole Bazzy, J.D.)","https://downsyndromecenter.libsyn.com/-9-special-needs-trusts-with-nicole-bazzy-j-d","adv"],
+["8","2013-05-04","Celiac Disease (Dr. Arvind Srinath)","https://downsyndromecenter.libsyn.com/-8-celiac-disease-with-dr-arvind-srinath","gi"],
+["7","2013-04-14","Constipation (Dr. Arvind Srinath)","https://downsyndromecenter.libsyn.com/-7-constipation-with-dr-arvind-srinath-mp3","gi"],
+["6","2013-03-27","GE Reflux (Dr. Arvind Srinath)","https://downsyndromecenter.libsyn.com/-6-ge-reflux-with-dr-arvind-srinath","gi"],
+["5","2013-03-21","Happy World Down Syndrome Day!","https://downsyndromecenter.libsyn.com/happy-world-down-syndrome-day","special"],
+["4","2013-03-08","Transition to Preschool (Sheila Cannon)","https://downsyndromecenter.libsyn.com/transition-to-preschool-with-sheila-cannon","edu"],
+["3","2013-02-27","Infectious Disease Issues in Ds (Dr. Nowalk)","https://downsyndromecenter.libsyn.com/-3-interview-with-dr-nowalk-id-issues-in-ds","med"],
+["2","2013-02-20","Down Syndrome Association of Pittsburgh, Family Life (Dr. Nowalk)","https://downsyndromecenter.libsyn.com/-2-interview-with-dr-nowalk-down-syndrome-association-of-pittsburgh-family-life","org"],
+["1","2013-02-12","Introduction to the Down Syndrome Center of WPA","https://downsyndromecenter.libsyn.com/introduction-to-the-down-syndrome-center-of-wpa","special"]
+];
+
+// 未就学児（0〜6歳）に関係の高い回: URLをキーに アウトライン(ol) と 参考リンク(lk) を保持
+const PRE = {
+"https://downsyndromecenter.libsyn.com/148-jacks-basket-with-carissa-carroll":{ol:["創設者Carissa Carrollが自身の経験からJack's Basketを立ち上げた経緯を語る","新しく診断を受けた家族へ「お祝いと歓迎」を届ける活動（世界中の家族が対象）"],lk:[["Jack's Basket","https://www.jacksbasket.org/"]]},
+"https://downsyndromecenter.libsyn.com/187-how-does-provider-bias-affect-delivery-of-the-diagnosis-of-ds":{ol:["Dr. Stephanie Meredith（ケンタッキー大）が、医療者のバイアスが診断の伝え方に与える影響の研究を紹介","信頼関係が黒人・ヒスパニック系家族へのケアに及ぼす影響","新規・妊娠中の家族向け資料と、医療者向け教育コースを案内"],lk:[["Lettercase（新規/妊娠中の親向け）","https://www.lettercase.org"],["医療者向けコース","https://www.lettercase.org/education/medical-professionals/"],["黒人・ヒスパニック家族向け支援","https://www.lettercase.org/support-for-black-and-hispanic-new-and-expectant-parents/"],["研究1（PubMed 38619097）","https://pubmed.ncbi.nlm.nih.gov/38619097/"],["研究2（PubMed 37633732）","https://pubmed.ncbi.nlm.nih.gov/37633732/"],["研究3（PubMed 39031948）","https://pubmed.ncbi.nlm.nih.gov/39031948/"]]},
+"https://downsyndromecenter.libsyn.com/40-up-at-down-country-interview":{ol:["Dr. Vellodyのラジオ番組出演・前編","自身の家族、出生前検査、診断の伝え方について"],lk:[["Up at Down Country","http://www.upatdowncountry.com"]]},
+"https://downsyndromecenter.libsyn.com/41-up-at-down-country-interview-part-2":{ol:["ラジオ出演・後編","診断の最善の伝え方の続き","教育・行動の問題に見える「医学的問題」について"],lk:[["Up at Down Country","http://www.upatdowncountry.com"]]},
+"https://downsyndromecenter.libsyn.com/131-down-syndrome-diagnosis-network-with-jen-jacob":{ol:["創設者Jen Jacobが、家族向けの情報・資源共有ネットワーク(DSDN)を紹介"],lk:[["Down Syndrome Diagnosis Network","https://www.dsdiagnosisnetwork.org"]]},
+"https://downsyndromecenter.libsyn.com/118-early-intervention-services":{ol:["The Alliance for Infants and ToddlersのErica Balintが登場","早期介入(Early Intervention)サービスとは何か","ダウン症の乳幼児にどう役立つか"],lk:[["ペンシルベニア州 早期介入","https://www.education.pa.gov/Early%20Learning/Early%20Intervention/Pages/default.aspx"],["The Alliance for Infants and Toddlers","https://www.afit.org/"]]},
+"https://downsyndromecenter.libsyn.com/transition-to-preschool-with-sheila-cannon":{ol:["Sheila Cannonが、ダウン症児のプリスクール(未就学)への移行プロセスを解説"],lk:[]},
+"https://downsyndromecenter.libsyn.com/95-feeding-in-infants-with-down-syndrome":{ol:["ピッツバーグ小児病院のフィーディングチーム（授乳・作業療法・言語療法）が登場","乳児への効果的な授乳・摂食テクニックを解説"],lk:[]},
+"https://downsyndromecenter.libsyn.com/184-baby-led-weaning-with-jill-rabin":{ol:["Jill Rabinが、ベビー・レッド・ウィーニング(子ども主導の離乳)を解説","発達遅延のある子ども向けに適応した方法とは"],lk:[["書籍 Your Baby Can Self-Feed, Too","https://theexperimentpublishing.com/catalogs/fall-2022/your-baby-can-self-feed-too/"],["jillrabin.com","https://www.jillrabin.com"],["Instagram (@jillrabinablw)","https://www.instagram.com/jillrabinablw/"]]},
+"https://downsyndromecenter.libsyn.com/115-approach-to-selective-picky-eaters":{ol:["臨床栄養士Ann MeyersとOT Sarah Rossmanが登場","選り好み(偏食)への対応をデータに基づいて解説"],lk:[["偏食の子の食事のコツ (HealthyChildren)","https://www.healthychildren.org/English/healthy-living/nutrition/Pages/Picky-Eaters.aspx"],["書籍 Child of Mine (Ellyn Satter)","https://www.amazon.com/Child-Mine-Feeding-Revised-Updated/dp/0923521518/"],["書籍 Fearless Feeding","https://www.amazon.com/Fearless-Feeding-Healthy-Eaters-School/dp/1732866201/"]]},
+"https://downsyndromecenter.libsyn.com/167-talk-tools-with-heather-vukelich":{ol:["SLP Heather Vukelichが登場","TalkToolsと、摂食・発話明瞭度を改善するテクニックを紹介"],lk:[["TalkTools","https://www.talktools.com"],["Happy Kids Therapy","https://www.happykidstherapy.com"],["摂食クラス","https://www.happykidstherapy.com/feeding-class"],["Instagram","https://www.instagram.com/happykidstherapy/"]]},
+"https://downsyndromecenter.libsyn.com/49-early-speech-language-and-communication-with-dr-libby-kumin":{ol:["Dr. Libby Kuminが、ダウン症児の初期コミュニケーションスキルを解説"],lk:[]},
+"https://downsyndromecenter.libsyn.com/65-speech-apraxia-with-betsy-gilbert-ccc-slp":{ol:["Betsy Gilbert(Therapy Works)が登場","発話の問題、特に発語失行(apraxia of speech)を解説"],lk:[["NDSC 発語失行ガイド(PDF)","https://www.ndsccenter.org/wp-content/uploads/Apraxia.pdf"],["Apraxia Kids","https://www.apraxia-kids.org/new-to-apraxia/"],["Therapy Works","https://therapyworksllc.com/"]]},
+"https://downsyndromecenter.libsyn.com/219-drooling-tongue-protrusion-and-other-oral-motor-topics":{ol:["口腔筋機能障害(OMD)が専門のSLP Kaye Baumgardnerが登場","乳児のよだれ・舌の突出に関する視聴者質問に回答","筋・感覚に基づく摂食の課題について"],lk:[["Kaye Baumgardner (Minnetonka Therapy)","https://www.minnetonkatherapy.com/kaye-b/"]]},
+"https://downsyndromecenter.libsyn.com/sign-language-instructional-video":{ol:["発話が出るまでの間のフラストレーション軽減のため、別の伝達手段(サイン)を教える","Patty Shukla Kids TVの動画で、幼い子向けの簡単なサインを紹介"],lk:[]},
+"https://downsyndromecenter.libsyn.com/speech-clarity":{ol:["SLP Jennifer Gray(Gray Speak Therapy)が登場","発話明瞭度の重要性と、改善するためのテクニックを解説"],lk:[["Gray Speak Therapy","http://grayspeaktherapy.com"]]},
+"https://downsyndromecenter.libsyn.com/54-gross-motor-development-part-1-with-pat-winders":{ol:["粗大運動の世界的権威Pat Windersが登場","ダウン症児の粗大運動スキルを解説（前編）"],lk:[]},
+"https://downsyndromecenter.libsyn.com/55-gross-motor-development-part-2-with-pat-winders":{ol:["Pat Windersによる粗大運動の続編","年長児に焦点を当てた発達の話"],lk:[]},
+"https://downsyndromecenter.libsyn.com/86-learning-to-read-tips-resources-for-success-with-dana-halle":{ol:["Dana Halle(Down Syndrome Foundation of Orange County)が登場","読みの指導のコツと教材(The Learning Program / LP Online)を紹介"],lk:[["LP Online","https://www.dsfoc.org/online-courses/"],["書籍 Teaching Reading to Children with Down Syndrome","https://www.amazon.com/Teaching-Reading-Children-Down-Syndrome/dp/0933149557/"],["DSEI Reading & Language Intervention","https://www.down-syndrome.org/en-us/resources/teaching/rli/"]]},
+"https://downsyndromecenter.libsyn.com/26-toilet-training":{ol:["Dr. Vellodyが、トイレトレーニングの準備状況の評価と基本概念を解説（前編）"],lk:[]},
+"https://downsyndromecenter.libsyn.com/27-toilet-training-part-2":{ol:["トイレトレーニング中に生じやすい問題と、その対処法（後編）"],lk:[]},
+"https://downsyndromecenter.libsyn.com/84-toilet-training-in-down-syndrome-with-dr-lina-patel-psyd":{ol:["心理士Dr. Lina Patel(Sie Center, Children's Colorado)が登場","トイレトレーニングを解説。著書あり"],lk:[["書籍 Potty Time for Kids with Down Syndrome","https://www.woodbinehouse.com/product/potty-time-for-kids-with-down-syndrome-lose-the-diapers-not-your-patience/"]]},
+"https://downsyndromecenter.libsyn.com/109-sensory-processing-in-ds-with-dr-katie-frank":{ol:["OT Dr. Katie Frankが登場","感覚処理の困難と、治療的アプローチを解説"],lk:[["ADSC ケア資料","http://adscresources.advocatehealth.com"],["書籍 The Out-of-Sync Child シリーズ","https://www.amazon.com/dp/B08869D9GV"],["STAR Institute","https://sensoryhealth.org/"]]},
+"https://downsyndromecenter.libsyn.com/158-sensory-processing-part-2-sound-sensitivity-toothbrushing-haircuts-nail-trims":{ol:["Dr. Katie Frankが、音過敏・歯磨き・散髪・爪切りに関する視聴者質問に回答","それぞれの場面への具体的アプローチと便利な道具を紹介"],lk:[["ADSC ケア資料","https://adscresources.advocatehealth.com/"],["3つ頭の歯ブラシ(例)","https://www.amazon.com/SUPVOX-Toothbrush-Replaceable-Special-toothhugger/dp/B07SJSXS12/"],["重み付きベスト(例)","https://www.amazon.com/Fun-Functions-Weighted-Compression-Vest/dp/B001TZGIH4/"],["静音ヘアクリッパー(例)","https://www.amazon.com/CALMING-CLIPPER-Haircutting-Sensitivity-Right-Handed/dp/B01J2QH9RO/"]]},
+"https://downsyndromecenter.libsyn.com/150-how-to-address-throwing-behaviors-with-dr-tarin-santamaria":{ol:["Dr. Tarin Santamariaが、物を投げる行動への対応を解説","周囲の安全を保つ工夫と、一般的な行動マネジメントの考え方"],lk:[]},
+"https://downsyndromecenter.libsyn.com/183-behavioral-support-services-with-dr-santamaria":{ol:["センター所属の心理士Dr. Tarin Santamariaが登場","地域で利用できる行動支援サービスの種類（“アルファベットスープ”）を整理"],lk:[]},
+"https://downsyndromecenter.libsyn.com/153-improving-tolerance-to-device-wearing-hearing-aids-glasses-cpap-masks":{ol:["Dr. Lina Patelが登場","顔まわりの感覚過敏により補聴器・眼鏡・CPAPマスク等の装着が難しい場合の対処を解説"],lk:[]},
+"https://downsyndromecenter.libsyn.com/vision-concerns-with-dr-michael-puente":{ol:["小児眼科医Dr. Michael Puente(Children's Colorado)が登場","ダウン症によく見られる視覚の問題を解説"],lk:[]},
+"https://downsyndromecenter.libsyn.com/44-pediatric-ophthalmology-with-dr-ken-nischal":{ol:["Dr. Ken Nischalが、一般的な眼・視覚ケアの問題を解説"],lk:[]},
+"https://downsyndromecenter.libsyn.com/171-hearing-health-in-down-syndrome-with-dr-heather-porter":{ol:["Dr. Heather Porter(Boys Town)が聴覚の健康を解説（2部構成の前編）"],lk:[["Boys Town 小児聴覚クリニック","https://www.boystownhospital.org/services/ear-nose-throat/pediatric-hearing-clinic"]]},
+"https://downsyndromecenter.libsyn.com/172-hearing-health-in-down-syndrome-with-dr-heather-porter":{ol:["Dr. Heather Porterによる聴覚の健康・後編"],lk:[["Boys Town 小児聴覚クリニック","https://www.boystownhospital.org/services/ear-nose-throat/pediatric-hearing-clinic"]]},
+"https://downsyndromecenter.libsyn.com/-10-ear-infections-with-dr-todd-otteson":{ol:["小児ENT Dr. Todd Ottesonが登場","中耳炎と、鼓膜チューブ(換気チューブ)の役割を解説"],lk:[]},
+"https://downsyndromecenter.libsyn.com/92-infantile-spasms-with-dr-nicole-baumer":{ol:["Dr. Nicole Baumerが、ダウン症で多い発作の一種「点頭てんかん(infantile spasms)」を解説","見分け方と早期受診の重要性"],lk:[["Epilepsy Foundation（点頭てんかん）","https://www.epilepsy.com/learn/types-epilepsy-syndromes/infantile-spasms-west-syndrome"],["Dr. Baumerによる要約(PDF)","https://www.childrenshospital.org/-/media/Centers-and-Services/Programs/A_E/Down-Syndrome-Program/down-syndrome-infantile-spasms.ashx?la=en&hash=23FA19753FA6A6DA74113DEE2F8B11D9938BDCCD"]]},
+"https://downsyndromecenter.libsyn.com/66-dental-topics-with-dr-brian-martin":{ol:["Dr. Brian Martinが、ダウン症児によくある小児歯科の問題を解説"],lk:[]},
+"https://downsyndromecenter.libsyn.com/67-preventing-respiratory-illness-with-dr-andrew-nowalk":{ol:["Dr. Andrew Nowalkが、呼吸器感染症(インフルエンザ・RSV等)の一般的な予防を解説","※COVID-19流行前の収録だが、ウイルス予防の原則は共通"],lk:[]},
+"https://downsyndromecenter.libsyn.com/180-sleep-questions":{ol:["睡眠心理士Dr. Lucy Lubinski(ピッツバーグ小児)が登場","小児によくある睡眠の問題と、その対処を解説"],lk:[["Pediatric Sleep Council","https://www.babysleep.com"]]},
+"https://downsyndromecenter.libsyn.com/46-sleep-apnea-with-dr-simons-and-dr-tobey":{ol:["ENT医Dr. SimonsとDr. Tobeyが登場","ダウン症の睡眠時無呼吸についての最新情報"],lk:[]},
+"https://downsyndromecenter.libsyn.com/update-on-sleep-apnea":{ol:["Dr. Rachel WhelanとDr. Ryan Sooseが登場","小児・成人の睡眠時無呼吸の、スクリーニング時期と管理法を解説","小児向け舌下神経刺激の治験も紹介"],lk:[["小児舌下神経刺激の治験(ClinicalTrials)","https://clinicaltrials.gov/study/NCT04801771"]]}
+};
+
+const listEl = document.getElementById('list');
+const chipsEl = document.getElementById('chips');
+const searchEl = document.getElementById('search');
+document.getElementById('total').textContent = EP.length;
+const preCount = EP.filter(e=>PRE[e[3]]).length;
+document.getElementById('pretotal').textContent = preCount;
+
+let activeCat = 'all';
+let query = '';
+
+// build chips
+const catCount = {};
+EP.forEach(e => catCount[e[4]] = (catCount[e[4]]||0)+1);
+const chipDefs = [['all','すべて',EP.length],['pre','★ 未就学児',preCount]]
+  .concat(CATS.map(c=>[c[0],c[1],catCount[c[0]]||0]));
+chipsEl.innerHTML = chipDefs.map(c =>{
+  const extra = c[0]==='pre' ? ' pre' : '';
+  return `<span class="chip${extra}${c[0]==='all'?' active':''}" data-cat="${c[0]}">${c[1]} (${c[2]})</span>`;
+}).join('');
+chipsEl.querySelectorAll('.chip').forEach(ch=>{
+  ch.addEventListener('click',()=>{
+    chipsEl.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+    ch.classList.add('active');
+    activeCat = ch.dataset.cat;
+    render();
+  });
+});
+searchEl.addEventListener('input',()=>{query=searchEl.value.toLowerCase().trim();render();});
+
+// プレビューのサンドボックスでもリンクが開くように補強
+document.addEventListener('click',function(e){
+  var a=e.target.closest?e.target.closest('a[href]'):null;
+  if(!a||!a.href||a.protocol==='mailto:') return;
+  var w=window.open(a.href,'_blank','noopener');
+  if(w) e.preventDefault();
+},true);
+
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function rowHTML(e){
+  const numCls = e[0]==='—' ? 'num none' : 'num';
+  const numTxt = e[0]==='—' ? '—' : '#'+e[0];
+  const p = PRE[e[3]];
+  const badge = p ? `<span class="badge">★未就学児</span>` : '';
+  let details='';
+  if(p){
+    const ol = p.ol.map(x=>`<li>${esc(x)}</li>`).join('');
+    let lkBlock='';
+    if(p.lk && p.lk.length){
+      const lks = p.lk.map(l=>`<li><a href="${l[1]}" target="_blank" rel="noopener">${esc(l[0])}</a></li>`).join('');
+      lkBlock = `<h4>説明文中のリンク</h4><ul class="lk">${lks}</ul>`;
+    }
+    details = `<details class="ol"><summary>アウトライン・リンク</summary>`+
+      `<div class="olbox"><h4>内容アウトライン</h4><ul>${ol}</ul>${lkBlock}`+
+      `<div style="font-size:.72rem;color:#9aa6b2;">※公式エピソード説明文に基づく要約</div></div></details>`;
+  }
+  const liCls = p ? 'preli' : '';
+  return `<li class="${liCls}"><span class="${numCls}">${numTxt}</span>`+
+    `<span class="ep">${badge} <a href="${e[3]}" target="_blank" rel="noopener">${esc(e[2])}</a>`+
+    `<span class="date">${e[1]}</span></span>${details}</li>`;
+}
+
+function render(){
+  listEl.innerHTML='';
+  const catMap = {}; CATS.forEach(c=>catMap[c[0]]=c[1]);
+  const preOnly = activeCat==='pre';
+  const order = (activeCat==='all'||preOnly) ? CATS.map(c=>c[0]) : [activeCat];
+  let shown=0;
+  order.forEach(cat=>{
+    let rows = EP.filter(e=>e[4]===cat);
+    if(preOnly) rows = rows.filter(e=>PRE[e[3]]);
+    if(query){
+      rows = rows.filter(e=>(e[2].toLowerCase().includes(query) || e[0].toLowerCase().includes(query) || e[1].includes(query)));
+    }
+    if(rows.length===0) return;
+    shown += rows.length;
+    const sec=document.createElement('section');
+    sec.innerHTML = `<div class="sec-head"><h2>${catMap[cat]}</h2><span class="cnt">${rows.length}件</span></div>`;
+    const ul=document.createElement('ul');
+    ul.innerHTML = rows.map(rowHTML).join('');
+    sec.appendChild(ul);
+    listEl.appendChild(sec);
+  });
+  if(shown===0){listEl.innerHTML='<p class="empty">該当するエピソードがありません。</p>';}
+}
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>おもちゃ × 発達カテゴリ・ステージ タグ付け（HugMap category_stage 突き合わせ）</title>
+<style>
+  :root{--bg:#f5f7fb;--card:#fff;--ink:#26303c;--sub:#5a6675;--line:#e2e8f1;--accent:#3a6ea5;--chip:#eef3f9;--shadow:0 2px 12px rgba(50,80,130,.09)}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1020px;margin:0 auto;padding:26px 18px 64px}
+  header.hero{background:linear-gradient(135deg,#4f86c6,#3a6ea5);color:#fff;border-radius:16px;padding:24px 26px;box-shadow:var(--shadow)}
+  header.hero h1{margin:0 0 6px;font-size:21px}
+  header.hero p{margin:3px 0;font-size:13px;opacity:.95}
+  h2.sec{font-size:18px;margin:28px 0 8px;padding-left:11px;border-left:5px solid var(--accent)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px 18px;box-shadow:var(--shadow);margin:12px 0}
+  .ref{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}
+  .refcat{border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+  .refcat h3{margin:0 0 6px;font-size:14px;display:flex;align-items:center;gap:7px}
+  .refcat .dot{width:12px;height:12px;border-radius:3px;display:inline-block}
+  .refcat .stg{font-size:11.5px;color:var(--sub)}
+  .tag{display:inline-block;border-radius:6px;padding:1px 8px;font-size:11px;font-weight:600;color:#fff;margin:2px 4px 2px 0;white-space:nowrap}
+  .toggle{display:flex;gap:8px;margin:6px 0 14px;flex-wrap:wrap}
+  .toggle button{font-size:13px;border:1px solid var(--line);background:#fff;color:var(--accent2,#2b5580);border-radius:8px;padding:6px 14px;cursor:pointer}
+  .toggle button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  section.cat h2c{}
+  .catblk{margin:14px 0}
+  .catblk>h3{font-size:15px;margin:0 0 4px;padding:8px 13px;background:var(--chip);border:1px solid var(--line);border-bottom:none;border-radius:9px 9px 0 0}
+  .catbody{border:1px solid var(--line);border-radius:0 0 9px 9px;background:#fff;padding:4px 13px 10px}
+  article{padding:9px 2px;border-bottom:1px dashed var(--line)}
+  article:last-child{border-bottom:none}
+  article .nm{font-size:13.5px;font-weight:600}
+  article .nm small{font-weight:400;color:#9aa6b2;font-size:11px;margin-left:6px}
+  article .tags{margin-top:4px}
+  .stagewrap .scat{margin:12px 0}
+  .stagewrap .scat>h3{font-size:14.5px;margin:0 0 6px;display:flex;align-items:center;gap:7px}
+  .srow{display:grid;grid-template-columns:150px 1fr;gap:8px;font-size:12.5px;padding:5px 0;border-top:1px solid var(--line)}
+  .srow .sname{font-weight:600;color:var(--ink)}
+  .srow .sname em{font-style:normal;color:#9aa6b2;font-weight:400;font-size:11px;display:block}
+  .srow .toys{color:var(--sub)}
+  .note{font-size:12px;color:var(--sub);margin-top:8px}
+  footer{margin-top:26px;text-align:center;font-size:12px;color:var(--sub)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <h1>おもちゃ × 発達カテゴリ・ステージ タグ付け</h1>
+    <p>「働く主婦の独り言」＋「YUKAのおもちゃ箱」のおもちゃ・教材を、HugMap（With U App Production）の <b>category（6領域）× category_stage（有効49ステージ）</b> に突き合わせてタグ付けしました。</p>
+    <p>用途：各おもちゃに発達ステージを紐づけることで、アプリで「今のステージにおすすめのおもちゃ」を提示できます。</p>
+  </header>
+
+  <h2 class="sec">参照：HugMapの発達カテゴリ × ステージ（Supabase）</h2>
+  <div class="card"><div class="ref" id="ref"></div>
+  <div class="note">出典：Supabase「With U App Production」public.category（6件）／public.category_stage（有効49件）。括弧内は対象月齢の目安（age_start〜age_end）。</div></div>
+
+  <h2 class="sec">タグ付け結果</h2>
+  <div class="toggle">
+    <button id="bToy" class="on" onclick="show('toy')">① おもちゃ → ステージ（タグ付きリスト）</button>
+    <button id="bStage" onclick="show('stage')">② ステージ → おもちゃ（逆引き）</button>
+  </div>
+  <div id="toyView"></div>
+  <div id="stageView" style="display:none"></div>
+
+  <footer>
+    <p>分類定義はHugMapのDB、おもちゃは両ブログ。タグは内容からの対応づけ（1点に複数タグ可）。</p>
+  </footer>
+</div>
+
+<script>
+// ===== カテゴリ定義（色・順） =====
+const CATS=[
+ {n:"運動発達",c:"#e07a5f",stages:[["あおむけ","0–7m"],["うつ伏せ","1–9m"],["座る","3–14m"],["立つ","4–24m"],["歩く","9–20m"],["走る・ジャンプ","18–48m"]]},
+ {n:"手先の発達",c:"#e9a23b",stages:[["目と手の協調性","0–7m"],["握る・つまむ","2–12m"],["運ぶ・離す","6–14m"],["積み木・パズル","12–30m"],["道具操作","12–42m"],["描く・書く","12–60m"],["ハサミ","18–42m"]]},
+ {n:"コミュニケーション",c:"#4a8fe7",stages:[["喃語","3–14m"],["指差し","9–15m"],["ジェスチャー・サイン","9–24m"],["状況理解","6–12m"],["単語理解","12–18m"],["一語文","10–20m"],["二語理解","18–24m"],["二〜三語文","18–26m"],["多語理解","24–48m"],["多語文","24–60m"]]},
+ {n:"認知・遊び",c:"#7b5cc4",stages:[["隠れた物を探す","6–18m"],["感覚遊び","3–24m"],["探求遊び","8–24m"],["構成遊び","12–48m"],["ごっこ遊び","18–60m"],["ルール遊び","36–60m"],["記憶","9–48m"],["空間認識","12–48m"],["図形理解","18–48m"],["色理解","18–48m"],["数理解","24–60m"],["文字理解","24–60m"],["概念理解","18–48m"]]},
+ {n:"社会性",c:"#2a9d8f",stages:[["目で追う","0–9m"],["音に反応","0–6m"],["ものを見つめる","0–24m"],["はじめてのふれあい","0–24m"],["基本注意","9–36m"],["持続注意","12–48m"],["いっしょに見る・感じる","9–18m"],["まねっこと愛着","6–36m"],["意図理解・やりたい","9–24m"],["自己調整・ルール","18–60m"]]},
+ {n:"身辺自立",c:"#c44d8f",stages:[["食事","9–36m"],["着衣","12–48m"],["トイレ","18–42m"]]},
+];
+const CATCOLOR={};CATS.forEach(c=>CATCOLOR[c.n]=c.c);
+
+// ===== おもちゃ → タグ（[カテゴリ,ステージ]） =====
+// site: Y=YUKAのおもちゃ箱, P=働く主婦の独り言
+const TOYS=[
+ // YUKA 手の運動
+ {s:"Y",g:"手の運動",t:"傘の袋のガラガラ",tg:[["手先の発達","握る・つまむ"],["手先の発達","運ぶ・離す"]]},
+ {s:"Y",g:"手の運動",t:"チューブのガラガラ",tg:[["手先の発達","握る・つまむ"],["手先の発達","運ぶ・離す"]]},
+ {s:"Y",g:"手の運動",t:"ティッシュボックス",tg:[["手先の発達","握る・つまむ"]]},
+ {s:"Y",g:"手の運動",t:"磁石積木（手の運動）",tg:[["手先の発達","握る・つまむ"],["手先の発達","積み木・パズル"]]},
+ // YUKA 見る力
+ {s:"Y",g:"見る力を育む",t:"しゃぼん玉",tg:[["社会性","目で追う"]]},
+ {s:"Y",g:"見る力を育む",t:"虫かごの玉転がし",tg:[["社会性","目で追う"],["認知・遊び","感覚遊び"]]},
+ {s:"Y",g:"見る力を育む",t:"ペットボトルの玉転がし",tg:[["社会性","目で追う"],["認知・遊び","感覚遊び"]]},
+ // YUKA 姿勢
+ {s:"Y",g:"姿勢の保持と移動",t:"ロールクッション",tg:[["運動発達","うつ伏せ"],["手先の発達","目と手の協調性"]]},
+ {s:"Y",g:"姿勢の保持と移動",t:"おすわりジョーズ",tg:[["運動発達","座る"]]},
+ {s:"Y",g:"姿勢の保持と移動",t:"楽しいおうち",tg:[["運動発達","座る"]]},
+ {s:"Y",g:"姿勢の保持と移動",t:"はいはい階段",tg:[["運動発達","座る"],["運動発達","立つ"]]},
+ {s:"Y",g:"姿勢の保持と移動",t:"たっちジョーズ",tg:[["運動発達","立つ"]]},
+ {s:"Y",g:"姿勢の保持と移動",t:"トイレの踏み台",tg:[["身辺自立","トイレ"]]},
+ {s:"Y",g:"姿勢の保持と移動",t:"和装ベルトで足をくくる",tg:[["身辺自立","食事"]]},
+ // YUKA 見て判断
+ {s:"Y",g:"見て判断する能力",t:"ペットボトルの棒挿し",tg:[["手先の発達","道具操作"],["認知・遊び","色理解"]]},
+ {s:"Y",g:"見て判断する能力",t:"果物の棒挿し・色合わせ",tg:[["手先の発達","道具操作"],["認知・遊び","色理解"]]},
+ {s:"Y",g:"見て判断する能力",t:"コップからコップへ移し替え",tg:[["手先の発達","運ぶ・離す"],["手先の発達","道具操作"]]},
+ {s:"Y",g:"見て判断する能力",t:"輪投げ",tg:[["認知・遊び","空間認識"],["手先の発達","目と手の協調性"]]},
+ {s:"Y",g:"見て判断する能力",t:"動物園のカギ遊び",tg:[["手先の発達","道具操作"],["認知・遊び","探求遊び"]]},
+ {s:"Y",g:"見て判断する能力",t:"あんぱんまんのチップ入れ",tg:[["手先の発達","握る・つまむ"],["手先の発達","運ぶ・離す"]]},
+ {s:"Y",g:"見て判断する能力",t:"三角チップの色合わせ",tg:[["認知・遊び","色理解"]]},
+ {s:"Y",g:"見て判断する能力",t:"型はめ",tg:[["認知・遊び","図形理解"],["手先の発達","積み木・パズル"]]},
+ {s:"Y",g:"見て判断する能力",t:"フェルトの果物",tg:[["認知・遊び","色理解"],["認知・遊び","数理解"]]},
+ {s:"Y",g:"見て判断する能力",t:"カラフルなプラスチック容器の色合わせ",tg:[["認知・遊び","色理解"]]},
+ {s:"Y",g:"見て判断する能力",t:"チップ挿しの色合わせ",tg:[["認知・遊び","色理解"],["認知・遊び","空間認識"]]},
+ {s:"Y",g:"見て判断する能力",t:"果物の絵合わせ",tg:[["認知・遊び","色理解"],["コミュニケーション","単語理解"]]},
+ {s:"Y",g:"見て判断する能力",t:"ひも通し",tg:[["手先の発達","道具操作"],["手先の発達","目と手の協調性"]]},
+ {s:"Y",g:"見て判断する能力",t:"キティーちゃんの色合わせ",tg:[["認知・遊び","色理解"],["認知・遊び","概念理解"]]},
+ // YUKA 準備教材
+ {s:"Y",g:"読み書き計算の準備教材",t:"磁石積木（色合わせ・数の学習）",tg:[["認知・遊び","色理解"],["認知・遊び","数理解"]]},
+ {s:"Y",g:"読み書き計算の準備教材",t:"動物の絵合わせ",tg:[["認知・遊び","記憶"],["コミュニケーション","単語理解"]]},
+ {s:"Y",g:"読み書き計算の準備教材",t:"長い・短い",tg:[["認知・遊び","概念理解"]]},
+ {s:"Y",g:"読み書き計算の準備教材",t:"重さの比較",tg:[["認知・遊び","概念理解"]]},
+ {s:"Y",g:"読み書き計算の準備教材",t:"量の比較",tg:[["認知・遊び","概念理解"],["認知・遊び","数理解"]]},
+ {s:"Y",g:"読み書き計算の準備教材",t:"数字と個数のマッチング",tg:[["認知・遊び","数理解"]]},
+ {s:"Y",g:"読み書き計算の準備教材",t:"単語には意味があると気づかせるために",tg:[["認知・遊び","文字理解"],["コミュニケーション","単語理解"]]},
+ {s:"Y",g:"読み書き計算の準備教材",t:"5の分解",tg:[["認知・遊び","数理解"]]},
+ {s:"Y",g:"読み書き計算の準備教材",t:"大きいビーズで数の学習",tg:[["認知・遊び","数理解"]]},
+ {s:"Y",g:"読み書き計算の準備教材",t:"指を使う練習と数の学習",tg:[["手先の発達","握る・つまむ"],["認知・遊び","数理解"]]},
+ {s:"Y",g:"読み書き計算の準備教材",t:"文字の意味を理解するために",tg:[["認知・遊び","文字理解"],["認知・遊び","概念理解"]]},
+ {s:"Y",g:"読み書き計算の準備教材",t:"蓋を使って神経衰弱",tg:[["認知・遊び","記憶"],["認知・遊び","数理解"]]},
+ {s:"Y",g:"読み書き計算の準備教材",t:"気持ちの切り替えを早めるために（分類）",tg:[["認知・遊び","概念理解"]]},
+ // YUKA 読み書き計算
+ {s:"Y",g:"読み書き計算",t:"数の分解",tg:[["認知・遊び","数理解"]]},
+ {s:"Y",g:"読み書き計算",t:"数の合成",tg:[["認知・遊び","数理解"]]},
+ {s:"Y",g:"読み書き計算",t:"ひっ算用のビーズひも",tg:[["認知・遊び","数理解"]]},
+ {s:"Y",g:"読み書き計算",t:"足し算のためのビーズ棒（1年生）",tg:[["認知・遊び","数理解"]]},
+ {s:"Y",g:"読み書き計算",t:"数字盤",tg:[["認知・遊び","数理解"]]},
+ {s:"Y",g:"読み書き計算",t:"文字を書く練習",tg:[["手先の発達","描く・書く"],["認知・遊び","文字理解"]]},
+ {s:"Y",g:"読み書き計算",t:"ボタンを使って引き算の練習",tg:[["認知・遊び","数理解"]]},
+ {s:"Y",g:"読み書き計算",t:"ビーズを使って引き算の練習",tg:[["認知・遊び","数理解"]]},
+ {s:"Y",g:"読み書き計算",t:"魚釣りで遊びながら引き算の練習",tg:[["認知・遊び","数理解"],["手先の発達","目と手の協調性"]]},
+ {s:"Y",g:"読み書き計算",t:"数列の理解",tg:[["認知・遊び","数理解"]]},
+ {s:"Y",g:"読み書き計算",t:"計量カップ・スプーンで分数に親しむ",tg:[["認知・遊び","数理解"]]},
+ {s:"Y",g:"読み書き計算",t:"ドットのカードで足し算＆引き算",tg:[["認知・遊び","数理解"]]},
+ {s:"Y",g:"読み書き計算",t:"カレンダー",tg:[["認知・遊び","数理解"],["認知・遊び","概念理解"]]},
+ // YUKA 言葉
+ {s:"Y",g:"遊びを通して言葉を育む",t:"どっち？",tg:[["コミュニケーション","指差し"],["社会性","意図理解・やりたい"]]},
+ {s:"Y",g:"遊びを通して言葉を育む",t:"きっかけ棒",tg:[["コミュニケーション","喃語"],["社会性","まねっこと愛着"]]},
+ {s:"Y",g:"遊びを通して言葉を育む",t:"絵カード",tg:[["コミュニケーション","単語理解"],["認知・遊び","概念理解"]]},
+ {s:"Y",g:"遊びを通して言葉を育む",t:"電話",tg:[["認知・遊び","ごっこ遊び"],["社会性","いっしょに見る・感じる"]]},
+ {s:"Y",g:"遊びを通して言葉を育む",t:"コップで「どっち？」",tg:[["コミュニケーション","指差し"],["認知・遊び","隠れた物を探す"]]},
+ {s:"Y",g:"遊びを通して言葉を育む",t:"子供の行動や気持ちを言語化する",tg:[["コミュニケーション","単語理解"],["社会性","意図理解・やりたい"]]},
+ {s:"Y",g:"遊びを通して言葉を育む",t:"積む・崩す",tg:[["認知・遊び","構成遊び"],["認知・遊び","概念理解"]]},
+ {s:"Y",g:"遊びを通して言葉を育む",t:"おままごと",tg:[["認知・遊び","ごっこ遊び"],["コミュニケーション","二〜三語文"]]},
+ {s:"Y",g:"遊びを通して言葉を育む",t:"お絵かき",tg:[["手先の発達","描く・書く"],["コミュニケーション","一語文"]]},
+ {s:"Y",g:"遊びを通して言葉を育む",t:"言葉の意味を経験させて抽象的な言葉の理解を促す",tg:[["コミュニケーション","状況理解"],["認知・遊び","概念理解"]]},
+ {s:"Y",g:"遊びを通して言葉を育む",t:"ドミノ倒し",tg:[["認知・遊び","構成遊び"],["社会性","自己調整・ルール"]]},
+ {s:"Y",g:"遊びを通して言葉を育む",t:"はさみを使う練習",tg:[["手先の発達","ハサミ"],["コミュニケーション","多語文"]]},
+ {s:"Y",g:"遊びを通して言葉を育む",t:"複数の形容詞で名詞を修飾",tg:[["コミュニケーション","多語文"],["認知・遊び","概念理解"]]},
+ {s:"Y",g:"遊びを通して言葉を育む",t:"糊を使う練習",tg:[["手先の発達","道具操作"],["社会性","意図理解・やりたい"]]},
+ {s:"Y",g:"遊びを通して言葉を育む",t:"リボンのひっつき虫（吹く練習）",tg:[["コミュニケーション","喃語"]]},
+ {s:"Y",g:"遊びを通して言葉を育む",t:"ボウリング",tg:[["認知・遊び","ルール遊び"],["社会性","自己調整・ルール"]]},
+ {s:"Y",g:"遊びを通して言葉を育む",t:"反対ことばカード",tg:[["認知・遊び","概念理解"],["コミュニケーション","多語理解"]]},
+ // YUKA 多目的
+ {s:"Y",g:"多目的教材",t:"へんしんボックス",tg:[["認知・遊び","数理解"],["認知・遊び","文字理解"],["社会性","自己調整・ルール"]]},
+ // pumpkin 口腔・発音・摂食
+ {s:"P",g:"口腔・発音・摂食",t:"Chewy Tube／ARKグラバー（あご訓練）",tg:[["身辺自立","食事"],["コミュニケーション","喃語"]]},
+ {s:"P",g:"口腔・発音・摂食",t:"口の機能訓練（バンゲード方式・口腔マッサージ）",tg:[["身辺自立","食事"],["コミュニケーション","喃語"]]},
+ {s:"P",g:"口腔・発音・摂食",t:"吹く練習のおもちゃ（ラッパ・シャボン玉・吹き戻し）",tg:[["コミュニケーション","喃語"]]},
+ // pumpkin ことば
+ {s:"P",g:"ことば・コミュニケーション",t:"絵カード交換（PECS）",tg:[["コミュニケーション","単語理解"],["コミュニケーション","一語文"],["社会性","意図理解・やりたい"]]},
+ {s:"P",g:"ことば・コミュニケーション",t:"手作りVOCA・しゃべるカード（音声ペン）",tg:[["コミュニケーション","一語文"],["社会性","意図理解・やりたい"]]},
+ {s:"P",g:"ことば・コミュニケーション",t:"コミュニケーションボード（文字盤）",tg:[["コミュニケーション","多語文"],["認知・遊び","文字理解"]]},
+ {s:"P",g:"ことば・コミュニケーション",t:"マカトン／手話の本・DVD",tg:[["コミュニケーション","ジェスチャー・サイン"]]},
+ // pumpkin 国語
+ {s:"P",g:"国語（読み書き）教材",t:"くもんのカード（ひらがな・漢字・絵カード）",tg:[["認知・遊び","文字理解"]]},
+ {s:"P",g:"国語（読み書き）教材",t:"文作りマグネット（品詞マグネット）",tg:[["コミュニケーション","多語文"],["認知・遊び","文字理解"]]},
+ {s:"P",g:"国語（読み書き）教材",t:"お話づくりカード（時系列・四コマ）",tg:[["コミュニケーション","多語文"],["認知・遊び","記憶"]]},
+ {s:"P",g:"国語（読み書き）教材",t:"反対ことばカード",tg:[["認知・遊び","概念理解"],["コミュニケーション","多語理解"]]},
+ {s:"P",g:"国語（読み書き）教材",t:"用途・場所かるた",tg:[["コミュニケーション","単語理解"],["認知・遊び","概念理解"]]},
+ // pumpkin 算数
+ {s:"P",g:"算数教材",t:"お金そろばん／100玉そろばん",tg:[["認知・遊び","数理解"]]},
+ {s:"P",g:"算数教材",t:"そろばん（播州そろばん）",tg:[["認知・遊び","数理解"]]},
+ {s:"P",g:"算数教材",t:"10の補数パズル（Numicon等）",tg:[["認知・遊び","数理解"]]},
+ {s:"P",g:"算数教材",t:"お金トランプ・お金学習カード",tg:[["認知・遊び","数理解"]]},
+ {s:"P",g:"算数教材",t:"時計学習（短針のみの時計など）",tg:[["認知・遊び","数理解"],["認知・遊び","概念理解"]]},
+ {s:"P",g:"算数教材",t:"型はめ・数字パズル",tg:[["認知・遊び","図形理解"],["認知・遊び","数理解"]]},
+ // pumpkin 視覚支援・見通し
+ {s:"P",g:"視覚支援・見通し・教材作り",t:"視覚的スケジュール（巻物カレンダー等）",tg:[["認知・遊び","概念理解"],["社会性","自己調整・ルール"]]},
+ {s:"P",g:"視覚支援・見通し・教材作り",t:"タイムタイマー（残り時間の見える化）",tg:[["社会性","自己調整・ルール"],["認知・遊び","概念理解"]]},
+ {s:"P",g:"視覚支援・見通し・教材作り",t:"ミニホワイトボード（その場で書いて示す）",tg:[["コミュニケーション","多語文"],["社会性","自己調整・ルール"]]},
+ {s:"P",g:"視覚支援・見通し・教材作り",t:"ラミネーター（教材作りの必需品）",tg:[]},
+ // pumpkin ICT・GPS・書籍
+ {s:"P",g:"ICT・GPS・参考書籍",t:"iPad（学習・視覚支援・VOCAの土台）",tg:[]},
+ {s:"P",g:"ICT・GPS・参考書籍",t:"みてねみまもりGPS（自主通学の見守り）",tg:[]},
+ {s:"P",g:"ICT・GPS・参考書籍",t:"書籍『ダウン症の子に算数を教える本』",tg:[]},
+ {s:"P",g:"ICT・GPS・参考書籍",t:"書籍『ダウン症の子どもがいきいきと育つことばとコミュニケーション』",tg:[]},
+];
+
+const SITE={Y:"YUKAのおもちゃ箱",P:"働く主婦の独り言"};
+const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const tagHTML=(c,st)=>`<span class="tag" style="background:${CATCOLOR[c]||'#888'}">${esc(c)}›${esc(st)}</span>`;
+
+// ---- reference ----
+(function(){let h="";CATS.forEach(c=>{h+=`<div class="refcat"><h3><span class="dot" style="background:${c.c}"></span>${c.n} <small style="color:#9aa6b2;font-weight:400;font-size:11px">(${c.stages.length})</small></h3><div class="stg">`+c.stages.map(s=>`${s[0]}<span style="color:#c2cad6">(${s[1]})</span>`).join(' ／ ')+`</div></div>`;});document.getElementById('ref').innerHTML=h;})();
+
+// ---- View 1: toy -> tags ----
+(function(){
+  const groups={};const order=[];
+  TOYS.forEach(t=>{const key=t.s+"|"+t.g;if(!groups[key]){groups[key]=[];order.push(key);}groups[key].push(t);});
+  let h="";let curSite="";
+  order.forEach(key=>{
+    const [s,g]=key.split("|");
+    if(s!==curSite){curSite=s;h+=`<h2 class="sec" style="font-size:16px;border-color:#9aa6b2">📚 ${esc(SITE[s])}</h2>`;}
+    h+=`<div class="catblk"><h3>${esc(g)} <span style="color:#9aa6b2;font-size:12px">(${groups[key].length})</span></h3><div class="catbody">`;
+    groups[key].forEach(t=>{
+      const tags=t.tg.length?t.tg.map(x=>tagHTML(x[0],x[1])).join(""):`<span class="tag" style="background:#b6bcc6">発達タグなし（ツール/書籍）</span>`;
+      h+=`<article><div class="nm">${esc(t.t)}</div><div class="tags">${tags}</div></article>`;
+    });
+    h+=`</div></div>`;
+  });
+  document.getElementById('toyView').innerHTML=h;
+})();
+
+// ---- View 2: stage -> toys ----
+(function(){
+  const map={};// "cat|stage" -> [toy names]
+  TOYS.forEach(t=>t.tg.forEach(x=>{const k=x[0]+"|"+x[1];(map[k]=map[k]||[]).push(t.t);}));
+  let h=`<div class="stagewrap">`;
+  CATS.forEach(c=>{
+    h+=`<div class="scat"><h3><span class="tag" style="background:${c.c}">${c.n}</span></h3>`;
+    c.stages.forEach(s=>{
+      const k=c.n+"|"+s[0];const toys=map[k]||[];
+      h+=`<div class="srow"><div class="sname">${esc(s[0])}<em>${s[1]}</em></div><div class="toys">${toys.length?toys.map(esc).join(' ・ '):'<span style="color:#c2cad6">（該当なし）</span>'}</div></div>`;
+    });
+    h+=`</div>`;
+  });
+  h+=`</div>`;
+  document.getElementById('stageView').innerHTML=h;
+})();
+
+function show(v){
+  document.getElementById('toyView').style.display=v==='toy'?'':'none';
+  document.getElementById('stageView').style.display=v==='stage'?'':'none';
+  document.getElementById('bToy').className=v==='toy'?'on':'';
+  document.getElementById('bStage').className=v==='stage'?'on':'';
+}
+</script>
+</body>
+</html>
