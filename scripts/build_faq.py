@@ -16,10 +16,10 @@ KEY = os.environ.get("SUPABASE_ANON_KEY")
 if not KEY:
     sys.exit("SUPABASE_ANON_KEY を環境変数で指定してください")
 
-SELECT = "faq_code,persona,question,answer,category_l1,category_l2,is_supervised,origin,source_urls"
+SELECT = "faq_code,persona,question,answer,category_l1,category_l2,category_l3,is_supervised,origin,source_urls"
 URL = (f"{SB}/rest/v1/faq?select={SELECT}"
        "&is_deleted_flag=eq.false&origin=neq.blog&language_code=eq.ja"
-       "&order=category_l1,faq_code&limit=1000")
+       "&order=category_l1,category_l2,category_l3,faq_code&limit=1000")
 
 req = urllib.request.Request(URL, headers={"apikey": KEY, "Authorization": f"Bearer {KEY}"})
 rows = json.loads(urllib.request.urlopen(req).read().decode())
@@ -183,12 +183,12 @@ function render() {{
   if (activePersona) rows = rows.filter(x => x.persona === activePersona);
   if (qtext) {{
     const q = qtext.toLowerCase();
-    rows = rows.filter(x => (x.question + x.answer + (x.category_l2||"")).toLowerCase().includes(q));
+    rows = rows.filter(x => (x.question + x.answer + (x.category_l2||"") + (x.category_l3||"")).toLowerCase().includes(q));
   }}
   document.getElementById("count").innerHTML = `<b>${{rows.length}}</b> 件のQ&A` + (activePersona ? `（${{META[activePersona][0]}}）` : "");
   const groups = {{}};
   rows.slice(0, shown).forEach(x => {{
-    const g = x.category_l2 || x.category_l1 || "その他";
+    const g = x.category_l3 || x.category_l2 || x.category_l1 || "その他";
     (groups[g] = groups[g] || []).push(x);
   }});
   let h = Object.entries(groups).map(([g, xs]) =>
