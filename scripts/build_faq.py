@@ -16,7 +16,7 @@ KEY = os.environ.get("SUPABASE_ANON_KEY")
 if not KEY:
     sys.exit("SUPABASE_ANON_KEY を環境変数で指定してください")
 
-SELECT = "faq_code,persona,question,answer,category_l1,category_l2,category_l3,is_supervised,origin,source_urls"
+SELECT = "faq_code,persona,question,answer,category_l1,category_l2,category_l3,is_supervised,origin,source_urls,media_path"
 URL = (f"{SB}/rest/v1/faq?select={SELECT}"
        "&is_deleted_flag=eq.false&origin=neq.blog&language_code=eq.ja"
        "&order=category_l1,category_l2,category_l3,faq_code&limit=1000")
@@ -27,6 +27,12 @@ print(f"fetched {len(rows)} rows from {SB}")
 
 # 念のためのガード: blog由来（二次利用許諾が必要）を除外
 rows = [r for r in rows if r.get("origin") != "blog"]
+
+# 図解メディア: media_pathはファイル名のみ。ビルド時に環境のSUPABASE_URLから公開URLを組み立てる
+for r in rows:
+    if r.get("media_path"):
+        r["media_url"] = f"{SB}/storage/v1/object/public/public-assets/faq_media/{r['media_path']}"
+    r.pop("media_path", None)
 
 META = {
     "st":            ["ことりせんせい", "ことば・コミュニケーション", "言語聴覚士（ST）の分野", "kotori"],
@@ -89,6 +95,7 @@ h2.sec{{font-size:16px;margin:26px 0 12px}}
 .qa .av{{width:34px;height:34px;border-radius:50%;background:var(--off);flex-shrink:0;display:flex;align-items:center;justify-content:center}}
 .qa .av img{{width:78%;height:78%;object-fit:contain}}
 .qa .a{{display:none;padding:2px 18px 14px 60px;font-size:13px;color:#443a34}}
+.qa .a .qimg{{width:100%;max-width:560px;display:block;border-radius:12px;margin:4px 0 10px}}
 .qa.open .a{{display:block}}
 .meta{{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}}
 .who{{font-size:11px;color:var(--grey)}}
@@ -169,7 +176,7 @@ function card(x) {{
   }}).join("");
   return `<div class="qa"><div class="q" onclick="this.parentNode.classList.toggle('open')">
       <span class="av"><img src="${{AV(x.persona)}}" alt=""></span><span>${{esc(x.question)}}</span><span class="car">▶</span></div>
-    <div class="a">${{md(x.answer)}}
+    <div class="a">${{x.media_url ? `<img class="qimg" src="${{x.media_url}}" alt="${{esc(x.question)}}の図解" loading="lazy">` : ""}}${{md(x.answer)}}
       <div class="meta">
         <span class="who">${{m[0]}}（${{m[2]}}）</span>
         ${{gold ? '<span class="badge gold">専門職監修</span>' : (srcs ? '<span class="badge src">参考: 専門機関の公開情報</span>' : '')}}
