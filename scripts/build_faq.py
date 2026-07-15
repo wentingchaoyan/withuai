@@ -1,0 +1,241 @@
+#!/usr/bin/env python3
+"""HugMap 公開FAQページ（faq.html）の静的生成スクリプト。
+
+使い方:
+    SUPABASE_URL=https://xxxx.supabase.co SUPABASE_ANON_KEY=eyJ... python3 scripts/build_faq.py
+
+- Supabase の faq テーブルから公開可能なQ&A（origin != 'blog'、削除済み除外、日本語）を取得し、
+  データをHTMLに焼き込んだ faq.html をリポジトリ直下に出力する。
+- ページ側は外部通信ゼロ（キー埋め込みなし・高速・SEOフレンドリー）。
+- FAQ本文の正は Supabase。内容を更新したらこのスクリプトを再実行して faq.html をコミットする。
+"""
+import json, os, sys, urllib.request
+
+SB = os.environ.get("SUPABASE_URL", "https://dltohjfxawjonomvxfsd.supabase.co")  # 既定: dev
+KEY = os.environ.get("SUPABASE_ANON_KEY")
+if not KEY:
+    sys.exit("SUPABASE_ANON_KEY を環境変数で指定してください")
+
+# --- ビルド設定（環境変数で切替） ---
+# FAQ_OUTPUT       : 出力ファイル名（既定 faq.html）
+# FAQ_INCLUDE_PEER : "1" で先輩保護者（peer_parent / origin='blog' の体験談）を追加
+# FAQ_NOINDEX      : "1" で noindex を付与し、監修レビュー用バナーを表示（直URL限定公開向け）
+OUTFILE = os.environ.get("FAQ_OUTPUT", "faq.html")
+INCLUDE_PEER = os.environ.get("FAQ_INCLUDE_PEER") == "1"
+NOINDEX = os.environ.get("FAQ_NOINDEX") == "1"
+
+SELECT = "faq_code,persona,question,answer,category_l1,category_l2,category_l3,is_supervised,origin,source_urls,media_path"
+# 通常は blog由来（二次利用許諾が必要）をURL段で除外。先輩保護者を含める場合は全件取得してPythonで選別。
+origin_clause = "" if INCLUDE_PEER else "&origin=neq.blog"
+URL = (f"{SB}/rest/v1/faq?select={SELECT}"
+       f"&is_deleted_flag=eq.false{origin_clause}&language_code=eq.ja"
+       "&order=category_l1,category_l2,category_l3,faq_code&limit=2000")
+
+req = urllib.request.Request(URL, headers={"apikey": KEY, "Authorization": f"Bearer {KEY}"})
+rows = json.loads(urllib.request.urlopen(req).read().decode())
+print(f"fetched {len(rows)} rows from {SB} (include_peer={INCLUDE_PEER})")
+
+# blog由来（二次利用許諾が必要）は除外。ただし INCLUDE_PEER の場合のみ先輩保護者は残す。
+if INCLUDE_PEER:
+    rows = [r for r in rows if r.get("origin") != "blog" or r.get("persona") == "peer_parent"]
+else:
+    rows = [r for r in rows if r.get("origin") != "blog"]
+
+# 図解メディア: media_pathはファイル名のみ。ビルド時に環境のSUPABASE_URLから公開URLを組み立てる
+for r in rows:
+    if r.get("media_path"):
+        r["media_url"] = f"{SB}/storage/v1/object/public/public-assets/faq_media/{r['media_path']}"
+    r.pop("media_path", None)
+
+META = {
+    "st":            ["ことりせんせい", "ことば・コミュニケーション", "言語聴覚士（ST）の分野", "kotori"],
+    "ot":            ["りすせんせい", "手・感覚・生活動作", "作業療法士（OT）の分野", "risu"],
+    "pt":            ["うさぎせんせい", "からだ・運動", "理学療法士（PT）の分野", "usagi"],
+    "psychologist":  ["ふくろうせんせい", "こころ・社会性・認知", "心理の分野", "fukurou"],
+    "pediatrician":  ["くませんせい", "発達の基礎・健康", "小児科の分野", "kuma"],
+    "sped":          ["ぞうせんせい", "学習・学校生活", "特別支援教育の分野", "zou"],
+    "feeding_oral":  ["かばせんせい", "食べる・お口", "摂食・口腔（ST/OT/小児歯科）の分野", "kaba"],
+    "peer_parent":   ["先輩パパ・ママ", "体験談", "実際の親の声", "senpai"],
+    "social_worker": ["相談支援のせんせい", "制度・進路", "相談支援の分野", "kuma"],
+}
+ORDER = ["st", "ot", "pt", "psychologist", "pediatrician", "sped", "feeding_oral", "peer_parent"]
+LINEUP_H = [86, 80, 86, 84, 78, 84, 92, 88]
+
+DATA_JS = json.dumps(rows, ensure_ascii=False, separators=(",", ":"))
+META_JS = json.dumps(META, ensure_ascii=False)
+ORDER_JS = json.dumps(ORDER)
+hero_imgs = "".join(
+    f'<img src="assets/images/persona/{META[k][3]}.png" style="height:{h}px" alt="{META[k][0]}">'
+    for k, h in zip(ORDER, LINEUP_H))
+
+# 監修レビュー用（直URL限定）: 検索エンジン除外＋レビュー用バナー。
+# NOINDEX オフ時は空文字となり、既定の faq.html 出力は従来と完全に同一。
+robots_meta = '\n<meta name="robots" content="noindex,nofollow">' if NOINDEX else ""
+review_css = (".reviewbar{background:var(--purple);color:#fff;font-size:12px;"
+              "font-weight:700;text-align:center;padding:8px 16px;line-height:1.5}\n") if NOINDEX else ""
+review_banner = ('<div class="reviewbar">🔒 監修レビュー用（限定公開・非掲載）'
+                 '｜このページは検索に出ません。URLを知る方のみ閲覧できます。'
+                 '先輩保護者の体験談を含みます。</div>\n') if NOINDEX else ""
+
+html = f"""<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">{robots_meta}
+<title>発達の悩み、せんせいに聞いてみて｜HugMap FAQ - With U</title>
+<meta name="description" content="ことば・からだ・こころ・学習・食べること——ダウン症・発達がゆっくりな子の子育てFAQ。国際的な専門機関の公開情報と専門職監修のQ&Aを、分野ごとのせんせいがお届けします。">
+<link rel="icon" href="assets/images/favicon.ico">
+<style>
+:root{{--ink:#291712;--grey:#8D8380;--lgrey:#DCD5D2;--purple:#7D2741;--yellow:#D7C862;--orange:#FF511B;--off:#F4F1F0;--card:#fff}}
+*{{box-sizing:border-box;margin:0;padding:0}}
+body{{font-family:-apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;background:var(--off);color:var(--ink);line-height:1.7}}
+{review_css}.topbar{{background:#fff;border-bottom:1px solid var(--lgrey);padding:10px 20px;display:flex;align-items:center;gap:10px}}
+.topbar img{{height:26px}}
+.topbar a{{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:700;font-size:14px}}
+.hero{{background:var(--orange);color:#fff;padding:38px 20px 0;text-align:center;position:relative;overflow:hidden}}
+.hero .bub{{position:absolute;border-radius:50%;background:rgba(255,255,255,.12)}}
+.hero h1{{font-size:26px;letter-spacing:.02em;position:relative}}
+.hero .sub{{font-size:13px;margin-top:8px;opacity:.95;position:relative}}
+.hero .lineup{{display:flex;align-items:flex-end;justify-content:center;gap:12px;margin-top:18px;position:relative}}
+.searchwrap{{max-width:620px;margin:-24px auto 0;padding:0 16px;position:relative;z-index:5}}
+.searchwrap input{{width:100%;border:2px solid var(--lgrey);border-radius:999px;padding:14px 22px;font-size:15px;font-family:inherit;box-shadow:0 4px 18px rgba(41,23,18,.08);background:#fff}}
+.searchwrap input:focus{{outline:none;border-color:var(--orange)}}
+.wrap{{max-width:960px;margin:0 auto;padding:26px 16px 70px}}
+h2.sec{{font-size:16px;margin:26px 0 12px}}
+.tnav{{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:10px}}
+.tile{{background:var(--card);border:2px solid transparent;border-radius:16px;padding:12px 6px 10px;text-align:center;cursor:pointer}}
+.tile:hover{{border-color:var(--lgrey)}}
+.tile.on{{border-color:var(--orange)}}
+.tile img{{height:56px}}
+.tile .tn{{font-size:11px;font-weight:800;margin-top:6px}}
+.tile .td{{font-size:9.5px;color:var(--grey)}}
+.count{{font-size:13px;color:var(--grey);margin:14px 2px 6px}}
+.count b{{color:var(--orange)}}
+.gsec{{margin-top:18px}}
+.gh{{font-size:14.5px;font-weight:800;border-bottom:2px solid var(--orange);padding-bottom:6px;margin-bottom:10px}}
+.qa{{background:var(--card);border-radius:14px;margin-bottom:8px;overflow:hidden}}
+.qa .q{{display:flex;gap:10px;align-items:center;padding:13px 16px;cursor:pointer;font-weight:700;font-size:13.5px}}
+.qa .q .car{{margin-left:auto;color:var(--grey);flex-shrink:0;transition:transform .15s}}
+.qa.open .q .car{{transform:rotate(90deg)}}
+.qa .av{{width:34px;height:34px;border-radius:50%;background:var(--off);flex-shrink:0;display:flex;align-items:center;justify-content:center}}
+.qa .av img{{width:78%;height:78%;object-fit:contain}}
+.qa .a{{display:none;padding:2px 18px 14px 60px;font-size:13px;color:#443a34}}
+.qa .a .qimg{{width:100%;max-width:560px;display:block;border-radius:12px;margin:4px 0 10px}}
+.qa.open .a{{display:block}}
+.meta{{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}}
+.who{{font-size:11px;color:var(--grey)}}
+.badge{{font-size:10px;font-weight:800;border-radius:999px;padding:2px 10px}}
+.badge.gold{{background:var(--yellow);color:var(--ink)}}
+.badge.src{{background:var(--off);color:var(--grey);font-weight:600}}
+.srcs a{{font-size:10.5px;color:var(--purple);margin-right:8px}}
+.cta{{margin-top:12px;background:#FFF4EF;border-radius:10px;padding:9px 12px;font-size:12px;display:flex;gap:10px;align-items:center}}
+.cta img{{width:30px;height:30px;border-radius:50%;background:#fff}}
+.cta a{{color:var(--orange);font-weight:800;text-decoration:none}}
+.dlband{{background:var(--purple);color:#fff;border-radius:18px;padding:24px;margin-top:38px;display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:center;text-align:center}}
+.dlband .big{{font-size:17px;font-weight:800}}
+.dlband .small{{font-size:12px;opacity:.9;margin-top:4px}}
+.dlband .badges{{display:flex;gap:10px;align-items:center}}
+.dlband .badges img{{height:44px}}
+.foot{{max-width:960px;margin:0 auto;padding:18px 16px 40px;font-size:10.5px;color:var(--grey)}}
+.foot a{{color:var(--grey)}}
+.morebtn{{display:block;margin:16px auto 0;background:#fff;border:2px solid var(--lgrey);border-radius:999px;padding:9px 26px;font-size:13px;font-weight:700;color:var(--ink);cursor:pointer}}
+.morebtn:hover{{border-color:var(--orange)}}
+</style></head><body>
+{review_banner}<div class="topbar"><a href="story.html"><img src="assets/images/logo/logo.svg" alt="With U"><span>With U</span></a></div>
+<div class="hero">
+  <div class="bub" style="width:220px;height:220px;right:-70px;top:-80px"></div>
+  <div class="bub" style="width:120px;height:120px;left:-40px;bottom:20px"></div>
+  <h1>発達の悩み、せんせいに聞いてみて</h1>
+  <div class="sub">ダウン症・発達がゆっくりな子の子育てFAQ ｜ 国際的な専門機関の公開情報と、専門職監修のQ&amp;Aから</div>
+  <div class="lineup">{hero_imgs}</div>
+</div>
+<div class="searchwrap"><input id="q" placeholder="キーワードで探す（例：むせる、はいはい、トイレ、発音…）" autocomplete="off"></div>
+<div class="wrap">
+  <h2 class="sec">せんせいから選ぶ</h2>
+  <div class="tnav" id="tnav"></div>
+  <div class="count" id="count"></div>
+  <div id="list"></div>
+  <div class="dlband">
+    <div>
+      <div class="big">この続きは、アプリで。</div>
+      <div class="small">HugMapなら、せんせいたちに24時間いつでも相談できます（無料）</div>
+    </div>
+    <div class="badges">
+      <a href="services.html"><img src="assets/images/app/badge-app-store.svg" alt="App Store"></a>
+      <a href="services.html"><img src="assets/images/app/badge-google-play.svg" alt="Google Play"></a>
+    </div>
+  </div>
+</div>
+<div class="foot">
+  ※ このFAQは一般的な情報の提供であり、診断・治療に代わるものではありません。お子さん個別のご心配は、主治医・専門職・地域の相談窓口にご相談ください。<br>
+  ※ 「専門職監修」バッジは、専門職が回答・監修したQ&amp;Aにのみ表示しています。その他の回答は、AAP（米国小児科学会）・WHO・ASHAなど国際的な専門機関の公開情報をもとに作成し、出典を明記しています。<br>
+  © WITH U INC ｜ <a href="privacy-ja.html">プライバシーポリシー</a> ｜ <a href="terms-ja.html">利用規約</a>
+</div>
+<script>
+const DATA = {DATA_JS};
+const META = {META_JS};
+const ORDER = {ORDER_JS};
+const AV = p => `assets/images/persona/${{(META[p]||META.pediatrician)[3]}}.png`;
+let activePersona = null, qtext = "", shown = 40;
+const esc = s => (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const md = s => esc(s).replace(/\\*\\*(.+?)\\*\\*/g, "<b>$1</b>");
+function renderNav() {{
+  const counts = {{}};
+  DATA.forEach(x => counts[x.persona] = (counts[x.persona]||0)+1);
+  document.getElementById("tnav").innerHTML = ORDER.filter(p => counts[p]).map(p => `
+    <div class="tile" data-p="${{p}}"><img src="${{AV(p)}}" alt="${{META[p][0]}}">
+      <div class="tn">${{META[p][0]}}</div><div class="td">${{META[p][1]}}・${{counts[p]}}問</div></div>`).join("");
+  document.querySelectorAll(".tile").forEach(t => t.onclick = () => {{
+    activePersona = activePersona === t.dataset.p ? null : t.dataset.p;
+    shown = 40;
+    document.querySelectorAll(".tile").forEach(x => x.classList.toggle("on", x.dataset.p === activePersona));
+    render();
+  }});
+}}
+function card(x) {{
+  const m = META[x.persona] || ["せんせい","","",""];
+  const gold = x.origin === "expert_qa";
+  const peer = x.persona === "peer_parent";
+  // 先輩保護者の体験談は出典リンク（社内blog）を出さない
+  const srcs = peer ? "" : (x.source_urls||[]).slice(0,3).map(u => {{
+    try {{ return `<a href="${{u}}" target="_blank" rel="noopener">${{new URL(u).hostname.replace("www.","")}}</a>`; }}
+    catch(e) {{ return ""; }}
+  }}).join("");
+  const badge = peer ? '<span class="badge src">先輩保護者の声（監修前）</span>'
+    : (gold ? '<span class="badge gold">専門職監修</span>'
+       : (srcs ? '<span class="badge src">参考: 専門機関の公開情報</span>' : ''));
+  return `<div class="qa"><div class="q" onclick="this.parentNode.classList.toggle('open')">
+      <span class="av"><img src="${{AV(x.persona)}}" alt=""></span><span>${{esc(x.question)}}</span><span class="car">▶</span></div>
+    <div class="a">${{x.media_url ? `<img class="qimg" src="${{x.media_url}}" alt="${{esc(x.question)}}の図解" loading="lazy">` : ""}}${{md(x.answer)}}
+      <div class="meta">
+        <span class="who">${{m[0]}}（${{m[2]}}）</span>
+        ${{badge}}
+        <span class="srcs">${{srcs}}</span>
+      </div>
+      <div class="cta"><img src="${{AV(x.persona)}}" alt=""><span>この悩み、続きはアプリで。<b>${{m[0]}}</b>が24時間答えます。 <a href="services.html">HugMapを見る →</a></span></div>
+    </div></div>`;
+}}
+function render() {{
+  let rows = DATA;
+  if (activePersona) rows = rows.filter(x => x.persona === activePersona);
+  if (qtext) {{
+    const q = qtext.toLowerCase();
+    rows = rows.filter(x => (x.question + x.answer + (x.category_l2||"") + (x.category_l3||"")).toLowerCase().includes(q));
+  }}
+  document.getElementById("count").innerHTML = `<b>${{rows.length}}</b> 件のQ&A` + (activePersona ? `（${{META[activePersona][0]}}）` : "");
+  const groups = {{}};
+  rows.slice(0, shown).forEach(x => {{
+    const g = x.category_l3 || x.category_l2 || x.category_l1 || "その他";
+    (groups[g] = groups[g] || []).push(x);
+  }});
+  let h = Object.entries(groups).map(([g, xs]) =>
+    `<div class="gsec"><div class="gh">${{esc(g)}}</div>${{xs.map(card).join("")}}</div>`).join("");
+  if (rows.length > shown) h += `<button class="morebtn" onclick="shown+=40;render()">もっと見る（残り ${{rows.length - shown}} 件）</button>`;
+  document.getElementById("list").innerHTML = h || '<div class="count">該当するQ&Aがありません</div>';
+}}
+document.getElementById("q").addEventListener("input", e => {{ qtext = e.target.value.trim(); shown = 40; render(); }});
+renderNav(); render();
+</script>
+</body></html>"""
+
+out = os.path.join(os.path.dirname(__file__), "..", OUTFILE)
+with open(out, "w", encoding="utf-8") as f:
+    f.write(html)
+print(f"wrote {OUTFILE} ({len(rows)} Q&As, {len(html)//1024} KB)")
