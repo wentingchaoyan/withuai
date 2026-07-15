@@ -16,17 +16,30 @@ KEY = os.environ.get("SUPABASE_ANON_KEY")
 if not KEY:
     sys.exit("SUPABASE_ANON_KEY を環境変数で指定してください")
 
+# --- ビルド設定（環境変数で切替） ---
+# FAQ_OUTPUT       : 出力ファイル名（既定 faq.html）
+# FAQ_INCLUDE_PEER : "1" で先輩保護者（peer_parent / origin='blog' の体験談）を追加
+# FAQ_NOINDEX      : "1" で noindex を付与し、監修レビュー用バナーを表示（直URL限定公開向け）
+OUTFILE = os.environ.get("FAQ_OUTPUT", "faq.html")
+INCLUDE_PEER = os.environ.get("FAQ_INCLUDE_PEER") == "1"
+NOINDEX = os.environ.get("FAQ_NOINDEX") == "1"
+
 SELECT = "faq_code,persona,question,answer,category_l1,category_l2,category_l3,is_supervised,origin,source_urls,media_path"
+# 通常は blog由来（二次利用許諾が必要）をURL段で除外。先輩保護者を含める場合は全件取得してPythonで選別。
+origin_clause = "" if INCLUDE_PEER else "&origin=neq.blog"
 URL = (f"{SB}/rest/v1/faq?select={SELECT}"
-       "&is_deleted_flag=eq.false&origin=neq.blog&language_code=eq.ja"
-       "&order=category_l1,category_l2,category_l3,faq_code&limit=1000")
+       f"&is_deleted_flag=eq.false{origin_clause}&language_code=eq.ja"
+       "&order=category_l1,category_l2,category_l3,faq_code&limit=2000")
 
 req = urllib.request.Request(URL, headers={"apikey": KEY, "Authorization": f"Bearer {KEY}"})
 rows = json.loads(urllib.request.urlopen(req).read().decode())
-print(f"fetched {len(rows)} rows from {SB}")
+print(f"fetched {len(rows)} rows from {SB} (include_peer={INCLUDE_PEER})")
 
-# 念のためのガード: blog由来（二次利用許諾が必要）を除外
-rows = [r for r in rows if r.get("origin") != "blog"]
+# blog由来（二次利用許諾が必要）は除外。ただし INCLUDE_PEER の場合のみ先輩保護者は残す。
+if INCLUDE_PEER:
+    rows = [r for r in rows if r.get("origin") != "blog" or r.get("persona") == "peer_parent"]
+else:
+    rows = [r for r in rows if r.get("origin") != "blog"]
 
 # 図解メディア: media_pathはファイル名のみ。ビルド時に環境のSUPABASE_URLから公開URLを組み立てる
 for r in rows:
@@ -55,8 +68,17 @@ hero_imgs = "".join(
     f'<img src="assets/images/persona/{META[k][3]}.png" style="height:{h}px" alt="{META[k][0]}">'
     for k, h in zip(ORDER, LINEUP_H))
 
+# 監修レビュー用（直URL限定）: 検索エンジン除外＋レビュー用バナー。
+# NOINDEX オフ時は空文字となり、既定の faq.html 出力は従来と完全に同一。
+robots_meta = '\n<meta name="robots" content="noindex,nofollow">' if NOINDEX else ""
+review_css = (".reviewbar{background:var(--purple);color:#fff;font-size:12px;"
+              "font-weight:700;text-align:center;padding:8px 16px;line-height:1.5}\n") if NOINDEX else ""
+review_banner = ('<div class="reviewbar">🔒 監修レビュー用（限定公開・非掲載）'
+                 '｜このページは検索に出ません。URLを知る方のみ閲覧できます。'
+                 '先輩保護者の体験談を含みます。</div>\n') if NOINDEX else ""
+
 html = f"""<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">{robots_meta}
 <title>発達の悩み、せんせいに聞いてみて｜HugMap FAQ - With U</title>
 <meta name="description" content="ことば・からだ・こころ・学習・食べること——ダウン症・発達がゆっくりな子の子育てFAQ。国際的な専門機関の公開情報と専門職監修のQ&Aを、分野ごとのせんせいがお届けします。">
 <link rel="icon" href="assets/images/favicon.ico">
@@ -64,7 +86,7 @@ html = f"""<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
 :root{{--ink:#291712;--grey:#8D8380;--lgrey:#DCD5D2;--purple:#7D2741;--yellow:#D7C862;--orange:#FF511B;--off:#F4F1F0;--card:#fff}}
 *{{box-sizing:border-box;margin:0;padding:0}}
 body{{font-family:-apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;background:var(--off);color:var(--ink);line-height:1.7}}
-.topbar{{background:#fff;border-bottom:1px solid var(--lgrey);padding:10px 20px;display:flex;align-items:center;gap:10px}}
+{review_css}.topbar{{background:#fff;border-bottom:1px solid var(--lgrey);padding:10px 20px;display:flex;align-items:center;gap:10px}}
 .topbar img{{height:26px}}
 .topbar a{{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:700;font-size:14px}}
 .hero{{background:var(--orange);color:#fff;padding:38px 20px 0;text-align:center;position:relative;overflow:hidden}}
@@ -116,7 +138,7 @@ h2.sec{{font-size:16px;margin:26px 0 12px}}
 .morebtn{{display:block;margin:16px auto 0;background:#fff;border:2px solid var(--lgrey);border-radius:999px;padding:9px 26px;font-size:13px;font-weight:700;color:var(--ink);cursor:pointer}}
 .morebtn:hover{{border-color:var(--orange)}}
 </style></head><body>
-<div class="topbar"><a href="story.html"><img src="assets/images/logo/logo.svg" alt="With U"><span>With U</span></a></div>
+{review_banner}<div class="topbar"><a href="story.html"><img src="assets/images/logo/logo.svg" alt="With U"><span>With U</span></a></div>
 <div class="hero">
   <div class="bub" style="width:220px;height:220px;right:-70px;top:-80px"></div>
   <div class="bub" style="width:120px;height:120px;left:-40px;bottom:20px"></div>
@@ -170,16 +192,21 @@ function renderNav() {{
 function card(x) {{
   const m = META[x.persona] || ["せんせい","","",""];
   const gold = x.origin === "expert_qa";
-  const srcs = (x.source_urls||[]).slice(0,3).map(u => {{
+  const peer = x.persona === "peer_parent";
+  // 先輩保護者の体験談は出典リンク（社内blog）を出さない
+  const srcs = peer ? "" : (x.source_urls||[]).slice(0,3).map(u => {{
     try {{ return `<a href="${{u}}" target="_blank" rel="noopener">${{new URL(u).hostname.replace("www.","")}}</a>`; }}
     catch(e) {{ return ""; }}
   }}).join("");
+  const badge = peer ? '<span class="badge src">先輩保護者の声（監修前）</span>'
+    : (gold ? '<span class="badge gold">専門職監修</span>'
+       : (srcs ? '<span class="badge src">参考: 専門機関の公開情報</span>' : ''));
   return `<div class="qa"><div class="q" onclick="this.parentNode.classList.toggle('open')">
       <span class="av"><img src="${{AV(x.persona)}}" alt=""></span><span>${{esc(x.question)}}</span><span class="car">▶</span></div>
     <div class="a">${{x.media_url ? `<img class="qimg" src="${{x.media_url}}" alt="${{esc(x.question)}}の図解" loading="lazy">` : ""}}${{md(x.answer)}}
       <div class="meta">
         <span class="who">${{m[0]}}（${{m[2]}}）</span>
-        ${{gold ? '<span class="badge gold">専門職監修</span>' : (srcs ? '<span class="badge src">参考: 専門機関の公開情報</span>' : '')}}
+        ${{badge}}
         <span class="srcs">${{srcs}}</span>
       </div>
       <div class="cta"><img src="${{AV(x.persona)}}" alt=""><span>この悩み、続きはアプリで。<b>${{m[0]}}</b>が24時間答えます。 <a href="services.html">HugMapを見る →</a></span></div>
@@ -208,7 +235,7 @@ renderNav(); render();
 </script>
 </body></html>"""
 
-out = os.path.join(os.path.dirname(__file__), "..", "faq.html")
+out = os.path.join(os.path.dirname(__file__), "..", OUTFILE)
 with open(out, "w", encoding="utf-8") as f:
     f.write(html)
-print(f"wrote faq.html ({len(rows)} Q&As, {len(html)//1024} KB)")
+print(f"wrote {OUTFILE} ({len(rows)} Q&As, {len(html)//1024} KB)")
