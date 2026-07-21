@@ -62,9 +62,21 @@ h2.sec{font-size:16px;margin:26px 0 12px}
 .foot a{color:var(--grey)}
 .morebtn{display:block;margin:16px auto 0;background:#fff;border:2px solid var(--lgrey);border-radius:999px;padding:9px 26px;font-size:13px;font-weight:700;color:var(--ink);cursor:pointer}
 .morebtn:hover{border-color:var(--orange)}
+.feedback{display:flex;align-items:center;gap:7px;margin-top:12px;font-size:11px;color:var(--grey)}
+.feedback button{border:1px solid var(--lgrey);background:#fff;border-radius:999px;padding:4px 10px;font:inherit;color:var(--ink);cursor:pointer}
+.feedback button:hover{border-color:var(--purple)}.feedback button:disabled{cursor:default;opacity:.55}
 @media(max-width:700px){.hero{padding-left:0;padding-right:0}.hero h1,.hero .sub,.hero .kicker{margin-left:16px;margin-right:16px}.hero .lineup{justify-content:flex-start;overflow-x:auto;scrollbar-width:none}.hero .lineup::-webkit-scrollbar{display:none}.hero .lineup img{flex:0 0 auto}.tnav{grid-template-columns:repeat(4,1fr);gap:8px}}
 @media(max-width:440px){.hero h1{font-size:22px}.hero .sub{font-size:12px}.tnav{grid-template-columns:repeat(2,1fr)}.qa .a{padding-left:18px}}
-</style></head><body>
+</style>
+<script>
+window.HUGMAP_ANALYTICS_CONFIG = {
+  measurementId: "G-K4L57BBLM7",
+  gtmContainerId: "", // GTM利用時のみ設定。measurementIdとは併用しない
+  consentDefault: "" // Consent Mode利用時は "denied" または "granted"
+};
+</script>
+<script src="assets/js/hugmap-analytics.js"></script>
+</head><body>
 <div class="reviewbar">🔒 監修レビュー用（限定公開・非掲載）｜このページは検索に出ません。URLを知る方のみ閲覧できます。先輩保護者の体験談を含みます。</div>
 <div class="topbar"><a href="story.html"><img src="assets/images/logo/logo.svg" alt="With U"><span>With U</span></a></div>
 <div class="hero">
@@ -87,8 +99,8 @@ h2.sec{font-size:16px;margin:26px 0 12px}
       <div class="small">HugMapなら、せんせいたちに24時間いつでも相談できます（無料）</div>
     </div>
     <div class="badges">
-      <a href="services.html"><img src="assets/images/app/badge-app-store.svg" alt="App Store"></a>
-      <a href="services.html"><img src="assets/images/app/badge-google-play.svg" alt="Google Play"></a>
+      <a href="services.html" data-action="app-cta" data-placement="bottom_banner" data-store="app_store"><img src="assets/images/app/badge-app-store.svg" alt="App Store"></a>
+      <a href="services.html" data-action="app-cta" data-placement="bottom_banner" data-store="google_play"><img src="assets/images/app/badge-google-play.svg" alt="Google Play"></a>
     </div>
   </div>
 </div>
@@ -105,6 +117,16 @@ const AV = p => `assets/images/persona/${(META[p]||META.pediatrician)[3]}.png?v=
 let activePersona = null, qtext = "", shown = 40;
 const esc = s => (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 const md = s => esc(s).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
+const track = (eventName, params={}) => window.HugMapAnalytics?.track(eventName, params);
+const filteredRows = () => {
+  let rows = DATA;
+  if (activePersona) rows = rows.filter(x => x.persona === activePersona);
+  if (qtext) {
+    const q = qtext.toLowerCase();
+    rows = rows.filter(x => (x.question + x.answer + (x.category_l2||"") + (x.category_l3||"")).toLowerCase().includes(q));
+  }
+  return rows;
+};
 function renderNav() {
   const counts = {};
   DATA.forEach(x => counts[x.persona] = (counts[x.persona]||0)+1);
@@ -116,6 +138,7 @@ function renderNav() {
     shown = 40;
     document.querySelectorAll(".tile").forEach(x => x.classList.toggle("on", x.dataset.p === activePersona));
     render();
+    track("persona_select", {persona: activePersona || "all", result_count: filteredRows().length});
   });
 }
 function card(x) {
@@ -124,13 +147,13 @@ function card(x) {
   const peer = x.persona === "peer_parent";
   // 先輩保護者の体験談は出典リンク（社内blog）を出さない
   const srcs = peer ? "" : (x.source_urls||[]).slice(0,3).map(u => {
-    try { return `<a href="${u}" target="_blank" rel="noopener">${new URL(u).hostname.replace("www.","")}</a>`; }
+    try { const domain = new URL(u).hostname.replace("www.",""); return `<a href="${u}" target="_blank" rel="noopener" data-action="source-link" data-domain="${domain}">${domain}</a>`; }
     catch(e) { return ""; }
   }).join("");
   const badge = peer ? '<span class="badge src">先輩保護者の声（監修前）</span>'
     : (gold ? '<span class="badge gold">専門職監修</span>'
        : (srcs ? '<span class="badge src">参考: 専門機関の公開情報</span>' : ''));
-  return `<div class="qa"><div class="q" onclick="this.parentNode.classList.toggle('open')">
+  return `<div class="qa" data-faq-code="${esc(x.faq_code)}" data-persona="${esc(x.persona)}"><div class="q" role="button" tabindex="0" aria-expanded="false" data-action="toggle-faq">
       <span class="av"><img src="${AV(x.persona)}" alt=""></span><span>${esc(x.question)}</span><span class="car">▶</span></div>
     <div class="a">${x.media_url ? `<img class="qimg" src="${x.media_url}" alt="${esc(x.question)}の図解" loading="lazy">` : ""}${md(x.answer)}
       <div class="meta">
@@ -138,16 +161,12 @@ function card(x) {
         ${badge}
         <span class="srcs">${srcs}</span>
       </div>
-      <div class="cta"><img src="${AV(x.persona)}" alt=""><span>この悩み、続きはアプリで。<b>${m[0]}</b>が24時間答えます。 <a href="services.html">HugMapを見る →</a></span></div>
+      <div class="feedback"><span>この回答は役に立ちましたか？</span><button type="button" data-action="faq-feedback" data-helpful="true">はい</button><button type="button" data-action="faq-feedback" data-helpful="false">いいえ</button></div>
+      <div class="cta"><img src="${AV(x.persona)}" alt=""><span>この悩み、続きはアプリで。<b>${m[0]}</b>が24時間答えます。 <a href="services.html" data-action="app-cta" data-placement="faq_answer">HugMapを見る →</a></span></div>
     </div></div>`;
 }
 function render() {
-  let rows = DATA;
-  if (activePersona) rows = rows.filter(x => x.persona === activePersona);
-  if (qtext) {
-    const q = qtext.toLowerCase();
-    rows = rows.filter(x => (x.question + x.answer + (x.category_l2||"") + (x.category_l3||"")).toLowerCase().includes(q));
-  }
+  const rows = filteredRows();
   document.getElementById("count").innerHTML = `<b>${rows.length}</b> 件のQ&A` + (activePersona ? `（${META[activePersona][0]}）` : "");
   const groups = {};
   rows.slice(0, shown).forEach(x => {
@@ -156,10 +175,78 @@ function render() {
   });
   let h = Object.entries(groups).map(([g, xs]) =>
     `<div class="gsec"><div class="gh">${esc(g)}</div>${xs.map(card).join("")}</div>`).join("");
-  if (rows.length > shown) h += `<button class="morebtn" onclick="shown+=40;render()">もっと見る（残り ${rows.length - shown} 件）</button>`;
+  if (rows.length > shown) h += `<button class="morebtn" data-action="load-more">もっと見る（残り ${rows.length - shown} 件）</button>`;
   document.getElementById("list").innerHTML = h || '<div class="count">該当するQ&Aがありません</div>';
 }
-document.getElementById("q").addEventListener("input", e => { qtext = e.target.value.trim(); shown = 40; render(); });
+const list = document.getElementById("list");
+const faqByCode = code => DATA.find(x => x.faq_code === code);
+function toggleFaq(trigger) {
+  const qa = trigger.closest(".qa");
+  const faq = faqByCode(qa.dataset.faqCode);
+  const isOpening = !qa.classList.contains("open");
+  qa.classList.toggle("open");
+  trigger.setAttribute("aria-expanded", String(isOpening));
+  if (isOpening && faq) track("faq_open", {
+    faq_code: faq.faq_code, persona: faq.persona,
+    category_l1: faq.category_l1, category_l2: faq.category_l2, category_l3: faq.category_l3
+  });
+}
+list.addEventListener("click", e => {
+  const action = e.target.closest("[data-action]");
+  if (!action) return;
+  const qa = action.closest(".qa");
+  const faq = qa ? faqByCode(qa.dataset.faqCode) : null;
+  if (action.dataset.action === "toggle-faq") toggleFaq(action);
+  if (action.dataset.action === "source-link" && faq) track("source_link_click", {
+    faq_code: faq.faq_code, persona: faq.persona, source_domain: action.dataset.domain
+  });
+  if (action.dataset.action === "app-cta" && faq) track("app_cta_click", {
+    placement: action.dataset.placement, faq_code: faq.faq_code, persona: faq.persona
+  });
+  if (action.dataset.action === "faq-feedback" && faq) {
+    track("faq_feedback", {faq_code: faq.faq_code, persona: faq.persona, helpful: action.dataset.helpful});
+    qa.querySelectorAll('[data-action="faq-feedback"]').forEach(button => button.disabled = true);
+  }
+  if (action.dataset.action === "load-more") {
+    shown += 40;
+    track("load_more", {visible_count: Math.min(shown, filteredRows().length), total_count: filteredRows().length});
+    render();
+  }
+});
+list.addEventListener("keydown", e => {
+  if ((e.key === "Enter" || e.key === " ") && e.target.dataset.action === "toggle-faq") {
+    e.preventDefault(); toggleFaq(e.target);
+  }
+});
+document.addEventListener("click", e => {
+  const action = e.target.closest('[data-action="app-cta"]');
+  if (action && !action.closest(".qa")) track("app_cta_click", {
+    placement: action.dataset.placement, store: action.dataset.store
+  });
+});
+let searchTimer;
+document.getElementById("q").addEventListener("input", e => {
+  qtext = e.target.value.trim(); shown = 40; render();
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    if (!qtext) return;
+    const resultCount = filteredRows().length;
+    const params = {query_length: qtext.length, result_count: resultCount, persona: activePersona || "all"};
+    track("faq_search", params);
+    if (resultCount === 0) track("search_no_results", {query_length: qtext.length, persona: activePersona || "all"});
+  }, 700);
+});
+const reachedDepths = new Set();
+window.addEventListener("scroll", () => {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  if (max <= 0) return;
+  const percent = Math.round((window.scrollY / max) * 100);
+  [50, 90].forEach(depth => {
+    if (percent >= depth && !reachedDepths.has(depth)) {
+      reachedDepths.add(depth); track("scroll_depth", {percent: depth});
+    }
+  });
+}, {passive:true});
 renderNav(); render();
 </script>
 </body></html>
