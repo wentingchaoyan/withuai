@@ -24,12 +24,14 @@ OUTFILE = os.environ.get("FAQ_OUTPUT", "faq.html")
 INCLUDE_PEER = os.environ.get("FAQ_INCLUDE_PEER") == "1"
 NOINDEX = os.environ.get("FAQ_NOINDEX") == "1"
 
-SELECT = "faq_code,persona,question,answer,category_l1,category_l2,category_l3,is_supervised,origin,source_urls,media_path"
+# 分類は faq_category を埋め込み取得（日本語名）。分類の正はDB側の二言語マスタ faq_category。
+SELECT = ("faq_code,persona,question,answer,is_supervised,origin,source_urls,media_path,"
+          "faq_category(name_l1_ja,name_l2_ja,name_l3_ja)")
 # 通常は blog由来（二次利用許諾が必要）をURL段で除外。先輩保護者を含める場合は全件取得してPythonで選別。
 origin_clause = "" if INCLUDE_PEER else "&origin=neq.blog"
 URL = (f"{SB}/rest/v1/faq?select={SELECT}"
        f"&is_deleted_flag=eq.false{origin_clause}&language_code=eq.ja"
-       "&order=category_l1,category_l2,category_l3,faq_code&limit=2000")
+       "&limit=2000")
 
 req = urllib.request.Request(URL, headers={"apikey": KEY, "Authorization": f"Bearer {KEY}"})
 rows = json.loads(urllib.request.urlopen(req).read().decode())
@@ -41,11 +43,20 @@ if INCLUDE_PEER:
 else:
     rows = [r for r in rows if r.get("origin") != "blog"]
 
-# 図解メディア: media_pathはファイル名のみ。ビルド時に環境のSUPABASE_URLから公開URLを組み立てる
 for r in rows:
+    # 図解メディア: media_pathはファイル名のみ。ビルド時に環境のSUPABASE_URLから公開URLを組み立てる
     if r.get("media_path"):
         r["media_url"] = f"{SB}/storage/v1/object/public/public-assets/faq_media/{r['media_path']}"
     r.pop("media_path", None)
+    # 分類（日本語）を faq_category から展開してページ用フィールドに落とす
+    fc = r.pop("faq_category", None) or {}
+    r["category_l1"] = fc.get("name_l1_ja")
+    r["category_l2"] = fc.get("name_l2_ja")
+    r["category_l3"] = fc.get("name_l3_ja")
+
+# category_l1 > l2 > l3 > faq_code で安定ソート（グループ表示順）
+rows.sort(key=lambda r: (r.get("category_l1") or "", r.get("category_l2") or "",
+                         r.get("category_l3") or "", r.get("faq_code") or ""))
 
 META = {
     "st":            ["ことりせんせい", "ことば・コミュニケーション", "言語聴覚士（ST）の分野", "kotori"],
