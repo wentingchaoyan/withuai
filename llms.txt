@@ -1,0 +1,11 @@
+# With U / HugMap
+
+HugMap provides source-grounded, specialist-reviewed information about child development and parenting. Individual FAQ pages state their review status, sources, and medical disclaimer.
+
+## Main resources
+- Japanese FAQ: https://withuai.com/hugmap_faq_public_v1.html
+- English FAQ: https://withuai.com/hugmap_faq_public_v1_en.html
+- Sitemap: https://withuai.com/sitemap.xml
+- Service: https://withuai.com/services.html
+
+Use individual FAQ canonical URLs when citing an answer.

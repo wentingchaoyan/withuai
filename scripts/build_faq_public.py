@@ -18,9 +18,11 @@
   SUPABASE_URL      : 既定 dev
   FAQ_REUSE_EXISTING: '1' で既存出力の埋め込みデータを再利用（ローカルUI確認専用）
 """
-import json, os, re, sys, urllib.request
+import datetime, html as html_lib, json, os, re, sys, urllib.parse, urllib.request
+from pathlib import Path
 
 SB = os.environ.get("SUPABASE_URL", "https://dltohjfxawjonomvxfsd.supabase.co")
+SITE_URL = os.environ.get("SITE_URL", "https://withuai.com").rstrip("/")
 KEY = os.environ.get("SUPABASE_ANON_KEY")
 
 LANG = os.environ.get("FAQ_LANG", "ja")
@@ -92,3 +94,124 @@ out = os.path.join(os.path.dirname(__file__), "..", OUTFILE)
 with open(out, "w", encoding="utf-8") as f:
     f.write(html)
 print(f"wrote {OUTFILE} ({len(rows)} Q&As, {len(html)//1024} KB)")
+
+
+def plain_text(value):
+    """Meta description用にMarkdown記号と改行を落とす。"""
+    return re.sub(r"\s+", " ", re.sub(r"\*\*", "", value or "")).strip()
+
+
+def answer_html(value):
+    escaped = html_lib.escape(value or "")
+    escaped = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", escaped)
+    return "<br>".join(escaped.splitlines())
+
+
+def faq_path(lang, code):
+    filename = f"{code.lower()}.html"
+    return f"faq/{filename}" if lang == "ja" else f"en/faq/{filename}"
+
+
+def existing_translation_codes(lang):
+    other_output = "hugmap_faq_public_v1_en.html" if lang == "ja" else "hugmap_faq_public_v1.html"
+    other_path = Path(__file__).resolve().parent.parent / other_output
+    if not other_path.exists():
+        return set()
+    match = re.search(r"const DATA = (\[.*?\]);\s*const META", other_path.read_text(encoding="utf-8"), re.S)
+    if not match:
+        return set()
+    return {r.get("faq_code") for r in json.loads(match.group(1)) if r.get("faq_code")}
+
+
+def build_faq_detail(row, lang, has_translation):
+    is_ja = lang == "ja"
+    code = row.get("faq_code") or "faq"
+    question = plain_text(row.get("question"))
+    answer = row.get("answer") or ""
+    description = plain_text(answer)[:155]
+    canonical_path = faq_path(lang, code)
+    canonical = f"{SITE_URL}/{canonical_path}"
+    asset_prefix = "../assets" if is_ja else "../../assets"
+    index_href = "../hugmap_faq_public_v1.html" if is_ja else "../../hugmap_faq_public_v1_en.html"
+    other_lang = "en" if is_ja else "ja"
+    alternate = f"{SITE_URL}/{faq_path(other_lang, code)}" if has_translation else ""
+    category = row.get("category_l3") or row.get("category_l2") or row.get("category_l1") or ("発達・子育て" if is_ja else "Development & parenting")
+    supervised = bool(row.get("is_supervised"))
+    status = ("専門職監修" if supervised else "専門機関の公開情報を参照") if is_ja else ("Specialist reviewed" if supervised else "Based on public professional guidance")
+    sources = []
+    for source in (row.get("source_urls") or [])[:5]:
+        try:
+            label = re.sub(r"^www\.", "", urllib.parse.urlparse(source).hostname or source)
+        except Exception:
+            label = source
+        sources.append(f'<a href="{html_lib.escape(source, quote=True)}" rel="noopener noreferrer" target="_blank">{html_lib.escape(label)}</a>')
+    source_html = " · ".join(sources) if sources else ("ページ内に記載された監修情報に基づきます" if is_ja else "See the review information on this page")
+    faq_schema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {"@type": "FAQPage", "@id": canonical + "#faq", "mainEntity": [{"@type": "Question", "name": question, "acceptedAnswer": {"@type": "Answer", "text": plain_text(answer)}}]},
+            {"@type": "WebPage", "@id": canonical, "url": canonical, "name": question, "inLanguage": lang, "isPartOf": {"@id": SITE_URL + "/#website"}, "publisher": {"@id": SITE_URL + "/#organization"}},
+            {"@type": "Organization", "@id": SITE_URL + "/#organization", "name": "WITH U INC", "url": SITE_URL},
+            {"@type": "BreadcrumbList", "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "With U", "item": SITE_URL + "/"},
+                {"@type": "ListItem", "position": 2, "name": "HugMap FAQ", "item": SITE_URL + ("/hugmap_faq_public_v1.html" if is_ja else "/hugmap_faq_public_v1_en.html")},
+                {"@type": "ListItem", "position": 3, "name": question, "item": canonical}
+            ]}
+        ]
+    }
+    alternate_tags = f'<link rel="alternate" hreflang="{other_lang}" href="{alternate}">' if alternate else ""
+    labels = {
+        "back": "FAQ一覧へ" if is_ja else "All FAQs",
+        "review": "回答の信頼性" if is_ja else "About this answer",
+        "sources": "出典" if is_ja else "Sources",
+        "disclaimer": "このFAQは一般的な情報の提供であり、診断・治療に代わるものではありません。個別の心配は主治医・専門職・地域の相談窓口へご相談ください。" if is_ja else "This FAQ provides general information and does not replace diagnosis or treatment. For individual concerns, consult an appropriate professional.",
+        "cta": "この子の場合を、HugMapで相談する" if is_ja else "Discuss your child's situation in HugMap"
+    }
+    schema_json = json.dumps(faq_schema, ensure_ascii=False).replace("</", "<\\/")
+    service_prefix = "../" if is_ja else "../../"
+    return f'''<!doctype html><html lang="{lang}"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<title>{html_lib.escape(question)}｜HugMap FAQ</title>
+<meta name="description" content="{html_lib.escape(description, quote=True)}">
+<link rel="canonical" href="{canonical}">
+<link rel="alternate" hreflang="{lang}" href="{canonical}">{alternate_tags}
+<meta property="og:type" content="article"><meta property="og:title" content="{html_lib.escape(question, quote=True)}"><meta property="og:description" content="{html_lib.escape(description, quote=True)}"><meta property="og:url" content="{canonical}">
+<link rel="icon" href="{asset_prefix}/images/logo/favicon/favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">{schema_json}</script>
+<style>:root{{--ink:#291712;--muted:#786d68;--line:#e4ddda;--purple:#7d2741;--orange:#ff511b;--off:#f4f1f0}}*{{box-sizing:border-box}}body{{margin:0;background:var(--off);color:var(--ink);font-family:-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.85}}header{{background:#fff;border-bottom:1px solid var(--line);padding:12px 20px}}header a{{color:var(--ink);font-weight:800;text-decoration:none}}main{{max-width:780px;margin:36px auto;padding:0 18px}}.crumb{{font-size:12px;color:var(--muted);margin-bottom:18px}}.crumb a{{color:var(--purple)}}article{{background:#fff;border-radius:22px;padding:clamp(22px,5vw,42px);box-shadow:0 8px 30px rgba(41,23,18,.06)}}.category{{color:var(--orange);font-size:12px;font-weight:800}}h1{{font-size:clamp(22px,4vw,32px);line-height:1.45;margin:8px 0 24px}}.answer{{font-size:16px}}.trust{{border-top:1px solid var(--line);margin-top:30px;padding-top:20px;font-size:12px;color:var(--muted)}}.trust b{{color:var(--ink)}}.sources{{margin-top:8px}}.sources a{{color:var(--purple)}}.notice{{margin-top:20px;padding:13px;background:var(--off);border-radius:10px;font-size:11px;color:var(--muted)}}.cta{{display:block;margin-top:24px;border-radius:999px;background:var(--orange);color:#fff;text-align:center;padding:12px 18px;font-weight:800;text-decoration:none}}footer{{max-width:780px;margin:24px auto 50px;padding:0 18px;color:var(--muted);font-size:11px}}</style></head><body>
+<header><a href="{index_href}">HugMap FAQ</a></header><main><nav class="crumb"><a href="{index_href}">{labels['back']}</a> / {html_lib.escape(category)}</nav><article><div class="category">{html_lib.escape(category)}</div><h1>{html_lib.escape(question)}</h1><div class="answer">{answer_html(answer)}</div><section class="trust"><b>{labels['review']}：</b>{status}<div class="sources"><b>{labels['sources']}：</b>{source_html}</div></section><div class="notice">{labels['disclaimer']}</div><a class="cta" href="{service_prefix}services.html?source=faq_detail&amp;faq={html_lib.escape(code, quote=True)}">{labels['cta']}</a></article></main><footer>© WITH U INC · FAQ ID: {html_lib.escape(code)}</footer></body></html>'''
+
+
+def write_seo_pages(rows, lang):
+    root = Path(__file__).resolve().parent.parent
+    out_dir = root / ("faq" if lang == "ja" else "en/faq")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    translations = existing_translation_codes(lang)
+    for row in rows:
+        code = row.get("faq_code")
+        if not code:
+            continue
+        (out_dir / f"{code.lower()}.html").write_text(build_faq_detail(row, lang, code in translations), encoding="utf-8")
+    print(f"wrote {len(rows)} static {lang} FAQ detail pages to {out_dir.relative_to(root)}")
+
+
+def write_discovery_files():
+    root = Path(__file__).resolve().parent.parent
+    urls = [f"{SITE_URL}/", f"{SITE_URL}/services.html", f"{SITE_URL}/hugmap_faq_public_v1.html", f"{SITE_URL}/hugmap_faq_public_v1_en.html"]
+    for directory in (root / "faq", root / "en/faq"):
+        if directory.exists():
+            urls.extend(f"{SITE_URL}/{p.relative_to(root).as_posix()}" for p in sorted(directory.glob("*.html")))
+    today = datetime.date.today().isoformat()
+    entries = "".join(f"<url><loc>{html_lib.escape(url)}</loc><lastmod>{today}</lastmod></url>" for url in dict.fromkeys(urls))
+    (root / "sitemap.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{entries}</urlset>\n', encoding="utf-8")
+    (root / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: GPTBot\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
+    (root / "llms.txt").write_text(
+        f"# With U / HugMap\n\nHugMap provides source-grounded, specialist-reviewed information about child development and parenting. Individual FAQ pages state their review status, sources, and medical disclaimer.\n\n## Main resources\n- Japanese FAQ: {SITE_URL}/hugmap_faq_public_v1.html\n- English FAQ: {SITE_URL}/hugmap_faq_public_v1_en.html\n- Sitemap: {SITE_URL}/sitemap.xml\n- Service: {SITE_URL}/services.html\n\nUse individual FAQ canonical URLs when citing an answer.\n",
+        encoding="utf-8",
+    )
+    print(f"wrote sitemap.xml ({len(dict.fromkeys(urls))} URLs), robots.txt, and llms.txt")
+
+
+write_seo_pages(rows, LANG)
+write_discovery_files()

@@ -1,9 +1,14 @@
 <!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex,nofollow">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <title>発達の悩み、せんせいに聞いてみて｜HugMap FAQ - With U</title>
 <meta name="description" content="ことば・からだ・こころ・学習・食べること——ダウン症・発達がゆっくりな子の子育てFAQ。国際的な専門機関の公開情報と専門職監修のQ&Aを、分野ごとのせんせいがお届けします。">
-<link rel="icon" href="assets/images/favicon.ico">
+<link rel="canonical" href="https://withuai.com/hugmap_faq_public_v1.html">
+<link rel="alternate" hreflang="ja" href="https://withuai.com/hugmap_faq_public_v1.html">
+<link rel="alternate" hreflang="en" href="https://withuai.com/hugmap_faq_public_v1_en.html">
+<link rel="alternate" hreflang="x-default" href="https://withuai.com/hugmap_faq_public_v1.html">
+<meta property="og:type" content="website"><meta property="og:title" content="子どもの「気になる」を探す｜HugMap FAQ"><meta property="og:description" content="発達や子育ての疑問に、信頼できる情報で答えます"><meta property="og:url" content="https://withuai.com/hugmap_faq_public_v1.html">
+<link rel="icon" href="assets/images/logo/favicon/favicon.svg" type="image/svg+xml">
 <style>
 :root{--ink:#291712;--grey:#8D8380;--lgrey:#DCD5D2;--purple:#7D2741;--yellow:#D7C862;--orange:#FF511B;--off:#F4F1F0;--card:#fff}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -67,6 +72,7 @@ h2.sec{font-size:16px;margin:26px 0 12px}
 .badge.gold{background:var(--yellow);color:var(--ink)}
 .badge.src{background:var(--off);color:var(--grey);font-weight:600}
 .srcs a{font-size:10.5px;color:var(--purple);margin-right:8px}
+.permalink{font-size:10.5px;color:var(--purple);font-weight:700;text-decoration:none;margin-left:auto}
 .cta{margin-top:12px;background:#FFF4EF;border-radius:10px;padding:9px 12px;font-size:12px;display:flex;gap:10px;align-items:center}
 .cta img{width:30px;height:30px;border-radius:50%;background:#fff}
 .cta a{color:var(--orange);font-weight:800;text-decoration:none}
@@ -105,7 +111,6 @@ window.HUGMAP_ANALYTICS_CONFIG = {
 </script>
 <script src="assets/js/hugmap-analytics.js"></script>
 </head><body>
-<div class="reviewbar">🔒 監修レビュー用 ｜ 検索には表示されません</div>
 <div class="topbar"><a href="story.html"><img src="assets/images/logo/logo.svg" alt="With U"><span>With U</span></a><button class="pocket-trigger" id="pocket-trigger" type="button" aria-label="保存したQ&Aを開く"><img src="assets/images/persona/persona_pocket.png" alt=""><span>ポーチ</span><span class="pocket-count" id="pocket-count">0</span></button></div>
 <div class="hero">
   <div class="bub" style="width:220px;height:220px;right:-70px;top:-80px"></div>
@@ -266,6 +271,7 @@ function card(x) {
         <span class="who">${m[0]}（${m[2]}）</span>
         ${badge}
         <span class="srcs">${srcs}</span>
+        <a class="permalink" href="faq/${x.faq_code.toLowerCase()}.html">個別ページ</a>
       </div>
       <div class="answer-actions"><button class="pocket-save${isPocketed(x.faq_code) ? " saved" : ""}" type="button" data-code="${encodeURIComponent(x.faq_code)}" aria-pressed="${isPocketed(x.faq_code)}">${isPocketed(x.faq_code) ? "✓ ポーチに保存済み" : "♡ ポーチにしまう"}</button><div class="feedback"><span>役に立った？</span><button type="button" data-feedback="yes" data-faq-code="${encodeURIComponent(x.faq_code)}" data-persona="${x.persona}">はい</button><button type="button" data-feedback="no" data-faq-code="${encodeURIComponent(x.faq_code)}" data-persona="${x.persona}">いいえ</button></div></div>
       <div class="cta"><img src="${AV(x.persona)}" alt=""><span>この悩み、続きはアプリで。<b>${m[0]}</b>が24時間答えます。 <a href="services.html" data-app-cta data-placement="faq_answer" data-faq-code="${encodeURIComponent(x.faq_code)}" data-persona="${x.persona}">HugMapを見る →</a></span></div>
