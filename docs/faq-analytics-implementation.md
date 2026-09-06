@@ -54,9 +54,13 @@ GTMでは各カスタムイベント名をトリガーにし、同名のGA4イ�
 | `source_link_click` | 回答の出典リンクをクリック | `faq_code`, `persona`, `source_domain` |
 | `load_more` | 「もっと見る」をクリック | `visible_count`, `total_count` |
 | `faq_feedback` | 「役に立った／立たなかった」 | `faq_code`, `persona`, `helpful` |
+| `faq_recommendation` | 任意のおすすめ検索を実行 | `result_count` |
+| `faq_pocket_add` | FAQをWebポーチへ保存 | `faq_code` |
+| `faq_pocket_remove` | FAQをWebポーチから削除 | `faq_code` |
+| `faq_pocket_open` | WebポーチからFAQを再表示 | `faq_code` |
 | `scroll_depth` | 50%／90%へ初めて到達 | `percent` |
 
-`faq_search` と `search_no_results` には検索語を含めない。`source_domain` はリンク先ドメインのみとし、完全なURLは送らない。
+`faq_search` と `search_no_results` には検索語を含めない。おすすめ検索で選んだ年齢、気になる場面、診断・特性も送信しない。`source_domain` はリンク先ドメインのみとし、完全なURLは送らない。
 
 ## GA4側の設定
 

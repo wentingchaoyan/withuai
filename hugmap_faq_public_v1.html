@@ -8,10 +8,12 @@
 :root{--ink:#291712;--grey:#8D8380;--lgrey:#DCD5D2;--purple:#7D2741;--yellow:#D7C862;--orange:#FF511B;--off:#F4F1F0;--card:#fff}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;background:var(--off);color:var(--ink);line-height:1.7}
-.reviewbar{background:var(--purple);color:#fff;font-size:12px;font-weight:700;text-align:center;padding:8px 16px;line-height:1.5}
-.topbar{background:#fff;border-bottom:1px solid var(--lgrey);padding:10px 20px;display:flex;align-items:center;gap:10px}
+.reviewbar{background:var(--purple);color:#fff;font-size:11px;font-weight:700;text-align:center;padding:6px 16px;line-height:1.4}
+.topbar{background:#fff;border-bottom:1px solid var(--lgrey);padding:9px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px}
 .topbar img{height:26px}
 .topbar a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:700;font-size:14px}
+.pocket-trigger{border:1px solid var(--lgrey);background:#fff;border-radius:999px;padding:5px 10px 5px 6px;display:flex;align-items:center;gap:5px;color:var(--ink);font:inherit;font-size:12px;font-weight:800;cursor:pointer}
+.pocket-trigger img{width:28px;height:28px;object-fit:contain}.pocket-count{min-width:20px;height:20px;border-radius:10px;background:var(--orange);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:10px}
 .hero{background:linear-gradient(180deg,#fff 0%,var(--off) 100%);color:var(--ink);padding:38px 20px 26px;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid var(--lgrey)}
 .hero .bub{position:absolute;border-radius:50%;background:rgba(215,200,98,.16)}
 .hero .kicker{display:inline-block;position:relative;background:#fff4ef;color:var(--orange);font-size:11px;font-weight:800;border-radius:999px;padding:4px 12px;margin-bottom:8px}
@@ -23,6 +25,21 @@ body{font-family:-apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto
 .searchwrap input{width:100%;border:2px solid var(--lgrey);border-radius:999px;padding:14px 22px;font-size:15px;font-family:inherit;box-shadow:0 4px 18px rgba(41,23,18,.08);background:#fff}
 .searchwrap input:focus{outline:none;border-color:var(--purple)}
 .wrap{max-width:960px;margin:0 auto;padding:26px 16px 70px}
+.wrap .searchwrap{max-width:none;margin:0;padding:0}
+.finder{background:#fff;border-radius:20px;padding:24px;margin:4px 0 32px;box-shadow:0 5px 22px rgba(41,23,18,.06)}
+.finder-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+.finder h2{font-size:20px;margin:0}.finder .intro{font-size:13px;color:var(--grey);margin-top:3px}
+.privacy-note{font-size:10.5px;color:var(--grey);white-space:nowrap;background:var(--off);border-radius:999px;padding:3px 9px}
+.finder-fields{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end;margin-top:16px}
+.finder label{display:block;font-size:12px;font-weight:800}
+.finder select{width:100%;margin-top:5px;border:1.5px solid var(--lgrey);border-radius:10px;background:#fff;padding:10px 30px 10px 10px;color:var(--ink);font:inherit;font-size:13px}
+.recommend-btn{border:0;border-radius:999px;background:var(--orange);color:#fff;padding:11px 18px;font-size:13px;font-weight:800;cursor:pointer;white-space:nowrap}
+.recommend-btn:hover{filter:brightness(.96)}
+.recommendations{display:none;margin:20px 0 30px;padding:20px;background:#fff9f5;border:2px solid #ffd9ca;border-radius:20px}
+.recommendations.show{display:block}.recommendations h2{font-size:18px}.recommendations .reason{font-size:12px;color:var(--grey);margin:2px 0 14px}
+.recommendations .qa{border:1px solid #f0dfd8}.browse-all{font-size:12px;color:var(--grey);margin-top:14px;text-align:center}
+.all-faq-head{margin:34px 0 14px;padding-top:26px;border-top:1px solid var(--lgrey)}
+.all-faq-head h2{font-size:20px}.all-faq-head p{font-size:12px;color:var(--grey);margin-top:2px}
 h2.sec{font-size:16px;margin:26px 0 12px}
 .tnav{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:10px}
 .tile{background:var(--card);border:2px solid transparent;border-radius:16px;padding:12px 6px 10px;text-align:center;cursor:pointer}
@@ -53,6 +70,20 @@ h2.sec{font-size:16px;margin:26px 0 12px}
 .cta{margin-top:12px;background:#FFF4EF;border-radius:10px;padding:9px 12px;font-size:12px;display:flex;gap:10px;align-items:center}
 .cta img{width:30px;height:30px;border-radius:50%;background:#fff}
 .cta a{color:var(--orange);font-weight:800;text-decoration:none}
+.answer-actions{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.pocket-save{border:1.5px solid var(--purple);background:#fff;color:var(--purple);border-radius:999px;padding:7px 12px;font:inherit;font-size:11px;font-weight:800;cursor:pointer}
+.pocket-save.saved{background:var(--purple);color:#fff}.pocket-save:hover{filter:brightness(.97)}
+.feedback{display:flex;align-items:center;gap:6px;margin-left:auto;color:var(--grey);font-size:10.5px}.feedback button{border:1px solid var(--lgrey);background:#fff;border-radius:999px;padding:5px 9px;color:var(--grey);font:inherit;font-size:10.5px;cursor:pointer}.feedback button.on{border-color:var(--orange);background:#fff4ef;color:var(--orange);font-weight:800}
+.pocket-layer{display:none;position:fixed;inset:0;background:rgba(41,23,18,.38);z-index:50;padding:18px;align-items:center;justify-content:center}.pocket-layer.show{display:flex}
+.pocket-panel{width:min(520px,100%);max-height:min(680px,88vh);overflow:auto;background:#fff;border-radius:24px;padding:22px;box-shadow:0 18px 50px rgba(41,23,18,.24)}
+.pocket-head{display:flex;align-items:center;gap:10px}.pocket-head img{width:52px;height:52px;object-fit:contain}.pocket-head h2{font-size:20px}.pocket-head p{font-size:11px;color:var(--grey)}
+.storage-note{margin-top:14px;padding:10px 12px;background:var(--off);border-radius:10px;color:var(--grey);font-size:10.5px;line-height:1.6}.storage-note b{color:var(--ink)}
+.pocket-close{margin-left:auto;border:0;background:var(--off);width:34px;height:34px;border-radius:50%;font-size:19px;cursor:pointer}
+.pocket-empty{text-align:center;color:var(--grey);font-size:13px;padding:30px 12px}
+.pocket-list{margin-top:16px}.pocket-item{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border-top:1px solid var(--lgrey);padding:12px 2px}
+.pocket-open{border:0;background:none;text-align:left;color:var(--ink);font:inherit;font-size:13px;font-weight:700;cursor:pointer}.pocket-remove{border:0;background:none;color:var(--grey);font:inherit;font-size:11px;cursor:pointer;padding:6px}
+.pocket-app{background:#fff4ef;border-radius:14px;padding:14px;margin-top:16px;text-align:center}.pocket-app b{display:block;font-size:14px}.pocket-app span{display:block;color:var(--grey);font-size:11px;margin:2px 0 8px}.pocket-app a{color:var(--orange);font-size:12px;font-weight:800;text-decoration:none}
+.pocket-toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--ink);color:#fff;border-radius:999px;padding:9px 15px;font-size:12px;z-index:60;opacity:0;pointer-events:none;transition:.2s}.pocket-toast.show{opacity:1;transform:translate(-50%,0)}
 .dlband{background:var(--purple);color:#fff;border-radius:18px;padding:24px;margin-top:38px;display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:center;text-align:center}
 .dlband .big{font-size:17px;font-weight:800}
 .dlband .small{font-size:12px;opacity:.9;margin-top:4px}
@@ -62,7 +93,7 @@ h2.sec{font-size:16px;margin:26px 0 12px}
 .foot a{color:var(--grey)}
 .morebtn{display:block;margin:16px auto 0;background:#fff;border:2px solid var(--lgrey);border-radius:999px;padding:9px 26px;font-size:13px;font-weight:700;color:var(--ink);cursor:pointer}
 .morebtn:hover{border-color:var(--orange)}
-@media(max-width:700px){.hero{padding-left:0;padding-right:0}.hero h1,.hero .sub,.hero .kicker{margin-left:16px;margin-right:16px}.hero .lineup{justify-content:flex-start;overflow-x:auto;scrollbar-width:none}.hero .lineup::-webkit-scrollbar{display:none}.hero .lineup img{flex:0 0 auto}.tnav{grid-template-columns:repeat(4,1fr);gap:8px}}
+@media(max-width:700px){.hero{padding-left:0;padding-right:0}.hero h1,.hero .sub,.hero .kicker{margin-left:16px;margin-right:16px}.hero .lineup{justify-content:flex-start;overflow-x:auto;scrollbar-width:none}.hero .lineup::-webkit-scrollbar{display:none}.hero .lineup img{flex:0 0 auto}.tnav{grid-template-columns:repeat(4,1fr);gap:8px}.finder-fields{grid-template-columns:1fr 1fr}.recommend-btn{grid-column:1/-1}.finder-head{display:block}.privacy-note{margin-top:6px;white-space:normal}}
 @media(max-width:440px){.hero h1{font-size:22px}.hero .sub{font-size:12px}.tnav{grid-template-columns:repeat(2,1fr)}.qa .a{padding-left:18px}}
 </style>
 <script>
@@ -74,19 +105,30 @@ window.HUGMAP_ANALYTICS_CONFIG = {
 </script>
 <script src="assets/js/hugmap-analytics.js"></script>
 </head><body>
-<div class="reviewbar">🔒 監修レビュー用（限定公開・非掲載）｜このページは検索に出ません。URLを知る方のみ閲覧できます。先輩保護者の体験談を含みます。</div>
-<div class="topbar"><a href="story.html"><img src="assets/images/logo/logo.svg" alt="With U"><span>With U</span></a></div>
+<div class="reviewbar">🔒 監修レビュー用 ｜ 検索には表示されません</div>
+<div class="topbar"><a href="story.html"><img src="assets/images/logo/logo.svg" alt="With U"><span>With U</span></a><button class="pocket-trigger" id="pocket-trigger" type="button" aria-label="保存したQ&Aを開く"><img src="assets/images/persona/persona_pocket.png" alt=""><span>ポーチ</span><span class="pocket-count" id="pocket-count">0</span></button></div>
 <div class="hero">
   <div class="bub" style="width:220px;height:220px;right:-70px;top:-80px"></div>
   <div class="bub" style="width:120px;height:120px;left:-40px;bottom:20px"></div>
-  <div class="kicker">分野ごとの専門家と先輩保護者が案内します</div>
-  <h1>発達の悩み、せんせいに聞いてみて</h1>
-  <div class="sub">ダウン症・発達がゆっくりな子の子育てFAQ ｜ 国際的な専門機関の公開情報と、専門職監修のQ&amp;Aから</div>
+  <div class="kicker">8人の案内役と探す</div>
+  <h1>子どもの「気になる」を探す</h1>
+  <div class="sub">発達や子育ての疑問に、信頼できる情報で答えます</div>
   <div class="lineup"><img src="assets/images/persona/kotori.png?v=20260716" style="height:86px" alt="ことりせんせい"><img src="assets/images/persona/risu.png?v=20260716" style="height:92px" alt="りすせんせい"><img src="assets/images/persona/usagi.png?v=20260716" style="height:86px" alt="うさぎせんせい"><img src="assets/images/persona/fukurou.png?v=20260716" style="height:84px" alt="ふくろうせんせい"><img src="assets/images/persona/kuma.png?v=20260716" style="height:78px" alt="くませんせい"><img src="assets/images/persona/zou.png?v=20260716" style="height:84px" alt="ぞうせんせい"><img src="assets/images/persona/kaba.png?v=20260716" style="height:92px" alt="かばせんせい"><img src="assets/images/persona/senpai.png?v=20260716" style="height:88px" alt="先輩パパ・ママ"></div>
 </div>
-<div class="searchwrap"><input id="q" placeholder="キーワードで探す（例：むせる、はいはい、トイレ、発音…）" autocomplete="off"></div>
 <div class="wrap">
-  <h2 class="sec">せんせいから選ぶ</h2>
+  <section class="finder" aria-labelledby="finder-title">
+    <div class="finder-head"><div><h2 id="finder-title">この子に近いQ&amp;A</h2><div class="intro">今の状況から、まず読む5件を選びます。</div></div><div class="privacy-note">選択内容は端末内のみ</div></div>
+    <div class="finder-fields">
+      <label>年齢<select id="finder-age"><option value="">選択しない</option><option value="baby">0〜1歳</option><option value="toddler">2〜3歳</option><option value="preschool">4〜6歳</option><option value="school">小学生</option><option value="teen">中学生以上</option></select></label>
+      <label>気になること<select id="finder-concern"><option value="">選択しない</option><option value="communication">ことば・伝え方</option><option value="movement">からだ・運動</option><option value="sensory_daily">感覚・生活動作</option><option value="mind_social">気持ち・行動・人との関わり</option><option value="eating">食事・お口</option><option value="learning">園・学校・学び</option><option value="health">発達の基礎・健康</option></select></label>
+      <label>背景（任意）<select id="finder-context"><option value="">選択しない</option><option value="down">ダウン症</option><option value="slow">発達がゆっくり</option><option value="neurodiverse">発達特性がある・気になる</option><option value="undiagnosed">診断はない・まだ分からない</option></select></label>
+      <button class="recommend-btn" id="recommend-btn" type="button">5件を見る</button>
+    </div>
+  </section>
+  <section class="recommendations" id="recommendations" aria-live="polite"><h2>まずはこちらの質問から</h2><div class="reason" id="recommend-reason"></div><div id="recommend-list"></div><div class="browse-all">回答はすべて無料で読めます。下には全Q&amp;Aを掲載しています。</div></section>
+  <div class="all-faq-head"><h2>すべてのQ&amp;A</h2><p>キーワードや分野から自由に探せます。</p></div>
+  <div class="searchwrap"><input id="q" placeholder="キーワードで探す" aria-label="FAQをキーワードで探す" autocomplete="off"></div>
+  <h2 class="sec">分野から選ぶ</h2>
   <div class="tnav" id="tnav"></div>
   <div class="count" id="count"></div>
   <div id="list"></div>
@@ -96,11 +138,20 @@ window.HUGMAP_ANALYTICS_CONFIG = {
       <div class="small">HugMapなら、せんせいたちに24時間いつでも相談できます（無料）</div>
     </div>
     <div class="badges">
-      <a href="services.html"><img src="assets/images/app/badge-app-store.svg" alt="App Store"></a>
-      <a href="services.html"><img src="assets/images/app/badge-google-play.svg" alt="Google Play"></a>
+      <a href="services.html" data-app-cta data-placement="faq_footer"><img src="assets/images/app/badge-app-store.svg" alt="App Store"></a>
+      <a href="services.html" data-app-cta data-placement="faq_footer"><img src="assets/images/app/badge-google-play.svg" alt="Google Play"></a>
     </div>
   </div>
 </div>
+<div class="pocket-layer" id="pocket-layer" role="dialog" aria-modal="true" aria-labelledby="pocket-title">
+  <div class="pocket-panel">
+    <div class="pocket-head"><img src="assets/images/persona/persona_pocket.png" alt="ぽけっとさんのポケット"><div><h2 id="pocket-title">ぽけっとさんのポーチ</h2><p>あとで読みたい答えを、この端末にしまいます。</p></div><button class="pocket-close" id="pocket-close" type="button" aria-label="ポーチを閉じる">×</button></div>
+    <div class="storage-note"><b>Web版では、このブラウザに一時保存されます。</b><br>履歴・サイトデータの削除やブラウザの設定により、消えることがあります。アプリなら、アカウントに紐づけて継続して保存できます。</div>
+    <div id="pocket-content"></div>
+    <div class="pocket-app"><b>アプリなら、記録と一緒に残せます</b><span>ためすことや相談も、ひとつのポーチへ。</span><a href="services.html?source=faq_pocket" data-pocket-app>HugMapを見る →</a></div>
+  </div>
+</div>
+<div class="pocket-toast" id="pocket-toast" role="status" aria-live="polite"></div>
 <div class="foot">
   ※ このFAQは一般的な情報の提供であり、診断・治療に代わるものではありません。お子さん個別のご心配は、主治医・専門職・地域の相談窓口にご相談ください。<br>
   ※ 「専門職監修」バッジは、専門職が回答・監修したQ&amp;Aにのみ表示しています。その他の回答は、AAP（米国小児科学会）・WHO・ASHAなど国際的な専門機関の公開情報をもとに作成し、出典を明記しています。<br>
@@ -111,9 +162,77 @@ const DATA = [{"faq_code":"FAQ-W044","persona":"psychologist","question":"癇癪
 const META = {"st": ["ことりせんせい", "ことば・コミュニケーション", "言語聴覚士（ST）の分野", "kotori"], "ot": ["りすせんせい", "手・感覚・生活動作", "作業療法士（OT）の分野", "risu"], "pt": ["うさぎせんせい", "からだ・運動", "理学療法士（PT）の分野", "usagi"], "psychologist": ["ふくろうせんせい", "こころ・社会性・認知", "心理の分野", "fukurou"], "pediatrician": ["くませんせい", "発達の基礎・健康", "小児科の分野", "kuma"], "sped": ["ぞうせんせい", "学習・学校生活", "特別支援教育の分野", "zou"], "feeding_oral": ["かばせんせい", "食べる・お口", "摂食・口腔（ST/OT/小児歯科）の分野", "kaba"], "peer_parent": ["先輩パパ・ママ", "体験談", "実際の親の声", "senpai"], "social_worker": ["相談支援のせんせい", "制度・進路", "相談支援の分野", "kuma"]};
 const ORDER = ["st", "ot", "pt", "psychologist", "pediatrician", "sped", "feeding_oral", "peer_parent"];
 const AV = p => `assets/images/persona/${(META[p]||META.pediatrician)[3]}.png?v=20260716`;
-let activePersona = null, qtext = "", shown = 40;
+let activePersona = null, qtext = "", shown = 40, searchTimer;
+const scrollDepthSent = new Set();
+const CONCERNS = {
+  communication:{label:"ことば・伝え方",personas:["st"],words:["ことば","発語","発音","会話","伝え","コミュニケーション","指さし","声"]},
+  movement:{label:"からだ・運動",personas:["pt"],words:["運動","歩","立つ","座る","はいはい","姿勢","身体","からだ"]},
+  sensory_daily:{label:"感覚・生活動作",personas:["ot"],words:["感覚","着替","トイレ","生活","手先","遊び","片付","自立"]},
+  mind_social:{label:"気持ち・行動・人との関わり",personas:["psychologist"],words:["気持ち","行動","友達","集団","不安","かんしゃく","社会","人との"]},
+  eating:{label:"食事・お口",personas:["feeding_oral"],words:["食","飲","むせ","口","歯","噛","偏食"]},
+  learning:{label:"園・学校・学び",personas:["sped"],words:["学校","園","学習","学び","授業","就学","宿題"]},
+  health:{label:"発達の基礎・健康",personas:["pediatrician"],words:["健康","発達","受診","医療","睡眠","検査","療育"]}
+};
+const AGES = {
+  baby:{label:"0〜1歳",words:["乳児","赤ちゃん","授乳","離乳","寝返り","おすわり","はいはい"]},
+  toddler:{label:"2〜3歳",words:["2歳","3歳","幼児","トイレ","発語","イヤイヤ"]},
+  preschool:{label:"4〜6歳",words:["4歳","5歳","6歳","就学前","保育園","幼稚園","園"]},
+  school:{label:"小学生",words:["小学生","小学校","学校","授業","宿題","就学"]},
+  teen:{label:"中学生以上",words:["中学生","高校","思春期","青年","進路","就労"]}
+};
+const POCKET_KEY = "hugmap_faq_pocket_v1";
+let pocket = loadPocket();
+let toastTimer;
 const esc = s => (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 const md = s => esc(s).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
+function loadPocket() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(POCKET_KEY) || "[]");
+    return Array.isArray(saved) ? saved.filter(code => DATA.some(x => x.faq_code === code)) : [];
+  } catch(e) { return []; }
+}
+function savePocket() {
+  try { localStorage.setItem(POCKET_KEY, JSON.stringify(pocket)); } catch(e) {}
+}
+function isPocketed(code) { return pocket.includes(code); }
+function showToast(message) {
+  const toast = document.getElementById("pocket-toast");
+  toast.textContent = message; toast.classList.add("show");
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove("show"), 1800);
+}
+function syncPocketButtons() {
+  document.querySelectorAll(".pocket-save").forEach(btn => {
+    const saved = isPocketed(decodeURIComponent(btn.dataset.code));
+    btn.classList.toggle("saved", saved);
+    btn.textContent = saved ? "✓ ポーチに保存済み" : "♡ ポーチにしまう";
+    btn.setAttribute("aria-pressed", String(saved));
+    btn.onclick = () => togglePocket(decodeURIComponent(btn.dataset.code));
+  });
+  document.getElementById("pocket-count").textContent = pocket.length;
+}
+function togglePocket(code) {
+  const index = pocket.indexOf(code);
+  const adding = index < 0;
+  if (adding) pocket.unshift(code); else pocket.splice(index, 1);
+  savePocket(); syncPocketButtons(); renderPocket();
+  showToast(adding ? "ポーチにしまいました" : "ポーチから取り出しました");
+  window.HugMapAnalytics?.track(adding ? "faq_pocket_add" : "faq_pocket_remove", {faq_code:code});
+}
+function renderPocket() {
+  const items = pocket.map(code => DATA.find(x => x.faq_code === code)).filter(Boolean);
+  document.getElementById("pocket-content").innerHTML = items.length ? `<div class="pocket-list">${items.map(x => `<div class="pocket-item"><button class="pocket-open" type="button" data-open-code="${encodeURIComponent(x.faq_code)}">${esc(x.question)}</button><button class="pocket-remove" type="button" data-remove-code="${encodeURIComponent(x.faq_code)}">削除</button></div>`).join("")}</div>` : '<div class="pocket-empty">まだ何も入っていません。<br>気になるQ&amp;Aをしまってみましょう。</div>';
+  document.querySelectorAll("[data-remove-code]").forEach(btn => btn.onclick = () => togglePocket(decodeURIComponent(btn.dataset.removeCode)));
+  document.querySelectorAll("[data-open-code]").forEach(btn => btn.onclick = () => openPocketFaq(decodeURIComponent(btn.dataset.openCode)));
+}
+function openPocketFaq(code) {
+  closePocket();
+  const target = document.querySelector(`#list .qa[data-code="${CSS.escape(code)}"]`);
+  if (!target) return;
+  target.classList.add("open"); target.scrollIntoView({behavior:"smooth",block:"center"});
+  window.HugMapAnalytics?.track("faq_pocket_open", {faq_code:code});
+}
+function openPocket() { renderPocket(); document.getElementById("pocket-layer").classList.add("show"); document.body.style.overflow="hidden"; }
+function closePocket() { document.getElementById("pocket-layer").classList.remove("show"); document.body.style.overflow=""; }
 function renderNav() {
   const counts = {};
   DATA.forEach(x => counts[x.persona] = (counts[x.persona]||0)+1);
@@ -125,6 +244,7 @@ function renderNav() {
     shown = 40;
     document.querySelectorAll(".tile").forEach(x => x.classList.toggle("on", x.dataset.p === activePersona));
     render();
+    window.HugMapAnalytics?.track("persona_select", {persona:activePersona||"all",result_count:filteredRows().length});
   });
 }
 function card(x) {
@@ -133,13 +253,13 @@ function card(x) {
   const peer = x.persona === "peer_parent";
   // 先輩保護者の体験談は出典リンク（社内blog）を出さない
   const srcs = peer ? "" : (x.source_urls||[]).slice(0,3).map(u => {
-    try { return `<a href="${u}" target="_blank" rel="noopener">${new URL(u).hostname.replace("www.","")}</a>`; }
+    try { return `<a href="${u}" target="_blank" rel="noopener" data-source-link data-faq-code="${encodeURIComponent(x.faq_code)}" data-persona="${x.persona}">${new URL(u).hostname.replace("www.","")}</a>`; }
     catch(e) { return ""; }
   }).join("");
   const badge = peer ? '<span class="badge src">先輩保護者の声（監修前）</span>'
     : (gold ? '<span class="badge gold">専門職監修</span>'
        : (srcs ? '<span class="badge src">参考: 専門機関の公開情報</span>' : ''));
-  return `<div class="qa"><div class="q" onclick="this.parentNode.classList.toggle('open')">
+  return `<div class="qa" data-code="${esc(x.faq_code)}"><div class="q" onclick="toggleAnswer(this)">
       <span class="av"><img src="${AV(x.persona)}" alt=""></span><span>${esc(x.question)}</span><span class="car">▶</span></div>
     <div class="a">${x.media_url ? `<img class="qimg" src="${x.media_url}" alt="${esc(x.question)}の図解" loading="lazy">` : ""}${md(x.answer)}
       <div class="meta">
@@ -147,8 +267,20 @@ function card(x) {
         ${badge}
         <span class="srcs">${srcs}</span>
       </div>
-      <div class="cta"><img src="${AV(x.persona)}" alt=""><span>この悩み、続きはアプリで。<b>${m[0]}</b>が24時間答えます。 <a href="services.html">HugMapを見る →</a></span></div>
+      <div class="answer-actions"><button class="pocket-save${isPocketed(x.faq_code) ? " saved" : ""}" type="button" data-code="${encodeURIComponent(x.faq_code)}" aria-pressed="${isPocketed(x.faq_code)}">${isPocketed(x.faq_code) ? "✓ ポーチに保存済み" : "♡ ポーチにしまう"}</button><div class="feedback"><span>役に立った？</span><button type="button" data-feedback="yes" data-faq-code="${encodeURIComponent(x.faq_code)}" data-persona="${x.persona}">はい</button><button type="button" data-feedback="no" data-faq-code="${encodeURIComponent(x.faq_code)}" data-persona="${x.persona}">いいえ</button></div></div>
+      <div class="cta"><img src="${AV(x.persona)}" alt=""><span>この悩み、続きはアプリで。<b>${m[0]}</b>が24時間答えます。 <a href="services.html" data-app-cta data-placement="faq_answer" data-faq-code="${encodeURIComponent(x.faq_code)}" data-persona="${x.persona}">HugMapを見る →</a></span></div>
     </div></div>`;
+}
+function faqParams(x) {
+  return {faq_code:x.faq_code,persona:x.persona,category_l1:x.category_l1||"",category_l2:x.category_l2||"",category_l3:x.category_l3||""};
+}
+function toggleAnswer(questionEl) {
+  const item = questionEl.parentNode;
+  const opening = !item.classList.contains("open");
+  item.classList.toggle("open");
+  if (!opening) return;
+  const x = DATA.find(row => row.faq_code === item.dataset.code);
+  if (x) window.HugMapAnalytics?.track("faq_open", faqParams(x));
 }
 function render() {
   let rows = DATA;
@@ -165,10 +297,107 @@ function render() {
   });
   let h = Object.entries(groups).map(([g, xs]) =>
     `<div class="gsec"><div class="gh">${esc(g)}</div>${xs.map(card).join("")}</div>`).join("");
-  if (rows.length > shown) h += `<button class="morebtn" onclick="shown+=40;render()">もっと見る（残り ${rows.length - shown} 件）</button>`;
+  if (rows.length > shown) h += `<button class="morebtn" onclick="loadMore()">もっと見る（残り ${rows.length - shown} 件）</button>`;
   document.getElementById("list").innerHTML = h || '<div class="count">該当するQ&Aがありません</div>';
+  syncPocketButtons();
 }
-document.getElementById("q").addEventListener("input", e => { qtext = e.target.value.trim(); shown = 40; render(); });
-renderNav(); render();
+function loadMore() {
+  const total = filteredRows().length;
+  shown += 40;
+  window.HugMapAnalytics?.track("load_more", {visible_count:Math.min(shown,total),total_count:total});
+  render();
+}
+function filteredRows() {
+  let rows = DATA;
+  if (activePersona) rows = rows.filter(x => x.persona === activePersona);
+  if (qtext) {
+    const q = qtext.toLowerCase();
+    rows = rows.filter(x => (x.question + x.answer + (x.category_l2||"") + (x.category_l3||"")).toLowerCase().includes(q));
+  }
+  return rows;
+}
+function recommend() {
+  const age = document.getElementById("finder-age").value;
+  const concern = document.getElementById("finder-concern").value;
+  const context = document.getElementById("finder-context").value;
+  if (!age && !concern && !context) {
+    document.getElementById("recommend-reason").textContent = "年齢・場面などを1つ以上選んでください。";
+    document.getElementById("recommend-list").innerHTML = "";
+    document.getElementById("recommendations").classList.add("show");
+    return;
+  }
+  const scored = DATA.map((x, index) => {
+    const text = `${x.question} ${x.category_l1||""} ${x.category_l2||""} ${x.category_l3||""}`.toLowerCase();
+    let score = 0;
+    if (concern) {
+      const c = CONCERNS[concern];
+      if (c.personas.includes(x.persona)) score += 8;
+      score += c.words.filter(w => text.includes(w.toLowerCase())).length * 2;
+    }
+    if (age) score += AGES[age].words.filter(w => text.includes(w.toLowerCase())).length * 3;
+    if (context === "down" && text.includes("ダウン症")) score += 5;
+    if ((context === "slow" || context === "undiagnosed") && /発達|成長|様子|見守/.test(text)) score += 1;
+    if (context === "neurodiverse" && /感覚|行動|コミュニケーション|社会/.test(text)) score += 2;
+    if (x.is_supervised) score += 1;
+    return {x, score, index};
+  }).sort((a,b) => b.score-a.score || a.index-b.index).slice(0,5).map(v => v.x);
+  const parts = [];
+  if (age) parts.push(AGES[age].label);
+  if (concern) parts.push(CONCERNS[concern].label);
+  document.getElementById("recommend-reason").textContent = `${parts.join("・") || "選んだ内容"}に近い質問を選びました。年齢は対象外を決めるものではなく、並び順の参考にしています。`;
+  document.getElementById("recommend-list").innerHTML = scored.map(card).join("");
+  syncPocketButtons();
+  document.getElementById("recommendations").classList.add("show");
+  // 年齢・気になる場面・診断等の選択値はセンシティブ情報になり得るため送信しない。
+  window.HugMapAnalytics?.track("faq_recommendation", {result_count:scored.length});
+  document.getElementById("recommendations").scrollIntoView({behavior:"smooth",block:"start"});
+}
+document.getElementById("q").addEventListener("input", e => {
+  qtext = e.target.value.trim(); shown = 40; render();
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    if (!qtext) return;
+    const resultCount = filteredRows().length;
+    const params = {query_length:qtext.length,result_count:resultCount,persona:activePersona||"all"};
+    window.HugMapAnalytics?.track("faq_search", params);
+    if (resultCount === 0) window.HugMapAnalytics?.track("search_no_results", params);
+  }, 700);
+});
+document.getElementById("recommend-btn").addEventListener("click", recommend);
+document.getElementById("pocket-trigger").addEventListener("click", openPocket);
+document.getElementById("pocket-close").addEventListener("click", closePocket);
+document.getElementById("pocket-layer").addEventListener("click", e => { if (e.target.id === "pocket-layer") closePocket(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") closePocket(); });
+document.addEventListener("click", e => {
+  const feedback = e.target.closest("[data-feedback]");
+  if (feedback) {
+    const code = decodeURIComponent(feedback.dataset.faqCode);
+    document.querySelectorAll(`[data-feedback][data-faq-code="${CSS.escape(feedback.dataset.faqCode)}"]`).forEach(btn => btn.classList.toggle("on", btn.dataset.feedback === feedback.dataset.feedback));
+    window.HugMapAnalytics?.track("faq_feedback", {faq_code:code,persona:feedback.dataset.persona,helpful:feedback.dataset.feedback === "yes"});
+    showToast("回答ありがとうございます");
+    return;
+  }
+  const source = e.target.closest("[data-source-link]");
+  if (source) {
+    let domain = "";
+    try { domain = new URL(source.href).hostname.replace("www.",""); } catch(err) {}
+    window.HugMapAnalytics?.track("source_link_click", {faq_code:decodeURIComponent(source.dataset.faqCode),persona:source.dataset.persona,source_domain:domain});
+    return;
+  }
+  const appCta = e.target.closest("[data-app-cta], [data-pocket-app]");
+  if (appCta) window.HugMapAnalytics?.track("app_cta_click", {placement:appCta.dataset.placement||"faq_pocket",faq_code:appCta.dataset.faqCode ? decodeURIComponent(appCta.dataset.faqCode) : "",persona:appCta.dataset.persona||""});
+});
+window.addEventListener("scroll", () => {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  if (max <= 0) return;
+  const depth = Math.round((window.scrollY / max) * 100);
+  [50,90].forEach(percent => {
+    if (depth >= percent && !scrollDepthSent.has(percent)) {
+      scrollDepthSent.add(percent);
+      window.HugMapAnalytics?.track("scroll_depth", {percent});
+    }
+  });
+}, {passive:true});
+renderNav(); render(); renderPocket(); syncPocketButtons();
 </script>
 </body></html>

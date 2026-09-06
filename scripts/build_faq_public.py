@@ -16,13 +16,12 @@
   FAQ_OUTPUT        : 出力ファイル名（既定 hugmap_faq_public_v1[_en].html）
   FAQ_INCLUDE_PEER  : '1' で先輩保護者（peer_parent）を含める（jaのみ該当・既定は ja=1 / en=0）
   SUPABASE_URL      : 既定 dev
+  FAQ_REUSE_EXISTING: '1' で既存出力の埋め込みデータを再利用（ローカルUI確認専用）
 """
-import json, os, sys, urllib.request
+import json, os, re, sys, urllib.request
 
 SB = os.environ.get("SUPABASE_URL", "https://dltohjfxawjonomvxfsd.supabase.co")
 KEY = os.environ.get("SUPABASE_ANON_KEY")
-if not KEY:
-    sys.exit("SUPABASE_ANON_KEY を環境変数で指定してください")
 
 LANG = os.environ.get("FAQ_LANG", "ja")
 if LANG not in ("ja", "en"):
@@ -31,6 +30,8 @@ if LANG not in ("ja", "en"):
 DEFAULT_OUT = "hugmap_faq_public_v1.html" if LANG == "ja" else "hugmap_faq_public_v1_en.html"
 OUTFILE = os.environ.get("FAQ_OUTPUT", DEFAULT_OUT)
 TEMPLATE = os.path.join(os.path.dirname(__file__), f"faq_{LANG}_template.html")
+# DB認証情報なしでテンプレートだけを確認するためのプレビュー用。通常ビルドは必ずDBから取得する。
+REUSE_EXISTING = os.environ.get("FAQ_REUSE_EXISTING", "0") == "1"
 # 先輩保護者（体験談）は既定で ja のみ含める
 INCLUDE_PEER = os.environ.get("FAQ_INCLUDE_PEER", "1" if LANG == "ja" else "0") == "1"
 
@@ -41,9 +42,24 @@ origin_clause = "" if INCLUDE_PEER else "&origin=neq.blog"
 URL = (f"{SB}/rest/v1/faq?select={SELECT}"
        f"&is_deleted_flag=eq.false{origin_clause}&language_code=eq.{LANG}&limit=2000")
 
-req = urllib.request.Request(URL, headers={"apikey": KEY, "Authorization": f"Bearer {KEY}"})
-rows = json.loads(urllib.request.urlopen(req).read().decode())
-print(f"fetched {len(rows)} {LANG} rows from {SB} (include_peer={INCLUDE_PEER})")
+if REUSE_EXISTING:
+    existing_path = os.path.join(os.path.dirname(__file__), "..", OUTFILE)
+    try:
+        with open(existing_path, encoding="utf-8") as f:
+            existing_html = f.read()
+        match = re.search(r"const DATA = (\[.*?\]);\s*const META", existing_html, re.S)
+        if not match:
+            sys.exit(f"既存の {OUTFILE} からFAQデータを読み取れませんでした")
+        rows = json.loads(match.group(1))
+        print(f"reused {len(rows)} {LANG} rows from existing {OUTFILE} (preview only)")
+    except FileNotFoundError:
+        sys.exit(f"既存の {OUTFILE} がありません")
+else:
+    if not KEY:
+        sys.exit("SUPABASE_ANON_KEY を環境変数で指定してください")
+    req = urllib.request.Request(URL, headers={"apikey": KEY, "Authorization": f"Bearer {KEY}"})
+    rows = json.loads(urllib.request.urlopen(req).read().decode())
+    print(f"fetched {len(rows)} {LANG} rows from {SB} (include_peer={INCLUDE_PEER})")
 
 # blog由来（二次利用許諾が必要）は除外。ただし INCLUDE_PEER の場合のみ先輩保護者は残す。
 if INCLUDE_PEER:
@@ -55,10 +71,11 @@ for r in rows:
     if r.get("media_path"):
         r["media_url"] = f"{SB}/storage/v1/object/public/public-assets/faq_media/{r['media_path']}"
     r.pop("media_path", None)
-    fc = r.pop("faq_category", None) or {}
-    r["category_l1"] = fc.get(f"name_l1_{LANG}")
-    r["category_l2"] = fc.get(f"name_l2_{LANG}")
-    r["category_l3"] = fc.get(f"name_l3_{LANG}")
+    fc = r.pop("faq_category", None)
+    if fc is not None:
+        r["category_l1"] = fc.get(f"name_l1_{LANG}")
+        r["category_l2"] = fc.get(f"name_l2_{LANG}")
+        r["category_l3"] = fc.get(f"name_l3_{LANG}")
 
 rows.sort(key=lambda r: (r.get("category_l1") or "", r.get("category_l2") or "",
                          r.get("category_l3") or "", r.get("faq_code") or ""))
