@@ -14,12 +14,12 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;background:var(--off);color:var(--ink);line-height:1.7}
 .reviewbar{background:var(--purple);color:#fff;font-size:11px;font-weight:700;text-align:center;padding:6px 16px;line-height:1.4}
-.topbar{background:#fff;border-bottom:1px solid var(--lgrey);padding:9px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.topbar{background:#fff;padding:9px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px}
 .topbar img{height:26px}
 .topbar a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:700;font-size:14px}
-.pocket-trigger{border:1px solid var(--lgrey);background:#fff;border-radius:999px;padding:5px 10px 5px 6px;display:flex;align-items:center;gap:5px;color:var(--ink);font:inherit;font-size:12px;font-weight:800;cursor:pointer}
+.pocket-trigger{border:0;background:var(--off);border-radius:999px;padding:5px 10px 5px 6px;display:flex;align-items:center;gap:5px;color:var(--ink);font:inherit;font-size:12px;font-weight:800;cursor:pointer}
 .pocket-trigger img{width:28px;height:28px;object-fit:contain}.pocket-count{min-width:20px;height:20px;border-radius:10px;background:var(--orange);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:10px}
-.hero{background:linear-gradient(180deg,#fff 0%,var(--off) 100%);color:var(--ink);padding:38px 20px 26px;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid var(--lgrey)}
+.hero{background:linear-gradient(180deg,#fff 0%,var(--off) 100%);color:var(--ink);padding:38px 20px 26px;text-align:center;position:relative;overflow:hidden}
 .hero .bub{position:absolute;border-radius:50%;background:rgba(215,200,98,.16)}
 .hero .kicker{display:inline-block;position:relative;background:#fff4ef;color:var(--orange);font-size:11px;font-weight:800;border-radius:999px;padding:4px 12px;margin-bottom:8px}
 .hero h1{font-size:26px;letter-spacing:.02em;position:relative}
@@ -27,29 +27,30 @@ body{font-family:-apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto
 .hero .lineup{display:flex;align-items:flex-end;justify-content:center;gap:12px;margin:18px auto 0;position:relative;max-width:780px;padding:0 12px}
 .hero .lineup img{object-fit:contain;filter:drop-shadow(0 4px 4px rgba(41,23,18,.06))}
 .searchwrap{max-width:620px;margin:-24px auto 0;padding:0 16px;position:relative;z-index:5}
-.searchwrap input{width:100%;border:2px solid var(--lgrey);border-radius:999px;padding:14px 22px;font-size:15px;font-family:inherit;box-shadow:0 4px 18px rgba(41,23,18,.08);background:#fff}
-.searchwrap input:focus{outline:none;border-color:var(--purple)}
+.searchwrap input{width:100%;border:0;border-radius:999px;padding:14px 22px;font-size:15px;font-family:inherit;box-shadow:0 4px 18px rgba(41,23,18,.08);background:#fff}
+.searchwrap input:focus{outline:none;box-shadow:0 4px 18px rgba(41,23,18,.08),0 0 0 2px rgba(125,39,65,.2)}
 .wrap{max-width:960px;margin:0 auto;padding:26px 16px 70px}
 .wrap .searchwrap{max-width:none;margin:0;padding:0}
 .finder{background:#fff;border-radius:20px;padding:24px;margin:4px 0 32px;box-shadow:0 5px 22px rgba(41,23,18,.06)}
 .finder-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
 .finder h2{font-size:20px;margin:0}.finder .intro{font-size:13px;color:var(--grey);margin-top:3px}
-.privacy-note{font-size:10.5px;color:var(--grey);white-space:nowrap;background:var(--off);border-radius:999px;padding:3px 9px}
+.privacy-note{font-size:10.5px;color:var(--grey);white-space:nowrap;padding-top:3px}
+.privacy-note::before{content:"🔒 ";font-size:10px}
 .finder-fields{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end;margin-top:16px}
 .finder label{display:block;font-size:12px;font-weight:800}
-.finder select{width:100%;margin-top:5px;border:1.5px solid var(--lgrey);border-radius:10px;background:#fff;padding:10px 30px 10px 10px;color:var(--ink);font:inherit;font-size:13px}
+.finder select{width:100%;margin-top:5px;border:0;border-radius:10px;background:var(--off);padding:10px 30px 10px 10px;color:var(--ink);font:inherit;font-size:13px}
 .recommend-btn{border:0;border-radius:999px;background:var(--orange);color:#fff;padding:11px 18px;font-size:13px;font-weight:800;cursor:pointer;white-space:nowrap}
 .recommend-btn:hover{filter:brightness(.96)}
-.recommendations{display:none;margin:20px 0 30px;padding:20px;background:#fff9f5;border:2px solid #ffd9ca;border-radius:20px}
+.recommendations{display:none;margin:20px 0 30px;padding:20px;background:#fff9f5;border-radius:20px}
 .recommendations.show{display:block}.recommendations h2{font-size:18px}.recommendations .reason{font-size:12px;color:var(--grey);margin:2px 0 14px}
-.recommendations .qa{border:1px solid #f0dfd8}.browse-all{font-size:12px;color:var(--grey);margin-top:14px;text-align:center}
-.all-faq-head{margin:34px 0 14px;padding-top:26px;border-top:1px solid var(--lgrey)}
+.recommendations .qa{background:#fff}.browse-all{font-size:12px;color:var(--grey);margin-top:14px;text-align:center}
+.all-faq-head{margin:34px 0 14px;padding-top:26px}
 .all-faq-head h2{font-size:20px}.all-faq-head p{font-size:12px;color:var(--grey);margin-top:2px}
 h2.sec{font-size:16px;margin:26px 0 12px}
 .tnav{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:10px}
-.tile{background:var(--card);border:2px solid transparent;border-radius:16px;padding:12px 6px 10px;text-align:center;cursor:pointer}
-.tile:hover{border-color:var(--lgrey)}
-.tile.on{border-color:var(--purple);background:#fbf6f8}
+.tile{background:var(--card);border:0;border-radius:16px;padding:14px 8px 12px;text-align:center;cursor:pointer}
+.tile:hover{background:#faf8f7}
+.tile.on{background:#f3e8ec;box-shadow:inset 0 0 0 2px rgba(125,39,65,.18)}
 .tile img{height:56px}
 .tile .tn{font-size:11px;font-weight:800;margin-top:6px}
 .tile .td{font-size:9.5px;color:var(--grey)}
@@ -77,9 +78,9 @@ h2.sec{font-size:16px;margin:26px 0 12px}
 .cta img{width:30px;height:30px;border-radius:50%;background:#fff}
 .cta a{color:var(--orange);font-weight:800;text-decoration:none}
 .answer-actions{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
-.pocket-save{border:1.5px solid var(--purple);background:#fff;color:var(--purple);border-radius:999px;padding:7px 12px;font:inherit;font-size:11px;font-weight:800;cursor:pointer}
+.pocket-save{border:0;background:#f3e8ec;color:var(--purple);border-radius:999px;padding:8px 13px;font:inherit;font-size:11px;font-weight:800;cursor:pointer}
 .pocket-save.saved{background:var(--purple);color:#fff}.pocket-save:hover{filter:brightness(.97)}
-.feedback{display:flex;align-items:center;gap:6px;margin-left:auto;color:var(--grey);font-size:10.5px}.feedback button{border:1px solid var(--lgrey);background:#fff;border-radius:999px;padding:5px 9px;color:var(--grey);font:inherit;font-size:10.5px;cursor:pointer}.feedback button.on{border-color:var(--orange);background:#fff4ef;color:var(--orange);font-weight:800}
+.feedback{display:flex;align-items:center;gap:6px;margin-left:auto;color:var(--grey);font-size:10.5px}.feedback button{border:0;background:var(--off);border-radius:999px;padding:6px 10px;color:var(--grey);font:inherit;font-size:10.5px;cursor:pointer}.feedback button.on{background:#fff4ef;color:var(--orange);font-weight:800}
 .pocket-layer{display:none;position:fixed;inset:0;background:rgba(41,23,18,.38);z-index:50;padding:18px;align-items:center;justify-content:center}.pocket-layer.show{display:flex}
 .pocket-panel{width:min(520px,100%);max-height:min(680px,88vh);overflow:auto;background:#fff;border-radius:24px;padding:22px;box-shadow:0 18px 50px rgba(41,23,18,.24)}
 .pocket-head{display:flex;align-items:center;gap:10px}.pocket-head img{width:52px;height:52px;object-fit:contain}.pocket-head h2{font-size:20px}.pocket-head p{font-size:11px;color:var(--grey)}
@@ -97,8 +98,8 @@ h2.sec{font-size:16px;margin:26px 0 12px}
 .dlband .badges img{height:44px}
 .foot{max-width:960px;margin:0 auto;padding:18px 16px 40px;font-size:10.5px;color:var(--grey)}
 .foot a{color:var(--grey)}
-.morebtn{display:block;margin:16px auto 0;background:#fff;border:2px solid var(--lgrey);border-radius:999px;padding:9px 26px;font-size:13px;font-weight:700;color:var(--ink);cursor:pointer}
-.morebtn:hover{border-color:var(--orange)}
+.morebtn{display:block;margin:16px auto 0;background:#fff;border:0;border-radius:999px;padding:11px 28px;font-size:13px;font-weight:700;color:var(--ink);cursor:pointer;box-shadow:0 3px 12px rgba(41,23,18,.07)}
+.morebtn:hover{background:#fff4ef;color:var(--orange)}
 @media(max-width:700px){.hero{padding-left:0;padding-right:0}.hero h1,.hero .sub,.hero .kicker{margin-left:16px;margin-right:16px}.hero .lineup{justify-content:flex-start;overflow-x:auto;scrollbar-width:none}.hero .lineup::-webkit-scrollbar{display:none}.hero .lineup img{flex:0 0 auto}.tnav{grid-template-columns:repeat(4,1fr);gap:8px}.finder-fields{grid-template-columns:1fr 1fr}.recommend-btn{grid-column:1/-1}.finder-head{display:block}.privacy-note{margin-top:6px;white-space:normal}}
 @media(max-width:440px){.hero h1{font-size:22px}.hero .sub{font-size:12px}.tnav{grid-template-columns:repeat(2,1fr)}.qa .a{padding-left:18px}}
 </style>
@@ -122,7 +123,7 @@ window.HUGMAP_ANALYTICS_CONFIG = {
 </div>
 <div class="wrap">
   <section class="finder" aria-labelledby="finder-title">
-    <div class="finder-head"><div><h2 id="finder-title">この子に近いQ&amp;A</h2><div class="intro">今の状況から、まず読む5件を選びます。</div></div><div class="privacy-note">選択内容は端末内のみ</div></div>
+    <div class="finder-head"><div><h2 id="finder-title">この子に近いQ&amp;A</h2><div class="intro">今の状況から、まず読む5件を選びます。</div></div><div class="privacy-note">入力内容は送信されません</div></div>
     <div class="finder-fields">
       <label>年齢<select id="finder-age"><option value="">選択しない</option><option value="baby">0〜1歳</option><option value="toddler">2〜3歳</option><option value="preschool">4〜6歳</option><option value="school">小学生</option><option value="teen">中学生以上</option></select></label>
       <label>気になること<select id="finder-concern"><option value="">選択しない</option><option value="communication">ことば・伝え方</option><option value="movement">からだ・運動</option><option value="sensory_daily">感覚・生活動作</option><option value="mind_social">気持ち・行動・人との関わり</option><option value="eating">食事・お口</option><option value="learning">園・学校・学び</option><option value="health">発達の基礎・健康</option></select></label>

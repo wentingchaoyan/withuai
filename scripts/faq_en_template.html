@@ -14,10 +14,10 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;background:var(--off);color:var(--ink);line-height:1.7}
 .reviewbar{background:var(--purple);color:#fff;font-size:12px;font-weight:700;text-align:center;padding:8px 16px;line-height:1.5}
-.topbar{background:#fff;border-bottom:1px solid var(--lgrey);padding:10px 20px;display:flex;align-items:center;gap:10px}
+.topbar{background:#fff;padding:10px 20px;display:flex;align-items:center;gap:10px}
 .topbar img{height:26px}
 .topbar a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:700;font-size:14px}
-.hero{background:linear-gradient(180deg,#fff 0%,var(--off) 100%);color:var(--ink);padding:38px 20px 26px;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid var(--lgrey)}
+.hero{background:linear-gradient(180deg,#fff 0%,var(--off) 100%);color:var(--ink);padding:38px 20px 26px;text-align:center;position:relative;overflow:hidden}
 .hero .bub{position:absolute;border-radius:50%;background:rgba(215,200,98,.16)}
 .hero .kicker{display:inline-block;position:relative;background:#fff4ef;color:var(--orange);font-size:11px;font-weight:800;border-radius:999px;padding:4px 12px;margin-bottom:8px}
 .hero h1{font-size:26px;letter-spacing:.02em;position:relative}
@@ -25,14 +25,14 @@ body{font-family:-apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto
 .hero .lineup{display:flex;align-items:flex-end;justify-content:center;gap:12px;margin:18px auto 0;position:relative;max-width:780px;padding:0 12px}
 .hero .lineup img{object-fit:contain;filter:drop-shadow(0 4px 4px rgba(41,23,18,.06))}
 .searchwrap{max-width:620px;margin:-24px auto 0;padding:0 16px;position:relative;z-index:5}
-.searchwrap input{width:100%;border:2px solid var(--lgrey);border-radius:999px;padding:14px 22px;font-size:15px;font-family:inherit;box-shadow:0 4px 18px rgba(41,23,18,.08);background:#fff}
-.searchwrap input:focus{outline:none;border-color:var(--purple)}
+.searchwrap input{width:100%;border:0;border-radius:999px;padding:14px 22px;font-size:15px;font-family:inherit;box-shadow:0 4px 18px rgba(41,23,18,.08);background:#fff}
+.searchwrap input:focus{outline:none;box-shadow:0 4px 18px rgba(41,23,18,.08),0 0 0 2px rgba(125,39,65,.2)}
 .wrap{max-width:960px;margin:0 auto;padding:26px 16px 70px}
 h2.sec{font-size:16px;margin:26px 0 12px}
 .tnav{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:10px}
-.tile{background:var(--card);border:2px solid transparent;border-radius:16px;padding:12px 6px 10px;text-align:center;cursor:pointer}
-.tile:hover{border-color:var(--lgrey)}
-.tile.on{border-color:var(--purple);background:#fbf6f8}
+.tile{background:var(--card);border:0;border-radius:16px;padding:14px 8px 12px;text-align:center;cursor:pointer}
+.tile:hover{background:#faf8f7}
+.tile.on{background:#f3e8ec;box-shadow:inset 0 0 0 2px rgba(125,39,65,.18)}
 .tile img{height:56px}
 .tile .tn{font-size:11px;font-weight:800;margin-top:6px}
 .tile .td{font-size:9.5px;color:var(--grey)}
@@ -66,8 +66,8 @@ h2.sec{font-size:16px;margin:26px 0 12px}
 .dlband .badges img{height:44px}
 .foot{max-width:960px;margin:0 auto;padding:18px 16px 40px;font-size:10.5px;color:var(--grey)}
 .foot a{color:var(--grey)}
-.morebtn{display:block;margin:16px auto 0;background:#fff;border:2px solid var(--lgrey);border-radius:999px;padding:9px 26px;font-size:13px;font-weight:700;color:var(--ink);cursor:pointer}
-.morebtn:hover{border-color:var(--orange)}
+.morebtn{display:block;margin:16px auto 0;background:#fff;border:0;border-radius:999px;padding:11px 28px;font-size:13px;font-weight:700;color:var(--ink);cursor:pointer;box-shadow:0 3px 12px rgba(41,23,18,.07)}
+.morebtn:hover{background:#fff4ef;color:var(--orange)}
 @media(max-width:700px){.hero{padding-left:0;padding-right:0}.hero h1,.hero .sub,.hero .kicker{margin-left:16px;margin-right:16px}.hero .lineup{justify-content:flex-start;overflow-x:auto;scrollbar-width:none}.hero .lineup::-webkit-scrollbar{display:none}.hero .lineup img{flex:0 0 auto}.tnav{grid-template-columns:repeat(4,1fr);gap:8px}}
 @media(max-width:440px){.hero h1{font-size:22px}.hero .sub{font-size:12px}.tnav{grid-template-columns:repeat(2,1fr)}.qa .a{padding-left:18px}}
 </style></head><body>
