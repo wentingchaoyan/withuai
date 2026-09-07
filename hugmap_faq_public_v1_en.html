@@ -157,11 +157,13 @@ function render() {
   document.getElementById("count").innerHTML = `<b>${rows.length}</b> Q&A` + (activePersona ? ` (${META[activePersona][0]})` : "");
   const groups = {};
   rows.slice(0, shown).forEach(x => {
-    const g = x.category_l3 || x.category_l2 || x.category_l1 || "Other";
-    (groups[g] = groups[g] || []).push(x);
+    // Keep granular L3 taxonomy for search/recommendations; group the public list by L2.
+    const label = x.category_l2 || x.category_l1 || "Other";
+    const key = `${x.category_l1 || ""}\u0000${label}`;
+    (groups[key] = groups[key] || {label, items:[]}).items.push(x);
   });
-  let h = Object.entries(groups).map(([g, xs]) =>
-    `<div class="gsec"><div class="gh">${esc(g)}</div>${xs.map(card).join("")}</div>`).join("");
+  let h = Object.values(groups).map(g =>
+    `<div class="gsec"><div class="gh">${esc(g.label)}</div>${g.items.map(card).join("")}</div>`).join("");
   if (rows.length > shown) h += `<button class="morebtn" onclick="shown+=40;render()">Show more (${rows.length - shown} remaining)</button>`;
   document.getElementById("list").innerHTML = h || '<div class="count">No matching Q&A found</div>';
 }

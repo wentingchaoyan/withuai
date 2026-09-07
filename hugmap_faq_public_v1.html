@@ -299,11 +299,13 @@ function render() {
   document.getElementById("count").innerHTML = `<b>${rows.length}</b> 件のQ&A` + (activePersona ? `（${META[activePersona][0]}）` : "");
   const groups = {};
   rows.slice(0, shown).forEach(x => {
-    const g = x.category_l3 || x.category_l2 || x.category_l1 || "その他";
-    (groups[g] = groups[g] || []).push(x);
+    // DBの細分類（L3）は検索・推薦用に保持し、一覧は読みやすいL2単位でまとめる。
+    const label = x.category_l2 || x.category_l1 || "その他";
+    const key = `${x.category_l1 || ""}\u0000${label}`;
+    (groups[key] = groups[key] || {label, items:[]}).items.push(x);
   });
-  let h = Object.entries(groups).map(([g, xs]) =>
-    `<div class="gsec"><div class="gh">${esc(g)}</div>${xs.map(card).join("")}</div>`).join("");
+  let h = Object.values(groups).map(g =>
+    `<div class="gsec"><div class="gh">${esc(g.label)}</div>${g.items.map(card).join("")}</div>`).join("");
   if (rows.length > shown) h += `<button class="morebtn" onclick="loadMore()">もっと見る（残り ${rows.length - shown} 件）</button>`;
   document.getElementById("list").innerHTML = h || '<div class="count">該当するQ&Aがありません</div>';
   syncPocketButtons();
