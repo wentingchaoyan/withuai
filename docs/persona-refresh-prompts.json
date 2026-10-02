@@ -1,0 +1,98 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-02",
+  "images": [
+    {
+      "file": "kotori.png",
+      "refs": [
+        "/Users/tingwen/Developer/Github/hugmap-stories/planning/style-studies/character-reference/assets/mimo-parent-child-color.png",
+        "/Users/tingwen/Developer/Github/withuai/assets/images/persona/kotori.png",
+        "/Users/tingwen/Developer/Github/hugmap-stories/planning/style-studies/mimo-media/faq_c009_pointing_kotori.png"
+      ],
+      "prompt": "Use case: style-transfer. Create replacement website teacher mascot PNG with genuine transparent background. Image1 is authoritative current ADULT model: use ONLY adult on LEFT, exact head/body proportions, facial construction and outfit, no child. Image2 is OLD website asset: retain its activity motif but replace its outdated character completely with image1 adult. Clean simple illustration legible at 86px high, entire character and props visible, tightly framed with small 3% margins, no text, no floor/background, no shadow. Mimo adult bird with ONE yellow leaf tuft, oval brown eyes, small orange diamond beak, smooth naturally rounded head exactly model. Fitted light warm gray short sleeve shirt, orange rounded collar and orange U chest emblem. Image3 overrides COLORS: vivid bright golden-yellow bird, light warm gray shirt, medium warm gray outline #756B66. Stand facing forward with wings relaxed slightly open as old pose. Keep TWO compact empty speech balloons upper right and three small orange listening arcs left from old asset. Balloons white-filled with warm gray outlines. Short bird legs. No child cheeks, no vest or buttons, no pointed neck/chin from old asset.",
+      "source_output": "exec-e2a4ace0-40e3-4ed3-944d-05da1e51bc1c.png",
+      "sha256": "178f24462d6499f664683c0b0b8202ec6535bd4e96b53b44c5d258d4b07e3d03",
+      "edits": [
+        {
+          "tool": "built-in image_gen",
+          "file": "kotori.png",
+          "ref": "/Users/tingwen/Developer/Github/hugmap-stories/planning/style-studies/character-reference/assets/mimo-parent-child-color.png",
+          "prompt": "Use case: precise-object-edit. The supplied parent-child model sheet is the sole authoritative anatomy reference. Extract/reproduce ONLY THE ADULT ON LEFT as a single transparent-background website mascot, retaining its head outline, head WIDTH AND HEIGHT, torso WIDTH AND HEIGHT, short legs, feet, ears/tuft sizes, face and clothing faithfully. Do not create a taller/slimmer reinterpretation. Keep original reference line thickness relative to head width, not thick bold icon outlines. Character proportions are more important than props. Reproduce the reference adult at uniform scale, then articulate forearms only as specified. No child, no words, no background, no ground shadow. Whole figure visible. Mimo bird: adult reference head excluding tuft about 320 high by 310 wide, chin-to-belly-bottom about 265, belly-to-toes about 100. Preserve these ratios, tiny thin legs, natural rounded cheeks; no oversized head or squashed body. Same adult listening pose reference: one wing lifted beside cheek, other relaxed. One leaf crown, small diamond beak, oval eyes. Color overrides only: vivid golden yellow as previous approved palette (roughly #FFDA38), warm light gray shirt #DDD7D3, orange collar/U emblem, warm gray outer line #756B66. Add two SMALL white speech balloons at upper right outside silhouette and three small orange listening arcs to left, without changing anatomy.",
+          "source_output": "exec-52c773e5-b353-4560-a282-2b57dae40544.png"
+        }
+      ]
+    },
+    {
+      "file": "usagi.png",
+      "refs": [
+        "/Users/tingwen/Developer/Github/hugmap-stories/planning/style-studies/character-reference/assets/gen-parent-child-color.png",
+        "/Users/tingwen/Developer/Github/withuai/assets/images/persona/usagi.png"
+      ],
+      "prompt": "Use case: style-transfer. Create replacement website teacher mascot PNG with genuine transparent background. Image1 is authoritative current ADULT model: use ONLY adult on LEFT, exact head/body proportions, facial construction and outfit, no child. Image2 is OLD website asset: retain its activity motif but replace its outdated character completely with image1 adult. Clean simple illustration legible at 86px high, entire character and props visible, tightly framed with small 3% margins, no text, no floor/background, no shadow. Gen adult rabbit: one upright ear, other bent forward exactly reference, cheek lobes, oval brown eyes, little front teeth. White fur, #756B66 warm gray contour, fitted burgundy #7D2741 short sleeve top and mustard neckerchief, orange U emblem. Pose playing with yellow ball: arms slightly spread and one foot raised near ball, other foot planted. Follow adult proportions of reference, head not enlarged. No tank top, no orange clothing trim, no child.",
+      "source_output": "exec-64c87375-f62c-46c8-80e5-43ee91887f38.png",
+      "sha256": "7ba3317a8a069eca7fc678dc740218337fafe3b96052e959d2407b28d98ebd2a",
+      "edits": [
+        {
+          "tool": "built-in image_gen",
+          "file": "usagi.png",
+          "ref": "/Users/tingwen/Developer/Github/hugmap-stories/planning/style-studies/character-reference/assets/gen-parent-child-color.png",
+          "prompt": "Use case: precise-object-edit. The supplied parent-child model sheet is the sole authoritative anatomy reference. Extract/reproduce ONLY THE ADULT ON LEFT as a single transparent-background website mascot, retaining its head outline, head WIDTH AND HEIGHT, torso WIDTH AND HEIGHT, short legs, feet, ears/tuft sizes, face and clothing faithfully. Do not create a taller/slimmer reinterpretation. Keep original reference line thickness relative to head width, not thick bold icon outlines. Character proportions are more important than props. Reproduce the reference adult at uniform scale, then articulate forearms only as specified. No child, no words, no background, no ground shadow. Whole figure visible. Gen rabbit: exact adult standing silhouette reference, one upright ear and one bent ear, cheek lobes, white fur, gray #756B66 outline, burgundy fitted top, mustard scarf, orange U emblem. Head excluding ears about 290 high by 325 wide, chin-to-sole about 420 high. Preserve this ratio and short broad body. Retain reference two-feet standing stance for reliable proportions, arms can be slightly open. Put small yellow ball beside one foot to retain sports motif; do not stretch legs or body for kicking pose.",
+          "source_output": "exec-e128f41e-76f1-4ad3-840f-9e98db095060.png"
+        },
+        {
+          "tool": "built-in image_gen",
+          "prompt": "Precise local pose edit. Keep this exact rabbit mascot's head shape, ears, face, head-to-body proportions, torso size, clothing, colors, line style, arms and transparent background unchanged. Modify ONLY the leg on viewer's left and yellow ball: bend that short leg naturally at knee and place its broad white foot RESTING ON TOP OF the yellow ball. Ball directly below the raised foot with clearly visible sole-to-ball contact, ball bottom aligned with the other planted foot's ground baseline. Ball remains same size and yellow pattern. Do not lengthen either leg, torso or neck; preserve character height and proportions. Other foot stays planted. No floating foot, no ball beside both feet, no extra limbs, no background, no shadows or halo. Entire figure visible with genuine alpha transparency.",
+          "source_output": "exec-76ac9dc0-b6cf-4b7f-ba0f-3df7dbc0c881.png"
+        }
+      ]
+    },
+    {
+      "file": "risu.png",
+      "refs": [
+        "/Users/tingwen/Developer/Github/hugmap-stories/planning/style-studies/character-reference/assets/luke-parent-child-color.png",
+        "/Users/tingwen/Developer/Github/withuai/assets/images/persona/risu.png"
+      ],
+      "prompt": "Use case: style-transfer. Create replacement website teacher mascot PNG with genuine transparent background. Image1 is authoritative current ADULT model: use ONLY adult on LEFT, exact head/body proportions, facial construction and outfit, no child. Image2 is OLD website asset: retain its activity motif but replace its outdated character completely with image1 adult. Clean simple illustration legible at 86px high, entire character and props visible, tightly framed with small 3% margins, no text, no floor/background, no shadow. Luke adult squirrel with round glasses, tall soft head, pointed furry ears, orange #FF511B head/outer body, broad white lower face and belly and paws, large white inner curled tail with orange border, gray open vest with pockets and orange U, yellow neck scarf. Match authoritative adult exactly, including warm brown line. Both paws gently hold small brown acorn in front of lower chest as old motif, without obscuring face/scarf. Adult shape and scale not baby, no cheek blush. Pure transparent background, not white.",
+      "source_output": "exec-7c96022e-cc0c-4969-bb2b-951baa785fb1.png",
+      "sha256": "8e41c268279b6acc4628bf766e082139b7796f84d49852fa71ed710d42a420c0",
+      "edits": [
+        {
+          "tool": "built-in image_gen",
+          "prompt": "Precise object edit of provided squirrel mascot. Replace ONLY the acorn held in both paws with TWO simple wooden building blocks: one small muted purple cube sitting on a slightly larger natural light wood square block. Both white paws naturally grip opposite sides of lower block, fingers in front, thumbs resting on upper edges. Blocks modest sized below yellow scarf, not covering face. Keep EXACT same squirrel, head shape, glasses, tall ears, orange and white fur, large white inner curled tail, light gray pocket vest and yellow scarf, facial expression, full body proportions, pose, outline and composition. No acorn remaining. Genuine transparent background preserved, no shadow, no words. Entire character including ears feet and tail visible with small margin. Do not redesign or enlarge head.",
+          "source_output": "/Users/tingwen/.codex/generated_images/01a0ef90-8448-75f1-9b8a-386b97d5c371/exec-e3ee8dfb-f62e-4063-a51c-d3738ab040d1.png"
+        },
+        {
+          "tool": "built-in image_gen",
+          "file": "risu.png",
+          "ref": "/Users/tingwen/Developer/Github/hugmap-stories/planning/style-studies/character-reference/assets/luke-parent-child-color.png",
+          "prompt": "Use case: precise-object-edit. The supplied parent-child model sheet is the sole authoritative anatomy reference. Extract/reproduce ONLY THE ADULT ON LEFT as a single transparent-background website mascot, retaining its head outline, head WIDTH AND HEIGHT, torso WIDTH AND HEIGHT, short legs, feet, ears/tuft sizes, face and clothing faithfully. Do not create a taller/slimmer reinterpretation. Keep original reference line thickness relative to head width, not thick bold icon outlines. Character proportions are more important than props. Reproduce the reference adult at uniform scale, then articulate forearms only as specified. No child, no words, no background, no ground shadow. Whole figure visible. Luke squirrel: reference head (excluding ears) crown-to-chin about 340 units, chin-to-sole about 465 units, head width about 310; lower body length about 1.36 times head height, NOT a long 1.6x torso. Torso round and broad, short thick legs, round feet. Preserve original broad white belly, white inner curled tail, orange head/fur, glasses, gray vest, yellow scarf, orange U chest emblem. Hands hold a small natural wood cube topped by a small purple cube in front of belly; blocks do not require stretching chest or lengthening body. Keep shoulders, waist, crotch and soles at same relative heights as reference. Preserve stance and tail.",
+          "source_output": "exec-b85dad23-4cb8-44a0-be7d-1a3587583edd.png"
+        },
+        {
+          "tool": "built-in image_gen",
+          "prompt": "Background extraction only. Remove every bit of brown/orange glow, shadow, haze and background outside this squirrel character, including gaps between legs and between tail and body. Output a clean transparent PNG alpha cutout with sharp antialiased contour and NO halo. Preserve the squirrel and two blocks exactly: same proportions, head, body, face, clothes, arms, colors and pose. Do not redraw or stretch the figure. Crop canvas snugly around entire figure with 3 percent transparent margin, no clipping ears/feet/tail. Transparency means zero alpha outside drawn character, no colored translucent mist.",
+          "input": "exec-11d02cc0-542e-417a-b7da-5ba6f83b062b.png",
+          "source_output": "exec-b85dad23-4cb8-44a0-be7d-1a3587583edd.png"
+        }
+      ]
+    }
+  ],
+  "faq_lineup_sizing": {
+    "risu": {
+      "visible_height_px": 84,
+      "image_height_px": 85.94,
+      "baseline_correction_px": 0.87
+    },
+    "usagi": {
+      "visible_height_px": 84,
+      "image_height_px": 88.65,
+      "baseline_correction_px": 3.61
+    },
+    "kotori": {
+      "visible_height_px": 84,
+      "image_height_px": 92.08,
+      "baseline_correction_px": 2.43
+    }
+  },
+  "proportion_reference": "Adult (left) of each canonical parent-child sheet; anatomy regenerated, CSS applies uniform scaling only."
+}
