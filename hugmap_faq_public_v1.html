@@ -63,7 +63,7 @@ h2.sec{font-size:16px;margin:26px 0 12px}
 .qa .q .car{margin-left:auto;color:var(--grey);flex-shrink:0;transition:transform .15s}
 .qa.open .q .car{transform:rotate(90deg)}
 .qa .av{width:34px;height:34px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.qa .av img{width:28px;height:28px;object-fit:contain}
+.qa .av img{width:34px;height:34px;object-fit:contain}
 .qa .a{display:none;padding:2px 18px 14px 60px;font-size:13px;color:#443a34}
 .qa .a .qimg{width:100%;max-width:560px;display:block;border-radius:12px;margin:4px 0 10px}
 .qa.open .a{display:block}
@@ -169,6 +169,7 @@ const META = {"st": ["ことりせんせい", "ことば・コミュニケーシ
 const ORDER = ["st", "ot", "pt", "psychologist", "pediatrician", "sped", "feeding_oral", "peer_parent"];
 const PERSONA_ASSET_VERSION = {"risu": "8e41c26827", "usagi": "7ba3317a8a", "kotori": "178f24462d"};
 const AV = p => { const name = (META[p]||META.pediatrician)[3]; return `assets/images/persona/${name}.png?v=${PERSONA_ASSET_VERSION[name] || "20260716"}`; };
+const AV_BUST = p => { const name = (META[p]||META.pediatrician)[3]; return `assets/images/persona/${name}-upper-body.png?v=20261002`; };
 let activePersona = null, qtext = "", shown = 40, searchTimer;
 const scrollDepthSent = new Set();
 const CONCERNS = {
@@ -267,7 +268,7 @@ function card(x) {
     : (gold ? '<span class="badge gold">専門職監修</span>'
        : (srcs ? '<span class="badge src">参考: 専門機関の公開情報</span>' : ''));
   return `<div class="qa" data-code="${esc(x.faq_code)}"><div class="q" onclick="toggleAnswer(this)">
-      <span class="av"><img src="${AV(x.persona)}" alt=""></span><span>${esc(x.question)}</span><span class="car">▶</span></div>
+      <span class="av"><img src="${AV_BUST(x.persona)}" alt="" width="34" height="34" loading="lazy" decoding="async"></span><span>${esc(x.question)}</span><span class="car">▶</span></div>
     <div class="a">${x.media_url ? `<img class="qimg" src="${x.media_url}" alt="${esc(x.question)}の図解" loading="lazy">` : ""}${md(x.answer)}
       <div class="meta">
         <span class="who">${m[0]}（${m[2]}）</span>

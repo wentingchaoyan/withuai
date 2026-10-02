@@ -1,0 +1,61 @@
+{
+  "tool": "built-in image_gen",
+  "images": [
+    {
+      "name": "kotori",
+      "prompt": "Create a square transparent PNG upper-body avatar from this EXACT existing character. Preserve identity, head silhouette, face, expression, colors, costume and linework precisely; do not redesign. Frame entire head including ears/tuft, shoulders and upper chest only, cropped horizontally at lower chest. Head large and centered for a small 36px FAQ question-list icon, 5 percent transparent margin above and beside head, no legs, no full body, no background circle or shadow or halo. Remove floating speech balloons and orange sound arcs. Retain lifted wing next to cheek.",
+      "file": "kotori-upper-body.png",
+      "source_output": "exec-9806cbfe-24b9-45b2-a6e9-dd3eeb8e17bb.png",
+      "sha256": "e96ff3adcd4d945cd3b75f4f5512b215837362cf6248e8bfa83ba8760840f294"
+    },
+    {
+      "name": "usagi",
+      "prompt": "Create a square transparent PNG upper-body avatar from this EXACT existing character. Preserve identity, head silhouette, face, expression, colors, costume and linework precisely; do not redesign. Frame entire head including ears/tuft, shoulders and upper chest only, cropped horizontally at lower chest. Head large and centered for a small 36px FAQ question-list icon, 5 percent transparent margin above and beside head, no legs, no full body, no background circle or shadow or halo. Retain both ears in full, burgundy shirt and scarf. No ball visible in upper-body crop.",
+      "file": "usagi-upper-body.png",
+      "source_output": "exec-5cb14205-ad18-486b-95c8-254d186d3585.png",
+      "sha256": "d45706ac17aa8f981f3a9ce15a1caa8ef9bf47e8eb9e8eeb0c6b51d4ce0d1590"
+    },
+    {
+      "name": "risu",
+      "prompt": "Create a square transparent PNG upper-body avatar from this EXACT existing character. Preserve identity, head silhouette, face, expression, colors, costume and linework precisely; do not redesign. Frame entire head including ears/tuft, shoulders and upper chest only, cropped horizontally at lower chest. Head large and centered for a small 36px FAQ question-list icon, 5 percent transparent margin above and beside head, no legs, no full body, no background circle or shadow or halo. Keep glasses and yellow scarf. Blocks may be omitted below chest crop, no large tail extending beyond head.",
+      "file": "risu-upper-body.png",
+      "source_output": "exec-aa7973ee-fc89-4f77-b7b3-3131ae1b7f0a.png",
+      "sha256": "a52943e5b0555a4963ff407bbc95326afc43a58086e1bf298c96ec0163e837d3"
+    },
+    {
+      "name": "fukurou",
+      "prompt": "Create a square transparent PNG upper-body avatar from this EXACT existing character. Preserve identity, head silhouette, face, expression, colors, costume and linework precisely; do not redesign. Frame entire head including ears/tuft, shoulders and upper chest only, cropped horizontally at lower chest. Head large and centered for a small 36px FAQ question-list icon, 5 percent transparent margin above and beside head, no legs, no full body, no background circle or shadow or halo. Omit large teaching board below chest so face remains primary.",
+      "file": "fukurou-upper-body.png",
+      "source_output": "exec-8dab779e-e433-4ae8-8485-312b94745735.png",
+      "sha256": "a9578688c476e3997cb66ce4227675f08cd511d8eb29061222375842389cbc85"
+    },
+    {
+      "name": "kuma",
+      "prompt": "Create a square transparent PNG upper-body avatar from this EXACT existing character. Preserve identity, head silhouette, face, expression, colors, costume and linework precisely; do not redesign. Frame entire head including ears/tuft, shoulders and upper chest only, cropped horizontally at lower chest. Head large and centered for a small 36px FAQ question-list icon, 5 percent transparent margin above and beside head, no legs, no full body, no background circle or shadow or halo. Keep white doctor coat and upper stethoscope.",
+      "file": "kuma-upper-body.png",
+      "source_output": "exec-ab5f7f43-b9b1-4aeb-8062-ad6d7d5cd7f6.png",
+      "sha256": "0b434354616ce49f14ec1a55845006ff7e033f260abf8d5ea9a1c00bdc625a59"
+    },
+    {
+      "name": "zou",
+      "prompt": "Create a square transparent PNG upper-body avatar from this EXACT existing character. Preserve identity, head silhouette, face, expression, colors, costume and linework precisely; do not redesign. Frame entire head including ears/tuft, shoulders and upper chest only, cropped horizontally at lower chest. Head large and centered for a small 36px FAQ question-list icon, 5 percent transparent margin above and beside head, no legs, no full body, no background circle or shadow or halo. Omit large teaching board below chest so face remains primary.",
+      "file": "zou-upper-body.png",
+      "source_output": "exec-76073bf2-aeb2-4bbb-9e3a-4318c8fae771.png",
+      "sha256": "8cff723173b67c3ef1e8bdf7937df07b35ac3cc85dddbebe977c544609776dda"
+    },
+    {
+      "name": "kaba",
+      "prompt": "Create a square transparent PNG upper-body avatar from this EXACT existing character. Preserve identity, head silhouette, face, expression, colors, costume and linework precisely; do not redesign. Frame entire head including ears/tuft, shoulders and upper chest only, cropped horizontally at lower chest. Head large and centered for a small 36px FAQ question-list icon, 5 percent transparent margin above and beside head, no legs, no full body, no background circle or shadow or halo. Retain smiling face, upper burgundy apron and small spoon, no large cup blocking face.",
+      "file": "kaba-upper-body.png",
+      "source_output": "exec-e0417681-f0c0-486a-9b30-a9066032335e.png",
+      "sha256": "d52034680d3ad628df012a575f02382ccaf9e718c0e110389bfec2d510e2df0d"
+    },
+    {
+      "name": "senpai",
+      "prompt": "Create a square transparent PNG upper-body avatar from this EXACT existing character. Preserve identity, head silhouette, face, expression, colors, costume and linework precisely; do not redesign. Frame entire head including ears/tuft, shoulders and upper chest only, cropped horizontally at lower chest. Head large and centered for a small 36px FAQ question-list icon, 5 percent transparent margin above and beside head, no legs, no full body, no background circle or shadow or halo. Keep BOTH mother's face/glasses and baby's face visible together, close bust portrait. Remove original pale circular background.",
+      "file": "senpai-upper-body.png",
+      "source_output": "exec-6833f1e1-fa1a-4f0e-a3ae-a86a901cd17d.png",
+      "sha256": "425cfc3fbe15c643f1a34dfa949090b161630b79a370c2c98ffbb7bacce1defc"
+    }
+  ]
+}
