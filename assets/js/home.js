@@ -20,3 +20,17 @@ document.addEventListener('keydown', event => {
     menu.querySelector('summary').focus();
   }
 });
+
+// Keep both screenshots available without JavaScript, then enhance with a switcher.
+for (const gallery of document.querySelectorAll('.home-screen-gallery')) {
+  const controls = gallery.querySelector('.home-screen-switch');
+  const buttons = [...controls.querySelectorAll('button')];
+  const screens = [...gallery.querySelectorAll('.home-app-screen')];
+  function selectScreen(index) {
+    screens.forEach((screen, i) => { screen.hidden = i !== index; });
+    buttons.forEach((button, i) => button.setAttribute('aria-pressed', String(i === index)));
+  }
+  buttons.forEach((button, i) => button.addEventListener('click', () => selectScreen(i)));
+  selectScreen(0);
+  controls.hidden = false;
+}

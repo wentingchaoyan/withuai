@@ -137,3 +137,12 @@
   #home-page .home-extra-card p{margin:0}
   #home-page .testimonial-card{padding:28px 24px 24px}
 }
+
+#home-page .home-screen-switch{display:flex;gap:4px;padding:4px;background:#F4F1F0;border-radius:14px;margin:0 auto 18px;max-width:330px}
+#home-page .home-screen-switch[hidden],#home-page .home-app-screen[hidden]{display:none}
+#home-page .home-screen-switch button{flex:1;border:0;border-radius:11px;min-height:44px;padding:9px 10px;background:transparent;font:inherit;font-size:12px;color:#71645F;cursor:pointer}
+#home-page .home-screen-switch button[aria-pressed="true"]{background:#FFFFFF;color:#291712;box-shadow:0 1px 5px #2917120D}
+#home-page .home-app-screen{margin:0}
+#home-page .home-app-screen+.home-app-screen:not([hidden]){margin-top:20px}
+#home-page .home-screen-gallery .wv-screen{height:auto;max-height:none;max-width:280px;object-fit:contain;border-radius:14px}
+#home-page .home-app-screen[hidden]+.home-app-screen{margin-top:0}

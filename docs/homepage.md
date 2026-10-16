@@ -12,7 +12,7 @@
 ## Content and images
 
 - `assets/images/home/team.webp`, `kotori.webp`, `risu.webp`, `pocket.webp`: optimized copies of the existing With U application character assets under `withu/src/images/persona/`.
-- `development-cards.webp`: the Japanese discovery-card screenshot supplied for this redesign. The English page explicitly identifies it as a Japanese app view; replace it with an English capture when available.
+- `discovery-ja.webp`, `development-ja.webp`, `discovery-en.webp`, `development-en.webp`: Japanese and English application screenshots supplied by the user. The development section switches between the two screens in the current page language; without JavaScript both remain visible. Only format/size optimization is applied.
 - `record-photo.webp`: therapy-photo portion of the already published `assets/images/app/home-screen.png`. It is presented as an illustrative record, not a current application screenshot.
 - Original user testimonials from the Japanese and English Services pages remain in the visible user-voices card grid.
 - Video analysis, schedules, voice records and per-person sharing permissions are summarized in the visible additional-feature cards. No expert-authored individual report service is promised.
