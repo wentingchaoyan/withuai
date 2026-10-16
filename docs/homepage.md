@@ -19,6 +19,8 @@
 - The existing App Store URL is retained. Android directs to Contact because the previous Google Play URL was an internal-test invitation, not a public listing.
 - FAQ, legal pages and existing app authentication routes remain in place.
 
+- `play-gesture-ja.webp` and `play-gesture-en.webp`: illustration crops from the user-supplied play screenshots. The matching activity title and description are rendered as accessible HTML; phone navigation, floating controls and pagination are excluded.
+
 ## Local verification
 
 Run `python3 -m http.server 8765 --bind 127.0.0.1` from the repository, then open `/` and `/en/`.
