@@ -6,7 +6,7 @@
 - `/en/` (`en/index.html`) is the equivalent English homepage.
 - `/services.html` and `/en/services.html` redirect to the corresponding homepages. JavaScript preserves query parameters and fragments; a meta refresh and a visible link provide a fallback.
 - Story, News and Contact remain separate pages. Their logo and Services links return to the homepage in the same language.
-- Edit both HTML files when changing copy, links or news. Update their canonical/hreflang metadata and `sitemap.xml` if routes change.
+- Edit both HTML files when changing homepage copy or links. News remains on the separate News pages, linked from the header and footer. Update their canonical/hreflang metadata and `sitemap.xml` if routes change.
 - Shared homepage presentation and progressive enhancement are in `assets/css/home.css` and `assets/js/home.js`. No build step is required; existing GitHub Pages deployment remains unchanged.
 
 ## Content and images
