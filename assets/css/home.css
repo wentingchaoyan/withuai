@@ -105,3 +105,44 @@
   #home-page .wv-entry p br{display:none}
   #home-page .wv-entry span{justify-self:start;font-size:12px}
 }
+
+/* Feature summaries: the illustration, title and short copy form one visible card. */
+#home-page .home-extra{padding-top:44px;padding-bottom:44px}
+#home-page .home-extra-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+#home-page .home-extra-card{padding:25px 23px;border-radius:24px;background:#FFF5EE}
+#home-page .home-extra-card:nth-child(2){background:#FAF7E7}
+#home-page .home-extra-card:nth-child(3){background:#F6F1F4}
+#home-page .home-extra-icon{width:56px;height:56px;display:grid;place-items:center;background:#FFFFFF;border-radius:18px;color:#C1431E;margin-bottom:20px}
+#home-page .home-extra-card:nth-child(2) .home-extra-icon{color:#7D6D22}
+#home-page .home-extra-card:nth-child(3) .home-extra-icon{color:#7D2741}
+#home-page .home-extra-icon svg{width:30px;height:30px}
+#home-page .home-extra-card h3{font-size:17px;line-height:1.6}
+#home-page .home-extra-card p{font-size:13px;line-height:1.85;color:#71645F;margin-top:12px}
+
+/* Restore the original Services testimonial cards, scoped to the new homepage. */
+#home-page .testimonials-section{padding:48px 7%;background:#FAF9F7}
+#home-page .testimonials-header{text-align:center;margin-bottom:30px}
+#home-page .testimonials-label{font-size:11px;letter-spacing:.14em;color:#7D2741;margin-bottom:12px}
+#home-page .testimonials-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+#home-page .testimonial-card{display:flex;flex-direction:column;background:#FFFFFF;border-radius:24px;padding:32px 28px 26px;position:relative;box-shadow:0 2px 12px #29171208}
+#home-page .testimonial-card::before{content:'';position:absolute;top:0;left:28px;right:28px;height:3px;border-radius:0 0 3px 3px;background:linear-gradient(90deg,#FF511B,#D7C862)}
+#home-page .testimonial-card:nth-child(even)::before{background:linear-gradient(90deg,#D7C862,#F2CC8F)}
+#home-page .testimonial-quote-mark{position:absolute;top:16px;left:23px;font:56px/1 Georgia,serif;color:#FF511B;opacity:.13;user-select:none}
+#home-page .testimonial-text{font-size:14px;line-height:1.9;position:relative;margin-bottom:24px}
+#home-page .testimonial-footer{margin-top:auto;display:flex;align-items:center;gap:12px;padding-top:18px;border-top:1px solid #E8E4E0;flex-wrap:wrap}
+#home-page .testimonial-avatar{width:40px;height:40px;flex-shrink:0;border-radius:50%;display:grid;place-items:center;font-size:16px;font-weight:500}
+#home-page .avatar-orange{background:#FF511B;color:#291712}
+#home-page .avatar-yellow{background:#D7C862;color:#291712}
+#home-page .avatar-twilight{background:#291712;color:#FFFFFF}
+#home-page .avatar-honey{background:#F2CC8F;color:#291712}
+#home-page .testimonial-user-info{flex:1;min-width:100px}
+#home-page .testimonial-user-name{font-size:14px;font-weight:500}
+#home-page .testimonial-user-role{font-size:12px;color:#71645F;margin-top:2px}
+#home-page .testimonial-stars{display:flex;gap:2px;color:#8C781E;font-size:14px}
+@media(max-width:650px){
+  #home-page .home-extra-grid,#home-page .testimonials-grid{grid-template-columns:1fr}
+  #home-page .home-extra-card{display:grid;grid-template-columns:54px 1fr;gap:8px 16px;padding:22px}
+  #home-page .home-extra-icon{grid-row:1/3;width:50px;height:50px;margin:0}
+  #home-page .home-extra-card p{margin:0}
+  #home-page .testimonial-card{padding:28px 24px 24px}
+}

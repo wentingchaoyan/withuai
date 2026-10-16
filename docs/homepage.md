@@ -14,8 +14,8 @@
 - `assets/images/home/team.webp`, `kotori.webp`, `risu.webp`, `pocket.webp`: optimized copies of the existing With U application character assets under `withu/src/images/persona/`.
 - `development-cards.webp`: the Japanese discovery-card screenshot supplied for this redesign. The English page explicitly identifies it as a Japanese app view; replace it with an English capture when available.
 - `record-photo.webp`: therapy-photo portion of the already published `assets/images/app/home-screen.png`. It is presented as an illustrative record, not a current application screenshot.
-- Original user testimonials from the Japanese and English Services pages remain in the expandable user-voices section.
-- Video analysis, schedules, voice records and per-person sharing permissions are summarized in the additional-features disclosure. No expert-authored individual report service is promised.
+- Original user testimonials from the Japanese and English Services pages remain in the visible user-voices card grid.
+- Video analysis, schedules, voice records and per-person sharing permissions are summarized in the visible additional-feature cards. No expert-authored individual report service is promised.
 - The existing App Store URL is retained. Android directs to Contact because the previous Google Play URL was an internal-test invitation, not a public listing.
 - FAQ, legal pages and existing app authentication routes remain in place.
 
