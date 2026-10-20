@@ -32,3 +32,17 @@ Check at desktop, tablet and mobile widths, including 320px:
 - all images and local links;
 - no horizontal overflow, including English copy;
 - white background with OS dark mode enabled.
+
+## Picture books
+
+- The homepages introduce Mimo, Luke and Gen after the sharing section. “Story” remains the company story; “絵本” / “Picture books” leads to `/stories/` / `/en/stories/`.
+- Both shelves link to the Japanese editions at `/stories/hello-mimo/`, `/stories/hello-luke/`, and `/stories/hello-gen/`. English entry copy explicitly identifies the reading language; English books are not implied.
+- Book sources remain in the sibling `hugmap-stories` repository. `stories/source-manifest.json` records the imported revision. Only rendered HTML, CSS, JS and referenced illustrations are published here; production prompts and discarded artwork are excluded.
+- Published illustrations are WebP conversions at quality 90, with original dimensions and composition. After importing future source updates, preserve the local shelf/home links and canonical URLs; Mimo’s original link to `mouikkai` is replaced with Luke because that book is not hosted here.
+- Entry styling lives in `assets/css/storybooks.css`. Book styling stays local to each edition, with Mimo’s small base stylesheet in `stories/base.css`.
+- Homepage buddy cards stay brief: a portrait, personality and distinct role, then a link to the introduction book. The shared introduction explains app consultation and play ideas; individual consultation examples are omitted to avoid repeating the feature sections. Character roles follow `hugmap-stories/planning/world-and-character-guide.md`: Mimo listens, Luke observes and adapts tools/environments, and Gen joins in at the child’s pace. A shared CTA scrolls to the existing app download/contact section (`#wv-start`). The duplicate three-card feature overview and standalone AI conversation section are removed. The hero retains the group illustration; its feature CTA leads directly to the development section (`#wv-discover`).
+- `assets/images/home/gen.webp` is a quality-90 WebP copy of the existing approved `assets/images/persona/usagi.png`.
+
+- Keep the three self-introduction books as evergreen destination pages. Everyday episodes and play ideas can be adapted for social posts; the homepage does not need a continuously growing episode feed. Update the books when character settings or content change, rather than duplicating each social post on the site.
+
+- Buddy cards use approved brand accents (Mimo `#FF511B`, Luke `#D7C862`, Gen `#7D2741`) for the image divider and book link, with pale matching portrait backgrounds. Character raster artwork is unchanged. Orange/yellow buttons use dark text; wine buttons use white text.

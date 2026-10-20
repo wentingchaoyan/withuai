@@ -19,7 +19,7 @@
 <link rel="icon" href="/assets/images/logo/favicon/favicon.svg">
 <link rel="stylesheet" href="/assets/css/home.css">
 <script src="/assets/js/home.js" defer></script>
-</head>
+<link rel="stylesheet" href="/assets/css/storybooks.css?layout=brand-cards"></head>
 <body>
 <div id="home-page" aria-label="HugMap — With U">
 
@@ -30,6 +30,7 @@
 <nav class="wv-desktop-nav" aria-label="メインナビゲーション">
 <a href="/story.html">Story</a>
 <a href="#wv-discover">Services</a>
+<a href="/stories/">絵本</a>
 <a href="/news/">News</a>
 <a href="/contact.html" aria-label="お問い合わせ Contact">Contact</a>
 <a class="wv-language" href="/en/" lang="en">English</a>
@@ -38,6 +39,7 @@
 <nav aria-label="モバイルナビゲーション">
 <a href="/story.html">Story</a>
 <a href="#wv-discover">Services</a>
+<a href="/stories/">絵本</a>
 <a href="/news/">News</a>
 <a href="/contact.html" aria-label="お問い合わせ Contact">Contact</a>
 <a class="wv-language" href="/en/" lang="en">English</a>
@@ -53,22 +55,7 @@
 <a class="wv-cta" href="#wv-discover">HugMapでできること</a></div>
 <img src="/assets/images/home/team.webp" width="700" height="466" decoding="async" fetchpriority="high" alt="With Uのキャラクターたち">
 </section>
-<section class="wv-section" id="wv-discover">
-<div class="wv-three">
-<a class="wv-entry" href="#wv-notice">
-<img src="/assets/images/home/kotori.webp" width="220" height="220" decoding="async" loading="lazy" alt="ことりせんせい">
-<h3>発達を知る</h3>
-<p>気になることを、<br>わかりやすく。</p><span>発達の姿を見る</span></a>
-<a class="wv-entry" href="#wv-play">
-<img src="/assets/images/home/risu.webp" width="220" height="220" decoding="async" loading="lazy" alt="りすせんせい">
-<h3>遊びを見つける</h3>
-<p>毎日の「何しよう？」に、<br>小さなアイディア。</p><span>遊びを見てみる</span></a>
-<a class="wv-entry" href="#wv-record">
-<img src="/assets/images/home/pocket.webp" width="220" height="242" decoding="async" loading="lazy" alt="ぽけっとさん">
-<h3>様子を残す</h3>
-<p>おうちでも、リハビリでも。<br>その瞬間を、記録に。</p><span>記録を見てみる</span></a></div>
-</section>
-<section class="wv-feature" id="wv-notice">
+<section class="wv-feature" id="wv-discover"><span id="wv-notice" class="section-anchor" aria-hidden="true"></span>
 <div class="wv-photo home-screen-gallery"><div class="home-screen-switch" role="group" aria-label="アプリ画面を選ぶ" hidden><button type="button" data-screen="0" aria-controls="app-screen-0" aria-pressed="true">姿を探す</button><button type="button" data-screen="1" aria-controls="app-screen-1" aria-pressed="false">発達の解説</button></div><figure id="app-screen-0" class="home-app-screen"><img class="wv-screen" src="/assets/images/home/discovery-ja.webp" width="780" height="1688" decoding="async" loading="lazy" alt="歩いて移動する姿を探す、日本語の発達画面"><figcaption class="wv-label">姿を探す</figcaption></figure><figure id="app-screen-1" class="home-app-screen"><img class="wv-screen" src="/assets/images/home/development-ja.webp" width="780" height="1688" decoding="async" loading="lazy" alt="身ぶりやサインで伝える姿を解説する、日本語の発達画面"><figcaption class="wv-label">発達の解説</figcaption></figure></div>
 <div class="wv-copy">
 <div class="wv-kicker">小さな変化に、気づく。</div>
@@ -120,21 +107,7 @@
 <p>診断書や療育の資料を、<br>スキャンして整理。</p>
 </article></div>
 </section>
-<section class="wv-section" id="wv-learn">
-<div class="wv-help">
-<img src="/assets/images/home/kotori.webp" width="220" height="220" decoding="async" loading="lazy" alt="ことりせんせい">
-<div>
-<div class="wv-kicker">ひとりで考え込む、その前に。</div>
-<h2>気になることは、話してみよう。</h2>
-<p>AIのせんせいと、発達のヒントを。<br>気になる答えを保存し、次の「やってみよう」へ。</p></div>
-<a class="wv-link" href="#wv-talk">会話例を見る</a></div>
-<details id="wv-talk"><summary>ことばについて、聞いてみる</summary>
-<div class="wv-talk">
-<p>「ことば以外にも、伝えようとしているサインはある？」</p>
-<p>「視線や指さし、声などにも、伝えたい気持ちが表れることがあります。どんな場面がありましたか？」</p>
-<div class="wv-label">紹介用の会話例</div></div>
-</details>
-</section>
+<section class="story-shelf buddy-section" id="picture-books" aria-labelledby="books-title"><div class="storybook-heading"><p class="storybook-kicker">HUGMAP BUDDIES</p><h2 id="books-title">きみと、おうちの人のバディ。</h2><p>気になることを相談したり、遊びを見つけたり。<br>親子の毎日に寄り添う、個性豊かなAIの仲間です。</p></div><div class="buddy-grid"><article class="buddy-card buddy-mimo"><div class="buddy-portrait"><img src="/assets/images/home/kotori.webp" alt="ミモ" loading="lazy" decoding="async"></div><div class="buddy-copy"><h3>ミモ</h3><p>歌とおしゃべりが好きな、聞き上手。声や仕草の「伝えたい」に耳をすませます。</p><a class="buddy-book" href="/stories/hello-mimo/#cover">ミモを絵本で知る →</a></div></article><article class="buddy-card buddy-luke"><div class="buddy-portrait"><img src="/assets/images/home/risu.webp" alt="ルーク" loading="lazy" decoding="async"></div><div class="buddy-copy"><h3>ルーク</h3><p>よく見て、作って、試す発明家。道具や環境を工夫して「じぶんで」を応援します。</p><a class="buddy-book" href="/stories/hello-luke/#cover">ルークを絵本で知る →</a></div></article><article class="buddy-card buddy-gen"><div class="buddy-portrait"><img src="/assets/images/home/gen.webp" alt="ゲン" loading="lazy" decoding="async"></div><div class="buddy-copy"><h3>ゲン</h3><p>一緒に動くのが大好きな、はりきり屋。その子に合うペースで、小さな挑戦を楽しみます。</p><a class="buddy-book" href="/stories/hello-gen/#cover">ゲンを絵本で知る →</a></div></article></div><div class="buddy-footer"><a class="wv-outline" href="#wv-start">HugMapで、バディと一緒に →</a></div></section>
 <section class="wv-section home-extra" id="more-features" aria-labelledby="extra-title"><div class="wv-section-head"><h2 id="extra-title">記録を支える、ほかの機能</h2></div><div class="home-extra-grid"><article class="home-extra-card"><div class="home-extra-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3Z"/></svg></div>
 <h3>動画から動きを振り返る</h3>
 <p>AIによる動画分析を、動きや変化を知る手がかりに。</p>
@@ -220,7 +193,7 @@
         </section>
 <div class="wv-story"><span>小さな成長を、誰かと喜びたかった。</span>
 <a class="wv-link" href="/story.html">With Uのはじまり</a></div>
-<section class="wv-end">
+<section class="wv-end" id="wv-start">
 <h2>今日の小さな一歩から。</h2>
 <div class="wv-download">
 <a href="https://apps.apple.com/jp/app/hugmap/id6743437199" target="_blank" rel="noopener" aria-label="App StoreでHugMapを見る">
@@ -236,6 +209,7 @@
 <nav aria-label="フッターナビゲーション">
 <a href="/story.html">Story</a>
 <a href="#wv-discover">Services</a>
+<a href="/stories/">絵本</a>
 <a href="/news/">News</a>
 <a href="/contact.html" aria-label="お問い合わせ Contact">Contact</a>
 <a class="wv-language" href="/en/" lang="en">English</a>

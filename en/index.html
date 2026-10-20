@@ -19,7 +19,7 @@
 <link rel="icon" href="/assets/images/logo/favicon/favicon.svg">
 <link rel="stylesheet" href="/assets/css/home.css">
 <script src="/assets/js/home.js" defer></script>
-</head>
+<link rel="stylesheet" href="/assets/css/storybooks.css?layout=brand-cards"></head>
 <body>
 <div id="home-page" aria-label="HugMap — With U">
 
@@ -30,6 +30,7 @@
 <nav class="wv-desktop-nav" aria-label="Main navigation">
 <a href="/en/story.html">Story</a>
 <a href="#wv-discover">Services</a>
+<a href="/en/stories/">Picture books</a>
 <a href="/en/news/">News</a>
 <a href="/en/contact.html" aria-label="Contact us">Contact</a>
 <a class="wv-language" href="/" lang="ja">日本語</a>
@@ -38,6 +39,7 @@
 <nav aria-label="Mobile navigation">
 <a href="/en/story.html">Story</a>
 <a href="#wv-discover">Services</a>
+<a href="/en/stories/">Picture books</a>
 <a href="/en/news/">News</a>
 <a href="/en/contact.html" aria-label="Contact us">Contact</a>
 <a class="wv-language" href="/" lang="ja">日本語</a>
@@ -53,22 +55,7 @@
 <a class="wv-cta" href="#wv-discover">Explore HugMap</a></div>
 <img src="/assets/images/home/team.webp" width="700" height="466" decoding="async" fetchpriority="high" alt="The With U character team">
 </section>
-<section class="wv-section" id="wv-discover">
-<div class="wv-three">
-<a class="wv-entry" href="#wv-notice">
-<img src="/assets/images/home/kotori.webp" width="220" height="220" decoding="async" loading="lazy" alt="Bird teacher">
-<h3>Understand development</h3>
-<p>Explore your questions,<br>one clear step at a time.</p><span>Notice little changes</span></a>
-<a class="wv-entry" href="#wv-play">
-<img src="/assets/images/home/risu.webp" width="220" height="220" decoding="async" loading="lazy" alt="Squirrel teacher">
-<h3>Find ways to play</h3>
-<p>A little inspiration for<br>“What shall we do today?”</p><span>Explore play ideas</span></a>
-<a class="wv-entry" href="#wv-record">
-<img src="/assets/images/home/pocket.webp" width="220" height="242" decoding="async" loading="lazy" alt="Pocket">
-<h3>Keep the moments</h3>
-<p>At home or in therapy.<br>Save what you notice.</p><span>Explore everyday records</span></a></div>
-</section>
-<section class="wv-feature" id="wv-notice">
+<section class="wv-feature" id="wv-discover"><span id="wv-notice" class="section-anchor" aria-hidden="true"></span>
 <div class="wv-photo home-screen-gallery"><div class="home-screen-switch" role="group" aria-label="Choose an app screen" hidden><button type="button" data-screen="0" aria-controls="app-screen-0" aria-pressed="true">Find moments</button><button type="button" data-screen="1" aria-controls="app-screen-1" aria-pressed="false">Development insights</button></div><figure id="app-screen-0" class="home-app-screen"><img class="wv-screen" src="/assets/images/home/discovery-en.webp" width="780" height="1688" decoding="async" loading="lazy" alt="English discovery screen showing walking-related moments"><figcaption class="wv-label">Find moments</figcaption></figure><figure id="app-screen-1" class="home-app-screen"><img class="wv-screen" src="/assets/images/home/development-en.webp" width="780" height="1688" decoding="async" loading="lazy" alt="English communication development screen explaining gestures and signs"><figcaption class="wv-label">Development insights</figcaption></figure></div>
 <div class="wv-copy">
 <div class="wv-kicker">Notice the little changes.</div>
@@ -120,21 +107,7 @@
 <p>Scan and organize medical documents<br>and therapy materials.</p>
 </article></div>
 </section>
-<section class="wv-section" id="wv-learn">
-<div class="wv-help">
-<img src="/assets/images/home/kotori.webp" width="220" height="220" decoding="async" loading="lazy" alt="Bird teacher">
-<div>
-<div class="wv-kicker">You don&#x27;t have to work it out alone.</div>
-<h2>Start with a question.</h2>
-<p>Explore development with AI teachers.<br>Save helpful answers and find something to try next.</p></div>
-<a class="wv-link" href="#wv-talk">See a sample conversation</a></div>
-<details id="wv-talk"><summary>A question about communication</summary>
-<div class="wv-talk">
-<p>“Are there ways my child might communicate without words?”</p>
-<p>“Looking, pointing and making sounds can all be ways of communicating. What have you noticed?”</p>
-<div class="wv-label">Illustrative conversation</div></div>
-</details>
-</section>
+<section class="story-shelf buddy-section" id="picture-books" aria-labelledby="books-title"><div class="storybook-heading"><p class="storybook-kicker">HUGMAP BUDDIES</p><h2 id="books-title">Buddies for your child. And for you.</h2><p>Someone to ask. New ways to play.<br>Meet the AI buddies who accompany your family every day.</p></div><div class="buddy-grid"><article class="buddy-card buddy-mimo"><div class="buddy-portrait"><img src="/assets/images/home/kotori.webp" alt="Mimo" loading="lazy" decoding="async"></div><div class="buddy-copy"><h3>Mimo</h3><p>A listener who loves songs and conversation. Mimo tunes in to what children express through sounds and gestures.</p><a class="buddy-book" href="/stories/hello-mimo/#cover">Meet Mimo in a picture book →</a></div></article><article class="buddy-card buddy-luke"><div class="buddy-portrait"><img src="/assets/images/home/risu.webp" alt="Luke" loading="lazy" decoding="async"></div><div class="buddy-copy"><h3>Luke</h3><p>A curious inventor who observes, makes and tries again. Luke adapts tools and surroundings to support “I can do it myself.”</p><a class="buddy-book" href="/stories/hello-luke/#cover">Meet Luke in a picture book →</a></div></article><article class="buddy-card buddy-gen"><div class="buddy-portrait"><img src="/assets/images/home/gen.webp" alt="Gen" loading="lazy" decoding="async"></div><div class="buddy-copy"><h3>Gen</h3><p>An eager buddy who loves moving together. Gen makes small adventures fun, at a pace that suits your child.</p><a class="buddy-book" href="/stories/hello-gen/#cover">Meet Gen in a picture book →</a></div></article></div><div class="buddy-footer"><a class="wv-outline" href="#wv-start">Meet your buddies in HugMap →</a></div><p class="buddy-language">Picture books are currently in Japanese.</p></section>
 <section class="wv-section home-extra" id="more-features" aria-labelledby="extra-title"><div class="wv-section-head"><h2 id="extra-title">More ways to support your records</h2></div><div class="home-extra-grid"><article class="home-extra-card"><div class="home-extra-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3Z"/></svg></div>
 <h3>Look back at movement</h3>
 <p>Use AI video analysis as a starting point for noticing movement and change.</p>
@@ -220,7 +193,7 @@
         </section>
 <div class="wv-story"><span>We wanted someone to celebrate the little steps with.</span>
 <a class="wv-link" href="/en/story.html">The story behind With U</a></div>
-<section class="wv-end">
+<section class="wv-end" id="wv-start">
 <h2>Start with one small step today.</h2>
 <div class="wv-download">
 <a href="https://apps.apple.com/jp/app/hugmap/id6743437199" target="_blank" rel="noopener" aria-label="View HugMap on the App Store">
@@ -236,6 +209,7 @@
 <nav aria-label="Footer navigation">
 <a href="/en/story.html">Story</a>
 <a href="#wv-discover">Services</a>
+<a href="/en/stories/">Picture books</a>
 <a href="/en/news/">News</a>
 <a href="/en/contact.html" aria-label="Contact us">Contact</a>
 <a class="wv-language" href="/" lang="ja">日本語</a>
