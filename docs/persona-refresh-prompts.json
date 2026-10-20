@@ -94,5 +94,25 @@
       "baseline_correction_px": 2.43
     }
   },
-  "proportion_reference": "Adult (left) of each canonical parent-child sheet; anatomy regenerated, CSS applies uniform scaling only."
+  "proportion_reference": "Adult (left) of each canonical parent-child sheet; anatomy regenerated, CSS applies uniform scaling only.",
+  "recordScope": "images内のprompt・edits・source_output・sha256は過去の制作記録。再制作にはcurrentProductionを優先する。currentProductionの更新は既存画像の更新・検証完了を意味しない。",
+  "currentProduction": {
+    "updated": "2026-10-20",
+    "mimo": {
+      "file": "kotori.png",
+      "paletteSpecification": "../../hugmap-stories/planning/style-studies/character-reference/brand-colors.json",
+      "paletteKey": "characterPalettes.mimo",
+      "palette": {
+        "body": "#FED304",
+        "bodyColorName": "蒲公英色",
+        "shirt": "#F4F1F0",
+        "collarAndChestMark": "#FF511B",
+        "outline": "#A77C65",
+        "eyes": "#6B5143"
+      },
+      "reference": "../../hugmap-stories/planning/style-studies/character-reference/assets/mimo-parent-child-color.png",
+      "prompt": "Create a transparent-background website illustration of adult Mimo. Use only the adult on the LEFT of the current parent-child reference for anatomy: a softly rounded egg-shaped head, one leaf-shaped crest, small solid oval brown eyes without white highlights, a small orange diamond beak, a short-sleeved shirt, and short bird legs. Preserve the approved adult proportions. Use these explicit sRGB color targets: body and crest TANPOPO (蒲公英色) #FED304; shirt #F4F1F0; collar and official U chest mark #FF511B; fine warm brown outline #A77C65; eyes #6B5143. These values override all historical prompt colors and old image palettes, including FAQ references. Do not sample colors from old website assets. Place the official U mark on the upper chest on the viewer's right; keep its official shape, solid fill and no outline. Retain the existing website listening motif: one wing beside the cheek, the other relaxed, two small white speech balloons at the upper right, and three small orange listening arcs on the left. Keep the whole figure visible and legible at small website sizes, with a small transparent margin. No child features, extra text, background, ground shadow or halo.",
+      "status": "現行の再制作指示。Web・FAQの既存PNGは今回未更新。生成後は色面と造形を確認してから差し替える。"
+    }
+  }
 }
