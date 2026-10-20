@@ -46,3 +46,9 @@ Check at desktop, tablet and mobile widths, including 320px:
 - Keep the three self-introduction books as evergreen destination pages. Everyday episodes and play ideas can be adapted for social posts; the homepage does not need a continuously growing episode feed. Update the books when character settings or content change, rather than duplicating each social post on the site.
 
 - Buddy cards use approved brand accents (Mimo `#FF511B`, Luke `#D7C862`, Gen `#7D2741`) for the image divider and book link, with pale matching portrait backgrounds. Character raster artwork is unchanged. Orange/yellow buttons use dark text; wine buttons use white text.
+
+- Homepage `team.webp` now uses the Mimo reference update (built-in imagegen): retain the seated group composition, match the approved seated Mimo (`exec-4bc04379-c849-4c90-bb41-ba4f1777bcb9.png`) with a smooth broad head, no cheek protrusion, and brown feet, with body `#FED304`, shirt `#F4F1F0`, collar/mark `#FF511B`. The generated group is exported on white as 700×466 WebP; image generation can introduce small line changes in the other characters.
+
+- Group line-weight refinement (built-in imagegen): use seated Mimo’s thin warm-brown contour as the reference for all characters, including the pocket mascot. Preserve head shapes, poses and composition; reduce heavy outer borders and inner strokes, retaining solid pupils.
+
+- Pocket outline refinement (built-in imagegen): change only the pocket mascot’s outer and handle strokes toward warm reddish brown `#B64D25`, retaining fine lines, orange fill and white facial features.
