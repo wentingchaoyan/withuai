@@ -3,18 +3,39 @@
     "book": "hello-mimo",
     "source": "hugmap-stories/stories/hello-mimo",
     "revision": "58a61e8500093dac849d7eab70b79062c47646fd",
-    "images": "Referenced PNGs converted to WebP quality 90; no drawing changes."
+    "images": "Referenced PNGs converted to WebP quality 90; no drawing changes.",
+    "english": {
+      "source": "hugmap-stories/en/stories/hello-mimo",
+      "publication": "en/stories/hello-mimo",
+      "assets": "Reuses the Japanese edition’s existing WebP illustrations.",
+      "localization": "English narration, bubbles, afterword, accessibility text and shared controls; added 2026-10-20.",
+      "revision": "f0e84382d1a20b5255d03c8ea64a956d446a210f"
+    }
   },
   {
     "book": "hello-luke",
     "source": "hugmap-stories/stories/hello-luke",
     "revision": "58a61e8500093dac849d7eab70b79062c47646fd",
-    "images": "Referenced PNGs converted to WebP quality 90; no drawing changes."
+    "images": "Referenced PNGs converted to WebP quality 90; no drawing changes.",
+    "english": {
+      "source": "hugmap-stories/en/stories/hello-luke",
+      "publication": "en/stories/hello-luke",
+      "assets": "Reuses the Japanese edition’s existing WebP illustrations.",
+      "localization": "English narration, bubbles, afterword, accessibility text and shared controls; added 2026-10-20.",
+      "revision": "f0e84382d1a20b5255d03c8ea64a956d446a210f"
+    }
   },
   {
     "book": "hello-gen",
     "source": "hugmap-stories/stories/hello-gen",
     "revision": "a73f507c2ecd838342f5cf5dcb23b271e45b9df0",
-    "images": "Referenced PNGs converted to WebP quality 90; no drawing changes."
+    "images": "Referenced PNGs converted to WebP quality 90; no drawing changes.",
+    "english": {
+      "source": "hugmap-stories/en/stories/hello-gen",
+      "publication": "en/stories/hello-gen",
+      "assets": "Reuses the Japanese edition’s existing WebP illustrations.",
+      "localization": "English narration, bubbles, afterword, accessibility text and shared controls; added 2026-10-20.",
+      "revision": "f0e84382d1a20b5255d03c8ea64a956d446a210f"
+    }
   }
 ]
