@@ -149,7 +149,7 @@ body.webtoon{background:#eee9e3}
 .webtoon[data-buddy="gen"] .panel figure::before{
  content:"";position:absolute;z-index:-1;pointer-events:none;
  left:-7%;bottom:0;width:114%;height:86%;
- background:url("hello-mimo/assets/orange-watercolor-wash.svg") center / 100% 100% no-repeat;
+ background:url("hello-mimo/assets/orange-watercolor-wash.svg?c9e72bbe4f") center / 100% 100% no-repeat;
 }
 
 /* Gen's bubbles sit beside his position in each illustration. */
@@ -178,3 +178,21 @@ body.webtoon{background:#eee9e3}
 
 /* A quiet role line introduces each buddy without repeating the opening scene. */
 .webtoon .cover .buddy-role{font-size:clamp(15px,2.5vw,17px);line-height:1.85;font-weight:400;letter-spacing:.02em;max-width:32em;margin:20px auto 0;text-wrap:balance;color:#776356}
+
+/* A soft, individually drawn frame, with a tail aimed at its own buddy. */
+.webtoon .panel .bubble-art>.bubble,
+.webtoon .panel .bubble-art>.speech-bubble,
+.webtoon .panel .bubble-art>.thought-bubble,
+.webtoon .panel .bubble-art .observation-thoughts{
+ border:0!important;background:transparent!important;border-radius:0!important;
+ padding:18px 27px;isolation:isolate;overflow:visible;
+}
+.webtoon .panel .bubble-art>.bubble::before,.webtoon .panel .bubble-art>.bubble::after,
+.webtoon .panel .bubble-art>.speech-bubble::before,.webtoon .panel .bubble-art>.speech-bubble::after,
+.webtoon .panel .bubble-art>.thought-bubble::before,.webtoon .panel .bubble-art>.thought-bubble::after,
+.webtoon .observation-thoughts::before,.webtoon .observation-thoughts::after{display:none!important}
+.story-bubble-frame{position:absolute;left:-38px;top:-38px;width:calc(100% + 76px);height:calc(100% + 76px);max-width:none;overflow:visible;z-index:-1;pointer-events:none}
+.webtoon .panel figure img{mix-blend-mode:normal!important}
+.webtoon .panel figure::before{opacity:.9}
+.webtoon .panel:nth-of-type(3n) figure::before{transform:rotate(-5deg);opacity:.76}
+.webtoon .panel:nth-of-type(3n + 1) figure::before{transform:rotate(4deg);opacity:.86}

@@ -64,7 +64,7 @@
 .panel figure::before{
  left:-7%;bottom:-3%;width:114%;height:min(53vw,68svh);
  border-radius:0;
- background:url("assets/orange-watercolor-wash.svg") center / 100% 100% no-repeat;
+ background:url("assets/orange-watercolor-wash.svg?c9e72bbe4f") center / 100% 100% no-repeat;
  filter:none;
 }
 /* Preserve solid white within the artwork. */
