@@ -52,3 +52,24 @@ Check at desktop, tablet and mobile widths, including 320px:
 - Group line-weight refinement (built-in imagegen): use seated Mimo’s thin warm-brown contour as the reference for all characters, including the pocket mascot. Preserve head shapes, poses and composition; reduce heavy outer borders and inner strokes, retaining solid pupils.
 
 - Pocket outline refinement (built-in imagegen): change only the pocket mascot’s outer and handle strokes toward warm reddish brown `#B64D25`, retaining fine lines, orange fill and white facial features.
+
+
+## Germany family pilot landing page (English review version)
+
+- `/en/try-hugmap/` is a focused English-language page for parents of preschool children in Germany. German translation is deferred until the English content and flow are approved.
+- Uses existing canonical artwork and screenshots; no copied assets or invented testimonials.
+- English buddy story afterwords link to the pilot page.
+- `family-pilot.css` and `family-pilot.js` are isolated from the main homepage.
+- The form now collects email, device, preferred language and optional interest, with required consent for trial follow-up (no marketing opt-in).
+- Uses the official Google Forms iframe, with an external-form fallback. No custom POST endpoint, local storage, or simulated success message. Google handles validation and the received confirmation; the LP does not infer submission from iframe load.
+- Owner: `admin@withuai.com`. Form editor: https://docs.google.com/forms/d/1zBb2S4CmdaHZsQSaKoZFuA7F9x9NQoGTp1CUo4Tz1-w/edit
+- Respondent form: https://docs.google.com/forms/d/e/1FAIpQLSfZWrNlx3L-2yHphMtoVzj9O7GYlbsu5bLE8ygA-bFizg3-FQ/viewform?hl=en
+- Private linked response spreadsheet: https://docs.google.com/spreadsheets/d/1qCYQzQYn16eS-z0hKdkWo1xPnd3Xo-jiS2K0hvXvNSI/edit
+- Email uses a required short-answer field with email validation. Device, language and trial-contact consent are required; interest is optional. Google login is not required, response summaries are not shared, and marketing consent is not bundled with trial follow-up.
+- Form is published and the sheet is linked, but this LP is still local until deployed. No real or synthetic requests were submitted during setup. Verify a controlled test response in the sheet before external recruitment.
+- Follow-up remains manual: review responses, confirm trial language/device/conditions, then arrange app access separately. No automatic invitation emails or app entitlements are created. Track invited/started separately; count actual non-test unique requests, not clicks.
+- No analytics are connected yet. A button click must not be counted as a completed registration.
+- `noindex,follow` is intentional during review. No sitemap entry or main-homepage promotion until launch readiness is confirmed.
+- Before distribution: verify Germany app availability, devices/languages, pricing/timing, enquiry handling and privacy information; translate the approved copy into German.
+
+- Chat demo uses the two supplied Consult/Luke screenshots in `assets/images/pilot/`. Review status is explicitly scoped to the shown answer. Screens are unmodified; the Consult example contains the supplied profile name/avatar. Review those before public distribution.
