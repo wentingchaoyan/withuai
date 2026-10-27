@@ -13,3 +13,6 @@
 
 /* Short path from request to a first family play experience. */
 .trial-steps{padding-left:1.35em;margin:1.5rem 0;line-height:1.7}.trial-steps li{padding-left:.3em;margin:.8rem 0}.trial-steps strong{display:block}
+
+/* Shared park artwork retains its full composition at every viewport. */
+.hero-art .park-team-image{width:100%;height:auto;max-width:100%;margin:12px auto 0}

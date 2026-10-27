@@ -73,3 +73,10 @@ Check at desktop, tablet and mobile widths, including 320px:
 - Before distribution: verify Germany app availability, devices/languages, pricing/timing, enquiry handling and privacy information; translate the approved copy into German.
 
 - Chat demo uses the two supplied Consult/Luke screenshots in `assets/images/pilot/`. Review status is explicitly scoped to the shown answer. Screens are unmodified; the Consult example contains the supplied profile name/avatar. Review those before public distribution.
+
+
+## Park group artwork — 2026-10-27
+
+- Japanese and English homepage heroes and Open Graph images use `assets/images/home/team-park.webp`. The English trial LP hero uses the same asset, with a group introduction caption.
+- Source: approved chat artwork `exec-02d1c480-f1bf-481e-a618-568daf3f7d3a.png`: Mimo on a park bench, Luke blowing bubbles, LUMI watching, and Gen holding a yellow ball, with sparse grass. Exported as 1536×1024 WebP.
+- The previous `team.webp` remains available. LP artwork uses responsive width and intrinsic height to preserve the full composition on mobile.
