@@ -10,3 +10,6 @@
 
 /* Shorter copy: keep links and demo headings comfortably spaced. */
 .buddy-copy>a{display:inline-block;margin-top:20px}.chat-step{min-height:118px}@media(max-width:760px){.chat-step{min-height:0}}
+
+/* Short path from request to a first family play experience. */
+.trial-steps{padding-left:1.35em;margin:1.5rem 0;line-height:1.7}.trial-steps li{padding-left:.3em;margin:.8rem 0}.trial-steps strong{display:block}
