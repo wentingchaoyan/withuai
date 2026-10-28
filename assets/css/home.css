@@ -165,6 +165,24 @@
 #home-page .home-extra-card,
 #home-page .testimonial-card{border-radius:var(--card-radius)}
 
+/* Public app and invite-only update share one homepage. */
+#home-page .release-label{display:inline-block;margin-left:8px;padding:4px 10px;border:1px solid currentColor;border-radius:20px;font-size:11px;letter-spacing:.04em;vertical-align:middle}
+#home-page .access-note{font-size:14px;line-height:1.8;color:#786a62}
+#home-page .buddy-footer .access-note{flex-basis:100%;margin:0;text-align:center}
+#home-page .access-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;max-width:1000px;margin:32px auto 0;text-align:left}
+#home-page .access-card{padding:32px;border:1px solid #e7dfd8;border-radius:24px;background:#fff}
+#home-page .access-card.access-pilot{background:#fff7ef}
+#home-page .access-kicker{font-size:12px;letter-spacing:.08em;color:#8c394f;margin:0 0 14px}
+#home-page .access-card h3{font-size:24px;line-height:1.5;margin:0 0 14px}
+#home-page .access-card>p:not(.access-kicker){font-size:15px;line-height:1.9;margin:0 0 24px;color:#786a62}
+#home-page .access-card .wv-download{justify-content:flex-start;margin:0 0 16px}
+#home-page .access-card .wv-outline{white-space:normal;text-align:center}
+#home-page .access-secondary{display:block;width:fit-content;font-size:13px;line-height:1.8;margin-top:16px;text-decoration:underline;text-underline-offset:4px}
+#home-page #buddy-access{scroll-margin-top:100px}
+@media(max-width:700px){#home-page .access-grid{grid-template-columns:1fr}#home-page .access-card{padding:24px}#home-page .access-card h3{font-size:22px}}
+
+#home-page #access-title span{display:inline-block}
+
 /* A quiet note from the founder, shared by both language editions. */
 #home-page .home-founder-copy{max-width:680px;margin:0 auto;padding:28px;border-radius:24px;background:#FFF9F5}
 #home-page .home-founder-copy p{margin-top:16px;color:#71645f;overflow-wrap:anywhere}
@@ -174,3 +192,49 @@
 @media(max-width:580px){#home-page:lang(ja) .wv-hero h1{font-size:clamp(24px,7.2vw,27px)}}
 
 #home-page:lang(ja) #books-title{word-break:keep-all;overflow-wrap:anywhere;text-wrap:balance}
+
+/* Early access is the primary action; books and the public app remain secondary. */
+#home-page .hero-actions{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+#home-page .hero-actions .wv-link{font-size:14px}
+#home-page .buddy-card .buddy-book{display:inline-block;width:auto;min-height:44px;padding:12px 0;margin-top:18px;background:transparent;color:#59483e;border:0;border-radius:0;text-decoration:underline;text-underline-offset:5px}
+#home-page .buddy-card .buddy-book:hover{filter:none;background:transparent;color:#7d2741}
+#home-page .buddy-footer .wv-outline{background:#ff511b;color:#291712;border-color:transparent}
+@media(min-width:701px){#home-page .buddy-section .buddy-portrait{height:190px}}
+#home-page .buddy-portrait img{max-height:165px}
+#home-page .wv-sharing{padding-top:20px}
+#home-page .wv-sharing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+#home-page details.home-extra{padding:24px 0 0;background:transparent;margin-top:24px}
+#home-page details.home-extra summary{cursor:pointer;font-size:14px;text-decoration:underline;text-underline-offset:5px}
+#home-page details.home-extra .home-extra-grid{margin-top:22px}
+#home-page .home-founder-copy>.wv-link{display:inline-block;margin-top:18px;font-size:14px}
+#home-page .access-grid{display:block;max-width:780px}
+#home-page .access-card.access-pilot{padding:36px;border:0;background:#fff0e4}
+#home-page .access-card .wv-cta{display:inline-flex;white-space:normal;text-align:center;justify-content:center}
+#home-page .access-card>p.access-note{font-size:12px;margin:12px 0 0}
+#home-page .public-app{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:30px 12px 0}
+#home-page .public-app h3{font-size:17px;margin:0 0 8px}
+#home-page .public-app p{font-size:14px;line-height:1.7;color:#71645f}
+#home-page .public-app .access-secondary{margin-top:8px}
+#home-page .public-app>a{flex-shrink:0}
+#home-page .public-app img{display:block;width:140px;height:46px}
+@media(max-width:650px){
+ #home-page .hero-actions{justify-content:center;gap:14px}
+ #home-page .wv-sharing-grid{grid-template-columns:1fr;gap:22px}
+ #home-page .access-card.access-pilot{padding:26px}
+ #home-page .public-app{align-items:flex-start;flex-direction:column;padding:28px 4px 0;gap:16px}
+}
+
+/* Secondary functions stay readable without narrow cards or extra descriptions. */
+#home-page .home-more-features{margin:30px auto 0;max-width:900px}
+#home-page .home-more-features>h3{font-size:14px;font-weight:500;color:#71645f;margin:0 0 14px}
+#home-page .home-more-features ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 32px;padding:0;margin:0;list-style:none}
+#home-page .home-more-features li{font-size:15px;line-height:1.7;padding-left:16px;position:relative}
+#home-page .home-more-features li::before{content:"";position:absolute;left:0;top:.7em;width:5px;height:5px;border-radius:50%;background:#b9a89b}
+@media(max-width:700px){#home-page .home-more-features ul{grid-template-columns:1fr;gap:12px}}
+
+/* Reserve stronger type for the main message and the application action. */
+#home-page .wv-hero h1{font-weight:600}
+#home-page .wv-cta,#home-page .buddy-footer .wv-outline{font-weight:600}
+#home-page .buddy-section .buddy-copy h3{font-size:21px;font-weight:500}
+#home-page .wv-kicker,#home-page .storybook-kicker,#home-page .testimonials-label{font-weight:400;letter-spacing:.08em}
+#home-page .release-label{font-weight:400}
