@@ -164,3 +164,13 @@
 #home-page .wv-entry,
 #home-page .home-extra-card,
 #home-page .testimonial-card{border-radius:var(--card-radius)}
+
+/* A quiet note from the founder, shared by both language editions. */
+#home-page .home-founder-copy{max-width:680px;margin:0 auto;padding:28px;border-radius:24px;background:#FFF9F5}
+#home-page .home-founder-copy p{margin-top:16px;color:#71645f;overflow-wrap:anywhere}
+#home-page .home-founder-copy .home-founder-name{font-size:13px;color:#7D2741}
+
+#home-page .home-founder-copy h2{word-break:keep-all;overflow-wrap:anywhere;text-wrap:balance}
+@media(max-width:580px){#home-page:lang(ja) .wv-hero h1{font-size:clamp(24px,7.2vw,27px)}}
+
+#home-page:lang(ja) #books-title{word-break:keep-all;overflow-wrap:anywhere;text-wrap:balance}
