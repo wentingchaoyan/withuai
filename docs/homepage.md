@@ -102,3 +102,12 @@ Check at desktop, tablet and mobile widths, including 320px:
 - The trial LP combines buddy introductions with play examples. The answer screenshot is prominent; the buddy chooser is expandable. The final Google Form action includes email/install guidance without a redundant “Before you join” block.
 - English Mimo, Luke and Gen afterwords link directly to the English Google Form and describe invite-only iOS/Android access without restricting applicants to Germany.
 - Shared favicon uses the supplied orange pocket mark, white facial features and opening, and a transparent exterior. The original PNG is embedded in the SVG to preserve the artwork.
+
+## Shared site navigation — 2026-10-28
+
+- `assets/css/site-chrome.css` styles the shared header/footer on the Japanese/English home, founder story, news index, contact page, and trial LP (nine pages). Use `brand-header` / `brand-footer` consistently when updating these pages.
+- Navigation order, logo size, language controls, single animated gradient underlines for hover/current-page states and mobile disclosure menus are shared. All URLs are relative for local-file compatibility. Language links preserve the current company page; the English-only trial LP links to the Japanese home.
+- The trial LP retains focused “How it works” / “Early access” header links within the same visual treatment. Company pages retain their content and contact form embeds.
+- Footers include Instagram for the relevant language, privacy and terms. Company-page favicons now use the shared pocket icon.
+
+- Shared navigation matches the public contact page: Source Sans 3, translucent fixed header, scroll shadow, animated gradient underline, yellow language pill with hover lift, and mobile hamburger. `assets/js/site-chrome.js` provides scroll and menu behavior.
