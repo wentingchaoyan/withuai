@@ -119,3 +119,20 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .android-steps p{margin:0 0 16px}
 .android-steps ol{display:flex;flex-wrap:wrap;gap:16px;list-style:none;margin:0;padding:0}
 @media(max-width:560px){.android-steps ol{flex-direction:column}.android-steps .button{width:100%}}
+
+/* Distinguish device choices from the ordered Android actions. */
+.download-actions .download-ios{background:#302c2a;color:#fff;border:1px solid #302c2a}
+.download-actions .download-ios:hover{background:#49413d}
+#android-toggle{background:#fff;color:#302c2a;border:1px solid #8c827c;gap:18px}
+#android-toggle:hover,#android-toggle[aria-expanded="true"]{background:#f2ebe4;border-color:#50473f}
+.toggle-chevron{font-size:22px;line-height:1;transition:transform .15s ease}
+#android-toggle[aria-expanded="true"] .toggle-chevron{transform:rotate(180deg)}
+.android-steps{border:1px solid #e4d9cf}
+.android-steps ol{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.android-steps li{display:flex;align-items:center;gap:12px;min-width:0}
+.step-number{display:inline-flex;align-items:center;justify-content:center;flex:0 0 32px;height:32px;border-radius:50%;background:#f2ebe4;color:#574c43;font-weight:700}
+.android-steps .button{flex:1;padding:14px 18px;text-align:center}
+.android-steps .step-group{background:#fff;color:#302c2a;border:1px solid #8c827c}
+.android-steps .step-group:hover{background:#f2ebe4}
+.android-steps .step-play{border:1px solid transparent}
+@media(max-width:560px){.android-steps{padding:20px 16px}.android-steps ol{grid-template-columns:1fr;gap:16px}.android-steps .button{width:auto}}
