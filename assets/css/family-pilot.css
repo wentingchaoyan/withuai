@@ -129,10 +129,13 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 #android-toggle[aria-expanded="true"] .toggle-chevron{transform:rotate(180deg)}
 .android-steps{border:1px solid #e4d9cf}
 .android-steps ol{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.android-steps li{display:flex;align-items:center;gap:12px;min-width:0}
+.android-steps li{display:grid;grid-template-columns:32px minmax(0,1fr);align-content:start;align-items:center;gap:8px 12px;min-width:0}
 .step-number{display:inline-flex;align-items:center;justify-content:center;flex:0 0 32px;height:32px;border-radius:50%;background:#f2ebe4;color:#574c43;font-weight:700}
 .android-steps .button{flex:1;padding:14px 18px;text-align:center}
 .android-steps .step-group{background:#fff;color:#302c2a;border:1px solid #8c827c}
 .android-steps .step-group:hover{background:#f2ebe4}
 .android-steps .step-play{border:1px solid transparent}
 @media(max-width:560px){.android-steps{padding:20px 16px}.android-steps ol{grid-template-columns:1fr;gap:16px}.android-steps .button{width:auto}}
+
+.android-steps .step-hint{grid-column:2;margin:0;font-size:13px;line-height:1.5;color:var(--muted)}
+.android-steps .button{min-width:0}
