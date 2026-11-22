@@ -106,3 +106,16 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
  .example-art{height:230px}
  .everyday-examples{gap:38px}
 }
+
+/* Simple device choices for the family pilot. */
+#join{scroll-margin-top:110px}
+.download-actions{display:flex;flex-wrap:wrap;gap:16px;margin-top:28px}
+.download-actions .button{min-width:220px}
+@media(max-width:560px){.download-actions{flex-direction:column}.download-actions .button{width:100%;min-width:0}}
+
+.download-actions button{font-family:inherit;cursor:pointer}
+.android-steps{margin-top:24px;padding:24px;border-radius:20px;background:#fff}
+.android-steps[hidden]{display:none}
+.android-steps p{margin:0 0 16px}
+.android-steps ol{display:flex;flex-wrap:wrap;gap:16px;list-style:none;margin:0;padding:0}
+@media(max-width:560px){.android-steps ol{flex-direction:column}.android-steps .button{width:100%}}
