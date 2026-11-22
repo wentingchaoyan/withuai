@@ -123,8 +123,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 /* Distinguish device choices from the ordered Android actions. */
 .download-actions .download-ios{background:#302c2a;color:#fff;border:1px solid #302c2a}
 .download-actions .download-ios:hover{background:#49413d}
-#android-toggle{background:#fff;color:#302c2a;border:1px solid #8c827c;gap:18px}
-#android-toggle:hover,#android-toggle[aria-expanded="true"]{background:#f2ebe4;border-color:#50473f}
+.download-android,#android-toggle{background:#fff;color:#302c2a;border:1px solid #8c827c;gap:18px}
+.download-android:hover,#android-toggle:hover,#android-toggle[aria-expanded="true"]{background:#f2ebe4;border-color:#50473f}
 .toggle-chevron{font-size:22px;line-height:1;transition:transform .15s ease}
 #android-toggle[aria-expanded="true"] .toggle-chevron{transform:rotate(180deg)}
 .android-steps{border:1px solid #e4d9cf}
